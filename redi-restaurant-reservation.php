@@ -12,7 +12,7 @@ if (!defined('REDI_RESTAURANT_PLUGIN_URL'))
 if (!defined('REDI_TEMPLATE'))
 	define('REDI_TEMPLATE', plugin_dir_path(__FILE__).'templates'.DIRECTORY_SEPARATOR);
 if (!defined('REDI_RESTAURANT_DEBUG'))
-	define('REDI_RESTAURANT_DEBUG', TRUE);
+	define('REDI_RESTAURANT_DEBUG', FALSE);
 if (!defined('ID'))
 	define('ID', 'ID');
 require_once('redi.php');
