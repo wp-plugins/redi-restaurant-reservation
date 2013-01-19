@@ -3,7 +3,7 @@
   Plugin Name: ReDi Restaurant Reservation
   Plugin URI: http://reservationdiary.eu/eng/reservation-wordpress-plugin/
   Description: ReDi Reservation plugin for Restaurants
-  Version: 13.0114
+  Version: 13.0119
   Author: reservationdiary.eu
   Author URI: http://reservationdiary.eu/
  */
@@ -24,7 +24,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 	class ReDiRestaurantReservation
 	{
 
-		public $version = '13.0114';
+		public $version = '13.0119';
 
 		/**
 		 * @var string The options string name for this plugin
@@ -352,9 +352,13 @@ if (!class_exists('ReDiRestaurantReservation'))
 				      'ajaxurl' => admin_url('admin-ajax.php')
 				));
 			wp_enqueue_script('restaurant');
+
+			wp_register_style('redi-restaurant',
+				REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
+			wp_enqueue_style('redi-restaurant');
 			$persons = 2;
-			$startDate = date('Y-m-d', strtotime('+27 hour'));
-			$startTime = date('G:00', strtotime('+27 hour'));
+			$startDate = gmdate('Y-m-d', strtotime('+27 hour'));
+			$startTime = gmdate('G:00', strtotime('+27 hour'));
 			require_once(REDI_TEMPLATE.'frontend.php');
 		}
 
@@ -364,9 +368,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 			{
 				case 'step1':
 					$params = array (
-						'StartTime' => urlencode(date('Y-m-d H:i',
+						'StartTime' => urlencode(gmdate('Y-m-d H:i',
 							strtotime($_POST['startDate'].' '.$_POST['startTime']))),
-						'EndTime' => urlencode(date('Y-m-d H:i',
+						'EndTime' => urlencode(gmdate('Y-m-d H:i',
 							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2
@@ -378,8 +382,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 						unset($query['debug']);
 						foreach ($query as $q)
 						{
-							$q->StartTime = date('H:i', strtotime($q->StartTime));
-							$q->EndTime = date('H:i', strtotime($q->EndTime));
+							$q->StartTime = gmdate('H:i', strtotime($q->StartTime));
+							$q->EndTime = gmdate('H:i', strtotime($q->EndTime));
 						}
 					}
 					echo json_encode($query);
@@ -389,9 +393,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$params = array (
 						'reservation' => array (
 
-							'StartTime' => (date('Y-m-d H:i',
+							'StartTime' => (gmdate('Y-m-d H:i',
 								strtotime($_POST['startDate'].' '.$_POST['startTime']))),
-							'EndTime' => (date('Y-m-d H:i',
+							'EndTime' => (gmdate('Y-m-d H:i',
 								strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 							'Quantity' => (int)$_POST['persons'],
 							"UserName" => $_POST['UserName'],

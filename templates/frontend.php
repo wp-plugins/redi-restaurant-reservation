@@ -9,9 +9,10 @@
         <input type="text" value="<?php echo $persons?>" name="persons" id="persons"/>
 
         <div style="margin-top: 30px; margin-bottom: 30px;">
-            <input id="step1button" type="submit" value="<?php echo __('Check available time');?>" name="submit">
+            <input id="step1button" type="submit" value="<?php echo __('Check available time');?>" name="submit"><img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
         </div>
-        <div id="step1errors" style="display: none;"></div>
+
+        <div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
     </div>
     <br/>
     <div id="step2" style="display: none;">
@@ -41,12 +42,15 @@
             <textarea rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
         </div>
         <div>
-            <input type="submit" id="redi-restaurant-step3" name="Action" value="<?php echo __('Make reservation')?>">
+            <input type="submit" id="redi-restaurant-step3" name="Action" value="<?php echo __('Make reservation')?>"><img id="step3load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/><br/>
         </div>
-        <div id="step3errors" style="display: none;"></div>
+
+        <div id="step3errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
     </div>
 
     <div id="step4" style="display: none;">
-		<?php echo __('Thank you for your reservation. We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.');?>
+		<strong>
+			<?php echo __('Thank you for your reservation. We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.');?>
+		</strong>
     </div>
 </form>
