@@ -47,6 +47,6 @@
     </div>
 
     <div id="step4" style="display: none;">
-		<?php echo __('You reservation has been accepted. You will receive confirmation by email.');?>
+		<?php echo __('Thank you for your reservation. We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.');?>
     </div>
 </form>
