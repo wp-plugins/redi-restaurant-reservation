@@ -50,7 +50,8 @@
 
     <div id="step4" style="display: none;">
 		<strong>
-			<?php echo __('Thank you for your reservation. We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.');?>
+			<?php echo __('Thank you for your reservation.')?><br/>
 		</strong>
+		 <?php echo __('We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.');?>
     </div>
 </form>
