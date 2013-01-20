@@ -26,22 +26,26 @@
     <div id="step3" style="display: none;">
         <h2><?php echo __('Step')?> 3: <?php echo __('Provide reservation details')?></h2>
         <div>
-            <label for="UserName"><?php echo __('Name');?></label> <span class="redi_required">*</span><br>
+			<br/>
+            <label for="UserName"><?php echo __('Name');?> <span class="redi_required">*</span></label>
             <input type="text" value="" name="UserName" id="UserName">
         </div>
         <div>
-            <label for="UserPhone"><?php echo __('Phone');?></label> <span class="redi_required">*</span><br>
+            <br/><label for="UserPhone"><?php echo __('Phone');?> <span class="redi_required">*</span></label>
             <input type="text" value="" name="UserPhone" id="UserPhone">
         </div>
         <div>
-            <label for="UserEmail"><?php echo __('Email');?></label> <span class="redi_required">*</span><br>
+            <br/>
+			<label for="UserEmail"><?php echo __('Email');?> <span class="redi_required">*</span></label> 
             <input type="text" value="" name="UserEmail" id="UserEmail">
         </div>
         <div>
-            <label for="UserComments"><?php echo __('Comment');?></label><br>
+            <br/>
+			<label for="UserComments"><?php echo __('Comment');?></label>
             <textarea rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
         </div>
         <div>
+		<br/><br/>
             <input type="submit" id="redi-restaurant-step3" name="Action" value="<?php echo __('Make reservation')?>"><img id="step3load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/><br/>
         </div>
 
