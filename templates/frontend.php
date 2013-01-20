@@ -2,10 +2,10 @@
 <form id="redi-reservation" name="redi-reservation" method="post">
     <div id="step1">
         <h2> <?php echo __('Step')?> 1: <?php echo __('Select date and time')?></h2>
-        <label for="startDate"><?php echo __('Date and time:')?></label><br/>
+        <br/><label for="startDate"><?php echo __('Date and time:')?></label><br/>
         <input type="text" value="<?php echo $startDate ?>" name="startDate" id="startDate"/>
         <input id="startTime" type="text" value="<?php echo $startTime?>" name="startTime"/><br/>
-        <label for="persons"><?php echo __('Persons:')?></label><br/>
+        <br/><label for="persons"><?php echo __('Persons:')?></label><br/>
         <input type="text" value="<?php echo $persons?>" name="persons" id="persons"/>
 
         <div style="margin-top: 30px; margin-bottom: 30px;">
@@ -51,7 +51,7 @@
         <br/>
         <div id="step3errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
     </div>
- 
+
     <div id="step4" style="display: none;">
 		<strong>
 			<?php echo __('Thank you for your reservation.')?><br/>
