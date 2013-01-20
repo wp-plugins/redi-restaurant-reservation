@@ -26,7 +26,7 @@ In case you have any problems with plugin installation or you need some customiz
 1. Example of plugin first page installed into default theme. When plugin is activated, new "Reservation" page is created. Step 1: Requests from user to select reservation date and time, and number of seats. User has to click on a button "Check available time". System will query online database for available places at specified time and shows result.
 2. Example of calendar control.
 3. Example of time control.
-4. Step 2: On this step user is requested available time if any.
+4. Step 2: On this step user is requested to select available time if any.
 5. Step 3: Once user selects available reservation time, user will be requested to fill reservation form with contact information.
 6. Reservation confirmation screen. At this time user has to receive confirmation email. Same time restaurant owner receives list of all upcoming reservations.
 7. Setup screen with number of seats available, opening times and days of the week.
