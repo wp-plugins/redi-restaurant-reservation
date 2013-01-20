@@ -5,7 +5,7 @@ Requires at least: 3.0.0
 Tested up to: 3.5
 Stable tag: trunk
 
-Easy ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
+ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
 
 == Description ==
 
