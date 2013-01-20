@@ -114,7 +114,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			add_action('admin_menu', array (&$this, 'redi_restaurant_admin_menu_link'));
 
 			$this->page_title = 'Reservation';
-			$this->content = '[redirestaraunt]';
+			$this->content = '[redirestaurant]';
 			$this->page_name = $this->_name;
 			$this->page_id = '0';
 
@@ -128,7 +128,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			add_shortcode('template', array ($this, 'shortcode'));
 			register_activation_hook(__FILE__, array ($this, 'activate'));
 
-			add_shortcode('redirestaraunt', array ($this, 'shortcode'));
+			add_shortcode('redirestaurant', array ($this, 'shortcode'));
 		}
 
 		/**
