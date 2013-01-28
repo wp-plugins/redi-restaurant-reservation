@@ -2,7 +2,7 @@
 Contributors: thecatkin, robby.roboter
 Tags: reservation diary, reservation, table reservation, restaurnat reservation, time reservation, open table, free table, easy reservation
 Requires at least: 3.0.0
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
@@ -19,7 +19,7 @@ Initially you need to setup number of persons that can book at one time, working
 3. Go to Settings/Redi Restaurant Reservation page
 4. Follow instructions on the page to setup plugin
 
-When plugin is activated, new page is automatically created and you can make your first reservation straight away.
+When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public ReservationDiary API. We do not share any of our user's information with third parties.
 In case you have any problems with plugin installation or you need some customization, please don't hesitate to contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 == Screenshots ==
@@ -36,11 +36,16 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0128 =
+* Added settings saved message box to admin page
+* Added checkbox that asks for permission to publish restaurant details into reservationdiary.eu catalog
+* Fixed prepopulating of URL field in admin page
+
 = 13.0119 =
 * Updated reservation confirmation text
 * Selected reservation time highlighted with bold style
 * Added loading icon
-* Applied timezone of the general WordPress settings
+* Applied time zone of the general WordPress settings
 * Removed links from confirmation email
 
 = 13.0114 =
