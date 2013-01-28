@@ -1,7 +1,7 @@
 <div class="wrap">
 
 	<?php if (isset($settings_saved)): ?>
-    <div class="updated" id="message"><p><?php echo __('Your setting is saved!')?></p></div>
+    <div class="updated" id="message"><p><?php echo __('Your settings have been saved!')?></p></div>
 	<?php endif ?>
     <div class="icon32" id="icon-admin"><br></div>
     <h2><?php echo __('Common settings');?></h2>
@@ -12,7 +12,7 @@
 
             <tr valign="top">
                 <th scope="row">
-                    <label for="services"><?php echo __('Seats:');?> </label>
+                    <label for="services"><?php echo __('Available seats:');?> </label>
                 </th>
                 <td>
                     <input id="services" type="text"
@@ -23,7 +23,7 @@
             </tr>
         </table>
         <div class="icon32" id="icon-options-general"><br></div>
-        <h2><?php echo __('Working time:');?> </h2>
+        <h2><?php echo __('Working time');?> </h2>
         <table class="form-table" style="width: 50%;">
             <tr valign="top">
 
