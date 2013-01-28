@@ -1,5 +1,8 @@
 <div class="wrap">
 
+	<?php if (isset($settings_saved)): ?>
+    <div class="updated" id="message"><p><?php echo __('Your setting is saved!')?></p></div>
+	<?php endif ?>
     <div class="icon32" id="icon-admin"><br></div>
     <h2><?php echo __('Common settings');?></h2>
 
@@ -35,9 +38,9 @@
                 </td>
             </tr>
 			<?php //$day =0; ?>
-	        <?php foreach ($this->weekday as $serviceTimeName):?>
+			<?php foreach ($this->weekday as $serviceTimeName): ?>
 			<?php //foreach ($serviceTimes as $serviceTimeName => $serviceTimeValue): ?>
-			<?php $serviceTimeValue =$serviceTimes[$serviceTimeName];?>
+			<?php $serviceTimeValue = $serviceTimes[$serviceTimeName]; ?>
 
             <tr valign="top">
                 <th scope="row">
@@ -64,17 +67,17 @@
 
                 <th scope="row">
                     <label for="Name">
-			            <?php echo __('Name'); ?>
+						<?php echo __('Name'); ?>
                     </label>
                 </th>
                 <td>
                     <input id="Name" type="text" value="<?php echo $place['Name']?>" name="Name"/>
                 </td>
-	        </tr>
-	        <tr>
+            </tr>
+            <tr>
                 <th scope="row">
                     <label for="Country">
-			            <?php echo __('Country'); ?>
+						<?php echo __('Country'); ?>
                     </label>
                 </th>
                 <td>
@@ -82,9 +85,9 @@
                 </td>
             </tr>
             <tr>
-	            <th scope="row">
+                <th scope="row">
                     <label for="City">
-			            <?php echo __('City'); ?>
+						<?php echo __('City'); ?>
                     </label>
                 </th>
                 <td>
@@ -104,18 +107,19 @@
             <tr>
                 <th scope="row">
                     <label for="WebAddress">
-			            <?php echo __('Url'); ?>
+						<?php echo __('Url'); ?>
                     </label>
                 </th>
                 <td>
-                    <input id="WebAddress" type="WebAddress" value="<?php echo $place['WebAddress']?>" name="WebAddress"/>
+                    <input id="WebAddress" type="WebAddress" value="<?php echo $place['WebAddress']?>"
+                           name="WebAddress"/>
                 </td>
             </tr>
             <tr>
 
                 <th scope="row">
                     <label for="Email">
-			            <?php echo __('Email'); ?>
+						<?php echo __('Email'); ?>
                     </label>
                 </th>
                 <td>
@@ -126,7 +130,7 @@
 
                 <th scope="row">
                     <label for="Phone">
-				        <?php echo __('Phone'); ?>
+						<?php echo __('Phone'); ?>
                     </label>
                 </th>
                 <td>
@@ -134,7 +138,14 @@
                 </td>
             </tr>
         </table>
-
+        <br/>
+        <input type="checkbox" name="Catalog" id="Catalog" value="1" <?php if ($place['Catalog'])
+			echo 'checked="checked'?>>
+        <label for="Catalog">
+			<?php echo __('Publish restaurant details to reservationdiary.eu catalog');?>
+        </label>
+        <br/>
+        <br/>
 
         <input id="submit" type="submit" value="Save" name="submit">
     </form>

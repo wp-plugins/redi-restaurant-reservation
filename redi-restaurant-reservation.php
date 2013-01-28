@@ -79,7 +79,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					                                        'Address' => 'Address line 1',
 					                                        'Email' => get_option('admin_email'),
 					                                        'Phone' => '[areacode] [number]',
-					                                        'WebAddress' => get_option('siteurl')
+					                                        'WebAddress' => 'http://'.$_SERVER['SERVER_NAME'].'/',
+					                                        'Catalog' => true
+					                                        //get_option('siteurl')
 				                                        )
 				                                  ));
 
@@ -166,6 +168,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						$times[$key]['CloseTime'] = $value;
 
 				$services = (int)$_POST['services'];
+
 				$getServices = $this->redi->getServices($categoryID);
 
 				if (count($getServices) != $services)
@@ -199,7 +202,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							));
 					}
 				}
-
+				$this->options['services'] = $services;
 				$this->saveAdminOptions();
 
 				if (is_array($times) && count($times))
@@ -214,13 +217,17 @@ if (!class_exists('ReDiRestaurantReservation'))
 						      'Address' => $_POST['Address'],
 						      'Email' => $_POST['Email'],
 						      'Phone' => $_POST['Phone'],
+						      'Catalog' => $_POST['Catalog'],
 						      'WebAddress' => $_POST['WebAddress']
 					      )
 					));
-
-
+				$settings_saved = true;
 			}
 			$place = $this->redi->getPlace($placeID); //goes to template 'admin'
+//			if (!$place)
+//			{
+//				$place = array ('WebAddress' => 'http://'.$_SERVER['SERVER_NAME'].'/');
+//			}
 			$serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
 
 			$getServices = $this->redi->getServices($categoryID);
@@ -405,7 +412,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"Name" => "Person"
 						)
 					);
-				//	var_dump($params);
+					//	var_dump($params);
 					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
 					echo json_encode($reservation);
 					break;
