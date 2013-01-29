@@ -79,9 +79,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 					                                        'Address' => 'Address line 1',
 					                                        'Email' => get_option('admin_email'),
 					                                        'Phone' => '[areacode] [number]',
-					                                        'WebAddress' => 'http://'.$_SERVER['SERVER_NAME'].'/',
+					                                        'WebAddress' => get_option('siteurl'),
 					                                        'Catalog' => true
-					                                        //get_option('siteurl')
 				                                        )
 				                                  ));
 
