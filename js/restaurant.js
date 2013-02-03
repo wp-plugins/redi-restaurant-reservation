@@ -1,28 +1,42 @@
 jQuery(function () {
 
-    function hideSteps()
-    {
+    function hideSteps() {
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
     }
 
-    jQuery('#persons').change(function() {
+    jQuery('#persons').change(function () {
         hideSteps();
     });
     jQuery('#startTime').timepicker({
         stepMinute:15,
-        onClose: function(dateText, inst){
+        onClose:function (dateText, inst) {
             hideSteps();
         }
     });
     jQuery("#startDate").datepicker({
         dateFormat:'yy-mm-dd',
-        minDate: new Date(),
-        onSelect: function(dateText, inst){
+        minDate:new Date(),
+        onSelect:function (dateText, inst) {
             hideSteps();
         }
     });
     jQuery('#redi-restaurant-step3').click(function () {
+        if(jQuery('#UserName').val() =='')
+        {
+            jQuery('#step3errors').html('Name can\'t be empty').show('slow');
+            return false;
+        }
+        if(jQuery('#UserEmail').val() =='')
+        {
+            jQuery('#step3errors').html('Email can\'t be empty').show('slow');
+            return false;
+        }
+        if(jQuery('#UserPhone').val() =='')
+        {
+            jQuery('#step3errors').html('Phone can\'t be empty').show('slow');
+            return false;
+        }
         var data = {
             action:'redi_restaurant-submit',
             get:'step3',
@@ -62,7 +76,7 @@ jQuery(function () {
             startTime:jQuery('#startTime').val(),
             persons:jQuery('#persons').val()
         };
-
+        //jQuery("html, body").animate({ scrollTop:  $("#step2")[0].scrollHeight }, "slow");
         jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
                 jQuery('#step1load').hide();
 
@@ -79,20 +93,21 @@ jQuery(function () {
                     }
                     jQuery('#step2').show('slow');
                     jQuery('.redi-restaurant-button').click(function () {
-                        jQuery('.redi-restaurant-button').each(function(){
-                                jQuery(this).html(jQuery(this).val());
-                            });
-                        jQuery(this).html('<b>'+jQuery(this).val()+'</b>');
+
+                        jQuery('.redi-restaurant-button').each(function () {
+                            jQuery(this).html(jQuery(this).val());
+                        });
+                        jQuery(this).html('<b>' + jQuery(this).val() + '</b>');
                         jQuery('#startTime1').val(jQuery(this).val());
                         jQuery('#step3').show('slow');
+                        //jQuery("html, body").animate({ scrollTop: $("#step2")[0].scrollHeight }, "slow");
                         jQuery('#UserName').focus();
                         return false;
                     });
                     // if we have time available simulate a click
-                    jQuery('.redi-restaurant-button').each(function(){
-
-                            if(jQuery(this).val() == jQuery('#startTime').val() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
-                        });
+                    jQuery('.redi-restaurant-button').each(function () {
+                        if (jQuery(this).val() == jQuery('#startTime').val() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
+                    });
                 }
             }
             , 'json')
