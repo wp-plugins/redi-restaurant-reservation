@@ -1,6 +1,27 @@
 jQuery(function () {
-    jQuery('#startTime').timepicker({stepMinute:15});
-    jQuery("#startDate").datepicker({dateFormat:'yy-mm-dd', minDate: new Date()});
+
+    function hideSteps()
+    {
+        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        jQuery('#step3').hide('slow');
+    }
+
+    jQuery('#persons').change(function() {
+        hideSteps();
+    });
+    jQuery('#startTime').timepicker({
+        stepMinute:15,
+        onClose: function(dateText, inst){
+            hideSteps();
+        }
+    });
+    jQuery("#startDate").datepicker({
+        dateFormat:'yy-mm-dd',
+        minDate: new Date(),
+        onSelect: function(dateText, inst){
+            hideSteps();
+        }
+    });
     jQuery('#redi-restaurant-step3').click(function () {
         var data = {
             action:'redi_restaurant-submit',
