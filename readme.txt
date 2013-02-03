@@ -36,6 +36,12 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0203 =
+* Changed persons from free form text to drop down
+* When user changes date, time or number of persons, form is closed and user has to check reservation availability with new form data
+* Added required field validation on a client side
+* When fully booked added information message
+
 = 13.0128 =
 * Added settings saved message box to admin page
 * Added checkbox that asks for permission to publish restaurant details into reservationdiary.eu catalog
