@@ -2,10 +2,10 @@
 <form id="redi-reservation" name="redi-reservation" method="post">
     <div id="step1">
         <h2> <?php echo __('Step')?> 1: <?php echo __('Select date and time')?></h2>
-        <br/><label for="startDate"><?php echo __('Date and time:')?></label><br/>
+        <br/><label for="startDate"><?php echo __('Date and time')?>:<span class="redi_required">*</span></label><br/>
         <input type="text" value="<?php echo $startDate ?>" name="startDate" id="startDate"/>
         <input id="startTime" type="text" value="<?php echo $startTime?>" name="startTime"/><br/>
-        <br/><label for="persons"><?php echo __('Persons:')?></label><br/>
+        <br/><label for="persons"><?php echo __('Persons')?>:<span class="redi_required">*</span></label><br/>
 
         <select name="persons" id="persons">
 			<?php for ($i = 1; $i != 11; $i++): ?>
@@ -39,21 +39,21 @@
 
         <div>
             <br/>
-            <label for="UserName"><?php echo __('Name');?> <span class="redi_required">*</span></label><br/>
+            <label for="UserName"><?php echo __('Name');?>:<span class="redi_required">*</span></label><br/>
             <input type="text" value="" name="UserName" id="UserName">
         </div>
         <div>
-            <br/><label for="UserPhone"><?php echo __('Phone');?> <span class="redi_required">*</span></label><br/>
+            <br/><label for="UserPhone"><?php echo __('Phone');?>:<span class="redi_required">*</span></label><br/>
             <input type="text" value="" name="UserPhone" id="UserPhone">
         </div>
         <div>
             <br/>
-            <label for="UserEmail"><?php echo __('Email');?> <span class="redi_required">*</span></label><br/>
+            <label for="UserEmail"><?php echo __('Email');?>:<span class="redi_required">*</span></label><br/>
             <input type="text" value="" name="UserEmail" id="UserEmail">
         </div>
         <div>
             <br/>
-            <label for="UserComments"><?php echo __('Comment');?></label><br/>
+            <label for="UserComments"><?php echo __('Comment');?>:</label><br/>
             <textarea rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
         </div>
         <div>

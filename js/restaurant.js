@@ -71,7 +71,7 @@ jQuery(function () {
                     jQuery('#step1errors').html(response['Error']).show('slow');
                 } else {
                     for (res in response) {
-                        //    console.log(response[res]['Available']);
+
                         jQuery('#buttons').append(
                             '<button class="redi-restaurant-button" value="' + response[res]['StartTime'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
                                 '>' + response[res]['StartTime'] + '</button>'
@@ -81,15 +81,18 @@ jQuery(function () {
                     jQuery('.redi-restaurant-button').click(function () {
                         jQuery('.redi-restaurant-button').each(function(){
                                 jQuery(this).html(jQuery(this).val());
-                            }
-                        );
+                            });
                         jQuery(this).html('<b>'+jQuery(this).val()+'</b>');
                         jQuery('#startTime1').val(jQuery(this).val());
                         jQuery('#step3').show('slow');
-
+                        jQuery('#UserName').focus();
                         return false;
-
                     });
+                    // if we have time available simulate a click
+                    jQuery('.redi-restaurant-button').each(function(){
+
+                            if(jQuery(this).val() == jQuery('#startTime').val() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
+                        });
                 }
             }
             , 'json')
