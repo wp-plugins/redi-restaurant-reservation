@@ -59,7 +59,7 @@
         <div>
             <br/><br/>
             <input type="submit" id="redi-restaurant-step3" name="Action"
-                   value="<?php echo __('Make reservation')?>"><img id="step3load" style="display: none;"
+                   value="<?php echo __('Make a reservation')?>"><img id="step3load" style="display: none;"
                                                                     src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif"
                                                                     alt=""/><br/>
         </div>
