@@ -36,6 +36,9 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0302 =
+* Fixed incompatibility with some themes
+
 = 13.0203 =
 * Changed persons from free form text to drop down
 * When user changes date, time or number of persons, form is closed and user has to check reservation availability with new form data
