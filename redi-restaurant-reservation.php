@@ -6,6 +6,9 @@
   Version: 13.0302
   Author: reservationdiary.eu
   Author URI: http://reservationdiary.eu/
+  Text Domain: redi-restaurant-reservation
+  Domain Path: /lang
+
  */
 if (!defined('REDI_RESTAURANT_PLUGIN_URL'))
 	define('REDI_RESTAURANT_PLUGIN_URL', plugin_dir_url(__FILE__));
@@ -20,12 +23,9 @@ require_once('redi.php');
 
 if (!class_exists('ReDiRestaurantReservation'))
 {
-
 	class ReDiRestaurantReservation
 	{
-
 		public $version = '13.0302';
-
 		/**
 		 * @var string The options string name for this plugin
 		 */
@@ -236,8 +236,12 @@ if (!class_exists('ReDiRestaurantReservation'))
 		{
 			if (!session_id())
 				session_start();
-		}
 
+			if (function_exists('load_plugin_textdomain'))
+			{
+				load_plugin_textdomain( 'redi-restaurant-reservation', false, 'redi-restaurant-reservation/lang');
+			}
+		}
 		/**
 		 * @desc Adds the options subpanel
 		 */
