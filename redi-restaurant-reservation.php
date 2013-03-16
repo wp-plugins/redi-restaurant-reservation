@@ -339,6 +339,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 		public function shortcode()
 		{
+            ob_start();
 			wp_enqueue_script('jquery');
 			wp_register_style('jquery_ui', null, array ('jquery'));
 			wp_enqueue_style('jquery_ui');
@@ -366,6 +367,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$startDate = gmdate('Y-m-d', strtotime('+27 hour'));
 			$startTime = gmdate('G:00', strtotime('+27 hour'));
 			require_once(REDI_TEMPLATE.'frontend.php');
+            $out = ob_get_contents();
+
+            ob_end_clean();
+            return $out;
 		}
 
 		function redi_restaurant_ajax()
