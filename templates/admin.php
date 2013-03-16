@@ -12,7 +12,7 @@
 
             <tr valign="top">
                 <th scope="row">
-                    <label for="services"><?php _e('Available seats:', 'redi-restaurant-reservation');?> </label>
+                    <label for="services"><?php _e('Available seats', 'redi-restaurant-reservation');?> </label>
                 </th>
                 <td>
                     <input id="services" type="text"
@@ -67,7 +67,7 @@
 
                 <th scope="row">
                     <label for="Name">
-						<?php _e('Name', 'redi-restaurant-reservation'); ?>
+						<?php _e('Restaurant name', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
