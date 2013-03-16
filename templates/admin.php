@@ -60,7 +60,7 @@
 			<?php endforeach?>
         </table>
         <div class="icon32" id="icon-users"><br></div>
-        <h2><?php _e('Address', 'redi-restaurant-reservation');?></h2>
+        <h2><?php _e('Restaurant details', 'redi-restaurant-reservation');?></h2>
 
         <table class="form-table" style="width: 50%;">
             <tr valign="top">

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2013-03-16 13:32+0200\n"
-"PO-Revision-Date: 2013-03-16 13:35+0200\n"
+"POT-Creation-Date: 2013-03-16 13:39+0200\n"
+"PO-Revision-Date: 2013-03-16 13:40+0200\n"
 "Last-Translator: Sergei <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Russian\n"
@@ -45,13 +45,12 @@ msgid "Close"
 msgstr "Время закрытия"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:63
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:100
-msgid "Address"
-msgstr "Адрес"
+msgid "Restaurant details"
+msgstr "Информация о ресторане"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:70
 msgid "Restaurant name"
-msgstr "Название ресторана"
+msgstr "Название"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:80
 msgid "Country"
@@ -60,6 +59,10 @@ msgstr "Страна"
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:90
 msgid "City"
 msgstr "Город"
+
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:100
+msgid "Address"
+msgstr "Адрес"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:110
 msgid "Url"

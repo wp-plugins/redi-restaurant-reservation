@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation 13.0302\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2013-03-16 13:34+0200\n"
-"PO-Revision-Date: 2013-03-16 13:34+0200\n"
+"POT-Creation-Date: 2013-03-16 13:40+0200\n"
+"PO-Revision-Date: 2013-03-16 13:40+0200\n"
 "Last-Translator: Sergei <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Estonian\n"
@@ -44,8 +44,7 @@ msgid "Close"
 msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:63
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:100
-msgid "Address"
+msgid "Restaurant details"
 msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:70
@@ -58,6 +57,10 @@ msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:90
 msgid "City"
+msgstr ""
+
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:100
+msgid "Address"
 msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:110
