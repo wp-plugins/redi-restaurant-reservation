@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-03-16 12:42+0200\n"
+"PO-Revision-Date: 2013-03-16 13:00+0200\n"
 "Last-Translator: Sergei <info@reservationdiary.eu>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: Poedit 1.5.5\n"
@@ -17,110 +17,107 @@ msgstr ""
 
 #: templates/admin.php:4
 msgid "Your settings have been saved!"
-msgstr "Ваши изменения сохранены!"
+msgstr ""
 
 #: templates/admin.php:7
 msgid "Common settings"
-msgstr "Общие настройки"
+msgstr ""
 
 #: templates/admin.php:15
 msgid "Available seats:"
-msgstr "Количество мест"
+msgstr ""
 
 #: templates/admin.php:26
 msgid "Working time"
-msgstr "Рабочее время"
+msgstr ""
 
 #: templates/admin.php:34
 msgid "Open"
-msgstr "Время открытия"
+msgstr ""
 
 #: templates/admin.php:37
 msgid "Close"
-msgstr "Время закрытия"
+msgstr ""
 
 #: templates/admin.php:63 templates/admin.php:100
 msgid "Address"
-msgstr "Адрес"
+msgstr ""
 
 #: templates/admin.php:70 templates/frontend.php:42
 msgid "Name"
-msgstr "Название"
+msgstr "Nimi"
 
 #: templates/admin.php:80
 msgid "Country"
-msgstr "Страна"
+msgstr ""
 
 #: templates/admin.php:90
 msgid "City"
-msgstr "Город"
+msgstr ""
 
 #: templates/admin.php:110
 msgid "Url"
-msgstr "Веб адрес"
+msgstr ""
 
 #: templates/admin.php:122 templates/frontend.php:51
 msgid "Email"
-msgstr "Емайл"
+msgstr "E-post"
 
 #: templates/admin.php:133 templates/frontend.php:46
 msgid "Phone"
-msgstr "Телефон"
+msgstr "Telefon"
 
 #: templates/admin.php:145
 msgid "Publish restaurant details to reservationdiary.eu catalog"
-msgstr "Опубликовать данные ресторана в каталоге reservationdiary.eu"
+msgstr ""
 
 #: templates/frontend.php:4 templates/frontend.php:29
 #: templates/frontend.php:38
 msgid "Step"
-msgstr "Шаг"
+msgstr "Samm"
 
 #: templates/frontend.php:4
 msgid "Select date and time"
-msgstr "Выбор даты и времени"
+msgstr "Vali kuupäev ja kellaaeg"
 
 #: templates/frontend.php:5
 msgid "Date and time"
-msgstr "Дата и время"
+msgstr "Kuupäev ja kellaaeg"
 
 #: templates/frontend.php:8
 msgid "Persons"
-msgstr "Количество людей"
+msgstr "Inimesi"
 
 #: templates/frontend.php:19
 msgid "Check available time"
-msgstr "Проверить доступность"
+msgstr "Kontrolli vaba aega"
 
 #: templates/frontend.php:29
 msgid "Select available time"
-msgstr "Выбор возможного времени"
+msgstr "Vali vaba aeg"
 
 #: templates/frontend.php:38
 msgid "Provide reservation details"
-msgstr "Информация для обратной связи"
+msgstr "Sisesta üksikasjad"
 
 #: templates/frontend.php:56
 msgid "Comment"
-msgstr "Коментарии"
+msgstr "Kommentaar"
 
 #: templates/frontend.php:62
 msgid "Make a reservation"
-msgstr "Забронировать"
+msgstr "Reserveeri"
 
 #: templates/frontend.php:73
 msgid "Thank you for your reservation."
-msgstr "Спасибо за ваше бронирование"
+msgstr "Täname reserveeringu eest."
 
 #: templates/frontend.php:75
 msgid ""
 "We will create a confirmation and email it to you at the email address you "
 "entered on the reservations form. You should receive your confirmation by "
 "email shortly."
-msgstr ""
-"Мы отправим подтверждение к вам на почтовый ящик, указанный в форме "
-"бронирования. Вы должны получить подтверждение по электронной почте в "
-"ближайшее время."
+msgstr "Me saadame kinnituse meilile mille te vormi sisestasite."
 
 #. Plugin Name of the plugin/theme
 msgid "ReDi Restaurant Reservation"

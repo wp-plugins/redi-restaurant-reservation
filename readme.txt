@@ -36,6 +36,11 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0316 =
+* Fixed incompatibility with plugins that resides on same page
+* Added multi language support to reservation form
+* Added translations on Russian and Estonian
+
 = 13.0302 =
 * Fixed incompatibility with some themes
 
