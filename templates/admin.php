@@ -1,10 +1,10 @@
 <div class="wrap">
 
 	<?php if (isset($settings_saved)): ?>
-    <div class="updated" id="message"><p><?php echo __('Your settings have been saved!')?></p></div>
+    <div class="updated" id="message"><p><?php _e('Your settings have been saved!', 'redi-restaurant-reservation')?></p></div>
 	<?php endif ?>
     <div class="icon32" id="icon-admin"><br></div>
-    <h2><?php echo __('Common settings');?></h2>
+    <h2><?php _e('Common settings', 'redi-restaurant-reservation');?></h2>
 
     <form name="redi-restaurant" method="post">
         <!--input type="hidden" name="categoryID" value="<?php echo $categoryID;?>"/-->
@@ -12,7 +12,7 @@
 
             <tr valign="top">
                 <th scope="row">
-                    <label for="services"><?php echo __('Available seats:');?> </label>
+                    <label for="services"><?php _e('Available seats:', 'redi-restaurant-reservation');?> </label>
                 </th>
                 <td>
                     <input id="services" type="text"
@@ -23,7 +23,7 @@
             </tr>
         </table>
         <div class="icon32" id="icon-options-general"><br></div>
-        <h2><?php echo __('Working time');?> </h2>
+        <h2><?php _e('Working time', 'redi-restaurant-reservation');?> </h2>
         <table class="form-table" style="width: 50%;">
             <tr valign="top">
 
@@ -31,10 +31,10 @@
 
                 </th>
                 <td>
-					<?php echo __('Open');?>
+					<?php _e('Open', 'redi-restaurant-reservation');?>
                 </td>
                 <td>
-					<?php echo __('Close');?>
+					<?php _e('Close', 'redi-restaurant-reservation');?>
                 </td>
             </tr>
 			<?php //$day =0; ?>
@@ -45,7 +45,7 @@
             <tr valign="top">
                 <th scope="row">
                     <label for="OpenTime[<?php echo $serviceTimeName?>]">
-						<?php echo __($serviceTimeName)?>
+						<?php _e($serviceTimeName)?>
                     </label>
                 </th>
                 <td>
@@ -60,14 +60,14 @@
 			<?php endforeach?>
         </table>
         <div class="icon32" id="icon-users"><br></div>
-        <h2><?php echo __('Address');?></h2>
+        <h2><?php _e('Address', 'redi-restaurant-reservation');?></h2>
 
         <table class="form-table" style="width: 50%;">
             <tr valign="top">
 
                 <th scope="row">
                     <label for="Name">
-						<?php echo __('Name'); ?>
+						<?php _e('Name', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -77,7 +77,7 @@
             <tr>
                 <th scope="row">
                     <label for="Country">
-						<?php echo __('Country'); ?>
+						<?php _e('Country', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -87,7 +87,7 @@
             <tr>
                 <th scope="row">
                     <label for="City">
-						<?php echo __('City'); ?>
+						<?php _e('City', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -97,7 +97,7 @@
             <tr>
                 <th scope="row">
                     <label for="Address">
-						<?php echo __('Address'); ?>
+						<?php _e('Address', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -107,7 +107,7 @@
             <tr>
                 <th scope="row">
                     <label for="WebAddress">
-						<?php echo __('Url'); ?>
+						<?php _e('Url', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -119,7 +119,7 @@
 
                 <th scope="row">
                     <label for="Email">
-						<?php echo __('Email'); ?>
+						<?php _e('Email', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -130,7 +130,7 @@
 
                 <th scope="row">
                     <label for="Phone">
-						<?php echo __('Phone'); ?>
+						<?php _e('Phone', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -142,7 +142,7 @@
         <input type="checkbox" name="Catalog" id="Catalog" value="1" <?php if ($place['Catalog'])
 			echo 'checked="checked'?>>
         <label for="Catalog">
-			<?php echo __('Publish restaurant details to reservationdiary.eu catalog');?>
+			<?php _e('Publish restaurant details to reservationdiary.eu catalog', 'redi-restaurant-reservation');?>
         </label>
         <br/>
         <br/>
