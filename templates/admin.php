@@ -148,6 +148,7 @@
 					<input id="DescriptionShort" type="text" value="<?php echo $place['DescriptionShort'] ?>" name="DescriptionShort"/>
 				</td>
 			</tr>
+
 			<tr>
 				<th scope="row">
 					<label for="DescriptionFull">
@@ -167,7 +168,7 @@
 				<td>
 					<select name="Lang" style="width:137px;"/>
 					<?php foreach ((array)$redi_l10n_sys_locales as $locale): ?>
-						<option <?php if ($place['Lang'] == $locale['Lang']): ?> selected="selected" <?php endif ?>>
+						<option <?php if ($place['Lang'] == $locale['lang-www']): ?> selected="selected" <?php endif ?> value="<?php echo $locale['lang-www'] ?>">
 							<?php echo $locale['lang']; ?>
 						</option>
 					<?php endforeach ?>

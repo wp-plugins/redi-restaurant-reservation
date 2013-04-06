@@ -204,6 +204,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				if (is_array($times) && count($times))
 					$this->redi->setServiceTime($categoryID, $times);
 
+
 				$this->redi->setPlace($placeID,
 					array (
 						'place' => array (
@@ -215,7 +216,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							'Phone' => $_POST['Phone'],
 							'Catalog' => $_POST['Catalog'],
 							'WebAddress' => $_POST['WebAddress'],
-							'Lang' => str_replace('_', '-',$_POST['Lang']),
+							'Lang' => $_POST['Lang'],
 							'MinTimeBeforeReservation' => 24, // hour
 							'DescriptionShort' => $_POST['DescriptionShort'],
 							'DescriptionFull' => $_POST['DescriptionFull']
