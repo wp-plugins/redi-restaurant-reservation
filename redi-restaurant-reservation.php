@@ -83,7 +83,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					                                        'Lang' => get_locale(),
 					                                        'MinTimeBeforeReservation' => 24, // hour
 					                                        'DescriptionShort' => get_option('blogdescription'),
-					                                        'DescriptionLong' => '',
+					                                        'DescriptionFull' => '',
 					                                        'Catalog' => true
 				                                        )
 				                                  ));
@@ -215,10 +215,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 							'Phone' => $_POST['Phone'],
 							'Catalog' => $_POST['Catalog'],
 							'WebAddress' => $_POST['WebAddress'],
-							'Lang' => str_replace('_', '-',$_POST['Lang']), ///get_locale()),
+							'Lang' => str_replace('_', '-',$_POST['Lang']),
 							'MinTimeBeforeReservation' => 24, // hour
-							'DescriptionShort' => '',
-							'DescriptionLong' => ''
+							'DescriptionShort' => $_POST['DescriptionShort'],
+							'DescriptionFull' => $_POST['DescriptionFull']
 							)
 						)
 				);

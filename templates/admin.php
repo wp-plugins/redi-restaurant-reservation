@@ -140,6 +140,26 @@
 			</tr>
 			<tr>
 				<th scope="row">
+					<label for="DescriptionShort">
+						<?php _e('Short description', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<input id="DescriptionShort" type="text" value="<?php echo $place['DescriptionShort'] ?>" name="DescriptionShort"/>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
+					<label for="DescriptionFull">
+						<?php _e('Long description', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td colspan="2">
+					<textarea name="DescriptionFull" id="DescriptionFull" cols="60" rows="5"><?php echo $place['DescriptionFull'] ?></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
 					<label for="Lang">
 						<?php _e('Language', 'redi-restaurant-reservation'); ?>
 					</label>
