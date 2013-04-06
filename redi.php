@@ -76,10 +76,7 @@ class Redi
 	 */
 	public function query($categoryID, $params)
 	{
-		$params_string = $this->strParams($params);
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/Person',
-			GET,
-			$params_string);
+		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/Person', GET, $this->strParams($params));
 	}
 
 	public function createCategory($placeID, $params)
@@ -231,18 +228,14 @@ class Redi
 				return;
 			}
 			$result = highlight_string("<?php\n".print_r($object, TRUE), TRUE);
-			$result =
-				'<pre style="text-align: left;">'.preg_replace('/&lt;\\?php<br \\/>/', '', $result, 1).'</pre><br />';
-			echo  $result;
+			echo '<pre style="text-align: left;">'.preg_replace('/&lt;\\?php<br \\/>/', '', $result, 1).'</pre><br />';
 		}
 
 	}
 
-	public static function p($object, $return = false)
+	public static function p($object)
 	{
 		if (REDI_RESTAURANT_DEBUG)
-		{
 			return $object;
-		}
 	}
 }

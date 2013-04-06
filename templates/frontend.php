@@ -1,4 +1,4 @@
-<!--{version:"<? echo $this->version?>"}-->
+<!--{version:"<?php echo $this->version?>"}-->
 <form id="redi-reservation" name="redi-reservation" method="post">
     <div id="step1">
         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
@@ -39,29 +39,41 @@
 
         <div>
             <br/>
-            <label for="UserName"><?php _e('Name', 'redi-restaurant-reservation');?>:<span class="redi_required">*</span></label><br/>
+            <label for="UserName"><?php _e('Name', 'redi-restaurant-reservation');?>:
+	            <span class="redi_required">*</span>
+            </label>
+	        <br/>
             <input type="text" value="" name="UserName" id="UserName">
         </div>
         <div>
-            <br/><label for="UserPhone"><?php _e('Phone', 'redi-restaurant-reservation');?>:<span class="redi_required">*</span></label><br/>
+            <br/>
+	        <label for="UserPhone"><?php _e('Phone', 'redi-restaurant-reservation');?>:
+		        <span class="redi_required">*</span>
+	        </label>
+	        <br/>
             <input type="text" value="" name="UserPhone" id="UserPhone">
         </div>
         <div>
             <br/>
-            <label for="UserEmail"><?php _e('Email', 'redi-restaurant-reservation');?>:<span class="redi_required">*</span></label><br/>
+            <label for="UserEmail"><?php _e('Email', 'redi-restaurant-reservation');?>:
+	            <span class="redi_required">*</span>
+            </label>
+	        <br/>
             <input type="text" value="" name="UserEmail" id="UserEmail">
         </div>
         <div>
             <br/>
-            <label for="UserComments"><?php _e('Comment', 'redi-restaurant-reservation');?>:</label><br/>
+            <label for="UserComments">
+	            <?php _e('Comment', 'redi-restaurant-reservation');?>:
+            </label>
+	        <br/>
             <textarea rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
         </div>
         <div>
             <br/><br/>
-            <input type="submit" id="redi-restaurant-step3" name="Action"
-                   value="<?php _e('Make a reservation', 'redi-restaurant-reservation')?>"><img id="step3load" style="display: none;"
-                                                                    src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif"
-                                                                    alt=""/><br/>
+            <input type="submit" id="redi-restaurant-step3" name="Action" value="<?php _e('Make a reservation', 'redi-restaurant-reservation')?>">
+	        <img id="step3load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
+	        <br/>
         </div>
         <br/>
 
@@ -75,3 +87,14 @@
 		<?php _e('We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.', 'redi-restaurant-reservation');?>
     </div>
 </form>
+<?php if($thanks):?>
+	<div id="Thanks" style="">
+
+		<a style="float: right;" href="http://www.reservationdiary.eu/" target="_blank">
+			<label style="font-size: 10px;">
+			<?php _e('Powered by', 'redi-restaurant-reservation')?>
+			</label>
+			<img style="border:none; float: right;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL?>img/logo.png" alt="Powered by reservationdiary.eu" title="Powered by reservationdiary.eu"/></a>
+
+	</div>
+<?php endif ?>

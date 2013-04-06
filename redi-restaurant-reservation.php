@@ -12,8 +12,8 @@
  */
 if (!defined('REDI_RESTAURANT_PLUGIN_URL'))
 	define('REDI_RESTAURANT_PLUGIN_URL', plugin_dir_url(__FILE__));
-if (!defined('REDI_TEMPLATE'))
-	define('REDI_TEMPLATE', plugin_dir_path(__FILE__).'templates'.DIRECTORY_SEPARATOR);
+if (!defined('REDI_RESTAURANT_TEMPLATE'))
+	define('REDI_RESTAURANT_TEMPLATE', plugin_dir_path(__FILE__).'templates'.DIRECTORY_SEPARATOR);
 if (!defined('REDI_RESTAURANT_DEBUG'))
 	define('REDI_RESTAURANT_DEBUG', FALSE);
 if (!defined('ID'))
@@ -65,7 +65,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 		{
 			//Gets email and sitename from config
 			$new_account = $this->redi->createUser(array ('Email' => get_option('admin_email')));
-			Redi::p($new_account);
+
 			if (isset($new_account[REDI_APIKEY]) && !empty($new_account[REDI_APIKEY]))
 			{
 
@@ -80,6 +80,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 					                                        'Email' => get_option('admin_email'),
 					                                        'Phone' => '[areacode] [number]',
 					                                        'WebAddress' => get_option('siteurl'),
+					                                        'Lang' => get_locale(),
+					                                        'MinTimeBeforeReservation' => 24, // hour
+					                                        'DescriptionShort' => get_option('blogdescription'),
+					                                        'DescriptionLong' => '',
 					                                        'Catalog' => true
 				                                        )
 				                                  ));
@@ -145,11 +149,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 			if ($this->ApiKey == NULL) /// TODO: move to install
 				$this->register();
 
-			//redi::p($this->ApiKey);
 			$placeID = $this->options['placeID'];
 			$serviceID = $this->options['serviceID'];
 			$categoryID = $this->options['categoryID'];
-			//Redi::p($placeID);
+
 			if (isset($_POST['submit']))
 			{
 				$this->options['OpenTime'] = $_POST['OpenTime'];
@@ -176,10 +179,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 						$removeServices = array_slice($getServices, 0, $diff);
 						foreach ($removeServices AS $service)
-						{
-							//Redi::p($service);
 							$ids[] = $service->ID;
-						}
 
 						$this->redi->deleteServices($categoryID, $ids);
 					}
@@ -197,39 +197,44 @@ if (!class_exists('ReDiRestaurantReservation'))
 							));
 					}
 				}
+				$this->options['Thanks'] = (int)$_POST['Thanks'];
 				$this->options['services'] = $services;
 				$this->saveAdminOptions();
 
 				if (is_array($times) && count($times))
 					$this->redi->setServiceTime($categoryID, $times);
 
-				$place = $this->redi->setPlace($placeID,
+				$this->redi->setPlace($placeID,
 					array (
-					      'place' => array (
-						      'Name' => $_POST['Name'],
-						      'City' => $_POST['City'],
-						      'Country' => $_POST['Country'],
-						      'Address' => $_POST['Address'],
-						      'Email' => $_POST['Email'],
-						      'Phone' => $_POST['Phone'],
-						      'Catalog' => $_POST['Catalog'],
-						      'WebAddress' => $_POST['WebAddress']
-					      )
-					));
+						'place' => array (
+							'Name' => $_POST['Name'],
+							'City' => $_POST['City'],
+							'Country' => $_POST['Country'],
+							'Address' => $_POST['Address'],
+							'Email' => $_POST['Email'],
+							'Phone' => $_POST['Phone'],
+							'Catalog' => $_POST['Catalog'],
+							'WebAddress' => $_POST['WebAddress'],
+							'Lang' => str_replace('_', '-',$_POST['Lang']), ///get_locale()),
+							'MinTimeBeforeReservation' => 24, // hour
+							'DescriptionShort' => '',
+							'DescriptionLong' => ''
+							)
+						)
+				);
 				$settings_saved = true;
 			}
 			$place = $this->redi->getPlace($placeID); //goes to template 'admin'
-//			if (!$place)
-//			{
-//				$place = array ('WebAddress' => 'http://'.$_SERVER['SERVER_NAME'].'/');
-//			}
+
 			$serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
 
 			$getServices = $this->redi->getServices($categoryID);
-			//			echo '<pre>';
-			//			var_dump($getServices);
+
 			$options = get_option($this->optionsName);
-			require_once(REDI_TEMPLATE.'admin.php');
+			$thanks = $options['Thanks'];
+
+			require_once(plugin_dir_path(__FILE__).'languages.php');
+			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 		}
 
 		function init_sessions()
@@ -366,7 +371,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$persons = 2;
 			$startDate = gmdate('Y-m-d', strtotime('+27 hour'));
 			$startTime = gmdate('G:00', strtotime('+27 hour'));
-			require_once(REDI_TEMPLATE.'frontend.php');
+			$thanks = $this->options['Thanks'];
+			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
             $out = ob_get_contents();
 
             ob_end_clean();
@@ -384,10 +390,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'EndTime' => urlencode(gmdate('Y-m-d H:i',
 							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 						'Quantity' => (int)$_POST['persons'],
-						'Alternatives' => 2
+						'Alternatives' => 2,
+						'Lang' => get_locale()
 					);
 					$query = $this->redi->query($this->options['categoryID'], $params);
-					//Redi::p($query);
+
 					if (!isset($query['Error']))
 					{
 						unset($query['debug']);
@@ -416,12 +423,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"Name" => "Person"
 						)
 					);
-					//	var_dump($params);
 					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
 					echo json_encode($reservation);
 					break;
-				default:
-					//var_dump($_POST);
 			}
 			die;
 		}
