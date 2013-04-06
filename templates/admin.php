@@ -183,11 +183,16 @@
 			<tr>
 				<th scope="row">
 					<label for="MinTimeBeforeReservation">
-						<?php _e('Minimum hours before reservation', 'redi-restaurant-reservation'); ?>
+						<?php _e('Hours before reservation', 'redi-restaurant-reservation'); ?>
 					</label>
 				</th>
 				<td>
 					<input id="MinTimeBeforeReservation" type="text" value="<?php echo $place['MinTimeBeforeReservation'] ?>" name="MinTimeBeforeReservation"/>
+				</td>
+				<td style="width:80%">
+					<p class="description">
+						<?php _e('Minimum hours before reservation can be accepted from client', 'redi-restaurant-reservation'); ?>
+					</p>
 				</td>
 			</tr>
 			<tr>
