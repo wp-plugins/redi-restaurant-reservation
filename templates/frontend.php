@@ -94,7 +94,7 @@
 			<label style="font-size: 10px;">
 			<?php _e('Powered by', 'redi-restaurant-reservation')?>
 			</label>
-			<img style="border:none; float: right;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL?>img/logo.png" alt="Powered by reservationdiary.eu" title="Powered by reservationdiary.eu"/></a>
+			<img style="border:none; margin-left: 3px;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL?>img/logo.png" alt="Powered by reservationdiary.eu" title="Powered by reservationdiary.eu"/></a>
 
 	</div>
 <?php endif ?>
