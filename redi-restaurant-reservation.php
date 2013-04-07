@@ -80,7 +80,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					                                        'Email' => get_option('admin_email'),
 					                                        'Phone' => '[areacode] [number]',
 					                                        'WebAddress' => get_option('siteurl'),
-					                                        'Lang' => get_locale(),
+					                                        'Lang' => str_replace('_', '-', get_locale()),
 					                                        'MinTimeBeforeReservation' => 24, // hour
 					                                        'DescriptionShort' => get_option('blogdescription'),
 					                                        'DescriptionFull' => '',
@@ -393,7 +393,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
-						'Lang' => get_locale()
+						'Lang' => str_replace('_', '-', get_locale())
 					);
 					$query = $this->redi->query($this->options['categoryID'], $params);
 
@@ -422,7 +422,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"UserEmail" => $_POST['UserEmail'],
 							"UserComments" => $_POST['UserComments'],
 							"UserPhone" => $_POST['UserPhone'],
-							"Name" => "Person"
+							"Name" => "Person",
+							"Lang" => str_replace('_', '-', get_locale())
 						)
 					);
 					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
