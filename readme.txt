@@ -19,7 +19,7 @@ Initially you need to setup number of persons that can book at one time, working
 3. Go to Settings/Redi Restaurant Reservation page
 4. Follow instructions on the page to setup plugin
 
-When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public <a hreg="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
+When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public <a href="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
 In case you have any problems with plugin installation or you need some customization, please don't hesitate to contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 == Screenshots ==
@@ -38,7 +38,7 @@ In case you have any problems with plugin installation or you need some customiz
 
 = 13.0406 =
 * Added French translation
-* Added possibility to provide Short and Full description about restaurnat
+* Added possibility to provide Short and Full description about restaurant
 * Added language selection for emails that are sent to administrator
 * Added configuration of minimum time in hours before reservation
 
