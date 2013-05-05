@@ -79,7 +79,7 @@ jQuery(function () {
             startTime:jQuery('#startTime').val(),
             persons:jQuery('#persons').val()
         };
-        //jQuery("html, body").animate({ scrollTop:  $("#step2")[0].scrollHeight }, "slow");
+
         jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
                 jQuery('#step1load').hide();
 
@@ -103,7 +103,6 @@ jQuery(function () {
                         jQuery(this).html('<b>' + jQuery(this).val() + '</b>');
                         jQuery('#startTime1').val(jQuery(this).val());
                         jQuery('#step3').show('slow');
-                        //jQuery("html, body").animate({ scrollTop: $("#step2")[0].scrollHeight }, "slow");
                         jQuery('#UserName').focus();
                         return false;
                     });

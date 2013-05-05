@@ -375,11 +375,12 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$persons = 2;
 
             $time_format = get_option('time_format');
+
             $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0)+1;
-            
+
 			$startDate = gmdate('Y-m-d', strtotime('+'.$MinTimeBeforeReservation.' hour'));
 
-            $startTime = mktime(date("G")+$MinTimeBeforeReservation, 0, 0, 0, 0, 0);
+            $startTime = mktime(date("G", current_time('timestamp')) + $MinTimeBeforeReservation, 0, 0, 0, 0, 0);
 
 			$thanks = $this->options['Thanks'];
 			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
@@ -403,15 +404,17 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'Alternatives' => 2,
 						'Lang' => str_replace('_', '-', get_locale())
 					);
+
 					$query = $this->redi->query($this->options['categoryID'], $params);
 
+                    $time_format = get_option('time_format');
 					if (!isset($query['Error']))
 					{
 						unset($query['debug']);
 						foreach ($query as $q)
 						{
-							$q->StartTime = gmdate('H:i', strtotime($q->StartTime));
-							$q->EndTime = gmdate('H:i', strtotime($q->EndTime));
+							$q->StartTime = gmdate($time_format, strtotime($q->StartTime));
+							$q->EndTime = gmdate($time_format, strtotime($q->EndTime));
 						}
 					}
 					echo json_encode($query);
