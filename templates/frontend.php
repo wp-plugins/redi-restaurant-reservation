@@ -14,7 +14,7 @@ var time_format ="HH:mm";
         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
         <br/><label for="startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
         <input type="text" value="<?php echo $startDate ?>" name="startDate" id="startDate"/>
-        <input id="startTime" type="text" value="<?php echo gmdate($time_format, $start_time);?>" name="startTime"/><br/>
+        <input id="startTime" type="text" value="<?php echo gmdate($time_format, $startTime);?>" name="startTime"/><br/>
         <br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
         <select name="persons" id="persons">

@@ -88,6 +88,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				                                        )
 				                                  ));
 
+
 				$this->options['placeID'] = $placeID = (int)$place[ID];
 
 				$category = $this->redi->createCategory($placeID,
@@ -199,7 +200,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 				}
 				$this->options['Thanks'] = (int)$_POST['Thanks'];
 				$this->options['services'] = $services;
-				$this->saveAdminOptions();
+                $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
+                $this->saveAdminOptions();
 
 				if (is_array($times) && count($times))
 					$this->redi->setServiceTime($categoryID, $times);
@@ -373,8 +375,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$persons = 2;
 
             $time_format = get_option('time_format');
-			$startDate = gmdate('Y-m-d', strtotime('+27 hour'));
-            $start_time = mktime(date("G")+27, 0, 0, 0, 0, 0);
+            $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0)+1;
+            
+			$startDate = gmdate('Y-m-d', strtotime('+'.$MinTimeBeforeReservation.' hour'));
+
+            $startTime = mktime(date("G")+$MinTimeBeforeReservation, 0, 0, 0, 0, 0);
 
 			$thanks = $this->options['Thanks'];
 			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
