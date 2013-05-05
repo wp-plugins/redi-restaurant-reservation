@@ -108,7 +108,7 @@ jQuery(function () {
                     });
                     // if we have time available simulate a click
                     jQuery('.redi-restaurant-button').each(function () {
-                        if (jQuery(this).val() == jQuery('#startTime').val() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
+                        if (jQuery(this).val().toLowerCase() == jQuery('#startTime').val().toLowerCase() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
                     });
                 }
             }

@@ -4,7 +4,7 @@
     $time_format_s =explode(':', $time_format);
 
     if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>
-var time_format ="hh:mm tt";
+var time_format ="h:mm tt";
     <?php else: ?>
 var time_format ="HH:mm";
     <?php endif ?>
