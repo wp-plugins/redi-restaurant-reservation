@@ -36,6 +36,9 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0505 =
+* Added support for different time formats
+
 = 13.0406 =
 * Added French translation
 * Added possibility to provide Short and Full description about restaurant
