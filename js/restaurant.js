@@ -10,12 +10,15 @@ jQuery(function () {
     });
     jQuery('#startTime').timepicker({
         stepMinute:15,
+        timeFormat:time_format,
         onClose:function (dateText, inst) {
             hideSteps();
         }
     });
+    //alert(time_format);
     jQuery("#startDate").datepicker({
         dateFormat:'yy-mm-dd',
+
         minDate:new Date(),
         onSelect:function (dateText, inst) {
             hideSteps();

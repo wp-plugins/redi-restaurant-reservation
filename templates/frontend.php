@@ -1,10 +1,20 @@
 <!--{version:"<?php echo $this->version?>"}-->
+<script type="text/javascript">
+    <?php
+    $time_format_s =explode(':', $time_format);
+
+    if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>
+var time_format ="hh:mm tt";
+    <?php else: ?>
+var time_format ="HH:mm";
+    <?php endif ?>
+</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
     <div id="step1">
         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
         <br/><label for="startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
         <input type="text" value="<?php echo $startDate ?>" name="startDate" id="startDate"/>
-        <input id="startTime" type="text" value="<?php echo $startTime?>" name="startTime"/><br/>
+        <input id="startTime" type="text" value="<?php echo gmdate($time_format, $start_time);?>" name="startTime"/><br/>
         <br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
         <select name="persons" id="persons">

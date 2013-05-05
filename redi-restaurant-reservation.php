@@ -371,8 +371,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 				REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
 			wp_enqueue_style('redi-restaurant');
 			$persons = 2;
+
+            $time_format = get_option('time_format');
 			$startDate = gmdate('Y-m-d', strtotime('+27 hour'));
-			$startTime = gmdate('G:00', strtotime('+27 hour'));
+            $start_time = mktime(date("G")+27, 0, 0, 0, 0, 0);
+
 			$thanks = $this->options['Thanks'];
 			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
             $out = ob_get_contents();
