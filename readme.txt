@@ -12,6 +12,13 @@ ReDi Restaurant Reservation plugin allows you to easily manage reservations for 
 ReDi Restaurant Reservation plugin allows you to manage reservations for your restaurant business. This plugin can help to receive reservations from clients online. Your clients will be able to see available space at specified time, and if it's available, client is able to make a table reservation.
 Initially you need to setup number of persons that can book at one time, working times and restaurant details.
 
+Supported languages:
+- English
+- Russian
+- French
+- Danish
+- Spain
+
 == Installation ==
 
 1. Click on "Install now" to install plugin
