@@ -14,10 +14,11 @@ Initially you need to setup number of persons that can book at one time, working
 
 Supported languages:
 
-* English
-* Russian
-* French
 * Danish
+* English
+* Estonian
+* French
+* Russian
 * Spainish
 
 If you need more languages, plese contact us!
