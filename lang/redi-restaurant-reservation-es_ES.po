@@ -4,11 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2013-04-06 23:45+0200\n"
-"PO-Revision-Date: 2013-05-28 09:15+0200\n"
+"POT-Creation-Date: 2013-05-28 09:19+0200\n"
+"PO-Revision-Date: 2013-05-28 09:20+0200\n"
 "Last-Translator: Sergei <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
-"Language: Russian\n"
+"Language: Spanish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,158 +21,155 @@ msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:5
 msgid "Your settings have been saved!"
-msgstr "Ваши изменения сохранены!"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:10
 msgid "Common settings"
-msgstr "Общие настройки"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:17
 msgid "Available seats"
-msgstr "Количество мест"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:28
 msgid "Working time"
-msgstr "Рабочее время"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:36
 msgid "Open"
-msgstr "Время открытия"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:39
 msgid "Close"
-msgstr "Время закрытия"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:65
 msgid "Restaurant details"
-msgstr "Информация о ресторане"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:72
 msgid "Restaurant name"
-msgstr "Название"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:82
 msgid "Country"
-msgstr "Страна"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:92
 msgid "City"
-msgstr "Город"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:102
 msgid "Address"
-msgstr "Адрес"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:112
 msgid "Url"
-msgstr "Веб адрес"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:124
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:58
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:68
 msgid "Email"
-msgstr "Емайл"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:134
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:50
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:60
 msgid "Phone"
-msgstr "Телефон"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:144
 msgid "Short description"
-msgstr "Короткое описание"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:155
 msgid "Long description"
-msgstr "Длинное описание"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:165
 msgid "Language"
-msgstr "Язык"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:179
 msgid "Language for admin emails"
-msgstr "Язык для писем администратору"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:186
 msgid "Hours before reservation"
-msgstr "Время до резервирования (в часах)"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:194
 msgid "Minimum hours before reservation can be accepted from client"
-msgstr "Минимальное количество часов до резервирования"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:201
 msgid "Catalog"
-msgstr "Каталог"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:209
 msgid "Publish restaurant details to reservationdiary.eu catalog"
-msgstr "Опубликовать данные ресторана в каталоге reservationdiary.eu"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:216
 msgid "Support us"
-msgstr "Поддержите нас"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:224
 msgid "Please support our plugin by publishing Reservation Diary logo"
-msgstr "Поддержите наш плагин разместив Reservation Diary лого"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:4
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:29
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:38
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:14
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:39
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:48
 msgid "Step"
-msgstr "Шаг"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:4
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:14
 msgid "Select date and time"
-msgstr "Выбор даты и времени"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:5
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:15
 msgid "Date and time"
-msgstr "Дата и время"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:8
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:18
 msgid "Persons"
-msgstr "Количество людей"
-
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:19
-msgid "Check available time"
-msgstr "Проверить доступность"
+msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:29
+msgid "Check available time"
+msgstr ""
+
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:39
 msgid "Select available time"
-msgstr "Выбор доступного времени"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:38
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:48
 msgid "Provide reservation details"
-msgstr "Информация для обратной связи"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:42
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:52
 msgid "Name"
-msgstr "Имя"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:67
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:77
 msgid "Comment"
-msgstr "Коментарии"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:74
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:84
 msgid "Make a reservation"
-msgstr "Забронировать"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:85
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:95
 msgid "Thank you for your reservation."
-msgstr "Спасибо за ваше бронирование"
+msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:87
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:97
 msgid ""
 "We will create a confirmation and email it to you at the email address you "
 "entered on the reservations form. You should receive your confirmation by "
 "email shortly."
 msgstr ""
-"Мы отправим подтверждение к вам на почтовый ящик, указанный в форме "
-"бронирования. Вы должны получить подтверждение по электронной почте в "
-"ближайшее время."
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:95
+#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:105
 msgid "Powered by"
-msgstr "Разработано"
+msgstr ""

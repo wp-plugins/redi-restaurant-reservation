@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation 13.0302\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2013-04-06 23:47+0200\n"
-"PO-Revision-Date: 2013-04-06 23:48+0200\n"
+"PO-Revision-Date: 2013-05-28 09:16+0200\n"
 "Last-Translator: Sergei <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Estonian\n"
@@ -94,9 +94,8 @@ msgid "Language for admin emails"
 msgstr ""
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:186
-#, fuzzy
 msgid "Hours before reservation"
-msgstr "Täname reserveeringu eest."
+msgstr "Tundi enne reservatsiooni"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:194
 msgid "Minimum hours before reservation can be accepted from client"
