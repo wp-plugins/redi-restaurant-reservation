@@ -13,11 +13,11 @@ ReDi Restaurant Reservation plugin allows you to manage reservations for your re
 Initially you need to setup number of persons that can book at one time, working times and restaurant details.
 
 Supported languages:
-- English
-- Russian
-- French
-- Danish
-- Spain
+* English
+* Russian
+* French
+* Danish
+* Spain
 
 == Installation ==
 
