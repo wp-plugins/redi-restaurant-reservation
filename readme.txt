@@ -14,7 +14,7 @@ Initially you need to setup number of persons that can book at one time, working
 
 Supported languages:
 
-* Danish
+* Dutch
 * English
 * Estonian
 * French
@@ -46,6 +46,10 @@ In case you have any problems with plugin installation or you need some customiz
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 13.0530
+* Added Dutch translation
+* Added Spainish translation
 
 = 13.0505 =
 * Added support for different time formats
