@@ -14,6 +14,7 @@ Initially you need to setup number of persons that can book at one time, working
 
 Supported languages:
 
+* Danish
 * Dutch
 * English
 * Estonian
@@ -49,6 +50,7 @@ In case you have any problems with plugin installation or you need some customiz
 
 = 13.0530 =
 * Added Dutch translation
+* Added Danish translation
 * Added Spainish translation
 
 = 13.0505 =
