@@ -60,7 +60,7 @@ class Redi
 
 	public function reservation($categoryID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID, POST, json_encode(unescape_array($params)));
+		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Redi
 
 	public function createCategory($placeID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$placeID, POST, json_encode(unescape_array($params)));
+		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$placeID, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function getServices($categoryID)
@@ -98,7 +98,7 @@ class Redi
 	{
 		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time',
 			PUT,
-			json_encode(unescape_array(array ('timeSet' => $timeSet))));
+			json_encode(self::unescape_array(array ('timeSet' => $timeSet))));
 	}
 
 	public function getServiceTime($categoryID)
@@ -108,7 +108,7 @@ class Redi
 
 	public function createService($categoryID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID, POST, json_encode(unescape_array($params)));
+		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function userGetError()
@@ -118,17 +118,17 @@ class Redi
 
 	public function createUser($params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.USER, POST, json_encode(unescape_array($params)));
+		return $this->curl(REDI_RESTAURANT_API.USER, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function setPlace($placeID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, PUT, json_encode(unescape_array($params)));
+		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, PUT, json_encode(self::unescape_array($params)));
 	}
 
 	public function createPlace($params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(unescape_array($params)));
+		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function getPlace($placeID)
