@@ -48,6 +48,9 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0617
+* Fixed problem with double escaping of ' or \ symbols
+
 = 13.0530 =
 * Added Dutch translation
 * Added Danish translation
