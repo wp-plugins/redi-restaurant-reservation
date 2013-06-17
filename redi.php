@@ -170,7 +170,7 @@ class Redi
 		}
 		return $unescaped_array;
 	}
-}
+
 	private function curl($url, $method = GET, $params_string = NULL)
 	{
 		$ch = curl_init();
