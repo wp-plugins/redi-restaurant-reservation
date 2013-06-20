@@ -403,8 +403,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
-						'Lang' => str_replace('_', '-', get_locale()),
-                        'CurrentTime' => date_i18n('Y-m-d H:i')
+						'Lang' => str_replace('_', '-', get_locale())
 					);
 
 					$query = $this->redi->query($this->options['categoryID'], $params);
@@ -436,8 +435,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"UserComments" => $_POST['UserComments'],
 							"UserPhone" => $_POST['UserPhone'],
 							"Name" => "Person",
-							"Lang" => str_replace('_', '-', get_locale()),
-                            'CurrentTime' => date_i18n('Y-m-d H:i')
+							"Lang" => str_replace('_', '-', get_locale())
 						)
 					);
 					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
