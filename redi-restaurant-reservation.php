@@ -131,6 +131,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			add_action('wp_ajax_nopriv_redi_restaurant-submit', array (&$this, 'redi_restaurant_ajax'));
 			add_action('wp_ajax_redi_restaurant-submit', array (&$this, 'redi_restaurant_ajax'));
 			add_shortcode('redirestaurant', array ($this, 'shortcode'));
+
 		}
 
 		/**
@@ -402,7 +403,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
-						'Lang' => str_replace('_', '-', get_locale())
+						'Lang' => str_replace('_', '-', get_locale()),
+                        'CurrentTime' => date_i18n('Y-m-d H:i')
 					);
 
 					$query = $this->redi->query($this->options['categoryID'], $params);
@@ -434,7 +436,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"UserComments" => $_POST['UserComments'],
 							"UserPhone" => $_POST['UserPhone'],
 							"Name" => "Person",
-							"Lang" => str_replace('_', '-', get_locale())
+							"Lang" => str_replace('_', '-', get_locale()),
+                            'CurrentTime' => date_i18n('Y-m-d H:i')
 						)
 					);
 					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
