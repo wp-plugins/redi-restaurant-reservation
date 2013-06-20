@@ -8,7 +8,7 @@ jQuery(function () {
     jQuery('#persons').change(function () {
         hideSteps();
     });
-    jQuery('#startTime').timepicker({
+    jQuery('#redi-restaurant-startTime').timepicker({
         stepMinute:15,
         timeFormat:time_format,
         onClose:function (dateText, inst) {
@@ -16,7 +16,7 @@ jQuery(function () {
         }
     });
     //alert(time_format);
-    jQuery("#startDate").datepicker({
+    jQuery("#redi-restaurant-startDate").datepicker({
         dateFormat:'yy-mm-dd',
 
         minDate:new Date(),
@@ -43,8 +43,8 @@ jQuery(function () {
         var data = {
             action:'redi_restaurant-submit',
             get:'step3',
-            startDate:jQuery('#startDate').val(),
-            startTime:jQuery('#startTime1').val(),
+            startDate:jQuery('#redi-restaurant-startDate').val(),
+            startTime:jQuery('#redi-restaurant-startTimeHidden').val(),
             persons:jQuery('#persons').val(),
             UserName:jQuery('#UserName').val(),
             UserEmail:jQuery('#UserEmail').val(),
@@ -75,8 +75,8 @@ jQuery(function () {
         var data = {
             action:'redi_restaurant-submit',
             get:'step1',
-            startDate:jQuery('#startDate').val(),
-            startTime:jQuery('#startTime').val(),
+            startDate:jQuery('#redi-restaurant-startDate').val(),
+            startTime:jQuery('#redi-restaurant-startTime').val(),
             persons:jQuery('#persons').val()
         };
 
@@ -101,14 +101,14 @@ jQuery(function () {
                             jQuery(this).html(jQuery(this).val());
                         });
                         jQuery(this).html('<b>' + jQuery(this).val() + '</b>');
-                        jQuery('#startTime1').val(jQuery(this).val());
+                        jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
                         jQuery('#step3').show('slow');
                         jQuery('#UserName').focus();
                         return false;
                     });
                     // if we have time available simulate a click
                     jQuery('.redi-restaurant-button').each(function () {
-                        if (jQuery(this).val().toLowerCase() == jQuery('#startTime').val().toLowerCase() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
+                        if (jQuery(this).val().toLowerCase() == jQuery('#redi-restaurant-startTime').val().toLowerCase() && (jQuery(this).is(':disabled') == false)) jQuery(this).click();
                     });
                 }
             }
