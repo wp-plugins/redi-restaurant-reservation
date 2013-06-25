@@ -48,10 +48,10 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
-= 13.0625
+= 13.0625 =
 * Added timezone support
 
-= 13.0618
+= 13.0618 =
 * Fixed problem with double escaping of ' or \ symbols
 
 = 13.0530 =
