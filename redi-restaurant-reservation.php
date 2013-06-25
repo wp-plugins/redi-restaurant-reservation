@@ -199,7 +199,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							));
 					}
 				}
-				$this->options['Thanks'] = (int)$_POST['Thanks'];
+				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
 				$this->options['services'] = $services;
                 $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
                 $this->saveAdminOptions();
@@ -236,7 +236,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$getServices = $this->redi->getServices($categoryID);
 
 			$options = get_option($this->optionsName);
-			$thanks = $options['Thanks'];
+
+			$thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
 
 			require_once(plugin_dir_path(__FILE__).'languages.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
@@ -259,8 +260,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 		{
 			add_options_page('Redi Restaurant Reservation',
 				'Redi Restaurant Reservation',
-				10,
-				basename(__FILE__),
+                'manage_options','options_page_slug',
 				array (&$this, 'redi_restaurant_admin_options_page'));
 		}
 
@@ -403,7 +403,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
-						'Lang' => str_replace('_', '-', get_locale())
+						'Lang' => str_replace('_', '-', get_locale()),
+                        'CurrentTime' => urlencode(date_i18n('Y-m-d H:i'))
 					);
 
 					$query = $this->redi->query($this->options['categoryID'], $params);
@@ -435,7 +436,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"UserComments" => $_POST['UserComments'],
 							"UserPhone" => $_POST['UserPhone'],
 							"Name" => "Person",
-							"Lang" => str_replace('_', '-', get_locale())
+							"Lang" => str_replace('_', '-', get_locale()),
+                            'CurrentTime' => date_i18n('Y-m-d H:i')
 						)
 					);
 					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
