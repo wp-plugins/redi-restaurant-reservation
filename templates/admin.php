@@ -206,7 +206,6 @@
 			</tr>
 		</table>
 
-		<br/>
 		<h2><?php _e('Email Configuration', 'redi-restaurant-reservation'); ?></h2>
 
 		<table class="form-table" style="width: 80%;">
@@ -260,6 +259,7 @@
 			</tr>
 
 		</table>
+		<br/>
 		<input id="submit" type="submit" value="Save" name="submit">
 	</form>
 </div>
