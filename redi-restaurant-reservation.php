@@ -202,6 +202,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
 				$this->options['services'] = $services;
                 $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
+				$this->options['ReservationTime'] = $_POST['ReservationTime'];
                 $this->saveAdminOptions();
 
 				if (is_array($times) && count($times))
@@ -240,6 +241,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
 
+			$ReservationTime = $this->getReservationTime();
 			require_once(plugin_dir_path(__FILE__).'languages.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 		}
@@ -378,7 +380,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
             $time_format = get_option('time_format');
 
-            $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0)+1;
+            $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
 
 			$startDate = gmdate('Y-m-d', strtotime('+'.$MinTimeBeforeReservation.' hour'));
 
@@ -401,7 +403,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'StartTime' => urlencode(gmdate('Y-m-d H:i',
 							strtotime($_POST['startDate'].' '.$_POST['startTime']))),
 						'EndTime' => urlencode(gmdate('Y-m-d H:i',
-							strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
+							strtotime($_POST['startDate'].' '.$_POST['startTime'].$this->getReservationTimeFormatted()))),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
 						'Lang' => str_replace('_', '-', get_locale()),
@@ -430,7 +432,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							'StartTime' => (gmdate('Y-m-d H:i',
 								strtotime($_POST['startDate'].' '.$_POST['startTime']))),
 							'EndTime' => (gmdate('Y-m-d H:i',
-								strtotime($_POST['startDate'].' '.$_POST['startTime'].' +3 hour'))),
+								strtotime($_POST['startDate'].' '.$_POST['startTime'].$this->getReservationTimeFormatted()))),
 							'Quantity' => (int)$_POST['persons'],
 							"UserName" => $_POST['UserName'],
 							"UserEmail" => $_POST['UserEmail'],
@@ -446,6 +448,20 @@ if (!class_exists('ReDiRestaurantReservation'))
 					break;
 			}
 			die;
+		}
+		private function getReservationTimeFormatted()
+		{
+			return ' +'.$this->getReservationTime().' minute';
+		}
+
+		private function getReservationTime()
+		{
+			if(isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)
+			{
+				return (int) $this->options['ReservationTime'];
+				return ' +'.$ReservationTime.' minute';
+			}
+			return 3*60;
 		}
 	}
 }

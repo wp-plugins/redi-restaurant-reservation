@@ -176,6 +176,21 @@
 			</tr>
 			<tr>
 				<th scope="row">
+					<label for="ReservationTime">
+						<?php _e('Reservation time', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<input id="ReservationTime" type="text" value="<?php echo $ReservationTime ?>" name="ReservationTime"/>
+				</td>
+				<td style="width:80%">
+					<p class="description">
+						<?php _e('Reservation duration in minutes', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
 					<label for="Catalog">
 						<?php _e('Catalog', 'redi-restaurant-reservation'); ?>
 					</label>
