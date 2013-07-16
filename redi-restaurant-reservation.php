@@ -223,7 +223,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 							'DescriptionShort' => $_POST['DescriptionShort'],
 							'DescriptionFull' => $_POST['DescriptionFull'],
 							'MinTimeBeforeReservation' => $_POST['MinTimeBeforeReservation'],
-							'Catalog' => (int)$_POST['Catalog']
+							'Catalog' => (int)$_POST['Catalog'],
+							'DateFormat' =>$_POST['DateFormat']
 							)
 						)
 				);
