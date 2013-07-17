@@ -48,6 +48,7 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+
 = 13.0716 =
 * Added possibility to specify date format in emails
 * Added to configuration reservation duration time
