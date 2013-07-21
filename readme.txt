@@ -34,6 +34,9 @@ If you need more languages, plese contact us!
 When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public <a href="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
 In case you have any problems with plugin installation or you need some customization, please don't hesitate to contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
+Paid Basic package functionality:
+* View your upcoming reservations from your Mobile/Tablet PC and never miss a customer. Please check screenshots.
+
 == Screenshots ==
 1. Example of plugin first page installed into default theme. When plugin is activated, new "Reservation" page is created. Step 1: Requests from user to select reservation date and time, and number of seats. User has to click on a button "Check available time". System will query online database for available places at specified time and shows result.
 2. Example of calendar control.
@@ -43,6 +46,8 @@ In case you have any problems with plugin installation or you need some customiz
 6. Reservation confirmation screen. At this time user has to receive confirmation email. Same time restaurant owner receives list of all upcoming reservations.
 7. Setup screen with number of seats available, opening times and days of the week.
 8. Setup screen with info on the restaurant incl. name, address, country, phone, email, URL
+9. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users)
+10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users)
 
 == Upgrade Notice ==
 
