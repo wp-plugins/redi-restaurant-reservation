@@ -24,6 +24,10 @@ Supported languages:
 
 If you need more languages, plese contact us!
 
+Paid basic package functionality:
+* View your upcoming reservations from your Mobile/Tablet PC and never miss a customer. 
+Please check screenshots.
+
 == Installation ==
 
 1. Click on "Install now" to install plugin
@@ -33,9 +37,6 @@ If you need more languages, plese contact us!
 
 When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public <a href="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
 In case you have any problems with plugin installation or you need some customization, please don't hesitate to contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
-
-Paid Basic package functionality:
-* View your upcoming reservations from your Mobile/Tablet PC and never miss a customer. Please check screenshots.
 
 == Screenshots ==
 01. Example of plugin first page installed into default theme. When plugin is activated, new "Reservation" page is created. Step 1: Requests from user to select reservation date and time, and number of seats. User has to click on a button "Check available time". System will query online database for available places at specified time and shows result.
