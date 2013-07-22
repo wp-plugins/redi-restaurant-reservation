@@ -28,6 +28,8 @@ Paid basic package functionality:
 * View your upcoming reservations from your Mobile/Tablet PC and never miss a customer. 
 Please check screenshots.
 
+For paid packages please contact by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+
 == Installation ==
 
 1. Click on "Install now" to install plugin
