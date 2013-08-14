@@ -61,6 +61,13 @@
 				</tr>
 			<?php endforeach ?>
 		</table>
+		<br/>
+		<p class="description">
+			<?php _e('Specify time in 24h format (00:00 - 23:59).', 'redi-restaurant-reservation'); ?>
+			<br/>
+			<?php _e('Set Open and Close fields to blank if restaurant is closed.', 'redi-restaurant-reservation'); ?>
+		</p>
+		<br/>
 		<div class="icon32" id="icon-users"><br></div>
 		<h2><?php _e('Restaurant details', 'redi-restaurant-reservation'); ?></h2>
 
