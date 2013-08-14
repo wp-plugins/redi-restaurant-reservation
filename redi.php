@@ -58,7 +58,12 @@ class Redi
 		$this->ApiKey = $ApiKey;
 	}
 
-	public function reservation($categoryID, $params)
+	public function cancelReservation($id, $lang, $reason)
+	{
+		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.$reason, DELETE);
+	}
+
+	public function createReservation($categoryID, $params)
 	{
 		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
 	}
@@ -89,7 +94,7 @@ class Redi
 		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID.'/Person', GET);
 	}
 
-	public function deleteServices($categoryID, $ids)
+	public function deleteServices($ids)
 	{
 		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'?serviceID='.join(',', $ids), DELETE);
 	}

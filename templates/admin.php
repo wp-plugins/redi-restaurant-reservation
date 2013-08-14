@@ -6,6 +6,16 @@
 			</p>
 		</div>
 	<?php endif ?>
+
+	<?php if (isset($errors)): ?>
+		<?php foreach((array)$errors as $error):?>
+		<div class="error">
+			<p>
+				<?php echo $error; ?>
+			</p>
+		</div>
+			<?php endforeach;?>
+	<?php endif ?>
 	<div class="icon32" id="icon-admin"><br></div>
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 

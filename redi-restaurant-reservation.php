@@ -155,6 +155,23 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$serviceID = $this->options['serviceID'];
 			$categoryID = $this->options['categoryID'];
 
+			if(isset($_POST['action']) && $_POST['action']=='cancel')
+			{
+				if(isset($_POST['id']) && ((int)$_POST['id']) >0 )
+				{
+					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
+
+					if(isset($ret['Error']))
+					{
+						$errors = array($ret['Error']);
+					}
+				}
+				else
+				{
+					$errors = array(_('id and reason are required'));
+				}
+			}
+
 			if (isset($_POST['submit']))
 			{
 				$this->options['OpenTime'] = $_POST['OpenTime'];
@@ -183,7 +200,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						foreach ($removeServices AS $service)
 							$ids[] = $service->ID;
 
-						$this->redi->deleteServices($categoryID, $ids);
+						$this->redi->deleteServices($ids);
 					}
 					else
 					{
@@ -244,6 +261,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$ReservationTime = $this->getReservationTime();
 			require_once(plugin_dir_path(__FILE__).'languages.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
+			require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');
 		}
 
 		function init_sessions()
@@ -443,7 +461,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'CurrentTime' => date_i18n('Y-m-d H:i')
 						)
 					);
-					$reservation = $this->redi->reservation($this->options['categoryID'], $params);
+					$reservation = $this->redi->createReservation($this->options['categoryID'], $params);
 					echo json_encode($reservation);
 					break;
 			}
