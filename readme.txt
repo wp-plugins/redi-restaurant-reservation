@@ -56,6 +56,8 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0814 =
+* Added cancel reservation from admin panel
 
 = 13.0716 =
 * Added possibility to specify date format in emails
