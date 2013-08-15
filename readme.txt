@@ -56,6 +56,9 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 13.0816 =
+* Added calendar localization support
+
 = 13.0815 =
 * Added cancel reservation from admin panel
 
