@@ -56,7 +56,7 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
-= 13.0814 =
+= 13.0815 =
 * Added cancel reservation from admin panel
 
 = 13.0716 =

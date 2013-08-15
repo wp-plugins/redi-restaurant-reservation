@@ -60,7 +60,7 @@ class Redi
 
 	public function cancelReservation($id, $lang, $reason)
 	{
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.$reason, DELETE);
+		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.urlencode($reason), DELETE);
 	}
 
 	public function createReservation($categoryID, $params)
