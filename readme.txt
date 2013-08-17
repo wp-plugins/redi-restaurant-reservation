@@ -56,7 +56,7 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
-= 13.0816 =
+= 13.0817 =
 * Added calendar localization support
 
 = 13.0815 =

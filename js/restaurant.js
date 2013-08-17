@@ -16,6 +16,12 @@ jQuery(function () {
         }
     });
 
+	// How to set calendar locale
+	// Step 1: Find region from file jquery.ui.i18n.all.js
+	// http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
+	// Step 2: Set region as a parameter, for exampe 'es' for Spanish
+	jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
+
     jQuery("#redi-restaurant-startDate").datepicker({
         dateFormat:'yy-mm-dd',
 
@@ -24,14 +30,7 @@ jQuery(function () {
             hideSteps();
         }
     });
-	
-	// How to set calendar locale
-	// Step 1: Find region from file jquery.ui.i18n.all.js
-	// http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
-	// Step 2: Set region as a parameter, for exampe "es" for Spanish
-	$.datepicker.setDefaults( $.datepicker.regional[ "" ] );
-
-	
+		
     jQuery('#redi-restaurant-step3').click(function () {
         if(jQuery('#UserName').val() =='')
         {
