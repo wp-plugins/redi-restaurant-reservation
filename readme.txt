@@ -25,8 +25,8 @@ Supported languages:
 If you need more languages, plese contact us!
 
 Paid basic package functionality:
-* View your upcoming reservations from your Mobile/Tablet PC and never miss a customer. 
-Please check screenshots.
+
+* View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so waitress can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 
 For paid packages please contact by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
@@ -49,7 +49,7 @@ In case you have any problems with plugin installation or you need some customiz
 06. Reservation confirmation screen. At this time user has to receive confirmation email. Same time restaurant owner receives list of all upcoming reservations.
 07. Setup screen with number of seats available, opening times and days of the week.
 08. Setup screen with info on the restaurant incl. name, address, country, phone, email, URL
-09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users)
+09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users). Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users)
 
 == Upgrade Notice ==
