@@ -238,6 +238,7 @@
 			</tr>
 		</table>
 
+		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Email Configuration', 'redi-restaurant-reservation'); ?></h2>
 
 		<table class="form-table" style="width: 80%;">

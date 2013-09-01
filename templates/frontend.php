@@ -1,5 +1,6 @@
 <!--{version:"<?php echo $this->version?>"}-->
 <script type="text/javascript">
+	var date_format = '<?php echo $calendar_date_format ?>';
     <?php
     $time_format_s =explode(':', $time_format);
 
@@ -8,6 +9,7 @@ var time_format ="h:mm tt";
     <?php else: ?>
 var time_format ="HH:mm";
     <?php endif ?>
+	
 </script>
 <form id="redi-reservation" name="redi-reservation" method="post">
     <div id="step1">

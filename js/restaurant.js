@@ -23,8 +23,7 @@ jQuery(function () {
 	jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
 
     jQuery("#redi-restaurant-startDate").datepicker({
-        dateFormat:'yy-mm-dd',
-
+        dateFormat:date_format,
         minDate:new Date(),
         onSelect:function (dateText, inst) {
             hideSteps();

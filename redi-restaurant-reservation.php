@@ -219,6 +219,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
 				$this->options['services'] = $services;
                 $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
+				$this->options['DateFormat'] = $_POST['DateFormat'];
 				$this->options['ReservationTime'] = $_POST['ReservationTime'];
                 $this->saveAdminOptions();
 
@@ -262,6 +263,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			require_once(plugin_dir_path(__FILE__).'languages.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');
+			require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
 		}
 
 		function init_sessions()
@@ -368,6 +370,70 @@ if (!class_exists('ReDiRestaurantReservation'))
 			delete_option(self::$name.'_page_id');
 		}
 
+		function getCalendarDateFormat($format)
+		{
+			switch ($format)
+			{
+				case 'MM-dd-yyyy':
+					return 'mm-dd-yy';
+				
+				case 'dd-MM-yyyy':
+					return 'dd-mm-yy';
+				
+				case 'yyyy.MM.dd':
+					return 'yy.mm.dd';
+				
+				case 'MM.dd.yyyy':
+					return 'mm.dd.yy';
+				
+				case 'dd.MM.yyyy':
+					return 'dd.mm.yy';
+				
+				case 'yyyy/MM/dd':
+					return 'yy/mm/dd';
+				
+				case 'MM/dd/yyyy':
+					return 'mm/dd/yy';
+				
+				case 'dd/MM/yyyy':
+					return 'dd/mm/yyyy';
+			}
+			
+			return 'yy-mm-dd';
+		}
+
+		function getPHPDateFormat($format)
+		{
+			switch ($format)
+			{
+				case 'MM-dd-yyyy':
+					return 'm-d-Y';
+				
+				case 'dd-MM-yyyy':
+					return 'd-m-Y';
+				
+				case 'yyyy.MM.dd':
+					return 'Y.m.d';
+				
+				case 'MM.dd.yyyy':
+					return 'm.d.Y';
+				
+				case 'dd.MM.yyyy':
+					return 'd.m.Y';
+				
+				case 'yyyy/MM/dd':
+					return 'Y/m/d';
+				
+				case 'MM/dd/yyyy':
+					return 'm/d/Y';
+				
+				case 'dd/MM/yyyy':
+					return 'd/m/Y';
+			}
+			
+			return 'Y-m-d';
+		}
+
 		public function shortcode()
 		{
             ob_start();
@@ -401,13 +467,21 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$persons = 2;
 
             $time_format = get_option('time_format');
-
+			$date_format_setting = $this->options['DateFormat'];
+			
+			$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
+			$date_format = $this->getPHPDateFormat($date_format_setting);
+			
             $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
 
-			$startDate = gmdate('Y-m-d', strtotime('+'.$MinTimeBeforeReservation.' hour'));
-
-            $startTime = mktime(date("G", current_time('timestamp')) + $MinTimeBeforeReservation, 0, 0, 0, 0, 0);
-
+			$d1 = new DateTime();
+			$d1->setTimestamp(current_time('timestamp'));
+			$d1->add(DateInterval::createFromDateString('+'.$MinTimeBeforeReservation.' hour'));
+			$startDate = $d1->format($date_format);
+			$d1->add(DateInterval::createFromDateString('+1 hour'));
+            $d1->setTime($d1->format('H'), 0);
+			$startTime = $d1->getTimestamp();
+			
 			$thanks = $this->options['Thanks'];
 			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
             $out = ob_get_contents();
@@ -415,46 +489,73 @@ if (!class_exists('ReDiRestaurantReservation'))
             ob_end_clean();
             return $out;
 		}
-
+		
 		function redi_restaurant_ajax()
 		{
 			switch ($_POST['get'])
 			{
 				case 'step1':
+					$startDate = DateTime::createFromFormat(
+						$this->getPHPDateFormat($this->options['DateFormat']).' H:i', $_POST['startDate'].' '.$_POST['startTime']);
+					
+					if ($startDate == FALSE)
+					{
+						echo json_encode(array('Error' => 'Selected date or time is not valid.'));
+						die;
+					}
+					
+					$strDate = $startDate->format('Y-m-d H:i');
+					
+					$endDate = DateTime::createFromFormat('Y-m-d H:i', $strDate);
+					$endDate->add(new DateInterval('PT'.$this->getReservationTime().'M'));
+					$strEndDate = $endDate->format('Y-m-d H:i');
+					
 					$params = array (
-						'StartTime' => urlencode(gmdate('Y-m-d H:i',
-							strtotime($_POST['startDate'].' '.$_POST['startTime']))),
-						'EndTime' => urlencode(gmdate('Y-m-d H:i',
-							strtotime($_POST['startDate'].' '.$_POST['startTime'].$this->getReservationTimeFormatted()))),
+						'StartTime' => urlencode($strDate),
+						'EndTime' => urlencode($strEndDate),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
 						'Lang' => str_replace('_', '-', get_locale()),
                         'CurrentTime' => urlencode(date_i18n('Y-m-d H:i'))
 					);
-
+					
 					$query = $this->redi->query($this->options['categoryID'], $params);
 
                     $time_format = get_option('time_format');
+
 					if (!isset($query['Error']))
 					{
 						unset($query['debug']);
 						foreach ($query as $q)
 						{
-							$q->StartTime = gmdate($time_format, strtotime($q->StartTime));
-							$q->EndTime = gmdate($time_format, strtotime($q->EndTime));
+							$q->StartTime = date($time_format, strtotime($q->StartTime));
+							$q->EndTime = date($time_format, strtotime($q->EndTime));
 						}
 					}
 					echo json_encode($query);
 					break;
 				case 'step3':
 
+					$startDate = DateTime::createFromFormat(
+						$this->getPHPDateFormat($this->options['DateFormat']).' H:i', $_POST['startDate'].' '.$_POST['startTime']);
+					
+					if ($startDate == FALSE)
+					{
+						echo json_encode(array('Error' => 'Selected date or time is not valid.'));
+						die;
+					}
+					
+					$strDate = $startDate->format('Y-m-d H:i');
+					
+					$endDate = DateTime::createFromFormat('Y-m-d H:i', $strDate);
+					$endDate->add(new DateInterval('PT'.$this->getReservationTime().'M'));
+					$strEndDate = $endDate->format('Y-m-d H:i');
+				
 					$params = array (
 						'reservation' => array (
 
-							'StartTime' => (gmdate('Y-m-d H:i',
-								strtotime($_POST['startDate'].' '.$_POST['startTime']))),
-							'EndTime' => (gmdate('Y-m-d H:i',
-								strtotime($_POST['startDate'].' '.$_POST['startTime'].$this->getReservationTimeFormatted()))),
+							'StartTime' => $strDate,
+							'EndTime' => $strEndDate,
 							'Quantity' => (int)$_POST['persons'],
 							"UserName" => $_POST['UserName'],
 							"UserEmail" => $_POST['UserEmail'],
@@ -465,12 +566,15 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'CurrentTime' => date_i18n('Y-m-d H:i')
 						)
 					);
+					
 					$reservation = $this->redi->createReservation($this->options['categoryID'], $params);
 					echo json_encode($reservation);
 					break;
 			}
+			
 			die;
 		}
+		
 		private function getReservationTimeFormatted()
 		{
 			return ' +'.$this->getReservationTime().' minute';
@@ -478,10 +582,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 		private function getReservationTime()
 		{
-			if(isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)
+			if (isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)
 			{
 				return (int) $this->options['ReservationTime'];
-				return ' +'.$ReservationTime.' minute';
 			}
 			return 3*60;
 		}

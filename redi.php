@@ -155,7 +155,6 @@ class Redi
 			foreach ($params as $param_name => $param_value)
 				$url_param .= (($first++ == 0) ? '?' : '&').$param_name.'='.$param_value;
 
-
 		return $url_param;
 	}
 
@@ -186,8 +185,6 @@ class Redi
 		curl_setopt($ch, CURLOPT_URL, $url.(($method == GET || $method == DELETE) ? $params_string : ''));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-		//		self::p($method.':'.$url.':'.$params_string);
-
 		switch ($method)
 		{
 			case GET:
@@ -216,11 +213,12 @@ class Redi
 		}
 
 		$output = curl_exec($ch);
-
+		
 		if ($output === FALSE)
 		{
-			echo 'Curl error: '.curl_error($ch);
+			return array('Error' => 'Online reservation is not available at this time. Try again later or contact us directly.');
 		}
+
 		curl_close($ch);
 
 		// convert response
