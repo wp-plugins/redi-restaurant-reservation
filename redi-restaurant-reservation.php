@@ -396,7 +396,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					return 'mm/dd/yy';
 				
 				case 'dd/MM/yyyy':
-					return 'dd/mm/yyyy';
+					return 'dd/mm/yy';
 			}
 			
 			return 'yy-mm-dd';
@@ -471,16 +471,13 @@ if (!class_exists('ReDiRestaurantReservation'))
 			
 			$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
 			$date_format = $this->getPHPDateFormat($date_format_setting);
-			
+
             $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
 
-			$d1 = new DateTime();
-			$d1->setTimestamp(current_time('timestamp'));
-			$d1->add(DateInterval::createFromDateString('+'.$MinTimeBeforeReservation.' hour'));
-			$startDate = $d1->format($date_format);
-			$d1->add(DateInterval::createFromDateString('+1 hour'));
-            $d1->setTime($d1->format('H'), 0);
-			$startTime = $d1->getTimestamp();
+			$reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
+            $startDate = date($date_format, $reservationStartTime);	
+            $startDateISO = date('Y-m-d', $reservationStartTime);
+			$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
 			
 			$thanks = $this->options['Thanks'];
 			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
@@ -495,28 +492,35 @@ if (!class_exists('ReDiRestaurantReservation'))
 			switch ($_POST['get'])
 			{
 				case 'step1':
-					$startDate = DateTime::createFromFormat(
-						$this->getPHPDateFormat($this->options['DateFormat']).' H:i', $_POST['startDate'].' '.$_POST['startTime']);
-					
-					if ($startDate == FALSE)
+                    // convert date to array
+                    $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
+
+					if ($date['error_count'] > 0)
 					{
 						echo json_encode(array('Error' => 'Selected date or time is not valid.'));
 						die;
 					}
-					
-					$strDate = $startDate->format('Y-m-d H:i');
-					
-					$endDate = DateTime::createFromFormat('Y-m-d H:i', $strDate);
-					$endDate->add(new DateInterval('PT'.$this->getReservationTime().'M'));
-					$strEndDate = $endDate->format('Y-m-d H:i');
-					
+
+                    $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
+                    
+                    // convert to int
+                    $startTimeInt = strtotime($startTimeStr, 0);
+
+                    // calculate end time
+                    $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
+
+                    // format to ISO
+                    $startTimeISO = gmdate('Y-m-d H:i', $startTimeInt);
+                    $endTimeISO = gmdate('Y-m-d H:i', $endTimeInt);
+                    $currentTimeISO = gmdate('Y-m-d H:i', current_time('timestamp'));
+
 					$params = array (
-						'StartTime' => urlencode($strDate),
-						'EndTime' => urlencode($strEndDate),
+						'StartTime' => urlencode($startTimeISO),
+						'EndTime' => urlencode($endTimeISO),
 						'Quantity' => (int)$_POST['persons'],
 						'Alternatives' => 2,
 						'Lang' => str_replace('_', '-', get_locale()),
-                        'CurrentTime' => urlencode(date_i18n('Y-m-d H:i'))
+                        'CurrentTime' => urlencode($currentTimeISO)
 					);
 					
 					$query = $this->redi->query($this->options['categoryID'], $params);
@@ -528,7 +532,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 						unset($query['debug']);
 						foreach ($query as $q)
 						{
-							$q->StartTime = date($time_format, strtotime($q->StartTime));
+                            $q->Select = ($startTimeISO == $q->StartTime && $q->Available);
+							$q->StartTimeISO = $q->StartTime;
+                            $q->StartTime = date($time_format, strtotime($q->StartTime));
 							$q->EndTime = date($time_format, strtotime($q->EndTime));
 						}
 					}
@@ -536,26 +542,24 @@ if (!class_exists('ReDiRestaurantReservation'))
 					break;
 				case 'step3':
 
-					$startDate = DateTime::createFromFormat(
-						$this->getPHPDateFormat($this->options['DateFormat']).' H:i', $_POST['startDate'].' '.$_POST['startTime']);
-					
-					if ($startDate == FALSE)
-					{
-						echo json_encode(array('Error' => 'Selected date or time is not valid.'));
-						die;
-					}
-					
-					$strDate = $startDate->format('Y-m-d H:i');
-					
-					$endDate = DateTime::createFromFormat('Y-m-d H:i', $strDate);
-					$endDate->add(new DateInterval('PT'.$this->getReservationTime().'M'));
-					$strEndDate = $endDate->format('Y-m-d H:i');
-				
+                    $startTimeStr = $_POST['startTime'];
+
+                    // convert to int
+                    $startTimeInt = strtotime($startTimeStr, 0);
+
+                    // calculate end time
+                    $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
+
+                    // format to ISO
+                    $startTimeISO = gmdate('Y-m-d H:i', $startTimeInt);
+                    $endTimeISO = gmdate('Y-m-d H:i', $endTimeInt);
+                    $currentTimeISO = gmdate('Y-m-d H:i', current_time('timestamp'));
+
 					$params = array (
 						'reservation' => array (
 
-							'StartTime' => $strDate,
-							'EndTime' => $strEndDate,
+							'StartTime' => $startTimeISO,
+							'EndTime' => $endTimeISO,
 							'Quantity' => (int)$_POST['persons'],
 							"UserName" => $_POST['UserName'],
 							"UserEmail" => $_POST['UserEmail'],
@@ -563,7 +567,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 							"UserPhone" => $_POST['UserPhone'],
 							"Name" => "Person",
 							"Lang" => str_replace('_', '-', get_locale()),
-                            'CurrentTime' => date_i18n('Y-m-d H:i')
+                            'CurrentTime' => $currentTimeISO
 						)
 					);
 					
@@ -575,11 +579,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 			die;
 		}
 		
-		private function getReservationTimeFormatted()
-		{
-			return ' +'.$this->getReservationTime().' minute';
-		}
-
 		private function getReservationTime()
 		{
 			if (isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)

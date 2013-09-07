@@ -12,6 +12,10 @@
 		<label for="redi-restaurant-cancel-reason"><?php _e('Reason', 'redi-restaurant-reservation')?>:</label><br/>
 		<textarea name="reason" id="redi-restaurant-cancel-reason" rows="5" cols="60"></textarea>
 		<br/>
-		<input type="submit" name="cancelReservation" value="<?php _e('Cancel reservation', 'redi-restaurant-reservation')?>">
+        <br/>
+		<input class="button-secondary" type="submit" name="cancelReservation" value="<?php _e('Cancel reservation', 'redi-restaurant-reservation')?>">
 	</form>
 </div>
+<br/>
+<br/>
+<br/>

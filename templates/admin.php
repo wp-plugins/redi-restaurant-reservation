@@ -75,6 +75,8 @@
 		<p class="description">
 			<?php _e('Specify time in 24h format (00:00 - 23:59).', 'redi-restaurant-reservation'); ?>
 			<br/>
+			<?php _e('If you close next day at night then set closing time on a same day. For example 18:00 - 3:00', 'redi-restaurant-reservation'); ?>
+			<br/>
 			<?php _e('Set Open and Close fields to blank if restaurant is closed.', 'redi-restaurant-reservation'); ?>
 		</p>
 		<br/>
@@ -293,6 +295,9 @@
 
 		</table>
 		<br/>
-		<input id="submit" type="submit" value="Save" name="submit">
+		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
 	</form>
 </div>
+<br/>
+<br/>
+<br/>
