@@ -19,7 +19,9 @@ Supported languages:
 * English
 * Estonian
 * French
+* German
 * Russian
+* Portuguese
 * Spainish
 
 If you need more languages, plese contact us!
@@ -55,6 +57,12 @@ In case you have any problems with plugin installation or you need some customiz
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 13.0919 =
+* Added Portuguese language
+* Added German language
+* Refactored calendar localization support to work on PHP 5.2 version
+* Improved error handling
 
 = 13.0817 =
 * Added calendar localization support
