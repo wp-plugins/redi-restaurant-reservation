@@ -254,7 +254,7 @@
 					<select name="Lang" style="width:137px;"/>
 					<?php foreach ((array)$redi_l10n_sys_locales as $locale): ?>
 						<option <?php if ($place['Lang'] == $locale['lang-www']): ?> selected="selected" <?php endif ?> value="<?php echo $locale['lang-www'] ?>">
-							<?php echo $locale['lang']; ?>
+							<?php echo $locale['lang-native']; ?>
 						</option>
 					<?php endforeach ?>
 					</select>

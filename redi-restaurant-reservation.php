@@ -236,7 +236,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 							'Address' => $_POST['Address'],
 							'Email' => $_POST['Email'],
 							'Phone' => $_POST['Phone'],
-							'Catalog' => $_POST['Catalog'],
 							'WebAddress' => $_POST['WebAddress'],
 							'Lang' => $_POST['Lang'],
 							'DescriptionShort' => $_POST['DescriptionShort'],
