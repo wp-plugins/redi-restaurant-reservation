@@ -323,18 +323,18 @@ $redi_l10n_sys_locales = array(
 //		'google-api' => 'de',
 //		'microsoft-api' => 'de'
 //	),
-//	'de_DE' => array (
-//		'country' => "Germany",
-//		'country-www' => 'de',
-//		'lang' => 'German',
-//		'lang-native' => 'Deutsch/Deutschland',
-//		'lang-www' => 'de-DE',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'deu',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'de',
-//		'microsoft-api' => 'de'
-//	),
+	'de_DE' => array (
+		'country' => "Germany",
+		'country-www' => 'de',
+		'lang' => 'German',
+		'lang-native' => 'Deutsch/Deutschland',
+		'lang-www' => 'de-DE',
+		'dir' => 'ltr',
+		'ms-loc' => 'deu',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'de',
+		'microsoft-api' => 'de'
+	),
 //	'de_LU' => array (
 //		'country' => "Luxembourg",
 //		'country-www' => 'lu',
@@ -575,18 +575,18 @@ $redi_l10n_sys_locales = array(
 //		'google-api' => 'es',
 //		'microsoft-api' => 'es'
 //	),
-//	'es_ES' => array (
-//		'country' => "Spain",
-//		'country-www' => 'es',
-//		'lang' => 'Spanish',
-//		'lang-native' => 'Español/España',
-//		'lang-www' => 'es-ES',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'esp',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'es',
-//		'microsoft-api' => 'es'
-//	),
+	'es_ES' => array (
+		'country' => "Spain",
+		'country-www' => 'es',
+		'lang' => 'Spanish',
+		'lang-native' => 'Español/España',
+		'lang-www' => 'es-ES',
+		'dir' => 'ltr',
+		'ms-loc' => 'esp',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'es',
+		'microsoft-api' => 'es'
+	),
 //	'es_GT' => array (
 //		'country' => "Guatemala",
 //		'country-www' => 'gt',
@@ -983,18 +983,18 @@ $redi_l10n_sys_locales = array(
 //		'google-api' => 'it',
 //		'microsoft-api' => 'it'
 //	),
-//	'it_IT' => array (
-//		'country' => "Italy",
-//		'country-www' => 'it',
-//		'lang' => 'Italian',
-//		'lang-native' => 'Italiano/Italia',
-//		'lang-www' => 'it-IT',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'ita',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'it',
-//		'microsoft-api' => 'it'
-//	),
+	'it_IT' => array (
+		'country' => "Italy",
+		'country-www' => 'it',
+		'lang' => 'Italian',
+		'lang-native' => 'Italiano/Italia',
+		'lang-www' => 'it-IT',
+		'dir' => 'ltr',
+		'ms-loc' => 'ita',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'it',
+		'microsoft-api' => 'it'
+	),
 //	'ja_JP' => array (
 //		'country' => "Japan",
 //		'country-www' => 'jp',
@@ -1211,30 +1211,30 @@ $redi_l10n_sys_locales = array(
 //		'google-api' => 'pl',
 //		'microsoft-api' => 'pl'
 //	),
-//	'pt_BR' => array (
-//		'country' => "Brazil",
-//		'country-www' => 'br',
-//		'lang' => 'Portuguese',
-//		'lang-native' => 'Português/Brasil',
-//		'lang-www' => 'pt-BR',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'ptb',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'pt',
-//		'microsoft-api' => 'pt'
-//	),
-//	'pt_PT' => array (
-//		'country' => "Portugal",
-//		'country-www' => 'pt',
-//		'lang' => 'Portuguese',
-//		'lang-native' => 'Português/Portugal',
-//		'lang-www' => 'pt-PT',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'ptg',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'pt',
-//		'microsoft-api' => 'pt'
-//	),
+	'pt_BR' => array (
+		'country' => "Brazil",
+		'country-www' => 'br',
+		'lang' => 'Portuguese',
+		'lang-native' => 'Português/Brasil',
+		'lang-www' => 'pt-BR',
+		'dir' => 'ltr',
+		'ms-loc' => 'ptb',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'pt',
+		'microsoft-api' => 'pt'
+	),
+	'pt_PT' => array (
+		'country' => "Portugal",
+		'country-www' => 'pt',
+		'lang' => 'Portuguese',
+		'lang-native' => 'Português/Portugal',
+		'lang-www' => 'pt-PT',
+		'dir' => 'ltr',
+		'ms-loc' => 'ptg',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'pt',
+		'microsoft-api' => 'pt'
+	),
 //	'ro_RO' => array (
 //		'country' => "Romania",
 //		'country-www' => 'ro',
