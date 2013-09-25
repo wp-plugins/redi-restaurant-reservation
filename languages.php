@@ -815,18 +815,18 @@ $redi_l10n_sys_locales = array(
 //		'google-api' => 'fr',
 //		'microsoft-api' => 'fr'
 //	),
-//	'fr_FR' => array (
-//		'country' => "France",
-//		'country-www' => 'fr',
-//		'lang' => 'French',
-//		'lang-native' => 'Français/France',
-//		'lang-www' => 'fr-FR',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'fra',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'fr',
-//		'microsoft-api' => 'fr'
-//	),
+	'fr_FR' => array (
+		'country' => "France",
+		'country-www' => 'fr',
+		'lang' => 'French',
+		'lang-native' => 'Français/France',
+		'lang-www' => 'fr-FR',
+		'dir' => 'ltr',
+		'ms-loc' => 'fra',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'fr',
+		'microsoft-api' => 'fr'
+	),
 //	'fr_LU' => array (
 //		'country' => "Luxembourg",
 //		'country-www' => 'lu',
