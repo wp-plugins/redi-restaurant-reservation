@@ -29,9 +29,8 @@ var time_format ="HH:mm";
         </select>
 
         <div style="margin-top: 30px; margin-bottom: 30px;">
-            <input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit"><img
-                id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif"
-                alt=""/>
+            <input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
+			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
         </div>
 
         <div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
@@ -40,7 +39,6 @@ var time_format ="HH:mm";
 
     <div id="step2" style="display: none;">
         <h2><?php _e('Step', 'redi-restaurant-reservation')?> 2: <?php _e('Select available time', 'redi-restaurant-reservation')?></h2>
-
         <div id="buttons">
         </div>
         <input type="hidden" id="redi-restaurant-startTimeHidden" value=""/>
@@ -49,7 +47,6 @@ var time_format ="HH:mm";
 
     <div id="step3" style="display: none;">
         <h2><?php _e('Step', 'redi-restaurant-reservation')?> 3: <?php _e('Provide reservation details', 'redi-restaurant-reservation')?></h2>
-
         <div>
             <br/>
             <label for="UserName"><?php _e('Name', 'redi-restaurant-reservation');?>:
@@ -89,10 +86,8 @@ var time_format ="HH:mm";
 	        <br/>
         </div>
         <br/>
-
         <div id="step3errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
     </div>
-
     <div id="step4" style="display: none;">
         <strong>
 			<?php _e('Thank you for your reservation.', 'redi-restaurant-reservation')?><br/>
@@ -102,12 +97,10 @@ var time_format ="HH:mm";
 </form>
 <?php if($thanks):?>
 	<div id="Thanks" style="">
-
 		<a style="float: right;" href="http://www.reservationdiary.eu/" target="_blank">
 			<label style="font-size: 10px;">
 			<?php _e('Powered by', 'redi-restaurant-reservation')?>
 			</label>
 			<img style="border:none; margin-left: 3px;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL?>img/logo.png" alt="Powered by reservationdiary.eu" title="Powered by reservationdiary.eu"/></a>
-
 	</div>
 <?php endif ?>
