@@ -9,6 +9,13 @@ var time_format ="h:mm tt";
     <?php else: ?>
 var time_format ="HH:mm";
     <?php endif ?>
+
+    var locale = "<?php echo get_locale()?>";
+
+    if ((/^en/).test(locale))
+    {
+        locale = "";
+    }
 	
 </script>
 <form id="redi-reservation" name="redi-reservation" method="post">

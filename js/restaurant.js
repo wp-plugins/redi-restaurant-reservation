@@ -8,6 +8,12 @@ jQuery(function () {
     jQuery('#persons').change(function () {
         hideSteps();
     });
+
+    // http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
+    // https://github.com/trentrichardson/jQuery-Timepicker-Addon/tree/master/dist/i18n
+    jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
+    jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale]);
+
     jQuery('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
         timeFormat: time_format,
@@ -15,12 +21,6 @@ jQuery(function () {
             hideSteps();
         }
     });
-
-    // How to set calendar locale
-    // Step 1: Find region from file jquery.ui.i18n.all.js
-    // http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
-    // Step 2: Set region as a parameter, for exampe 'es' for Spanish
-    jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
 
     jQuery("#redi-restaurant-startDate").datepicker({
         dateFormat: date_format,

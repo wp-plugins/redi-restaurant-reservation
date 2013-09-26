@@ -452,6 +452,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 			wp_register_script('datetimepicker-lang',REDI_RESTAURANT_PLUGIN_URL.'/lib/datetimepicker/js/jquery.ui.i18n.all.min.js');
 			wp_enqueue_script('datetimepicker-lang');
 
+			wp_register_script('timepicker-lang',REDI_RESTAURANT_PLUGIN_URL.'/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js');
+			wp_enqueue_script('timepicker-lang');
+
 			wp_register_script('restaurant', REDI_RESTAURANT_PLUGIN_URL.'js/restaurant.js', array ('jquery'));
 			wp_localize_script('restaurant',
 				'AjaxUrl',
