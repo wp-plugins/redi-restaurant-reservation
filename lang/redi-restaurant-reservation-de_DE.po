@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2013-04-06 23:45+0200\n"
-"PO-Revision-Date: 2013-09-06 06:44-0800\n"
+"PO-Revision-Date: 2013-09-26 22:37+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Russian\n"
@@ -149,7 +149,7 @@ msgstr "Wählen Sie freie Zeiten"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:38
 msgid "Provide reservation details"
-msgstr "Angaben über Resrvation Details"
+msgstr "Angaben über Reservation"
 
 #: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:42
 msgid "Name"
