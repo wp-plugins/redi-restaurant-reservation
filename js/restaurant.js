@@ -11,8 +11,21 @@ jQuery(function () {
 
     // http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
     // https://github.com/trentrichardson/jQuery-Timepicker-Addon/tree/master/dist/i18n
-    jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
-    jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale]);
+    if (jQuery.timepicker.regional[locale] != undefined) {
+        jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
+    }
+    else
+    {
+        jQuery.timepicker.setDefaults(jQuery.timepicker.regional[""]);
+    }
+    
+    if (jQuery.datepicker.regional[locale] != undefined)
+    {
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale]);
+    }
+    else{
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[""]);
+    }
 
     jQuery('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
