@@ -1163,18 +1163,18 @@ $redi_l10n_sys_locales = array(
 //		'google-api' => 'nl',
 //		'microsoft-api' => 'nl'
 //	),
-//	'nl_NL' => array (
-//		'country' => "Netherlands",
-//		'country-www' => 'nl',
-//		'lang' => 'Dutch',
-//		'lang-native' => 'Nederlands / Nederland',
-//		'lang-www' => 'nl-NL',
-//		'dir' => 'ltr',
-//		'ms-loc' => 'nld',
-//		'ms-cp' => 'CP1252',
-//		'google-api' => 'nl',
-//		'microsoft-api' => 'nl'
-//	),
+	'nl_NL' => array (
+		'country' => "Netherlands",
+		'country-www' => 'nl',
+		'lang' => 'Dutch',
+		'lang-native' => 'Nederlands / Nederland',
+		'lang-www' => 'nl-NL',
+		'dir' => 'ltr',
+		'ms-loc' => 'nld',
+		'ms-cp' => 'CP1252',
+		'google-api' => 'nl',
+		'microsoft-api' => 'nl'
+	),
 //	'nn_NO' => array (
 //		'country' => "Norway",
 //		'country-www' => 'nn',
