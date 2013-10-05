@@ -20,9 +20,11 @@ Supported languages:
 * Estonian
 * French
 * German
+* Italian
+* Polish
 * Russian
 * Portuguese
-* Spainish
+* Spanish
 
 If you need more languages, plese contact us!
 
