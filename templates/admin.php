@@ -27,8 +27,17 @@
 					<label for="services"><?php _e('Available seats', 'redi-restaurant-reservation'); ?> </label>
 				</th>
 				<td>
-					<input id="services" type="text"
-					       value="<?php echo (int)count($getServices) ?>" name="services"/>
+					<input id="services" type="text" value="<?php echo (int)count($getServices) ?>" name="services"/>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
+					<label for="MaxPersons"><?php _e('Max persons per reservation', 'redi-restaurant-reservation'); ?> </label>
+				</th>
+				<td>
+					<input id="MaxPersons" type="text" value="<?php echo (int)$maxPersons ?>" name="MaxPersons"/>
 				</td>
 				<td>
 				</td>

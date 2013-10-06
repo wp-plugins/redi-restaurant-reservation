@@ -221,6 +221,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
 				$this->options['DateFormat'] = $_POST['DateFormat'];
 				$this->options['ReservationTime'] = $_POST['ReservationTime'];
+				$this->options['MaxPersons'] = (int)$_POST['MaxPersons'];
                 $this->saveAdminOptions();
 
 				if (is_array($times) && count($times))
@@ -257,6 +258,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$options = get_option($this->optionsName);
 
 			$thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
+			$maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
 
 			$ReservationTime = $this->getReservationTime();
 			require_once(plugin_dir_path(__FILE__).'languages.php');
@@ -480,7 +482,8 @@ if (!class_exists('ReDiRestaurantReservation'))
             $startDate = date($date_format, $reservationStartTime);	
             $startDateISO = date('Y-m-d', $reservationStartTime);
 			$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
-			
+
+			$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
 			$thanks = $this->options['Thanks'];
 			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
             $out = ob_get_contents();
