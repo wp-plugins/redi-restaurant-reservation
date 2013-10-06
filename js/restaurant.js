@@ -51,16 +51,24 @@ jQuery(function () {
     });
 
     jQuery('#redi-restaurant-step3').click(function () {
+        var error = '';
         if (jQuery('#UserName').val() == '') {
-            jQuery('#step3errors').html('Name can\'t be empty').show('slow');
-            return false;
+            error += 'Name can\'t be empty<br/>';
         }
         if (jQuery('#UserEmail').val() == '') {
-            jQuery('#step3errors').html('Email can\'t be empty').show('slow');
-            return false;
+            error += 'Email can\'t be empty<br/>';
         }
         if (jQuery('#UserPhone').val() == '') {
-            jQuery('#step3errors').html('Phone can\'t be empty').show('slow');
+            error += 'Phone can\'t be empty<br/>';
+        }
+        jQuery('.field_required').each(function(){
+            if(jQuery(this).attr('type') === 'checkbox' && jQuery(this).attr('checked') !== "checked" || jQuery(this).attr('type') === 'textbox' && jQuery(this).val() === ''){
+                error += jQuery('#'+this.id+'_message').attr('value')+'<br/>';
+            }
+        });
+        if(error)
+        {
+            jQuery('#step3errors').html(error).show('slow');
             return false;
         }
         var data = {
@@ -73,8 +81,34 @@ jQuery(function () {
             UserEmail: jQuery('#UserEmail').val(),
             UserComments: jQuery('#UserComments').val(),
             UserPhone: jQuery('#UserPhone').val()
-
         };
+        if(jQuery('#field_1').attr('type')==='checkbox' && jQuery('#field_1').attr('checked') === "checked"){
+            data['field_1'] = 'on';
+        }else{
+            data['field_1'] = jQuery('#field_1').val();
+        }
+        if(jQuery('#field_2').attr('type')==='checkbox' && jQuery('#field_2').attr('checked') === "checked"){
+            data['field_2'] = 'on';
+        }else{
+            data['field_2'] = jQuery('#field_2').val();
+        }
+        if(jQuery('#field_3').attr('type')==='checkbox' && jQuery('#field_3').attr('checked') === "checked"){
+            data['field_3'] = 'on';
+        }else{
+            data['field_3'] = jQuery('#field_3').val();
+        }
+        if(jQuery('#field_4').attr('type')==='checkbox' && jQuery('#field_4').attr('checked') === "checked"){
+            data['field_4'] = 'on';
+        }else{
+            data['field_4'] = jQuery('#field_4').val();
+        }
+        if(jQuery('#field_5').attr('type')==='checkbox' && jQuery('#field_5').attr('checked') === "checked"){
+            data['field_5'] = 'on';
+        }else{
+            data['field_5'] = jQuery('#field_5').val();
+        }
+
+
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
         jQuery.post(AjaxUrl.ajaxurl, data, function (response) {

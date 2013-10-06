@@ -78,6 +78,40 @@ var time_format ="HH:mm";
 	        <br/>
             <input type="text" value="" name="UserEmail" id="UserEmail">
         </div>
+	    <!-- custom fields -->
+	    <?php for($i=1; $i!=6; $i++):?>
+		    <?php $field_name = 'field_'.$i.'_name'; ?>
+	        <?php $field_required = 'field_'.$i.'_required'; ?>
+	        <?php $field_type = 'field_'.$i.'_type'; ?>
+		    <?php $field_message = 'field_'.$i.'_message'; ?>
+
+		    <?php if(isset($$field_name) && !empty($$field_name)):?>
+			    <div>
+				    <br/>
+				    <label for="field_<?php echo $i; ?>"><?php echo $$field_name; ?>:
+					    <?php if(isset($$field_required) && $$field_required):?>
+					        <span class="redi_required">*</span>
+						    <input type="hidden" id="<?php echo 'field_'.$i.'_message'; ?>"
+								value="<?php
+								if(!empty($$field_message))
+								{
+									echo $$field_message;
+								}
+								else
+								{
+									/// TODO: Custom field ${name} is required, $$field_name
+									echo ( _e('Custom field is required', 'redi-restaurant-reservation'));
+								}
+								?>">
+				        <?php endif;?>
+				    </label>
+				    <br/>
+
+				    <input type="<?php echo($$field_type);?>" value="" name="field_<?php echo $i; ?>" id="field_<?php echo $i; ?>" <?php if(isset($$field_required) && $$field_required):?>class="field_required"<?php endif; ?>>
+			    </div>
+			<?php endif;?>
+	    <?php endfor;?>
+	    <!-- /custom fields -->
         <div>
             <br/>
             <label for="UserComments">
