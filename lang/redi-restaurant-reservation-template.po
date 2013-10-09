@@ -4,172 +4,247 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2013-04-06 23:45+0200\n"
-"PO-Revision-Date: 2013-07-15 09:52+0200\n"
-"Last-Translator: Sergei <info@reservationdiary.eu>\n"
+"POT-Creation-Date: 2013-10-09 22:10+0200\n"
+"PO-Revision-Date: 2013-10-09 22:10+0200\n"
+"Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Russian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _e\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: D:\\Projects\\ReservationDiary\\redi-restaurant-"
+"X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-"
 "reservation\\trunk\\templates\n"
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:5
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:5
 msgid "Your settings have been saved!"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:10
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:20
 msgid "Common settings"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:17
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:27
 msgid "Available seats"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:28
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:37
+msgid "Max persons per reservation"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:47
 msgid "Working time"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:36
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:55
 msgid "Open"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:39
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:58
 msgid "Close"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:65
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:85
+msgid "Specify time in 24h format (00:00 - 23:59)."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:87
+msgid ""
+"If you close next day at night then set closing time on a same day. For "
+"example 18:00 - 3:00"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:89
+msgid "Set Open and Close fields to blank if restaurant is closed."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:93
 msgid "Restaurant details"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:72
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:100
 msgid "Restaurant name"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:82
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:110
 msgid "Country"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:92
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:120
 msgid "City"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:102
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:130
 msgid "Address"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:112
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:140
 msgid "Url"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:124
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:58
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:152
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:75
 msgid "Email"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:134
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:50
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:162
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:67
 msgid "Phone"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:144
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:172
 msgid "Short description"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:155
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:183
 msgid "Long description"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:165
-msgid "Language"
-msgstr ""
-
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:179
-msgid "Language for admin emails"
-msgstr ""
-
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:186
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:193
 msgid "Hours before reservation"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:194
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:201
 msgid "Minimum hours before reservation can be accepted from client"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:201
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:208
+msgid "Reservation time"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:216
+msgid "Reservation duration in minutes"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:223
 msgid "Catalog"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:209
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:231
 msgid "Publish restaurant details to reservationdiary.eu catalog"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:216
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:238
 msgid "Support us"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/admin.php:224
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:246
 msgid "Please support our plugin by publishing Reservation Diary logo"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:4
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:29
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:38
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:253
+msgid "Email Configuration"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:259
+msgid "Language"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:273
+msgid "Language for admin emails"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:281
+msgid "Date format"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:309
+msgid "Custom fields"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:316
+msgid "Field name"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:321
+msgid "Field type"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:326
+msgid "Is required?"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:331
+msgid "Required error message"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/basicpackage.php:5
+msgid "Basic package (paid version)"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:5
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:16
+msgid "Cancel reservation"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:9
+msgid "Reservation number"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:12
+msgid "Reason"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:23
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:48
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:56
 msgid "Step"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:4
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:23
 msgid "Select date and time"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:5
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:24
 msgid "Date and time"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:8
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:28
 msgid "Persons"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:19
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:39
 msgid "Check available time"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:29
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:48
 msgid "Select available time"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:38
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:56
 msgid "Provide reservation details"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:42
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:59
 msgid "Name"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:67
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:103
+msgid "Custom field is required"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:118
 msgid "Comment"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:74
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:125
 msgid "Make a reservation"
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:85
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:134
 msgid "Thank you for your reservation."
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:87
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:136
 msgid ""
 "We will create a confirmation and email it to you at the email address you "
 "entered on the reservations form. You should receive your confirmation by "
 "email shortly."
 msgstr ""
 
-#: D:\Projects\ReservationDiary\redi-restaurant-reservation\trunk\templates/frontend.php:95
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:143
 msgid "Powered by"
 msgstr ""
