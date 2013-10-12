@@ -645,17 +645,22 @@ if (!class_exists('ReDiRestaurantReservation'))
 					{
 						if(isset($_POST['field_'.$i]))
 						{
-							$comment .= $this->options['field_'.$i.'_name'].': ';
+
 							$field_type = 'field_'.$i.'_type';
 
 							if(isset($this->options[$field_type]) && $this->options[$field_type] === 'checkbox')
 							{
+								$comment .= $this->options['field_'.$i.'_name'].': ';
 								$comment .= ($_POST['field_'.$i] === 'on') ? _x('Yes', 'redi-restaurant-reservation') : _x('No', 'redi-restaurant-reservation');
 								$comment .= '<br/>';
 							}
 							else
 							{
-								$comment .= $_POST['field_'.$i].'<br/>';
+								if(!empty($_POST['field_'.$i]))
+								{
+									$comment .= $this->options['field_'.$i.'_name'].': ';
+									$comment .= $_POST['field_'.$i].'<br/>';
+								}
 							}
 						}
 					}
