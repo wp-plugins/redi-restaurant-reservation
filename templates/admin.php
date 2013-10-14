@@ -1,4 +1,19 @@
+<style type="text/css">
+	.tab_wrap {
+		background-color: #FFFFFF;
+		border: 1px solid #CCCCCC;
+		padding: 10px;
+	}
+</style>
+
 <div class="wrap">
+<!-- tabs --
+<a class="nav-tab <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='common')): ?> nav-tab-active<?php endif;?>"
+   href="options-general.php?page=options_page_slug&sm=common"><?php _e('Common settings', 'redi-restaurant-reservation') ?></a>
+<a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='advanced')): ?> nav-tab-active<?php endif;?>"
+   href="options-general.php?page=options_page_slug&sm=advanced"><?php _e('Advanced settings', 'redi-restaurant-reservation') ?></a>
+<div class="tab_wrap">
+<!-- /tabs -->
 	<?php if (isset($settings_saved)): ?>
 		<div class="updated" id="message">
 			<p>
@@ -16,6 +31,7 @@
 		</div>
 			<?php endforeach;?>
 	<?php endif ?>
+	<?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='common')): ?>
 	<div class="icon32" id="icon-admin"><br></div>
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 
@@ -362,7 +378,15 @@
 
 		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
 	</form>
+<!-- tabs --
+<?php else:?>
+	<iframe src="http://wp.reservationdiary.eu/<?php echo $this->ApiKey; ?>/en-uk/AvailableSeats" width="100%;" style="min-height: 500px;"></iframe>
+	<?php endif ?>
+-- /tams-->
 </div>
+<!-- tabs --\
+</div>
+<!-- /tams-->
 <br/>
 <br/>
 <br/>
