@@ -26,11 +26,12 @@ Supported languages:
 * Portuguese
 * Spanish
 
-If you need more languages, plese contact us!
+If you need more languages, please contact us!
 
 Paid basic package functionality:
 
 * View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so waitress can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
+* Support for maximum available seats for online reservation by week day
 
 For paid packages please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
@@ -49,16 +50,22 @@ In case you have any problems with plugin installation or you need some customiz
 02. Example of calendar control.
 03. Example of time control.
 04. Step 2: On this step user is requested to select available time if any.
-05. Step 3: Once user selects available reservation time, user will be requested to fill reservation form with contact information.
+05. Step 3: Once user selects available reservation time, user will be requested to fill reservation form with contact information and custom fields.
 06. Reservation confirmation screen. At this time user has to receive confirmation email. Same time restaurant owner receives list of all upcoming reservations.
-07. Setup screen with number of seats available, opening times and days of the week.
-08. Setup screen with info on the restaurant incl. name, address, country, phone, email, URL
+07. Setup screen with number of seats available, maximum persons per reservation, opening times and days of the week.
+08. Setup screen with info on the restaurant including name, address, country, phone, email, URL
 09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users). Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users)
-
+11. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
+12. Setting for custom fields that user should fill during reservation
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 13.1022 =
+* Added setting for maximum persons per reservation
+* Added support for custom fields that user should fill during reservation
+* Added Polish language
 
 = 13.0919 =
 * Added Portuguese language
