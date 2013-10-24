@@ -35,6 +35,8 @@ Paid basic package functionality:
 
 Basic package price is 5 EUR per month. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
 
+Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+
 == Installation ==
 
 1. Click on "Install now" to install plugin
