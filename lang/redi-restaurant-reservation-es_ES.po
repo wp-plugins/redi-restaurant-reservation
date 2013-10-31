@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2013-10-09 22:09+0200\n"
-"PO-Revision-Date: 2013-10-09 22:09+0200\n"
+"PO-Revision-Date: 2013-10-31 20:25+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Spanish\n"
@@ -236,7 +236,7 @@ msgstr "Comentario"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:125
 msgid "Make a reservation"
-msgstr "Hacer una reservación"
+msgstr "Hacer una reserva"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:134
 msgid "Thank you for your reservation."
