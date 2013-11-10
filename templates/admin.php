@@ -57,6 +57,11 @@
 				</td>
 			</tr>
 		</table>
+        <br/>
+		<p class="description">
+            <b style="color: red"><?php _e("NOTE: Reducing number of available seats will remove existing reservations.") ?></b>
+		</p>
+        <br/>
 		<div class="icon32" id="icon-options-general"><br></div>
 		<h2><?php _e('Working time', 'redi-restaurant-reservation'); ?> </h2>
 		<table class="form-table" style="width: 20%;">
@@ -377,7 +382,7 @@
 		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
 	</form>
 <?php else:?>
-	<iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/AvailableSeats" width="100%;" style="min-height: 500px;"></iframe>
+	<iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 500px;"></iframe>
 	<?php endif ?>
 </div>
 </div>
