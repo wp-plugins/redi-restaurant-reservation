@@ -80,7 +80,8 @@ jQuery(function () {
             UserName: jQuery('#UserName').val(),
             UserEmail: jQuery('#UserEmail').val(),
             UserComments: jQuery('#UserComments').val(),
-            UserPhone: jQuery('#UserPhone').val()
+            UserPhone: jQuery('#UserPhone').val(),
+            lang : jQuery('#redi-restaurant-lang').val()
         };
         if(jQuery('#field_1').attr('type')==='checkbox' && jQuery('#field_1').attr('checked') === "checked"){
             data['field_1'] = 'on';
@@ -135,7 +136,8 @@ jQuery(function () {
             startDate: jQuery('#redi-restaurant-startDate').val(),
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
-            persons: jQuery('#persons').val()
+            persons: jQuery('#persons').val(),
+            lang : jQuery('#redi-restaurant-lang').val()
         };
 
         jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
