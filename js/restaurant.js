@@ -35,6 +35,15 @@ jQuery(function () {
         }
     });
 
+    jQuery("#redi-restaurant-startDate").change(function(){
+        var day1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getDate();
+        var month1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getMonth() + 1;
+        var year1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getFullYear();
+        var fullDate = year1 + "-" + month1 + "-" + day1;
+
+        jQuery("#redi-restaurant-startDateISO").val(fullDate);
+    });
+
     jQuery("#redi-restaurant-startDate").datepicker({
         dateFormat: date_format,
         minDate: new Date(),
@@ -132,7 +141,6 @@ jQuery(function () {
         var data = {
             action: 'redi_restaurant-submit',
             get: 'step1',
-            startDate: jQuery('#redi-restaurant-startDate').val(),
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val()
