@@ -129,6 +129,7 @@ jQuery(function () {
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
                 jQuery('#step4').show('slow');
+                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
             }
         }, 'json');
         return false;
