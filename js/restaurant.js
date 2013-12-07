@@ -128,7 +128,7 @@ jQuery(function () {
                 jQuery('#step1').hide('slow');
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
-                jQuery('#step4').show('slow');
+                jQuery('#step4').show('slow'); //success message
                 jQuery("html, body").animate({ scrollTop: 0 }, "slow");
             }
         }, 'json');

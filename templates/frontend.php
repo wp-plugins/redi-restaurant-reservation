@@ -129,7 +129,7 @@ var time_format ="HH:mm";
         <br/>
         <div id="step3errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
     </div>
-    <div id="step4" style="display: none;">
+    <div id="step4" style="display: none;" class="redi-reservation-alert-success redi-reservation-alert">
         <strong>
 			<?php _e('Thank you for your reservation.', 'redi-restaurant-reservation')?><br/>
         </strong>
