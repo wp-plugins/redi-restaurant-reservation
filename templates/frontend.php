@@ -133,6 +133,7 @@ var time_format ="HH:mm";
     <div id="step4" style="display: none;" class="redi-reservation-alert-success redi-reservation-alert">
         <strong>
 			<?php _e('Thank you for your reservation.', 'redi-restaurant-reservation')?><br/>
+            <br/>
         </strong>
 		<?php _e('We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.', 'redi-restaurant-reservation');?>
     </div>
