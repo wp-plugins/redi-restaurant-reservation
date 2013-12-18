@@ -120,7 +120,9 @@ jQuery(function () {
 
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
+        jQuery('#redi-restaurant-step3').attr('disabled', true);
         jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
+            jQuery('#redi-restaurant-step3').attr('disabled', false);
             jQuery('#step3load').hide();
             if (response['Error']) {
                 jQuery('#step3errors').html(response['Error']).show('slow');
