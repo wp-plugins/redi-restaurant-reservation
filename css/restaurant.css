@@ -38,3 +38,13 @@ strong {
 {
     z-index: 9999 !important;
 }
+
+.ui-timepicker-div > dl > dt
+{
+    font-weight: bold;
+}
+
+.ui-timepicker-div > dl > dd
+{
+    margin: 0 0 20px;
+}
