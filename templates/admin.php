@@ -34,26 +34,45 @@
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 
 	<form name="redi-restaurant" method="post">
-		<table class="form-table" style="width: 25%;">
-
+		<table class="form-table" >
 			<tr valign="top">
-				<th scope="row">
-					<label for="services"><?php _e('Available seats', 'redi-restaurant-reservation'); ?> </label>
-				</th>
-				<td>
-					<input id="services" type="text" value="<?php echo (int)count($getServices) ?>" name="services"/>
-				</td>
-				<td>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">
+				<th scope="row" style="width:15%;">
 					<label for="MaxPersons"><?php _e('Max persons per reservation', 'redi-restaurant-reservation'); ?> </label>
 				</th>
 				<td>
 					<input id="MaxPersons" type="text" value="<?php echo (int)$maxPersons ?>" name="MaxPersons"/>
 				</td>
 				<td>
+				</td>
+			</tr>
+            <tr>
+				<th scope="row">
+					<label for="ReservationTime">
+						<?php _e('Reservation time', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<input id="ReservationTime" type="text" value="<?php echo $ReservationTime ?>" name="ReservationTime"/>
+				</td>
+				<td style="width:80%">
+					<p class="description">
+						<?php _e('Reservation duration in minutes', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+            <tr>
+				<th scope="row">
+					<label for="Thanks">
+						<?php _e('Support us', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if ($thanks) echo 'checked="checked"' ?>>
+				</td>
+				<td style="width:80%">
+					<p class="description">
+						<?php _e('Please support our plugin by publishing Reservation Diary logo', 'redi-restaurant-reservation'); ?>
+					</p>
 				</td>
 			</tr>
 		</table>
@@ -221,21 +240,7 @@
 					</p>
 				</td>
 			</tr>
-			<tr>
-				<th scope="row">
-					<label for="ReservationTime">
-						<?php _e('Reservation time', 'redi-restaurant-reservation'); ?>
-					</label>
-				</th>
-				<td>
-					<input id="ReservationTime" type="text" value="<?php echo $ReservationTime ?>" name="ReservationTime"/>
-				</td>
-				<td style="width:80%">
-					<p class="description">
-						<?php _e('Reservation duration in minutes', 'redi-restaurant-reservation'); ?>
-					</p>
-				</td>
-			</tr>
+			
 			<tr>
 				<th scope="row">
 					<label for="Catalog">
@@ -251,21 +256,16 @@
 					</p>
 				</td>
 			</tr>
-			<tr>
+			<tr valign="top">
 				<th scope="row">
-					<label for="Thanks">
-						<?php _e('Support us', 'redi-restaurant-reservation'); ?>
-					</label>
+					<label for="services"><?php _e('Available seats', 'redi-restaurant-reservation'); ?> </label>
 				</th>
 				<td>
-					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if ($thanks) echo 'checked="checked"' ?>>
+					<input id="services" type="text" value="<?php echo (int)count($getServices) ?>" name="services"/>
 				</td>
-				<td style="width:80%">
-					<p class="description">
-						<?php _e('Please support our plugin by publishing Reservation Diary logo', 'redi-restaurant-reservation'); ?>
-					</p>
+				<td>
 				</td>
-			</tr>
+			</tr>			
 		</table>
 
 		<div class="icon32" id="icon-edit-comments"><br></div>
