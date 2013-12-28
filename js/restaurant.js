@@ -1,5 +1,4 @@
 jQuery(function () {
-
     function hideSteps() {
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');

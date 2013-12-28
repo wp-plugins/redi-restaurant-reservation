@@ -49,6 +49,8 @@ if (!defined('REDI_RESTAURANT_API'))
 	define('REDI_RESTAURANT_API', 'http://api.reservationdiary.eu/service/');
 }
 
+define('CUSTOM_FIELDS', 6);
+
 class Redi
 {
 	private $ApiKey;
@@ -140,7 +142,17 @@ class Redi
 	{
 		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
 	}
+    
+    public function getPlaceCategories($placeID)
+	{
+		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
+	}
 
+    public function getPlaces()
+	{
+		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, GET);
+	}
+    
 	public function setApiKey($ApiKey)
 	{
 		$this->ApiKey = $ApiKey;

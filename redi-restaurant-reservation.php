@@ -151,13 +151,18 @@ if (!class_exists('ReDiRestaurantReservation'))
 			if ($this->ApiKey == NULL) /// TODO: move to install
 				$this->register();
 
-			$placeID = $this->options['placeID'];
+            $places = $this->redi->getPlaces();    
+            
+            //$placeID = $this->options['placeID']; 
+            $placeID = $places[0]->ID;
+            $places = $this->redi->getPlaces();    
+        
 			$serviceID = $this->options['serviceID'];
 			$categoryID = $this->options['categoryID'];
 
 			if(isset($_POST['action']) && $_POST['action']=='cancel')
 			{
-				if(isset($_POST['id']) && ((int)$_POST['id']) >0 )
+				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
 				{
 					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
 
@@ -178,11 +183,19 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->options['CloseTime'] = $_POST['CloseTime'];
 
 				foreach ($_POST['OpenTime'] as $key => $value)
+                {
 					if (self::set_and_not_empty($value))
+                    {
 						$times[$key]['OpenTime'] = $value;
+                    }
+                }
 				foreach ($_POST['CloseTime'] as $key => $value)
+                {
 					if (self::set_and_not_empty($value))
+                    {
 						$times[$key]['CloseTime'] = $value;
+                    }
+                }
 
 				$services = (int)$_POST['services'];
 
@@ -223,7 +236,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->options['ReservationTime'] = $_POST['ReservationTime'];
 				$this->options['MaxPersons'] = (int)$_POST['MaxPersons'];
 
-				for($i=1; $i!=6; $i++)
+				for($i = 1; $i != CUSTOM_FIELDS; $i++)
 				{
 					$field_name = 'field_'.$i.'_name';
 					$field_type = 'field_'.$i.'_type';
@@ -275,9 +288,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 				);
 				$settings_saved = true;
 			}
-			$place = $this->redi->getPlace($placeID); //goes to template 'admin'
-
-			$serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
 
 			$getServices = $this->redi->getServices($categoryID);
 
@@ -286,7 +296,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
 			$maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
 
-			for($i=1; $i!=6; $i++)
+			for($i = 1; $i != CUSTOM_FIELDS; $i++)
 			{
 				$field_name = 'field_'.$i.'_name';
 				$field_type = 'field_'.$i.'_type';
@@ -313,11 +323,23 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $options[$field_message];
 				}
 			}
-			$ReservationTime = $this->getReservationTime();
+			
+            
+         
+			
 			require_once(plugin_dir_path(__FILE__).'languages.php');
+            
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
+        }
+        
+        function ajaxed_admin_page($placeID, $categoryID)
+        {
+            $serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
+               $place = $this->redi->getPlace($placeID); //goes to template 'admin'
+               $ReservationTime = $this->getReservationTime();
+             require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
 		}
 
 		function init_sessions()
@@ -539,7 +561,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
 			$thanks = $this->options['Thanks'];
 
-			for($i = 1; $i != 6; $i++)
+			for($i = 1; $i != CUSTOM_FIELDS; $i++)
 			{
 				$field_name = 'field_'.$i.'_name';
 				$field_type = 'field_'.$i.'_type';
@@ -573,7 +595,7 @@ if (!class_exists('ReDiRestaurantReservation'))
             return $out;
 		}
 
-		function redi_restaurant_ajax()
+        function redi_restaurant_ajax()
 		{
 			switch ($_POST['get'])
 			{
@@ -626,6 +648,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					}
 					echo json_encode($query);
 					break;
+                    
 				case 'step3':
 
                     $startTimeStr = $_POST['startTime'];
@@ -641,7 +664,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $endTimeISO = gmdate('Y-m-d H:i', $endTimeInt);
                     $currentTimeISO = gmdate('Y-m-d H:i', current_time('timestamp'));
 					$comment = '';
-					for($i=1; $i!=6; $i++)
+					for($i = 1; $i != CUSTOM_FIELDS; $i++)
 					{
 						if(isset($_POST['field_'.$i]))
 						{
@@ -690,6 +713,13 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$reservation = $this->redi->createReservation($this->options['categoryID'], $params);
 					echo json_encode($reservation);
 					break;
+                    
+                    case 'get_place':
+                        $placeID = (int)$_POST['placeID'];
+                        $categoryID = (int)$this->options['categoryID'];
+                        self::ajaxed_admin_page($placeID, $categoryID);
+
+                    break;
 			}
 
 			die;
