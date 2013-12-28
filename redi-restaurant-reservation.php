@@ -155,13 +155,17 @@ if (!class_exists('ReDiRestaurantReservation'))
             
             //$placeID = $this->options['placeID']; 
             $placeID = $places[0]->ID;
-            $places = $this->redi->getPlaces();    
-        
+            //$places = $this->redi->getPlaces();    
+            $categories = $this->redi->getPlaceCategories($placeID);
+          //  var_dump($categories);
 			$serviceID = $this->options['serviceID'];
-			$categoryID = $this->options['categoryID'];
+            $categoryID = $this->options['categoryID']; //old
+			//$categoryID =  $categories[0]->ID; 
+            
 
 			if(isset($_POST['action']) && $_POST['action']=='cancel')
 			{
+                $placeID = $_POST['Place'];
 				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
 				{
 					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
@@ -266,7 +270,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 				if (is_array($times) && count($times))
 					$this->redi->setServiceTime($categoryID, $times);
 
-
 				$this->redi->setPlace($placeID,
 					array (
 						'place' => array (
@@ -287,8 +290,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 						)
 				);
 				$settings_saved = true;
+                $places = $this->redi->getPlaces();    
 			}
-
+            
 			$getServices = $this->redi->getServices($categoryID);
 
 			$options = get_option($this->optionsName);
@@ -323,11 +327,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $options[$field_message];
 				}
 			}
-			
-            
-         
-			
-			require_once(plugin_dir_path(__FILE__).'languages.php');
+
+            require_once(plugin_dir_path(__FILE__).'languages.php');
             
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');
@@ -337,9 +338,9 @@ if (!class_exists('ReDiRestaurantReservation'))
         function ajaxed_admin_page($placeID, $categoryID)
         {
             $serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
-               $place = $this->redi->getPlace($placeID); //goes to template 'admin'
-               $ReservationTime = $this->getReservationTime();
-             require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
+            $place = $this->redi->getPlace($placeID); //goes to template 'admin'
+            $ReservationTime = $this->getReservationTime();
+            require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
 		}
 
 		function init_sessions()
@@ -545,6 +546,13 @@ if (!class_exists('ReDiRestaurantReservation'))
 			wp_enqueue_style('redi-restaurant');
 			$persons = 2;
 
+            //places 
+            $places = $this->redi->getPlaces();    
+            
+            //$placeID = $this->options['placeID']; 
+            $placeID = $places[0]->ID;
+            
+           // var_dump($places);
             $time_format = get_option('time_format');
 			$date_format_setting = $this->options['DateFormat'];
 
@@ -588,7 +596,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $this->options[$field_message];
 				}
 			}
-			require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
+            
+            require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
             $out = ob_get_contents();
 
             ob_end_clean();
@@ -600,6 +609,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			switch ($_POST['get'])
 			{
 				case 'step1':
+                    $placeID = (int)$_POST['place'];
                     // convert date to array
                     $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
 
@@ -630,8 +640,12 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'Lang' => str_replace('_', '-', get_locale()),
                         'CurrentTime' => urlencode($currentTimeISO)
 					);
-
-					$query = $this->redi->query($this->options['categoryID'], $params);
+                    //get first category on selected place
+                   
+                    $categories = $this->redi->getPlaceCategories($placeID);                    
+                    $category = $categories[0];
+                   
+					$query = $this->redi->query($category->ID, $params);
 
                     $time_format = get_option('time_format');
 

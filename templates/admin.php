@@ -9,7 +9,6 @@
 jQuery(function () {
 	jQuery('#Place').change(function () {
 		jQuery('#Place option:selected').each(function () {
-				//alert(this.value);
 				var data = {
 					action: 'redi_restaurant-submit',
 					get: 'get_place',
@@ -59,7 +58,7 @@ jQuery(function () {
 				<td>
 					<select name="Place" id="Place">
 						<?php foreach((array)$places as $place_current):?>
-							<option value="<?php echo $place_current->ID ?>">
+							<option value="<?php echo $place_current->ID ?>" <?php if($placeID == $place_current->ID): ?>selected="selected"<?php endif;?>>
 								<?php echo $place_current->Name ?>
 							</option>
 						<?php endforeach; ?>
