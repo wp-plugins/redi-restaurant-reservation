@@ -20,18 +20,19 @@ var time_format ="HH:mm";
 </script>
 <form id="redi-reservation" name="redi-reservation" method="post">
 	<div id="step1">
-		 
-		 
-		 
 		<h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
-        <br/><label for="place"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br/>
-		 <select name="place" id="place">
+        <?php if(count((array)$places) > 1 ): ?>
+        <br/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br/>
+		 <select name="placeID" id="placeID">
 			<?php foreach((array)$places as $place_current):?>
 				<option value="<?php echo $place_current->ID ?>">
 					<?php echo $place_current->Name ?>
 				</option>
 			<?php endforeach; ?>
 		 </select>
+         <?php else: ?>
+            <input type="hidden" name="placeID" value="<?php echo $places[0]->ID ?>"/>
+         <?php endif ?>
          <br/>
 		<br/><label for="redi-restaurant-startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>

@@ -89,12 +89,14 @@ if (!class_exists('ReDiRestaurantReservation'))
 				                                  ));
 
 
-				$this->options['placeID'] = $placeID = (int)$place[ID];
+				//$this->options['placeID'] = 
+                $placeID = (int)$place[ID];
 
 				$category = $this->redi->createCategory($placeID,
 					array ('category' => array ('Name' => 'Restaurant')));
 
-				$this->options['categoryID'] = $categoryID = (int)$category[ID];
+				//$this->options['categoryID'] = 
+                $categoryID = (int)$category[ID];
 				$service = $this->redi->createService($categoryID,
 					array ('service' => array ('Name' => 'Person', 'Quantity' => 10)));
 
@@ -159,13 +161,12 @@ if (!class_exists('ReDiRestaurantReservation'))
             $categories = $this->redi->getPlaceCategories($placeID);
           //  var_dump($categories);
 			$serviceID = $this->options['serviceID'];
-            $categoryID = $this->options['categoryID']; //old
-			//$categoryID =  $categories[0]->ID; 
+            //$categoryID = $this->options['categoryID']; //old
+			$categoryID =  $categories[0]->ID; 
             
-
-			if(isset($_POST['action']) && $_POST['action']=='cancel')
+            if(isset($_POST['action']) && $_POST['action']=='cancel')
 			{
-                $placeID = $_POST['Place'];
+                
 				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
 				{
 					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
@@ -183,6 +184,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($_POST['submit']))
 			{
+            $placeID = $_POST['Place'];
 				$this->options['OpenTime'] = $_POST['OpenTime'];
 				$this->options['CloseTime'] = $_POST['CloseTime'];
 
@@ -606,10 +608,16 @@ if (!class_exists('ReDiRestaurantReservation'))
 
         function redi_restaurant_ajax()
 		{
+            if(isset($_POST['placeID']))
+            {
+                $placeID = (int)$_POST['placeID'];
+                $categories  = $this->redi->getPlaceCategories($placeID);
+                $categoryID = $categories[0]->ID;
+            }
 			switch ($_POST['get'])
 			{
 				case 'step1':
-                    $placeID = (int)$_POST['place'];
+                    //$placeID = (int)$_POST['placeID'];
                     // convert date to array
                     $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
 
@@ -724,13 +732,15 @@ if (!class_exists('ReDiRestaurantReservation'))
 						)
 					);
 
-					$reservation = $this->redi->createReservation($this->options['categoryID'], $params);
+					$reservation = $this->redi->createReservation(
+                    $categoryID
+                    //$this->options['categoryID']
+                    , $params);
 					echo json_encode($reservation);
 					break;
                     
                     case 'get_place':
-                        $placeID = (int)$_POST['placeID'];
-                        $categoryID = (int)$this->options['categoryID'];
+                        //(int)$this->options['categoryID'];
                         self::ajaxed_admin_page($placeID, $categoryID);
 
                     break;

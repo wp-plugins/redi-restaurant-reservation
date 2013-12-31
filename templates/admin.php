@@ -14,7 +14,9 @@ jQuery(function () {
 					get: 'get_place',
 					placeID: this.value
 				};
+                jQuery('#ajaxload').show('slow');
 				jQuery.post('admin-ajax.php', data, function (response) {
+                    jQuery('#ajaxload').hide('slow');
 					jQuery('#ajaxed').html(response);
 				});
 		});
@@ -63,7 +65,9 @@ jQuery(function () {
 							</option>
 						<?php endforeach; ?>
 					</select>
+                    <img id="ajaxload" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 				</td>
+                
 			</tr>
 			<tr valign="top">
 				<th scope="row" style="width:15%;">
