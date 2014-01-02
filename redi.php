@@ -226,7 +226,10 @@ class Redi
 
 		$output = curl_exec($ch);
 		
-		if ($output === FALSE)
+        
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+		if ($output === FALSE || $http_status != 200)
 		{
 			return array('Error' => 'Online reservation is not available at this time. Try again later or contact us directly.');
 		}
