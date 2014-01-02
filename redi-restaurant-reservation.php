@@ -550,7 +550,15 @@ if (!class_exists('ReDiRestaurantReservation'))
                     wp_enqueue_style('redi-restaurant');
                     $persons = 2;
 
-                   
+                    //places 
+            $places = $this->redi->getPlaces();    
+            
+            //$placeID = $this->options['placeID']; 
+            $placeID = $places[0]->ID;
+            
+
+            $time_format = get_option('time_format');
+			$date_format_setting = $this->options['DateFormat'];
 
                    // var_dump($places);
                     $time_format = get_option('time_format');
