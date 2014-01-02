@@ -184,7 +184,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($_POST['submit']))
 			{
-            $placeID = $_POST['Place'];
+                $placeID = $_POST['Place'];
+                $categories = $this->redi->getPlaceCategories($placeID);
+                $categoryID = $categories[0]->ID;
 				$this->options['OpenTime'] = $_POST['OpenTime'];
 				$this->options['CloseTime'] = $_POST['CloseTime'];
 
