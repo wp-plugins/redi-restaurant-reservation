@@ -1,5 +1,4 @@
 jQuery(function () {
-
     function hideSteps() {
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
@@ -90,7 +89,7 @@ jQuery(function () {
             UserEmail: jQuery('#UserEmail').val(),
             UserComments: jQuery('#UserComments').val(),
             UserPhone: jQuery('#UserPhone').val(),
-            lang : jQuery('#redi-restaurant-lang').val()
+            placeID: jQuery('#placeID').val()
         };
         if(jQuery('#field_1').attr('type')==='checkbox' && jQuery('#field_1').attr('checked') === "checked"){
             data['field_1'] = 'on';
@@ -138,6 +137,7 @@ jQuery(function () {
         return false;
     });
     jQuery('#step1button').click(function () {
+        jQuery('#step1button').attr('disabled', true);
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
         jQuery('#step1load').show();
@@ -145,6 +145,7 @@ jQuery(function () {
         var data = {
             action: 'redi_restaurant-submit',
             get: 'step1',
+            placeID: jQuery('#placeID').val(),
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
@@ -153,7 +154,7 @@ jQuery(function () {
 
         jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
             jQuery('#step1load').hide();
-
+            jQuery('#step1button').attr('disabled', false);
             jQuery('#buttons').html('');
             if (response['Error']) {
                 jQuery('#step1errors').html(response['Error']).show('slow');
@@ -196,5 +197,11 @@ jQuery(function () {
         ;
         return false;
 
+    });
+
+    jQuery('#placeID').change(function () {
+        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        jQuery('#step3').hide('slow');
+        jQuery('#step1errors').hide('slow');
     });
 });

@@ -49,6 +49,8 @@ if (!defined('REDI_RESTAURANT_API'))
 	define('REDI_RESTAURANT_API', 'http://api.reservationdiary.eu/service/');
 }
 
+define('CUSTOM_FIELDS', 6);
+
 class Redi
 {
 	private $ApiKey;
@@ -140,7 +142,17 @@ class Redi
 	{
 		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
 	}
+    
+    public function getPlaceCategories($placeID)
+	{
+		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
+	}
 
+    public function getPlaces()
+	{
+		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, GET);
+	}
+    
 	public function setApiKey($ApiKey)
 	{
 		$this->ApiKey = $ApiKey;
@@ -214,9 +226,12 @@ class Redi
 
 		$output = curl_exec($ch);
 		
-		if ($output === FALSE)
+        
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+		if ($output === FALSE || $http_status != 200 && $http_status != 400)
 		{
-			return array('Error' => 'Online reservation is not available at this time. Try again later or contact us directly.');
+			return array('Error' => 'Online reservation service is not available at this time. Try again later or contact us directly.');
 		}
 
 		curl_close($ch);
