@@ -156,6 +156,10 @@
 			</td>
 		</tr>			
 	</table>
+        <p class="description">
+			<b style="color: red"><?php _e("NOTE: Reducing number of available seats will remove existing reservations.") ?></b>
+		</p>
+                <br/>
 	<h2><?php _e('Working time', 'redi-restaurant-reservation'); ?> </h2>
 	<table class="form-table" style="width: 20%;">
 		<tr valign="top">

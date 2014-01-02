@@ -98,10 +98,7 @@ jQuery(function () {
 			</tr>
 		</table>
 		<br/>
-		<p class="description">
-			<b style="color: red"><?php _e("NOTE: Reducing number of available seats will remove existing reservations.") ?></b>
-		</p>
-                <br/>
+		
 		<!-- custom fields-->
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
