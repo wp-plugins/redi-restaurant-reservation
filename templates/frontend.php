@@ -31,7 +31,7 @@ var time_format ="HH:mm";
 			<?php endforeach; ?>
 		 </select>
          <?php else: ?>
-            <input type="hidden" name="placeID" value="<?php echo $places[0]->ID ?>"/>
+            <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
          <br/>
 		<br/><label for="redi-restaurant-startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>

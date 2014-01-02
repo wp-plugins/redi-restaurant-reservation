@@ -143,7 +143,7 @@ jQuery(function () {
         var data = {
             action: 'redi_restaurant-submit',
             get: 'step1',
-            place: jQuery('#place').val(),
+            placeID: jQuery('#placeID').val(),
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val()
