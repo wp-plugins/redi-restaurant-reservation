@@ -329,7 +329,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $options[$field_message];
 				}
 			}
-
+            $ReservationTime = $this->getReservationTime();
             require_once(plugin_dir_path(__FILE__).'languages.php');
             require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
             require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
@@ -340,7 +340,7 @@ if (!class_exists('ReDiRestaurantReservation'))
             $places = $this->redi->getPlaces();
             $serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
             $place = $this->redi->getPlace($placeID); //goes to template 'admin'
-            $ReservationTime = $this->getReservationTime();
+            
             $getServices = $this->redi->getServices($categoryID);
 
             require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
