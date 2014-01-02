@@ -158,60 +158,7 @@ jQuery(function () {
 		<div id="ajaxed">
                     <?php self::ajaxed_admin_page($placeID, $categoryID); ?>
 		</div>
-		<div class="icon32" id="icon-edit-comments"><br></div>
-		<h2><?php _e('Email Configuration', 'redi-restaurant-reservation'); ?></h2>
-
-		<table class="form-table" style="width: 80%;">
-			<tr>
-				<th scope="row">
-					<label for="Lang">
-						<?php _e('Language', 'redi-restaurant-reservation'); ?>
-					</label>
-				</th>
-				<td>
-					<select name="Lang" style="width:137px;">
-					<?php foreach ((array)$redi_l10n_sys_locales as $locale): ?>
-						<option <?php if ($place['Lang'] == $locale['lang-www']): ?> selected="selected" <?php endif ?> value="<?php echo $locale['lang-www'] ?>">
-							<?php echo $locale['lang-native']; ?>
-						</option>
-					<?php endforeach ?>
-					</select>
-				</td>
-				<td>
-					<p class="description">
-						<?php _e('Language for admin emails', 'redi-restaurant-reservation'); ?>
-					</p>
-				</td>
-			</tr>
-			<tr valign="top">
-
-				<th scope="row" style="width:15%;">
-					<label for="DateFormat">
-						<?php _e('Date format', 'redi-restaurant-reservation'); ?>
-					</label>
-				</th>
-				<td>
-					<select id="DateFormat" name="DateFormat">
-						<optgroup label="Hyphen">
-							<option <?php if ($place['DateFormat'] == 'yyyy-MM-dd'): ?> selected="selected" <?php endif ?> value="yyyy-MM-dd">yyyy-mm-dd</option>
-							<option <?php if ($place['DateFormat'] == 'MM-dd-yyyy'): ?> selected="selected" <?php endif ?> value="MM-dd-yyyy">mm-dd-yyyy</option>
-							<option <?php if ($place['DateFormat'] == 'dd-MM-yyyy'): ?> selected="selected" <?php endif ?> value="dd-MM-yyyy">dd-mm-yyyy</option>
-						</optgroup>
-						<optgroup label="Dot">
-							<option <?php if ($place['DateFormat'] == 'yyyy.MM.dd'): ?> selected="selected" <?php endif ?> value="yyyy.MM.dd">yyyy.mm.dd</option>
-							<option <?php if ($place['DateFormat'] == 'MM.dd.yyyy'): ?> selected="selected" <?php endif ?> value="MM.dd.yyyy">mm.dd.yyyy</option>
-							<option <?php if ($place['DateFormat'] == 'dd.MM.yyyy'): ?> selected="selected" <?php endif ?> value="dd.MM.yyyy">dd.mm.yyyy</option>
-						</optgroup>
-						<optgroup label="Slash">
-							<option <?php if ($place['DateFormat'] == 'yyyy/MM/dd'): ?> selected="selected" <?php endif ?> value="yyyy/MM/dd">yyyy/mm/dd</option>
-							<option <?php if ($place['DateFormat'] == 'MM/dd/yyyy'): ?> selected="selected" <?php endif ?> value="MM/dd/yyyy">mm/dd/yyyy</option>
-							<option <?php if ($place['DateFormat'] == 'dd/MM/yyyy'): ?> selected="selected" <?php endif ?> value="dd/MM/yyyy">dd/mm/yyyy</option>
-						</optgroup>
-					</select>
-				</td>
-			</tr>
-
-		</table>
+		
 		
 
 		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
