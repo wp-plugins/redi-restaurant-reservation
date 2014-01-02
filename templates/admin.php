@@ -55,22 +55,7 @@ jQuery(function () {
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 	<form name="redi-restaurant" method="post">
 		<table class="form-table" >
-		<tr valign="top">
-				<th scope="row" style="width:15%;">
-					<label for="Place"><?php _e('Place', 'redi-restaurant-reservation'); ?> </label>
-				</th>
-				<td>
-					<select name="Place" id="Place">
-						<?php foreach((array)$places as $place_current):?>
-							<option value="<?php echo $place_current->ID ?>" <?php if($placeID == $place_current->ID): ?>selected="selected"<?php endif;?>>
-								<?php echo $place_current->Name ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-                    <img id="ajaxload" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
-				</td>
-                
-			</tr>
+
 			<tr valign="top">
 				<th scope="row" style="width:15%;">
 					<label for="MaxPersons"><?php _e('Max persons per reservation', 'redi-restaurant-reservation'); ?> </label>
@@ -172,6 +157,7 @@ jQuery(function () {
 		</table>
 		<br/>
 		<!-- /custom fields-->
+                
 		<div id="ajaxed">
                     <?php self::ajaxed_admin_page($placeID, $categoryID); ?>
 		</div>

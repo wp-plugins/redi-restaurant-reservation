@@ -1,55 +1,25 @@
 <div class="icon32" id="icon-options-general"><br></div>
-	<h2><?php _e('Working time', 'redi-restaurant-reservation'); ?> </h2>
-	<table class="form-table" style="width: 20%;">
-		<tr valign="top">
 
-			<th scope="row">
-
-			</th>
-			<td>
-				<?php _e('Open', 'redi-restaurant-reservation'); ?>
-			</td>
-			<td>
-				<?php _e('Close', 'redi-restaurant-reservation'); ?>
-			</td>
-		</tr>
-
-		<?php foreach ($this->weekday as $serviceTimeName): ?>
-			<?php $serviceTimeValue = $serviceTimes[$serviceTimeName]; ?>
-
-			<tr valign="top">
-				<th scope="row">
-					<label for="OpenTime[<?php echo $serviceTimeName ?>]">
-						<?php _e($serviceTimeName) ?>
-					</label>
-				</th>
-				<td>
-					<input id="OpenTime[<?php echo $day ?>]" type="text"
-							value="<?php echo $serviceTimeValue->OpenTime ?>"
-							name="OpenTime[<?php echo $serviceTimeName ?>]"/>
-				</td>
-				<td>
-					<input id="" type="text" value="<?php echo $serviceTimeValue->CloseTime ?>"
-							name="CloseTime[<?php echo $serviceTimeName ?>]"/>
-				</td>
-			</tr>
-		<?php endforeach ?>
-	</table>
-	<br/>
-	<br/>
-		
-	<p class="description">
-		<?php _e('Specify time in 24h format (00:00 - 23:59).', 'redi-restaurant-reservation'); ?>
-		<br/>
-		<?php _e('If you close next day at night then set closing time on a same day. For example 18:00 - 3:00', 'redi-restaurant-reservation'); ?>
-		<br/>
-		<?php _e('Set Open and Close fields to blank if restaurant is closed.', 'redi-restaurant-reservation'); ?>
-	</p>
-	<br/>
 	<div class="icon32" id="icon-users"><br></div>
 	<h2><?php _e('Restaurant settings', 'redi-restaurant-reservation'); ?></h2>
 
 	<table class="form-table" style="width: 80%;">
+            <tr valign="top">
+                        <th scope="row" style="width:15%;">
+                            <label for="Place"><?php _e('Place', 'redi-restaurant-reservation'); ?> </label>
+                        </th>
+                        <td>
+                            <select name="Place" id="Place">
+                                    <?php foreach((array)$places as $place_current):?>
+                                            <option value="<?php echo $place_current->ID ?>" <?php if($placeID == $place_current->ID): ?>selected="selected"<?php endif;?>>
+                                                    <?php echo $place_current->Name ?>
+                                            </option>
+                                    <?php endforeach; ?>
+                            </select>
+                            <img id="ajaxload" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
+                        </td>
+
+                </tr>
 		<tr valign="top">
 
 			<th scope="row" style="width:15%;">
@@ -186,3 +156,50 @@
 			</td>
 		</tr>			
 	</table>
+	<h2><?php _e('Working time', 'redi-restaurant-reservation'); ?> </h2>
+	<table class="form-table" style="width: 20%;">
+		<tr valign="top">
+
+			<th scope="row">
+
+			</th>
+			<td>
+				<?php _e('Open', 'redi-restaurant-reservation'); ?>
+			</td>
+			<td>
+				<?php _e('Close', 'redi-restaurant-reservation'); ?>
+			</td>
+		</tr>
+
+		<?php foreach ($this->weekday as $serviceTimeName): ?>
+			<?php $serviceTimeValue = $serviceTimes[$serviceTimeName]; ?>
+
+			<tr valign="top">
+				<th scope="row">
+					<label for="OpenTime[<?php echo $serviceTimeName ?>]">
+						<?php _e($serviceTimeName) ?>
+					</label>
+				</th>
+				<td>
+					<input id="OpenTime[<?php echo $day ?>]" type="text"
+							value="<?php echo $serviceTimeValue->OpenTime ?>"
+							name="OpenTime[<?php echo $serviceTimeName ?>]"/>
+				</td>
+				<td>
+					<input id="" type="text" value="<?php echo $serviceTimeValue->CloseTime ?>"
+							name="CloseTime[<?php echo $serviceTimeName ?>]"/>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</table>
+	<br/>
+	<br/>
+
+	<p class="description">
+		<?php _e('Specify time in 24h format (00:00 - 23:59).', 'redi-restaurant-reservation'); ?>
+		<br/>
+		<?php _e('If you close next day at night then set closing time on a same day. For example 18:00 - 3:00', 'redi-restaurant-reservation'); ?>
+		<br/>
+		<?php _e('Set Open and Close fields to blank if restaurant is closed.', 'redi-restaurant-reservation'); ?>
+	</p>
+	<br/>

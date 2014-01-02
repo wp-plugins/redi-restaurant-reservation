@@ -337,10 +337,12 @@ if (!class_exists('ReDiRestaurantReservation'))
         
         function ajaxed_admin_page($placeID, $categoryID)
         {
+            $places = $this->redi->getPlaces();
             $serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
             $place = $this->redi->getPlace($placeID); //goes to template 'admin'
             $ReservationTime = $this->getReservationTime();
             $getServices = $this->redi->getServices($categoryID);
+
             require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
 	}
 
@@ -547,11 +549,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     wp_enqueue_style('redi-restaurant');
                     $persons = 2;
 
-                    //places
-                    $places = $this->redi->getPlaces();
-
-                    //$placeID = $this->options['placeID'];
-                    $placeID = $places[0]->ID;
+                   
 
                    // var_dump($places);
                     $time_format = get_option('time_format');
@@ -617,6 +615,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     die;
                 }
                 $categoryID = $categories[0]->ID;
+                
             }
             switch ($_POST['get'])
             {
@@ -748,7 +747,6 @@ if (!class_exists('ReDiRestaurantReservation'))
                     break;
 
                 case 'get_place':
-                    //(int)$this->options['categoryID'];
                     self::ajaxed_admin_page($placeID, $categoryID);
 
                     break;
