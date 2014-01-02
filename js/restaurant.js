@@ -199,7 +199,8 @@ jQuery(function () {
     });
 
     jQuery('#placeID').change(function () {
-        if (jQuery("#step2").is(":visible"))
-                jQuery('#step1button').click();
+        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        jQuery('#step3').hide('slow');
+        jQuery('#step1errors').hide('slow');
     });
 });
