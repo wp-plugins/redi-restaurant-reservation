@@ -184,8 +184,14 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($_POST['submit']))
 			{
+                $settings_saved = true;
                 $placeID = $_POST['Place'];
                 $categories = $this->redi->getPlaceCategories($placeID);
+                if(isset($categories['Error']))
+                {
+                    $errors[] = $categories['Error'];
+                    $settings_saved = false;
+                }
                 $categoryID = $categories[0]->ID;
 				$this->options['OpenTime'] = $_POST['OpenTime'];
 				$this->options['CloseTime'] = $_POST['CloseTime'];
@@ -208,7 +214,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$services = (int)$_POST['services'];
 
 				$getServices = $this->redi->getServices($categoryID);
-
+                if(isset($getServices['Error']))
+                {
+                    $errors[] = $getServices['Error'];
+                    $settings_saved = false;
+                }
 				if (count($getServices) != $services)
 				{
 					if (count($getServices) > $services)
@@ -221,20 +231,32 @@ if (!class_exists('ReDiRestaurantReservation'))
 						foreach ($removeServices AS $service)
 							$ids[] = $service->ID;
 
-						$this->redi->deleteServices($ids);
+						$ret = $this->redi->deleteServices($ids);
+                        if(isset($ret['Error']))
+                        {
+                            $errors[] = $ret['Error'];
+                            $settings_saved = false;
+                        }
+                        $ret = array();
 					}
 					else
 					{
 						//add
 						$diff = $services - count($getServices);
 
-						$this->redi->createService($categoryID,
+						$ret = $this->redi->createService($categoryID,
 							array (
 							      'service' => array (
 								      'Name' => 'Person',
 								      'Quantity' => $diff
 							      )
 							));
+                        if(isset($ret['Error']))
+                        {
+                            $errors[] = $ret['Error'];
+                            $settings_saved = false;
+                        }
+                        $ret = array();
 					}
 				}
 				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
@@ -272,9 +294,17 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $this->saveAdminOptions();
 
 				if (is_array($times) && count($times))
-					$this->redi->setServiceTime($categoryID, $times);
-
-				$this->redi->setPlace($placeID,
+                {
+					$ret = $this->redi->setServiceTime($categoryID, $times);
+                    if(isset($ret['Error']))
+                    {
+                        $errors[] = $ret['Error'];
+                        $settings_saved = false;
+                    }
+                    $ret = array();
+                    
+                }
+				$ret = $this->redi->setPlace($placeID,
 					array (
 						'place' => array (
 							'Name' => $_POST['Name'],
@@ -293,11 +323,24 @@ if (!class_exists('ReDiRestaurantReservation'))
 							)
 						)
 				);
-				$settings_saved = true;
+                if(isset($ret['Error']))
+                {
+                    $errors[] = $ret['Error'];
+                    $settings_saved = false;
+                }
+				
                 $places = $this->redi->getPlaces();    
+                if(isset($places['Error']))
+                {
+                    $errors[] = $places['Error'];
+                }
 			}
             
 			$getServices = $this->redi->getServices($categoryID);
+            if(isset($getServices['Error']))
+            {
+                $errors[] = $getServices['Error'];
+            }
 
 			$options = get_option($this->optionsName);
 

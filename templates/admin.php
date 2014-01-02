@@ -15,7 +15,7 @@
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='cancel')): ?> nav-tab-active<?php endif;?>"
    href="options-general.php?page=options_page_slug&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
 <div class="tab_wrap">
-	<?php if (isset($settings_saved)): ?>
+	<?php if (isset($settings_saved) && $settings_saved): ?>
 		<div class="updated" id="message">
 			<p>
 				<?php _e('Your settings have been saved!', 'redi-restaurant-reservation') ?>
