@@ -331,10 +331,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 			}
 
             require_once(plugin_dir_path(__FILE__).'languages.php');
-            
-			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
-			require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');
-			require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
+            require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
+            require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
         }
         
         function ajaxed_admin_page($placeID, $categoryID)

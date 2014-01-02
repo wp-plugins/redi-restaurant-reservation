@@ -29,6 +29,8 @@ jQuery(function () {
    href="options-general.php?page=options_page_slug&sm=free"><?php _e('Free package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='basic')): ?> nav-tab-active<?php endif;?>"
    href="options-general.php?page=options_page_slug&sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
+<a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='cancel')): ?> nav-tab-active<?php endif;?>"
+   href="options-general.php?page=options_page_slug&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
 <div class="tab_wrap">
 	<?php if (isset($settings_saved)): ?>
 		<div class="updated" id="message">
@@ -115,10 +117,7 @@ jQuery(function () {
 			<b style="color: red"><?php _e("NOTE: Reducing number of available seats will remove existing reservations.") ?></b>
 		</p>
 		<div id="ajaxed">
-		<?php 
-		//var_dump($placeID);
-       self::ajaxed_admin_page($placeID, $categoryID);
-		 ?>
+                    <?php self::ajaxed_admin_page($placeID, $categoryID); ?>
 		</div>
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Email Configuration', 'redi-restaurant-reservation'); ?></h2>
@@ -233,8 +232,25 @@ jQuery(function () {
 
 		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
 	</form>
-<?php else:?>
-	<iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 500px;"></iframe>
+        <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
+            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 500px;"></iframe>
+        <?php elseif((isset($_GET['sm']) && $_GET['sm']=='cancel')):?>
+        <div id="icon-admin" class="icon32">
+            <br>
+	</div>
+	<h2><?php _e('Cancel reservation', 'redi-restaurant-reservation'); ?></h2>
+	<form id="redi-reservation-cancel" name="redi-reservation-cancel" method="post">
+		<input type="hidden" name="action" value="cancel"/>
+		<br/>
+		<label for="redi-restaurant-cancel-id"><?php _e('Reservation number', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
+		<input type="text" value="" name="id" id="redi-restaurant-cancel-id"/>
+		<br/>
+		<label for="redi-restaurant-cancel-reason"><?php _e('Reason', 'redi-restaurant-reservation')?>:</label><br/>
+		<textarea name="reason" id="redi-restaurant-cancel-reason" rows="5" cols="60"></textarea>
+		<br/>
+        <br/>
+		<input class="button-secondary" type="submit" name="cancelReservation" value="<?php _e('Cancel reservation', 'redi-restaurant-reservation')?>">
+	</form>
 	<?php endif ?>
 </div>
 </div>
