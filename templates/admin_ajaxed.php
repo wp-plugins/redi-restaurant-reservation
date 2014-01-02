@@ -47,7 +47,7 @@
 	</p>
 	<br/>
 	<div class="icon32" id="icon-users"><br></div>
-	<h2><?php _e('Restaurant details', 'redi-restaurant-reservation'); ?></h2>
+	<h2><?php _e('Restaurant settings', 'redi-restaurant-reservation'); ?></h2>
 
 	<table class="form-table" style="width: 80%;">
 		<tr valign="top">

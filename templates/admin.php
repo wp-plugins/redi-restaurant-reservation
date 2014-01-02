@@ -116,6 +116,62 @@ jQuery(function () {
 		<p class="description">
 			<b style="color: red"><?php _e("NOTE: Reducing number of available seats will remove existing reservations.") ?></b>
 		</p>
+                <br/>
+		<!-- custom fields-->
+		<div class="icon32" id="icon-edit-comments"><br></div>
+		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
+
+		<table class="form-table" style="width: 80%;">
+			<thead>
+				<tr>
+					<th>
+						<label>
+							<?php _e('Field name', 'redi-restaurant-reservation'); ?>
+						</label>
+					</th>
+					<th>
+						<label>
+							<?php _e('Field type', 'redi-restaurant-reservation'); ?>
+						</label>
+					</th>
+					<th>
+						<label>
+							<?php _e('Is required?', 'redi-restaurant-reservation'); ?>
+						</label>
+					</th>
+					<th>
+						<label>
+							<?php _e('Required error message', 'redi-restaurant-reservation'); ?>
+						</label>
+					</th>
+				</tr>
+			</thead>
+			<?php for($i = 1; $i != CUSTOM_FIELDS; $i++):?>
+			<tr>
+				<td>
+					<?php $field_name=('field_'.$i.'_name'); ?>
+					<input type="text" name="<?php echo $field_name; ?>" value="<?php echo $$field_name; ?>"/>
+				</td>
+				<td>
+					<?php $field_type=('field_'.$i.'_type'); ?>
+					<select name="<?php echo $field_type; ?>">
+						<option value="textbox" <?php if ($$field_type === 'textbox'):?>selected="selected"<?php endif?>>TextBox</option>
+						<option value="checkbox" <?php if ($$field_type === 'checkbox'):?>selected="selected"<?php endif?>>Checkbox</option>
+					</select>
+				</td>
+				<td>
+					<?php $field_required=('field_'.$i.'_required'); ?>
+					<input type="checkbox" name="<?php echo $field_required; ?>" <?php if ($$field_required): ?>checked="checked"<?php endif?>>
+				</td>
+				<td>
+					<?php $field_message=('field_'.$i.'_message'); ?>
+					<input type="text" name="<?php echo $field_message;?>" value="<?php echo $$field_message; ?>" style="width:300px;">
+				</td>
+			</tr>
+			<?php endfor; ?>
+		</table>
+		<br/>
+		<!-- /custom fields-->
 		<div id="ajaxed">
                     <?php self::ajaxed_admin_page($placeID, $categoryID); ?>
 		</div>
@@ -173,62 +229,7 @@ jQuery(function () {
 			</tr>
 
 		</table>
-		<br/>
-		<!-- custom fields-->
-		<div class="icon32" id="icon-edit-comments"><br></div>
-		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
-
-		<table class="form-table" style="width: 80%;">
-			<thead>
-				<tr>
-					<th>
-						<label>
-							<?php _e('Field name', 'redi-restaurant-reservation'); ?>
-						</label>
-					</th>
-					<th>
-						<label>
-							<?php _e('Field type', 'redi-restaurant-reservation'); ?>
-						</label>
-					</th>
-					<th>
-						<label>
-							<?php _e('Is required?', 'redi-restaurant-reservation'); ?>
-						</label>
-					</th>
-					<th>
-						<label>
-							<?php _e('Required error message', 'redi-restaurant-reservation'); ?>
-						</label>
-					</th>
-				</tr>
-			</thead>
-			<?php for($i = 1; $i != CUSTOM_FIELDS; $i++):?>
-			<tr>
-				<td>
-					<?php $field_name=('field_'.$i.'_name'); ?>
-					<input type="text" name="<?php echo $field_name; ?>" value="<?php echo $$field_name; ?>"/>
-				</td>
-				<td>
-					<?php $field_type=('field_'.$i.'_type'); ?>
-					<select name="<?php echo $field_type; ?>">
-						<option value="textbox" <?php if ($$field_type === 'textbox'):?>selected="selected"<?php endif?>>TextBox</option>
-						<option value="checkbox" <?php if ($$field_type === 'checkbox'):?>selected="selected"<?php endif?>>Checkbox</option>
-					</select>
-				</td>
-				<td>
-					<?php $field_required=('field_'.$i.'_required'); ?>
-					<input type="checkbox" name="<?php echo $field_required; ?>" <?php if ($$field_required): ?>checked="checked"<?php endif?>>
-				</td>
-				<td>
-					<?php $field_message=('field_'.$i.'_message'); ?>
-					<input type="text" name="<?php echo $field_message;?>" value="<?php echo $$field_message; ?>" style="width:300px;">
-				</td>
-			</tr>
-			<?php endfor; ?>
-		</table>
-		<br/>
-		<!-- /custom fields-->
+		
 
 		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
 	</form>
