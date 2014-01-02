@@ -5,24 +5,7 @@
 		padding: 10px;
 	}
 </style>
-<script type="text/javascript">
-jQuery(function () {
-	jQuery('#Place').change(function () {
-		jQuery('#Place option:selected').each(function () {
-				var data = {
-					action: 'redi_restaurant-submit',
-					get: 'get_place',
-					placeID: this.value
-				};
-                jQuery('#ajaxload').show('slow');
-				jQuery.post('admin-ajax.php', data, function (response) {
-                    jQuery('#ajaxload').hide('slow');
-					jQuery('#ajaxed').html(response);
-				});
-		});
-	});
-});
-</script>
+
 
 <div class="wrap">
 <a class="nav-tab <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?> nav-tab-active<?php endif;?>"

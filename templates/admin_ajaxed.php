@@ -1,3 +1,21 @@
+<script type="text/javascript">
+jQuery(function () {
+	jQuery('#Place').change(function () {
+		jQuery('#Place option:selected').each(function () {
+				var data = {
+					action: 'redi_restaurant-submit',
+					get: 'get_place',
+					placeID: this.value
+				};
+                jQuery('#ajaxload').show('slow');
+				jQuery.post('admin-ajax.php', data, function (response) {
+                    jQuery('#ajaxload').hide('slow');
+					jQuery('#ajaxed').html(response);
+				});
+		});
+	});
+});
+</script>
 <div class="icon32" id="icon-options-general"><br></div>
 
 	<div class="icon32" id="icon-users"><br></div>
