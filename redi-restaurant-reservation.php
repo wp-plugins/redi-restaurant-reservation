@@ -607,25 +607,30 @@ if (!class_exists('ReDiRestaurantReservation'))
 		}
 
         function redi_restaurant_ajax()
-		{
-            if(isset($_POST['placeID']))
+        {
+            if (isset($_POST['placeID']))
             {
-                $placeID = (int)$_POST['placeID'];
-                $categories  = $this->redi->getPlaceCategories($placeID);
+                $placeID    = (int) $_POST['placeID'];
+                $categories = $this->redi->getPlaceCategories($placeID);
+                if(isset($categories['Error']))
+                {
+                    echo json_encode($categories);
+                    die;
+                }
                 $categoryID = $categories[0]->ID;
             }
-			switch ($_POST['get'])
-			{
-				case 'step1':
+            switch ($_POST['get'])
+            {
+                case 'step1':
                     //$placeID = (int)$_POST['placeID'];
                     // convert date to array
                     $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
 
-					if ($date['error_count'] > 0)
-					{
-						echo json_encode(array('Error' => 'Selected date or time is not valid.'));
-						die;
-					}
+                    if ($date['error_count'] > 0)
+                    {
+                        echo json_encode(array('Error' => 'Selected date or time is not valid.'));
+                        die;
+                    }
 
                     $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
 
@@ -636,42 +641,47 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
 
                     // format to ISO
-                    $startTimeISO = gmdate('Y-m-d H:i', $startTimeInt);
-                    $endTimeISO = gmdate('Y-m-d H:i', $endTimeInt);
+                    $startTimeISO   = gmdate('Y-m-d H:i', $startTimeInt);
+                    $endTimeISO     = gmdate('Y-m-d H:i', $endTimeInt);
                     $currentTimeISO = gmdate('Y-m-d H:i', current_time('timestamp'));
 
-					$params = array (
-						'StartTime' => urlencode($startTimeISO),
-						'EndTime' => urlencode($endTimeISO),
-						'Quantity' => (int)$_POST['persons'],
-						'Alternatives' => 2,
-						'Lang' => str_replace('_', '-', get_locale()),
-                        'CurrentTime' => urlencode($currentTimeISO)
-					);
+                    $params = array(
+                        'StartTime'    => urlencode($startTimeISO),
+                        'EndTime'      => urlencode($endTimeISO),
+                        'Quantity'     => (int) $_POST['persons'],
+                        'Alternatives' => 2,
+                        'Lang'         => str_replace('_', '-', get_locale()),
+                        'CurrentTime'  => urlencode($currentTimeISO)
+                    );
                     //get first category on selected place
-                   
-                    $categories = $this->redi->getPlaceCategories($placeID);                    
-                    $category = $categories[0];
-                   
-					$query = $this->redi->query($category->ID, $params);
+
+                    $categories = $this->redi->getPlaceCategories($placeID);
+                    if(isset($categories['Error']))
+                    {
+                        echo json_encode($categories);
+                        die;
+                    }
+                    $category   = $categories[0];
+
+                    $query = $this->redi->query($category->ID, $params);
 
                     $time_format = get_option('time_format');
 
-					if (!isset($query['Error']))
-					{
-						unset($query['debug']);
-						foreach ($query as $q)
-						{
-                            $q->Select = ($startTimeISO == $q->StartTime && $q->Available);
-							$q->StartTimeISO = $q->StartTime;
-                            $q->StartTime = date($time_format, strtotime($q->StartTime));
-							$q->EndTime = date($time_format, strtotime($q->EndTime));
-						}
-					}
-					echo json_encode($query);
-					break;
-                    
-				case 'step3':
+                    if (!isset($query['Error']))
+                    {
+                        unset($query['debug']);
+                        foreach ($query as $q)
+                        {
+                            $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
+                            $q->StartTimeISO = $q->StartTime;
+                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
+                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
+                        }
+                    }
+                    echo json_encode($query);
+                    break;
+
+                case 'step3':
 
                     $startTimeStr = $_POST['startTime'];
 
@@ -682,72 +692,71 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
 
                     // format to ISO
-                    $startTimeISO = gmdate('Y-m-d H:i', $startTimeInt);
-                    $endTimeISO = gmdate('Y-m-d H:i', $endTimeInt);
+                    $startTimeISO   = gmdate('Y-m-d H:i', $startTimeInt);
+                    $endTimeISO     = gmdate('Y-m-d H:i', $endTimeInt);
                     $currentTimeISO = gmdate('Y-m-d H:i', current_time('timestamp'));
-					$comment = '';
-					for($i = 1; $i != CUSTOM_FIELDS; $i++)
-					{
-						if(isset($_POST['field_'.$i]))
-						{
+                    $comment        = '';
+                    for ($i = 1; $i != CUSTOM_FIELDS; $i++)
+                    {
+                        if (isset($_POST['field_'.$i]))
+                        {
 
-							$field_type = 'field_'.$i.'_type';
+                            $field_type = 'field_'.$i.'_type';
 
-							if(isset($this->options[$field_type]) && $this->options[$field_type] === 'checkbox')
-							{
-								$comment .= $this->options['field_'.$i.'_name'].': ';
-								$comment .= ($_POST['field_'.$i] === 'on') ? _x('Yes', 'redi-restaurant-reservation') : _x('No', 'redi-restaurant-reservation');
-								$comment .= '<br/>';
-							}
-							else
-							{
-								if(!empty($_POST['field_'.$i]))
-								{
-									$comment .= $this->options['field_'.$i.'_name'].': ';
-									$comment .= $_POST['field_'.$i].'<br/>';
-								}
-							}
-						}
-					}
-					if(!empty($comment))
-					{
-						$comment .= '<br/>';
-					}
-					$comment .= $_POST['UserComments'];
+                            if (isset($this->options[$field_type]) && $this->options[$field_type] === 'checkbox')
+                            {
+                                $comment .= $this->options['field_'.$i.'_name'].': ';
+                                $comment .= ($_POST['field_'.$i] === 'on') ? _x('Yes', 'redi-restaurant-reservation') : _x('No', 'redi-restaurant-reservation');
+                                $comment .= '<br/>';
+                            }
+                            else
+                            {
+                                if (!empty($_POST['field_'.$i]))
+                                {
+                                    $comment .= $this->options['field_'.$i.'_name'].': ';
+                                    $comment .= $_POST['field_'.$i].'<br/>';
+                                }
+                            }
+                        }
+                    }
+                    if (!empty($comment))
+                    {
+                        $comment .= '<br/>';
+                    }
+                    $comment .= $_POST['UserComments'];
 
 
-					$params = array (
-						'reservation' => array (
+                    $params = array(
+                        'reservation' => array(
+                            'StartTime'    => $startTimeISO,
+                            'EndTime'      => $endTimeISO,
+                            'Quantity'     => (int) $_POST['persons'],
+                            "UserName"     => $_POST['UserName'],
+                            "UserEmail"    => $_POST['UserEmail'],
+                            "UserComments" => $comment,
+                            "UserPhone"    => $_POST['UserPhone'],
+                            "Name"         => "Person",
+                            "Lang"         => str_replace('_', '-', get_locale()),
+                            'CurrentTime'  => $currentTimeISO
+                        )
+                    );
 
-							'StartTime' => $startTimeISO,
-							'EndTime' => $endTimeISO,
-							'Quantity' => (int)$_POST['persons'],
-							"UserName" => $_POST['UserName'],
-							"UserEmail" => $_POST['UserEmail'],
-							"UserComments" => $comment,
-							"UserPhone" => $_POST['UserPhone'],
-							"Name" => "Person",
-							"Lang" => str_replace('_', '-', get_locale()),
-                            'CurrentTime' => $currentTimeISO
-						)
-					);
+                    $reservation = $this->redi->createReservation(
+                            $categoryID
+                            //$this->options['categoryID']
+                            , $params);
+                    echo json_encode($reservation);
+                    break;
 
-					$reservation = $this->redi->createReservation(
-                    $categoryID
-                    //$this->options['categoryID']
-                    , $params);
-					echo json_encode($reservation);
-					break;
-                    
-                    case 'get_place':
-                        //(int)$this->options['categoryID'];
-                        self::ajaxed_admin_page($placeID, $categoryID);
+                case 'get_place':
+                    //(int)$this->options['categoryID'];
+                    self::ajaxed_admin_page($placeID, $categoryID);
 
                     break;
-			}
+            }
 
-			die;
-		}
+            die;
+        }
 
 		private function getReservationTime()
 		{

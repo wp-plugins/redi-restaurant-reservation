@@ -88,7 +88,8 @@ jQuery(function () {
             UserName: jQuery('#UserName').val(),
             UserEmail: jQuery('#UserEmail').val(),
             UserComments: jQuery('#UserComments').val(),
-            UserPhone: jQuery('#UserPhone').val()
+            UserPhone: jQuery('#UserPhone').val(),
+            placeID: jQuery('#placeID').val()
         };
         if(jQuery('#field_1').attr('type')==='checkbox' && jQuery('#field_1').attr('checked') === "checked"){
             data['field_1'] = 'on';
