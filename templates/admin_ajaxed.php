@@ -36,7 +36,11 @@ jQuery(function () {
                             </select>
                             <img id="ajaxload" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
                         </td>
-
+				        <td style="width:80%">
+					        <p class="description">
+                                <?php _e('Multiple places are available for Basic package users', 'redi-restaurant-reservation') ?>
+                            </p>
+                        </td>
                 </tr>
 		<tr valign="top">
 
