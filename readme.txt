@@ -73,6 +73,16 @@ Plugin requires curl library to operate.
 
 == Changelog ==
 
+= 14.0114 =
+* Added support for multiple places (for basic package users)
+* Added better error handling to Admin console
+* Changed style of confirmation message
+* Scroll up page to confirmation message
+* Set calendar style to display on top of all elements
+* Moved cancel functionality to separated Tab
+* Fixed double click on reservation
+* Fixed manual date input
+
 = 13.1022 =
 * Added setting for maximum persons per reservation
 * Added support for custom fields that user should fill during reservation
