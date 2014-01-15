@@ -22,7 +22,7 @@ var time_format ="HH:mm";
 	<div id="step1">
 		
         <?php if(count((array)$places) > 1 ): ?>
-            <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e(' Select place, date and time', 'redi-restaurant-reservation')?></h2>
+            <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2>
         <br/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br/>
 		 <select name="placeID" id="placeID">
 			<?php foreach((array)$places as $place_current):?>
