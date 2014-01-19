@@ -37,6 +37,8 @@ Basic package functionality:
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
 
+We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Applicaiton. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 == Installation ==
@@ -61,7 +63,7 @@ Plugin requires curl library to operate.
 07. Setup screen with number of seats available, maximum persons per reservation, opening times and days of the week.
 08. Setup screen with info on the restaurant including name, address, country, phone, email, URL
 09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users). Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
-10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users). Photo, Visits and Rating are available only by request.
+10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users). Photo is taken from Facebook public profile. Photo, Visits and Rating are available only by request.
 11. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
 12. Setting for custom fields that user should fill during reservation
 13. List of Time shifts (Available only for Basic package users)
