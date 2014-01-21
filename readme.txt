@@ -28,16 +28,21 @@ Supported languages:
 
 If you need more languages, please contact us!
 
-Basic package functionality:
+= Free version limitation =
+* Allows reservations up to 1 month upfront
 
+= Basic package functionality =
 * View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 * Setup maximum available seats for online reservation by week day
 * Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
 * Support for multiple places.
+* Allows reservations up to 1 year upfront
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
 
-We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Applicaiton. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+= Additional services =
+* Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
+* We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Applicaiton. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
