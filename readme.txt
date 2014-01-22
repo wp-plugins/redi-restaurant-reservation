@@ -38,7 +38,7 @@ Basic package price is 5 EUR per month per place. To subscribe please use follow
 
 = Additional services =
 * Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
-* We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Applicaiton. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+* We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 * Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
 
