@@ -28,15 +28,11 @@ Supported languages:
 
 If you need more languages, please contact us!
 
-= Free version limitation =
-* Allows reservations up to 1 month upfront
-
 = Basic package functionality =
 * View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 * Setup maximum available seats for online reservation by week day
 * Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
 * Support for multiple places.
-* Allows reservations up to 1 year upfront
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
 
