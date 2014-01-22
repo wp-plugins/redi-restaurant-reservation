@@ -60,14 +60,15 @@ jQuery(function () {
 
     jQuery('#redi-restaurant-step3').click(function () {
         var error = '';
-        if (jQuery('#UserName').val() == '') {
-            error += 'Name can\'t be empty<br/>';
+        if (jQuery('#UserName').val() === '') {
+            error += redi_restaraurant_reservation.name_missing+'<br/>';
         }
-        if (jQuery('#UserEmail').val() == '') {
-            error += 'Email can\'t be empty<br/>';
+        if (jQuery('#UserEmail').val() === '') {
+            error += redi_restaraurant_reservation.email_missing+'<br/>';
         }
-        if (jQuery('#UserPhone').val() == '') {
-            error += 'Phone can\'t be empty<br/>';
+        if (jQuery('#UserPhone').val() === '') {
+            
+            error += redi_restaraurant_reservation.phone_missing+'<br/>';
         }
         jQuery('.field_required').each(function(){
             if(jQuery(this).attr('type') === 'checkbox' && jQuery(this).attr('checked') !== "checked" || jQuery(this).attr('type') === 'textbox' && jQuery(this).val() === ''){
@@ -121,7 +122,7 @@ jQuery(function () {
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
         jQuery('#redi-restaurant-step3').attr('disabled', true);
-        jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
+        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
             jQuery('#redi-restaurant-step3').attr('disabled', false);
             jQuery('#step3load').hide();
             if (response['Error']) {
@@ -152,7 +153,7 @@ jQuery(function () {
             lang : jQuery('#redi-restaurant-lang').val()
         };
 
-        jQuery.post(AjaxUrl.ajaxurl, data, function (response) {
+        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
             jQuery('#step1load').hide();
             jQuery('#step1button').attr('disabled', false);
             jQuery('#buttons').html('');

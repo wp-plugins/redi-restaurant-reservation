@@ -150,21 +150,23 @@ if (!class_exists('ReDiRestaurantReservation'))
 		 */
 		function redi_restaurant_admin_options_page()
 		{
-			if ($this->ApiKey == NULL) /// TODO: move to install
-				$this->register();
+                    if ($this->ApiKey == NULL) /// TODO: move to install
+                    {
+                            $this->register();
+                    }
 
-            $places = $this->redi->getPlaces();    
-            
-            //$placeID = $this->options['placeID']; 
-            $placeID = $places[0]->ID;
-            //$places = $this->redi->getPlaces();    
-            $categories = $this->redi->getPlaceCategories($placeID);
-          //  var_dump($categories);
-			$serviceID = $this->options['serviceID'];
-            //$categoryID = $this->options['categoryID']; //old
-			$categoryID =  $categories[0]->ID; 
-            
-            if(isset($_POST['action']) && $_POST['action']=='cancel')
+                    $places = $this->redi->getPlaces();
+
+
+                    $placeID = $places[0]->ID;
+
+                    $categories = $this->redi->getPlaceCategories($placeID);
+
+                    $serviceID = $this->options['serviceID'];
+
+                    $categoryID =  $categories[0]->ID;
+
+                    if(isset($_POST['action']) && $_POST['action']=='cancel')
 			{
                 
 				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
@@ -232,36 +234,36 @@ if (!class_exists('ReDiRestaurantReservation'))
 							$ids[] = $service->ID;
 
 						$ret = $this->redi->deleteServices($ids);
-                        if(isset($ret['Error']))
-                        {
-                            $errors[] = $ret['Error'];
-                            $settings_saved = false;
-                        }
-                        $ret = array();
+                                                if(isset($ret['Error']))
+                                                {
+                                                    $errors[] = $ret['Error'];
+                                                    $settings_saved = false;
+                                                }
+                                                $ret = array();
 					}
 					else
 					{
-						//add
-						$diff = $services - count($getServices);
+                                            //add
+                                            $diff = $services - count($getServices);
 
-						$ret = $this->redi->createService($categoryID,
-							array (
-							      'service' => array (
-								      'Name' => 'Person',
-								      'Quantity' => $diff
-							      )
-							));
-                        if(isset($ret['Error']))
-                        {
-                            $errors[] = $ret['Error'];
-                            $settings_saved = false;
-                        }
-                        $ret = array();
+                                            $ret = $this->redi->createService($categoryID,
+                                                    array (
+                                                          'service' => array (
+                                                                  'Name' => 'Person',
+                                                                  'Quantity' => $diff
+                                                          )
+                                                    ));
+                                            if(isset($ret['Error']))
+                                            {
+                                                $errors[] = $ret['Error'];
+                                                $settings_saved = false;
+                                            }
+                                            $ret = array();
 					}
 				}
 				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
 				$this->options['services'] = $services;
-                $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
+                                $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
 				$this->options['DateFormat'] = $_POST['DateFormat'];
 				$this->options['ReservationTime'] = $_POST['ReservationTime'];
 				$this->options['MaxPersons'] = (int)$_POST['MaxPersons'];
@@ -583,10 +585,14 @@ if (!class_exists('ReDiRestaurantReservation'))
                     wp_enqueue_script('timepicker-lang');
 
                     wp_register_script('restaurant', REDI_RESTAURANT_PLUGIN_URL.'js/restaurant.js', array ('jquery'));
+
                     wp_localize_script('restaurant',
-                            'AjaxUrl',
+                            'redi_restaraurant_reservation',
                             array ( // URL to wp-admin/admin-ajax.php to process the request
-                                  'ajaxurl' => admin_url('admin-ajax.php')
+                                  'ajaxurl' => admin_url('admin-ajax.php'),
+                                  'name_missing'  => __('Name can\'t be empty', 'redi-restaurant-reservation'),
+                                  'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
+                                  'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
                             ));
                     wp_enqueue_script('restaurant');
 
@@ -596,16 +602,14 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $persons = 2;
 
                     //places 
-            $places = $this->redi->getPlaces();    
-            
-            //$placeID = $this->options['placeID']; 
-            $placeID = $places[0]->ID;
-            
+                    $places = $this->redi->getPlaces();
 
-            $time_format = get_option('time_format');
-			$date_format_setting = $this->options['DateFormat'];
+                    $placeID = $places[0]->ID;
 
-                   // var_dump($places);
+
+                    $time_format = get_option('time_format');
+                    $date_format_setting = $this->options['DateFormat'];
+
                     $time_format = get_option('time_format');
                                 $date_format_setting = $this->options['DateFormat'];
 
@@ -680,7 +684,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     if ($date['error_count'] > 0)
                     {
-                        echo json_encode(array('Error' => 'Selected date or time is not valid.'));
+                        echo json_encode(array('Error' => _x('Selected date or time is not valid.', 'redi-restaurant-reservation')));
                         die;
                     }
 
@@ -809,15 +813,15 @@ if (!class_exists('ReDiRestaurantReservation'))
             die;
         }
 
-		private function getReservationTime()
-		{
-			if (isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)
-			{
-				return (int) $this->options['ReservationTime'];
-			}
-			return 3*60;
-		}
-	}
+        private function getReservationTime()
+        {
+                if (isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)
+                {
+                        return (int) $this->options['ReservationTime'];
+                }
+                return 3*60;
+        }
+    }
 }
 new ReDiRestaurantReservation();
 
