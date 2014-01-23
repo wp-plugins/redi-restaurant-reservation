@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2013-10-09 22:10+0200\n"
-"PO-Revision-Date: 2013-10-09 22:10+0200\n"
+"PO-Revision-Date: 2014-01-23 22:29+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Russian\n"
@@ -14,10 +14,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: _e\n"
+"X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-"
-"reservation\\trunk\\templates\n"
+"reservation\\trunk\n"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:5
 msgid "Your settings have been saved!"
@@ -32,9 +32,8 @@ msgid "Available seats"
 msgstr "Количество мест"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:37
-#, fuzzy
 msgid "Max persons per reservation"
-msgstr "Забронировать"
+msgstr "Максимальное количество людей"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:47
 msgid "Working time"
@@ -50,17 +49,20 @@ msgstr "Время закрытия"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:85
 msgid "Specify time in 24h format (00:00 - 23:59)."
-msgstr ""
+msgstr "Укажите время в 24 часовом формате (00:00 - 23:59)."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:87
 msgid ""
 "If you close next day at night then set closing time on a same day. For "
 "example 18:00 - 3:00"
 msgstr ""
+"Если ресторан закрывается на следующий день ночью то установите время "
+"закрытия на тот же день. Например 18:00 - 3:00"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:89
 msgid "Set Open and Close fields to blank if restaurant is closed."
 msgstr ""
+"Оставте время открытия и закрытия пустыми, если ресторан весь день закрыт."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:93
 msgid "Restaurant details"
@@ -113,13 +115,12 @@ msgid "Minimum hours before reservation can be accepted from client"
 msgstr "Минимальное количество часов до резервирования"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:208
-#, fuzzy
 msgid "Reservation time"
-msgstr "Информация для обратной связи"
+msgstr "Время резервирования"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:216
 msgid "Reservation duration in minutes"
-msgstr ""
+msgstr "Время резервирования в минутах"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:223
 msgid "Catalog"
@@ -139,7 +140,7 @@ msgstr "Поддержите наш плагин разместив Reservation 
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:253
 msgid "Email Configuration"
-msgstr ""
+msgstr "Настройки електронной почты"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:259
 msgid "Language"
@@ -151,45 +152,44 @@ msgstr "Язык для писем администратору"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:281
 msgid "Date format"
-msgstr ""
+msgstr "Формат даты"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:309
 msgid "Custom fields"
-msgstr ""
+msgstr "Дополнительные поля"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:316
 msgid "Field name"
-msgstr ""
+msgstr "Название поля"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:321
 msgid "Field type"
-msgstr ""
+msgstr "Тип"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:326
 msgid "Is required?"
-msgstr ""
+msgstr "Обязательный?"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/admin.php:331
 msgid "Required error message"
-msgstr ""
+msgstr "Ошибка если поле не указано"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/basicpackage.php:5
 msgid "Basic package (paid version)"
-msgstr ""
+msgstr "Базовый пакет (платная версия)"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:5
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:16
-#, fuzzy
 msgid "Cancel reservation"
-msgstr "Забронировать"
+msgstr "Отмена резервирования"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:9
 msgid "Reservation number"
-msgstr ""
+msgstr "Номер резервирования"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/cancel.php:12
 msgid "Reason"
-msgstr ""
+msgstr "Причина"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:23
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:48
@@ -227,7 +227,7 @@ msgstr "Имя"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:103
 msgid "Custom field is required"
-msgstr ""
+msgstr "Поле обязательное"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk\templates/frontend.php:118
 msgid "Comment"
