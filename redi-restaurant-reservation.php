@@ -180,7 +180,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				}
 				else
 				{
-					$errors = array(_x('id and reason are required', 'redi-restaurant-reservation'));
+					$errors = array(__('id and reason are required', 'redi-restaurant-reservation'));
 				}
 			}
 
@@ -684,7 +684,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     if ($date['error_count'] > 0)
                     {
-                        echo json_encode(array('Error' => _x('Selected date or time is not valid.', 'redi-restaurant-reservation')));
+                        echo json_encode(array('Error' => __('Selected date or time is not valid.', 'redi-restaurant-reservation')));
                         die;
                     }
 
@@ -762,7 +762,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                             if (isset($this->options[$field_type]) && $this->options[$field_type] === 'checkbox')
                             {
                                 $comment .= $this->options['field_'.$i.'_name'].': ';
-                                $comment .= ($_POST['field_'.$i] === 'on') ? _x('Yes', 'redi-restaurant-reservation') : _x('No', 'redi-restaurant-reservation');
+                                $comment .= ($_POST['field_'.$i] === 'on') ? __('Yes', 'redi-restaurant-reservation') : __('No', 'redi-restaurant-reservation');
                                 $comment .= '<br/>';
                             }
                             else
