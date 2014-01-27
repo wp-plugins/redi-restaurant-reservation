@@ -144,7 +144,7 @@
 		
 		
 
-		<input class="button-primary" id="submit" type="submit" value="Save" name="submit">
+		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes' );?>" name="submit">
 	</form>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
             <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 500px;"></iframe>
