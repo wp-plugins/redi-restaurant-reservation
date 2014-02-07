@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2014-01-31 19:51+0200\n"
-"PO-Revision-Date: 2014-01-31 19:51+0200\n"
+"PO-Revision-Date: 2014-02-07 10:00+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Spanish\n"
@@ -21,51 +21,53 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:183
 msgid "id and reason are required"
-msgstr ""
+msgstr "id y razón son obligatorios"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:593
 msgid "Name can't be empty"
-msgstr ""
+msgstr "El nombre no puede ser vacío"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:594
 msgid "Email can't be empty"
-msgstr ""
+msgstr "El email no puede ser vacío"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:595
 msgid "Phone can't be empty"
-msgstr ""
+msgstr "El teléfono no puede ser vacío"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:687
 msgid "Selected date or time is not valid."
-msgstr ""
+msgstr "La fecha o la hora seleccionadas no son válidas."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:765
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:765
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi.php:234
 msgid ""
 "Online reservation service is not available at this time. Try again later or "
 "contact us directly."
 msgstr ""
+"El servicio de reserva online no está disponible en este momento. Inténtelo "
+"más tarde o póngase en contacto con nosotros."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:12
 msgid "Free package settings"
-msgstr ""
+msgstr "Configuración del paquete gratuito"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:14
 msgid "Basic package settings"
-msgstr ""
+msgstr "Configuración del paquete básico"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:16
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:155
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:166
 msgid "Cancel reservation"
-msgstr ""
+msgstr "Cancelar reserva"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:21
 msgid "Your settings have been saved!"
@@ -77,15 +79,15 @@ msgstr "Ajustes comunes"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:44
 msgid "Max persons per reservation"
-msgstr ""
+msgstr "Número máximo de personas por reserva"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:55
 msgid "Reservation time"
-msgstr ""
+msgstr "Tiempo de reserva"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:63
 msgid "Reservation duration in minutes"
-msgstr ""
+msgstr "Duración de la reserva en minutos"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:70
 msgid "Support us"
@@ -97,48 +99,48 @@ msgstr "Por favor apoya nuestro plugin publicando el logo de Reservation Diary"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:87
 msgid "Custom fields"
-msgstr ""
+msgstr "Campos personalizados"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:94
 msgid "Field name"
-msgstr ""
+msgstr "Nombre del campo"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:99
 msgid "Field type"
-msgstr ""
+msgstr "Tipo de campo"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:104
 msgid "Is required?"
-msgstr ""
+msgstr "¿Es obligatorio?"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:109
 msgid "Required error message"
-msgstr ""
+msgstr "Mensaje de error obligatorio"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:147
 msgid "Save Changes"
-msgstr ""
+msgstr "Guardar cambios"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:159
 msgid "Reservation number"
-msgstr ""
+msgstr "Número de reserva"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:162
 msgid "Reason"
-msgstr ""
+msgstr "Razón"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:22
 msgid "Restaurant settings"
-msgstr ""
+msgstr "Ajustes del restaurante"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:27
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:26
 msgid "Place"
-msgstr ""
+msgstr "Lugar"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:41
 msgid "Multiple places are available for Basic package users"
-msgstr ""
+msgstr "Muchos lugares están disponibles para el paquete de la versión de pago"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:49
 msgid "Restaurant name"
@@ -203,6 +205,8 @@ msgstr "Asientos disponibles"
 msgid ""
 "NOTE: Reducing number of available seats will remove existing reservations."
 msgstr ""
+"ATENCIÓN: Si usted reduce el número de sitios disponibles podría eliminar "
+"reservas existentes."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:184
 msgid "Working time"
@@ -218,21 +222,24 @@ msgstr "Cerrado"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:224
 msgid "Specify time in 24h format (00:00 - 23:59)."
-msgstr ""
+msgstr "Especifique la hora en formato 24 horas (00:00 - 23:59)."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:226
 msgid ""
 "If you close next day at night then set closing time on a same day. For "
 "example 18:00 - 3:00"
 msgstr ""
+"Si cierra el día siguiente por la noche, establezca la hora de cierre en un "
+"mismo día. Por ejemplo 18:00 - 03:00 "
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:228
 msgid "Set Open and Close fields to blank if restaurant is closed."
 msgstr ""
+"Deje los campos Abierto y Cerrado en blanco si el restaurante está cerrado."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:232
 msgid "Email Configuration"
-msgstr ""
+msgstr "Configuración del Email"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:238
 msgid "Language"
@@ -244,27 +251,27 @@ msgstr "Idioma para mensajes de correo electrónico del administrador"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:260
 msgid "Date format"
-msgstr ""
+msgstr "Formato de la fecha"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:265
 msgid "Hyphen"
-msgstr ""
+msgstr "Guión"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:270
 msgid "Dot"
-msgstr ""
+msgstr "Punto"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:275
 msgid "Slash"
-msgstr ""
+msgstr "Barra oblicua"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:5
 msgid "Basic package (paid version)"
-msgstr ""
+msgstr "Páquete básico (versión de pago)"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:7
 msgid "* View upcoming reservations on Mobile/Tablet PC"
-msgstr ""
+msgstr "* Ver las próximas reservas en el Movil/Tablet"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:9
 msgid ""
@@ -275,32 +282,44 @@ msgid ""
 "for next 24 hours. By clicking on reservation item you will see reservation "
 "details."
 msgstr ""
+"Viendo las próximas reservas desde su Móvil/Tablet y así no perderá ningún "
+"cliente. Esta página podría estar abierta en una Tablet de modo que la "
+"camarera pueda ver todas las reservas para hoy. La página se actualiza cada "
+"15 minutos y muestra las reservas pasadas de hace 3 horas, y también todas "
+"las próximas reservas para las próximas 24 horas. Al hacer clic sobre la "
+"reserva podrás ver detalles de la misma."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:11
 msgid "Fully functional demo can be accessed by following link for 30 days:"
-msgstr ""
+msgstr "Versión de demo completamente funcional durante 30 días:"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:11
 msgid "Open upcoming reservations"
-msgstr ""
+msgstr "Ver las próximas reservas"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:14
 msgid "* Setup maximum available seats for online reservation by week day"
 msgstr ""
+"Establecer el número máximo de asientos disponibles por reserva durante una "
+"semana"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:16
 msgid ""
 "* Time shifts. Define multiple open/close time by week day. Define time "
 "before reservation by shift and week day."
 msgstr ""
+"Cambios de tiempo. Defina múltiples horarios de apertura/cierre de un día de "
+"la semana. Defina el tiempo de después de una reserva por turno y día de la "
+"semana."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:18
 msgid "* Support for multiple places."
-msgstr ""
+msgstr "* Soporte para múltiples sitios."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:21
 msgid "For paid packages please contact us by email:"
 msgstr ""
+"Para poder pagar el paquete póngase en contacto con nosotros vía email:"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:25
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:36
@@ -311,7 +330,7 @@ msgstr "Paso"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:25
 msgid "Select place, date and time"
-msgstr ""
+msgstr "Seleccione lugar, fecha y hora"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:36
 msgid "Select date and time"
@@ -343,7 +362,7 @@ msgstr "Nombre"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:118
 msgid "Custom field is required"
-msgstr ""
+msgstr "El campo personalizado es obligatorio"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:133
 msgid "Comment"
