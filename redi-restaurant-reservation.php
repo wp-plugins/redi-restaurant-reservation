@@ -380,7 +380,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				}
 			}
             $ReservationTime = $this->getReservationTime();
-            
+
             require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
             require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
         }
