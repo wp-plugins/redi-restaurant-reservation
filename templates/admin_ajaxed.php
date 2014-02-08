@@ -121,7 +121,7 @@ jQuery(function () {
 				</label>
 			</th>
 			<td>
-				<input id="DescriptionShort" type="text" value="<?php echo $place['DescriptionShort'] ?>" name="DescriptionShort"/>
+				<input maxlength="200" id="DescriptionShort" type="text" value="<?php echo $place['DescriptionShort'] ?>" name="DescriptionShort"/>
 			</td>
 		</tr>
 
@@ -132,7 +132,7 @@ jQuery(function () {
 				</label>
 			</th>
 			<td colspan="2">
-				<textarea name="DescriptionFull" id="DescriptionFull" cols="60" rows="5"><?php echo $place['DescriptionFull'] ?></textarea>
+				<textarea maxlength="1000" name="DescriptionFull" id="DescriptionFull" cols="60" rows="5"><?php echo $place['DescriptionFull'] ?></textarea>
 			</td>
 		</tr>
 		<tr>

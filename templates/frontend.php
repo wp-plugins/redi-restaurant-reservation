@@ -133,7 +133,7 @@ var time_format ="HH:mm";
 				<?php _e('Comment', 'redi-restaurant-reservation');?>:
 			</label>
 			<br/>
-			<textarea rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
+			<textarea maxlength="250" rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
 		</div>
 		<div>
 			<br/><br/>
