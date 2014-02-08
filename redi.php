@@ -138,9 +138,14 @@ class Redi
 		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(self::unescape_array($params)));
 	}
 
-	public function shiftsStartTime($placeID, $params)
+	public function shiftsStartTime($categoryID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$placeID.'/shiftsStartTime', GET, $this->strParams($params));
+		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/shiftsStartTime', GET, $this->strParams($params));
+	}
+
+	public function availabilityByShifts($categoryID, $params)
+	{
+		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/availabilityByShifts/Person', GET, $this->strParams($params));
 	}
 
 	public function getPlace($placeID)

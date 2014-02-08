@@ -39,7 +39,6 @@ jQuery(function () {
         var month1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getMonth() + 1;
         var year1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getFullYear();
         var fullDate = year1 + "-" + month1 + "-" + day1;
-
         jQuery("#redi-restaurant-startDateISO").val(fullDate);
     });
 
@@ -55,6 +54,25 @@ jQuery(function () {
             var fullDate = year1 + "-" + month1 + "-" + day1;
 
             jQuery("#redi-restaurant-startDateISO").val(fullDate);
+
+
+            jQuery('#step1load').show();
+            //get shifts
+            var data = {
+                action: 'redi_restaurant-submit',
+                get: 'step_shifts',
+                placeID: jQuery('#placeID').val(),
+                startDate: jQuery('#redi-restaurant-startDateISO').val()
+            };
+            jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+                if (response['Error']) {
+                    jQuery('#step1errors').html(response['Error']).show('slow');
+                } else {
+                    jQuery('#step1errors').hide('slow');
+                    jQuery('#redi-restaurant-startTimeArray').val(response);
+                }
+                jQuery('#step1load').hide();
+            }, 'json');
         }
     });
 
