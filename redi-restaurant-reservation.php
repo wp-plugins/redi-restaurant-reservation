@@ -699,16 +699,12 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 		            $categoryID =  $categories[0]->ID;
 
-				  //var_dump($_POST['startDate']);
 		            $day_of_week = date('w', strtotime($_POST['startDate']));
-				    //var_dump($day_of_week);
 
 		            $shifts = $this->redi->shiftsStartTime($categoryID, array(
 				            'Day' => $day_of_week,
 				            'Lang' =>  str_replace('_', '-', get_locale()))
 		            );
-		           // var_dump($shifts);
-
 
 					if(isset($shifts['Error']))
 					{
@@ -717,11 +713,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 					}
 		            if(is_array($shifts))
 		            {
-////                        $shifts_with_dates = array();
-////                        foreach($shifts as $shift)
-////                        {
-////                            $shifts_with_dates[] = $shift;
-////                        }
 			            $start_time_array = implode(',',$shifts);
 		            }
 		            echo json_encode($start_time_array);
@@ -760,12 +751,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 						$start_time_array_with_date[] = ($startDateISO.' '.$start_time);
 					}
 
-					//var_dump($start_time_array_with_date);
                     $params = array(
-                   //     'StartTime'    => urlencode($startTimeISO),
-                   //     'EndTime'      => urlencode($endTimeISO),
                         'Quantity'     => (int) $_POST['persons'],
-                      //  'Alternatives' => 2,
                         'Lang'         => str_replace('_', '-', get_locale()),
                         'CurrentTime'  => urlencode($currentTimeISO),
 	                    'StartTimeArray' => urlencode(implode(',', $start_time_array_with_date))
@@ -773,7 +760,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     //get first category on selected place
 
 	                $query = $this->redi->availabilityByShifts($categoryID, $params);
-					//var_dump($query);
+
                     $time_format = get_option('time_format');
 
                     if (!isset($query['Error']))
