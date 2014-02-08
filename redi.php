@@ -138,6 +138,11 @@ class Redi
 		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(self::unescape_array($params)));
 	}
 
+	public function shiftsStartTime($placeID, $params)
+	{
+		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$placeID.'/shiftsStartTime', GET, $this->strParams($params));
+	}
+
 	public function getPlace($placeID)
 	{
 		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
@@ -225,10 +230,8 @@ class Redi
 		}
 
 		$output = curl_exec($ch);
-		
-        
-                $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        
+		$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
 		if ($output === FALSE || $http_status != 200 && $http_status != 400)
 		{
 			return array('Error' => __('Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation'));
