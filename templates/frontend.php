@@ -38,7 +38,21 @@ var time_format ="HH:mm";
          <?php endif ?>
 		<br/><label for="redi-restaurant-startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
-		<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
+		<?php if (isset($timepicker) && $timepicker === 'dropdown'):?>
+			<select id="redi-restaurant-startHour">
+				<?php foreach(range(0, 23) as $hour):?>
+					<option value="<?php echo $hour;?>" <?php if(date('H',$startTime)==$hour):?>selected="selected"<?php endif;?>><?php echo date($time_format_hours, strtotime( $hour.':00'));?></option>
+				<?php endforeach;?>
+			</select>
+			<select id="redi-restaurant-startMinute">
+				<?php foreach(range(0, 45, 15) as $minute):?>
+					<option value="<?php echo $minute;?>"><?php echo $minute;?></option>
+				<?php endforeach;?>
+			</select>
+			<input id="redi-restaurant-startTime" type="hidden" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
+		<?php else:?>
+			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
+		<?php endif ?>
 		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
 		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 

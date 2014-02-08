@@ -657,8 +657,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                             $$field_message = $this->options[$field_message];
                         }
                     }
-            
-					$timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
+
+					$time_format_hours = str_replace(':i', '', get_option('time_format'));
+
+					$timepicker = isset($this->options['TimePicker']) ? $this->options['TimePicker'] : null;
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
