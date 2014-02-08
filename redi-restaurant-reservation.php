@@ -611,61 +611,49 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $date_format_setting = $this->options['DateFormat'];
 
                     $time_format = get_option('time_format');
-					$date_format_setting = $this->options['DateFormat'];
+                                $date_format_setting = $this->options['DateFormat'];
 
-					$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
-					$date_format = $this->getPHPDateFormat($date_format_setting);
+                                $calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
+                                $date_format = $this->getPHPDateFormat($date_format_setting);
 
                     $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
 
-					$reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
+                                $reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
                     $startDate = date($date_format, $reservationStartTime);
                     $startDateISO = date('Y-m-d', $reservationStartTime);
-					$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
+                                $startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
 
                     $maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
                     $thanks = $this->options['Thanks'];
 
                     for($i = 1; $i != CUSTOM_FIELDS; $i++)
                     {
-                        $field_name = 'field_'.$i.'_name';
-                        $field_type = 'field_'.$i.'_type';
-                        $field_required = 'field_'.$i.'_required';
-                        $field_message = 'field_'.$i.'_message';
+                            $field_name = 'field_'.$i.'_name';
+                            $field_type = 'field_'.$i.'_type';
+                            $field_required = 'field_'.$i.'_required';
+                            $field_message = 'field_'.$i.'_message';
 
-                        if(isset($this->options[$field_name]))
-                        {
-                            $$field_name = $this->options[$field_name];
-                        }
+                            if(isset($this->options[$field_name]))
+                            {
+                                    $$field_name = $this->options[$field_name];
+                            }
 
-                        if(isset($this->options[$field_type]))
-                        {
-                            $$field_type = $this->options[$field_type];
-                        }
+                            if(isset($this->options[$field_type]))
+                            {
+                                    $$field_type = $this->options[$field_type];
+                            }
 
-                        if(isset($this->options[$field_required]))
-                        {
-                            $$field_required = $this->options[$field_required];
-                        }
+                            if(isset($this->options[$field_required]))
+                            {
+                                    $$field_required = $this->options[$field_required];
+                            }
 
-                        if(isset($this->options[$field_message]))
-                        {
-                            $$field_message = $this->options[$field_message];
-                        }
+                            if(isset($this->options[$field_message]))
+                            {
+                                    $$field_message = $this->options[$field_message];
+                            }
                     }
-					$day_of_week = date('w', $reservationStartTime);
-
-					$shifts = $this->redi->shiftsStartTime($placeID, array(
-						'Day' => $day_of_week,
-						'Lang' =>  str_replace('_', '-', get_locale()))
-					);
-					if(is_array($shifts))
-					{
-						$start_time_array = implode(',',$shifts);
-					}
-					var_dump($shifts);
-				//	var_dump($start_time_array);
-					$hide_clock = TRUE;
+            
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
@@ -719,8 +707,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                         'Quantity'     => (int) $_POST['persons'],
                         'Alternatives' => 2,
                         'Lang'         => str_replace('_', '-', get_locale()),
-                        'CurrentTime'  => urlencode($currentTimeISO),
-	                    'StartTimeArray' => $_POST['StartTimeArray']
+                        'CurrentTime'  => urlencode($currentTimeISO)
                     );
                     //get first category on selected place
 
