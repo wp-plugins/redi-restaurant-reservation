@@ -150,7 +150,8 @@ jQuery(function () {
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
-            lang : jQuery('#redi-restaurant-lang').val()
+            lang : jQuery('#redi-restaurant-lang').val(),
+            StartTimeArray : jQuery('#redi-restaurant-startTimeArray').val()
         };
 
         jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {

@@ -38,8 +38,14 @@ var time_format ="HH:mm";
          <?php endif ?>
 		<br/><label for="redi-restaurant-startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
-		<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
 		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
+		<?php if(!$hide_clock):?>
+			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
+		<?php endif;?>
+
+		<?php if(isset($start_time_array)):?>
+			<input id="redi-restaurant-startTimeArray" type="hidden" name="StartTimeArray" value="<?php echo $start_time_array; ?>" />
+		<?php endif;?>
 		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
 		<select name="persons" id="persons">
@@ -55,7 +61,11 @@ var time_format ="HH:mm";
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
 
-		<div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
+		<div id="step1errors" <?php if (!isset($shifts['Error'])):?>style="display: none;"<?php endif;?> class="redi-reservation-alert-error redi-reservation-alert">
+			<?php if (isset($shifts['Error'])):?>
+				<?php echo $shifts['Error'];?><br/>
+			<?php endif;?>
+		</div>
 	</div>
 	<br/>
 
