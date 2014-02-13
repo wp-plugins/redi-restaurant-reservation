@@ -65,10 +65,8 @@ strong {
 #persons, #redi-restaurant-startDate, #redi-restaurant-startTime
 {
     width:175px;
-    text-align: right;
 }
 #redi-restaurant-startHour, #redi-restaurant-startMinute
 {
     width: 83px;
-    text-align: right;
 }
