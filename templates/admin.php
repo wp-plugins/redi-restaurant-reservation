@@ -79,6 +79,25 @@
 					</p>
 				</td>
 			</tr>
+
+			<tr>
+				<th scope="row">
+					<label for="TimePicker">
+						<?php _e('TimePicker type', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="TimePicker">
+						<option value="plugin" <?php if ($timepicker === 'plugin'):?>selected="selected" <?php endif;?>>jQuery plugin</option>
+						<option value="dropdown" <?php if ($timepicker === 'dropdown'):?>selected="selected" <?php endif;?>>dropdown</option>
+					</select>
+				</td>
+				<td style="width:80%">
+					<p class="description">
+						<?php _e('jQuery plugin or HTML dropdown', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
 		</table>
 		<br/>
 		

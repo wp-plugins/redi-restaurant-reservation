@@ -4,6 +4,13 @@ jQuery(function () {
         jQuery('#step3').hide('slow');
     }
 
+    var updateTime = function(){
+        jQuery('#redi-restaurant-startTime').val(jQuery('#redi-restaurant-startHour').val()+':'+jQuery('#redi-restaurant-startMinute').val());
+        hideSteps();
+    };
+
+    jQuery('#redi-restaurant-startHour').change(updateTime);
+    jQuery('#redi-restaurant-startMinute').change(updateTime);
     jQuery('#persons').change(function () {
         hideSteps();
     });
