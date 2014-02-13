@@ -1,4 +1,4 @@
-select
+.redi-reservation-select
 {
     -moz-box-sizing: border-box;
     background-clip: padding-box;
@@ -12,7 +12,6 @@ select
     outline: medium none;
     padding: 0.4em;
     transition: all 0.2s ease-in-out 0s;
-
 }
 .redi-reservation-alert {
     background-color: #FCF8E3;

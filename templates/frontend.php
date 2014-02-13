@@ -24,7 +24,7 @@ var time_format ="HH:mm";
         <?php if(count((array)$places) > 1 ): ?>
             <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2>
         <br/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br/>
-		 <select name="placeID" id="placeID">
+		 <select name="placeID" id="placeID" class="redi-reservation-select">
 			<?php foreach((array)$places as $place_current):?>
 				<option value="<?php echo $place_current->ID ?>">
 					<?php echo $place_current->Name ?>
@@ -41,11 +41,11 @@ var time_format ="HH:mm";
         <br/>
         <br/><label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<?php if (isset($timepicker) && $timepicker === 'dropdown'):?>
-			<select id="redi-restaurant-startHour">
+			<select id="redi-restaurant-startHour" class="redi-reservation-select">
 				<?php foreach(range(0, 23) as $hour):?>
 					<option value="<?php echo $hour;?>" <?php if(date('H',$startTime)==$hour):?>selected="selected"<?php endif;?>><?php echo date($time_format_hours, strtotime( $hour.':00'));?></option>
 				<?php endforeach;?>
-			</select>&nbsp;:&nbsp;<select id="redi-restaurant-startMinute">
+			</select>&nbsp;:&nbsp;<select id="redi-restaurant-startMinute" class="redi-reservation-select">
 				<?php foreach(range(0, 45, 15) as $minute):?>
 					<option value="<?php echo $minute;?>"><?php printf('%02d', $minute);?></option>
 				<?php endforeach;?>
@@ -57,7 +57,7 @@ var time_format ="HH:mm";
 		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
 		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
-		<select name="persons" id="persons">
+		<select name="persons" id="persons" class="redi-reservation-select">
 			<?php for ($i = 1; $i != $maxPersons+1; $i++): ?>
 			<option value="<?php echo $i?>" <?php if ($persons == $i) echo 'selected="selected"';?> >
 				<?php echo $i ?>
