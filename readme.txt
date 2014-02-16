@@ -33,6 +33,7 @@ If you need more languages, please contact us!
 * Setup maximum available seats for online reservation by week day
 * Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
 * Support for multiple places.
+* Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted to explain it to clients.
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
 
@@ -44,6 +45,9 @@ Basic package price is 5 EUR per month per place. To subscribe please use follow
 
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
+= Other plugins =
+* If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a>
+ plugin too.
 == Installation ==
 
 1. Click on "Install now" to install plugin
