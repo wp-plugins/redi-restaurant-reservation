@@ -77,6 +77,8 @@ Plugin requires curl library to operate.
 14. Open/close time for time shift (Available only for Basic package users)
 15. Time before reservation for time shift by weekday (Available only for Basic package users)
 16. Step 1: Select place, date and time (Multiple places available only for Basic package users)
+17. Blocked Time list. (Available only for Basic package users)
+18. Edit Blocked time. (Available only for Basic package users)
 
 == Upgrade Notice ==
 
