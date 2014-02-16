@@ -157,7 +157,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 
             $places = $this->redi->getPlaces();
 
-
             $placeID = $places[0]->ID;
 
             $categories = $this->redi->getPlaceCategories($placeID);
@@ -603,7 +602,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					//places
 					$places = $this->redi->getPlaces();
 
-					$placeID = $places[0]->ID;
+                    $placeID = $places[0]->ID;
 					$categories = $this->redi->getPlaceCategories($placeID);
 					$categoryID = $categories[0]->ID;
 					$time_format = get_option('time_format');
@@ -652,16 +651,6 @@ if (!class_exists('ReDiRestaurantReservation'))
                             $$field_message = $this->options[$field_message];
                         }
                     }
-					$day_of_week = date('w', strtotime($_POST['startDate']));
-
-					$shifts = $this->redi->shiftsStartTime($categoryID, array(
-						'Day' => $day_of_week,
-						'Lang' =>  str_replace('_', '-', get_locale()))
-					);
-					if(is_array($shifts))
-					{
-						$start_time_array = implode(',',$shifts);
-					}
 
 					$hide_clock = TRUE;
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
@@ -688,38 +677,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
             switch ($_POST['get'])
             {
-	            case 'step_shifts':
-		          //  $places = $this->redi->getPlaces(); //
-
-		            $placeID = $_POST['placeID'];
-
-		            $categories = $this->redi->getPlaceCategories($placeID);
-
-		            $serviceID = $this->options['serviceID'];
-
-		            $categoryID =  $categories[0]->ID;
-
-		            $day_of_week = date('w', strtotime($_POST['startDate']));
-
-		            $shifts = $this->redi->shiftsStartTime($categoryID, array(
-				            'Day' => $day_of_week,
-				            'Lang' =>  str_replace('_', '-', get_locale()))
-		            );
-
-					if(isset($shifts['Error']))
-					{
-						echo json_encode($shifts);
-						die;
-					}
-		            if(is_array($shifts))
-		            {
-			            $start_time_array = implode(',',$shifts);
-		            }
-		            echo json_encode($start_time_array);
-		            die;
-
-		            break;
-                case 'step1':
+	            case 'step1':
                     // convert date to array
                     $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
 
@@ -742,20 +700,16 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $endTimeISO     = gmdate('Y-m-d H:i', $endTimeInt);
                     $currentTimeISO = gmdate('Y-m-d H:i', current_time('timestamp'));
 
-	                $start_time_array = explode(',', $_POST['StartTimeArray']);
-
 	                $startDateISO  = gmdate('Y-m-d', strtotime($_POST['startDateISO']));
-					$start_time_array_with_date = array();
-					foreach((array)$start_time_array as $start_time)
-					{
-						$start_time_array_with_date[] = ($startDateISO.' '.$start_time);
-					}
 
+                    $StartTime = gmdate('Y-m-d 00:00', strtotime($_POST['startDateISO'])); //CalendarDate + 00:00
+                    $EndTime = gmdate('Y-m-d 00:00', strtotime("+1 day",strtotime($_POST['startDateISO'])));//CalendarDate + 1day + 00:00
                     $params = array(
                         'Quantity'     => (int) $_POST['persons'],
                         'Lang'         => str_replace('_', '-', get_locale()),
                         'CurrentTime'  => urlencode($currentTimeISO),
-	                    'StartTimeArray' => urlencode(implode(',', $start_time_array_with_date))
+                        'StartTime' => urlencode($StartTime),
+                        'EndTime' => urlencode($EndTime)
                     );
                     //get first category on selected place
 
