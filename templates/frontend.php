@@ -24,7 +24,7 @@ var time_format ="HH:mm";
         <?php if(count((array)$places) > 1 ): ?>
             <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2>
         <br/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br/>
-		 <select name="placeID" id="placeID">
+		 <select name="placeID" id="placeID" class="redi-reservation-select">
 			<?php foreach((array)$places as $place_current):?>
 				<option value="<?php echo $place_current->ID ?>">
 					<?php echo $place_current->Name ?>
@@ -46,9 +46,11 @@ var time_format ="HH:mm";
 		<?php if(isset($start_time_array)):?>
 			<input id="redi-restaurant-startTimeArray" type="hidden" name="StartTimeArray" value="<?php echo $start_time_array; ?>" />
 		<?php endif;?>
-		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
+		<br/>
+        <br/>
+        <label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
-		<select name="persons" id="persons">
+		<select name="persons" id="persons" class="redi-reservation-select">
 			<?php for ($i = 1; $i != $maxPersons+1; $i++): ?>
 			<option value="<?php echo $i?>" <?php if ($persons == $i) echo 'selected="selected"';?> >
 				<?php echo $i ?>

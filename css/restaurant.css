@@ -1,4 +1,18 @@
-
+.redi-reservation-select
+{
+    -moz-box-sizing: border-box;
+    background-clip: padding-box;
+    border: 1px solid #B7AEA6;
+    border-radius: 0.236em;
+    box-shadow: 0 0 0.236em 0 #E5E1DE;
+    color: #6C6158;
+    font-family: "Cutive",sans-serif;
+    font-size: 0.857em;
+    line-height: 1.618em;
+    outline: medium none;
+    padding: 0.4em;
+    transition: all 0.2s ease-in-out 0s;
+}
 .redi-reservation-alert {
     background-color: #FCF8E3;
     border: 1px solid #FBEED5;
@@ -47,4 +61,8 @@ strong {
 .ui-timepicker-div > dl > dd
 {
     margin: 0 0 20px;
+}
+#persons, #redi-restaurant-startDate
+{
+    width:175px;
 }
