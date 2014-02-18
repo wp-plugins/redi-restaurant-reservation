@@ -33,10 +33,10 @@ var time_format ="HH:mm";
 		 </select>
          <br/>
          <?php else: ?>
-         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
+         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date', 'redi-restaurant-reservation')?></h2>
             <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
-		<br/><label for="redi-restaurant-startDate"><?php _e('Date and time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
+		<br/><label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
 		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
 		<?php if(!$hide_clock):?>
