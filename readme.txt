@@ -1,6 +1,6 @@
 ﻿=== ReDi Restaurant Reservation ===
 Contributors: thecatkin, robby.roboter
-Tags: reservation diary, reservation, table reservation, restaurnat reservation, time reservation, open table, free table, easy reservation
+Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking
 Requires at least: 3.0.0
 Tested up to: 3.8
 Stable tag: trunk
@@ -42,6 +42,7 @@ Basic package price is 5 EUR per month per place. To subscribe please use follow
 * We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 * Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
+* Remind your customer about upcoming reservation via Email or by SMS
 
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
@@ -83,6 +84,11 @@ Plugin requires curl library to operate.
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 14.0221 =
+* Added alternative time picker for better reservation time selection on mobile devices
+* Added limits to text areas
+* Moved all texts to language files
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)
