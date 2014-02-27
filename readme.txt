@@ -18,7 +18,7 @@ Supported languages:
 * Dutch
 * English
 * Estonian
-* French
+* French, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
 * German
 * Italian
 * Polish
