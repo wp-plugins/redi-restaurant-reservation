@@ -20,9 +20,16 @@ var time_format ="HH:mm";
 </script>
 <form id="redi-reservation" name="redi-reservation" method="post">
 	<div id="step1">
-		
+		<?php
+			$h1_text =  '';
+		if(count((array)$places) > 1 ) $h1_text .=  __('Select place,', 'redi-restaurant-reservation');
+		if(count((array)$areas) > 1 ) $h1_text .= ' '.__('preferred location,', 'redi-restaurant-reservation');
+		$h1_text .= ' '.__('date and time', 'redi-restaurant-reservation');
+
+		?>
+		<h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php echo $h1_text ?></h2>
         <?php if(count((array)$places) > 1 ): ?>
-            <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2>
+
         <br/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br/>
 		 <select name="placeID" id="placeID" class="redi-reservation-select">
 			<?php foreach((array)$places as $place_current):?>
@@ -33,9 +40,23 @@ var time_format ="HH:mm";
 		 </select>
          <br/>
          <?php else: ?>
-         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
             <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
+		<!-- Area -->
+		<?php if(count((array)$areas) > 1 ): ?>
+			<br/><label for="areaID"><?php _e('Area', 'redi-restaurant-reservation')?>:</label><br/>
+			<select name="areaID" id="areaID" class="redi-reservation-select">
+				<option value=""><?php _e('--select area--', 'redi-restaurant-reservation')?></option>
+				<?php foreach((array)$areas as $area_current):?>
+					<option value="<?php echo $area_current->ID ?>">
+						<?php echo $area_current->Name ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+			<br/>
+		<?php endif ?>
+
+		<!-- Area -->
 		<br/><label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
         <br/>

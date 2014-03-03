@@ -23,6 +23,9 @@ if (!defined('SERVICE'))
 if (!defined('CATEGORY'))
 	define('CATEGORY', 'Category.svc/');
 
+if (!defined('AREA'))
+	define('AREA', 'Area.svc/');
+
 if (!defined('RESERVATION'))
 	define ('RESERVATION', 'Reservation.svc/');
 
@@ -94,6 +97,11 @@ class Redi
 	public function getServices($categoryID)
 	{
 		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID.'/Person', GET);
+	}
+
+	public function getAreas($categoryID)
+	{
+		return $this->curl(REDI_RESTAURANT_API.AREA.'en-GB/'.$this->ApiKey.'/'.$categoryID, GET);
 	}
 
 	public function deleteServices($ids)

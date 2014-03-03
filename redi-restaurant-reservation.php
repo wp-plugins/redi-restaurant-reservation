@@ -610,6 +610,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     $placeID = $places[0]->ID;
 
+					$categories = $this->redi->getPlaceCategories($placeID);
+					$first_category = $categories[0];
+
+					$areas = $this->redi->getAreas($first_category->ID);
 
                     $time_format = get_option('time_format');
                     $date_format_setting = $this->options['DateFormat'];
@@ -682,10 +686,16 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $categoryID = $categories[0]->ID;
                 
             }
+
+	        $areaID = 0;
+	        if(isset($_POST))
+	        {
+		        $areaID =(int)$_POST['areaID'];
+	        }
+
             switch ($_POST['get'])
             {
                 case 'step1':
-                    //$placeID = (int)$_POST['placeID'];
                     // convert date to array
                     $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
 
@@ -716,8 +726,13 @@ if (!class_exists('ReDiRestaurantReservation'))
                         'Lang'         => str_replace('_', '-', get_locale()),
                         'CurrentTime'  => urlencode($currentTimeISO)
                     );
-                    //get first category on selected place
 
+					if($areaID)
+					{
+						$params['AreaID'] = $areaID;
+					}
+
+	                //get first category on selected place
                     $categories = $this->redi->getPlaceCategories($placeID);
                     if(isset($categories['Error']))
                     {
@@ -804,10 +819,11 @@ if (!class_exists('ReDiRestaurantReservation'))
                         )
                     );
 
-                    $reservation = $this->redi->createReservation(
-                            $categoryID
-                            //$this->options['categoryID']
-                            , $params);
+	                if($areaID)
+	                {
+		                $params['AreaID'] = $areaID;
+	                }
+                    $reservation = $this->redi->createReservation($categoryID, $params);
                     echo json_encode($reservation);
                     break;
 
