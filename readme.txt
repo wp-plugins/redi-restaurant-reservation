@@ -43,6 +43,7 @@ Basic package price is 5 EUR per month per place. To subscribe please use follow
 * Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
 * Remind your customer about upcoming reservation via Email or by SMS
+* Collect pre-payment for reservations
 
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
