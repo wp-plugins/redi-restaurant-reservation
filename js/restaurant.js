@@ -4,8 +4,8 @@ jQuery(function () {
         jQuery('#step3').hide('slow');
     }
 
-    var updateTime = function(){
-        jQuery('#redi-restaurant-startTime').val(jQuery('#redi-restaurant-startHour').val()+':'+jQuery('#redi-restaurant-startMinute').val());
+    var updateTime = function () {
+        jQuery('#redi-restaurant-startTime').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());
         hideSteps();
     };
 
@@ -20,16 +20,14 @@ jQuery(function () {
     if (jQuery.timepicker.regional[locale] != undefined) {
         jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
     }
-    else
-    {
+    else {
         jQuery.timepicker.setDefaults(jQuery.timepicker.regional[""]);
     }
-    
-    if (jQuery.datepicker.regional[locale] != undefined)
-    {
+
+    if (jQuery.datepicker.regional[locale] != undefined) {
         jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale]);
     }
-    else{
+    else {
         jQuery.datepicker.setDefaults(jQuery.datepicker.regional[""]);
     }
 
@@ -41,7 +39,7 @@ jQuery(function () {
         }
     });
 
-    jQuery("#redi-restaurant-startDate").change(function(){
+    jQuery("#redi-restaurant-startDate").change(function () {
         var day1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getDate();
         var month1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getMonth() + 1;
         var year1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getFullYear();
@@ -68,22 +66,21 @@ jQuery(function () {
     jQuery('#redi-restaurant-step3').click(function () {
         var error = '';
         if (jQuery('#UserName').val() === '') {
-            error += redi_restaraurant_reservation.name_missing+'<br/>';
+            error += redi_restaraurant_reservation.name_missing + '<br/>';
         }
         if (jQuery('#UserEmail').val() === '') {
-            error += redi_restaraurant_reservation.email_missing+'<br/>';
+            error += redi_restaraurant_reservation.email_missing + '<br/>';
         }
         if (jQuery('#UserPhone').val() === '') {
-            
-            error += redi_restaraurant_reservation.phone_missing+'<br/>';
+
+            error += redi_restaraurant_reservation.phone_missing + '<br/>';
         }
-        jQuery('.field_required').each(function(){
-            if(jQuery(this).attr('type') === 'checkbox' && jQuery(this).attr('checked') !== "checked" || jQuery(this).attr('type') === 'textbox' && jQuery(this).val() === ''){
-                error += jQuery('#'+this.id+'_message').attr('value')+'<br/>';
+        jQuery('.field_required').each(function () {
+            if (jQuery(this).attr('type') === 'checkbox' && jQuery(this).attr('checked') !== "checked" || jQuery(this).attr('type') === 'textbox' && jQuery(this).val() === '') {
+                error += jQuery('#' + this.id + '_message').attr('value') + '<br/>';
             }
         });
-        if(error)
-        {
+        if (error) {
             jQuery('#step3errors').html(error).show('slow');
             return false;
         }
@@ -99,29 +96,29 @@ jQuery(function () {
             UserPhone: jQuery('#UserPhone').val(),
             placeID: jQuery('#placeID').val()
         };
-        if(jQuery('#field_1').attr('type')==='checkbox' && jQuery('#field_1').attr('checked') === "checked"){
+        if (jQuery('#field_1').attr('type') === 'checkbox' && jQuery('#field_1').attr('checked') === "checked") {
             data['field_1'] = 'on';
-        }else{
+        } else {
             data['field_1'] = jQuery('#field_1').val();
         }
-        if(jQuery('#field_2').attr('type')==='checkbox' && jQuery('#field_2').attr('checked') === "checked"){
+        if (jQuery('#field_2').attr('type') === 'checkbox' && jQuery('#field_2').attr('checked') === "checked") {
             data['field_2'] = 'on';
-        }else{
+        } else {
             data['field_2'] = jQuery('#field_2').val();
         }
-        if(jQuery('#field_3').attr('type')==='checkbox' && jQuery('#field_3').attr('checked') === "checked"){
+        if (jQuery('#field_3').attr('type') === 'checkbox' && jQuery('#field_3').attr('checked') === "checked") {
             data['field_3'] = 'on';
-        }else{
+        } else {
             data['field_3'] = jQuery('#field_3').val();
         }
-        if(jQuery('#field_4').attr('type')==='checkbox' && jQuery('#field_4').attr('checked') === "checked"){
+        if (jQuery('#field_4').attr('type') === 'checkbox' && jQuery('#field_4').attr('checked') === "checked") {
             data['field_4'] = 'on';
-        }else{
+        } else {
             data['field_4'] = jQuery('#field_4').val();
         }
-        if(jQuery('#field_5').attr('type')==='checkbox' && jQuery('#field_5').attr('checked') === "checked"){
+        if (jQuery('#field_5').attr('type') === 'checkbox' && jQuery('#field_5').attr('checked') === "checked") {
             data['field_5'] = 'on';
-        }else{
+        } else {
             data['field_5'] = jQuery('#field_5').val();
         }
 
@@ -157,7 +154,7 @@ jQuery(function () {
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
-            lang : jQuery('#redi-restaurant-lang').val()
+            lang: jQuery('#redi-restaurant-lang').val()
         };
 
         jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
@@ -181,10 +178,10 @@ jQuery(function () {
                 jQuery('.redi-restaurant-button').click(function () {
 
                     jQuery('.redi-restaurant-button').each(function () {
-                        jQuery(this).css("font-weight", "normal");
+                        jQuery(this).removeAttr("select");
                     });
 
-                    jQuery(this).css("font-weight", "bold");
+                    jQuery(this).attr("select", "select");
 
                     jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
                     jQuery('#step3').show('slow');
