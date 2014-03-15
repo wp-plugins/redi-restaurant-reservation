@@ -150,6 +150,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 		 */
 		function redi_restaurant_admin_options_page()
 		{
+			$errors = array();
 			if ($this->ApiKey == NULL) /// TODO: move to install
 			{
 			        $this->register();
@@ -175,18 +176,29 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 					if(isset($ret['Error']))
 					{
-						$errors = array($ret['Error']);
+						$errors[] = $ret['Error'];
 					}
 				}
 				else
 				{
-					$errors = array(__('id and reason are required', 'redi-restaurant-reservation'));
+					$errors[] = __('id and reason are required', 'redi-restaurant-reservation');
 				}
 			}
 
 			if (isset($_POST['submit']))
 			{
                 $settings_saved = true;
+
+				$minPersons = (int)$_POST['MinPersons'];
+				$maxPersons = (int)$_POST['MaxPersons'];
+				if( $minPersons >= $maxPersons)
+				{
+					$errors[] = //new WP_Error('required',
+						__('Min Persons should be lower than Max Persons');
+				}
+				$this->options['MinPersons'] = $minPersons;
+				$this->options['MaxPersons'] = $maxPersons;
+				
                 $placeID = $_POST['Place'];
                 $categories = $this->redi->getPlaceCategories($placeID);
                 if(isset($categories['Error']))
@@ -267,8 +279,6 @@ if (!class_exists('ReDiRestaurantReservation'))
                                 $this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
 				$this->options['DateFormat'] = $_POST['DateFormat'];
 				$this->options['ReservationTime'] = $_POST['ReservationTime'];
-				$this->options['MaxPersons'] = (int)$_POST['MaxPersons'];
-
 
 				for($i = 1; $i != CUSTOM_FIELDS; $i++)
 				{
@@ -350,6 +360,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
 			$timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
+			$minPersons = isset($options['MinPersons']) ? $options['MinPersons']: 1;
 			$maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
 
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -603,7 +614,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     wp_register_style('redi-restaurant',
                             REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
                     wp_enqueue_style('redi-restaurant');
-                    $persons = 2;
+                  //  $persons = 2; //min can be bigger than 2
 
                     //places 
                     $places = $this->redi->getPlaces();
@@ -627,7 +638,8 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $startDateISO = date('Y-m-d', $reservationStartTime);
 					$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
 
-                    $maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
+					$minPersons = isset($this->options['MinPersons']) ? $this->options['MinPersons'] : 1;
+					$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
                     $thanks = $this->options['Thanks'];
 
                     for($i = 1; $i != CUSTOM_FIELDS; $i++)
