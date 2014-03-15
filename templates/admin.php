@@ -77,7 +77,7 @@
 					</label>
 				</th>
 				<td>
-					<input id="ReservationTime" type="text" value="<?php echo $ReservationTime ?>" name="ReservationTime"/>
+					<input id="ReservationTime" type="text" value="<?php echo $reservationTime ?>" name="ReservationTime"/>
 				</td>
 				<td style="width:80%">
 					<p class="description">
@@ -179,7 +179,7 @@
 		<!-- /custom fields-->
                 
 		<div id="ajaxed">
-                    <?php self::ajaxed_admin_page($placeID, $categoryID); ?>
+                    <?php self::ajaxed_admin_page($placeID, $categoryID, $settings_saved); ?>
 		</div>
 		
 		

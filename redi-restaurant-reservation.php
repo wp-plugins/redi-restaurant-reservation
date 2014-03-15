@@ -153,11 +153,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$errors = array();
 			if ($this->ApiKey == NULL) /// TODO: move to install
 			{
-			        $this->register();
+				$this->register();
 			}
 
 			$places = $this->redi->getPlaces();
-
 
 			$placeID = $places[0]->ID;
 
@@ -192,12 +191,70 @@ if (!class_exists('ReDiRestaurantReservation'))
 				//validation
 				$minPersons = (int)$_POST['MinPersons'];
 				$maxPersons = (int)$_POST['MaxPersons'];
-				if( $minPersons >= $maxPersons)
+				if($minPersons >= $maxPersons)
 				{
-					$errors[] = //new WP_Error('required',
-						__('Min Persons should be lower than Max Persons');
+					$errors[] = __('Min Persons should be lower than Max Persons', 'redi-restaurant-reservation');
+					$form_valid = false;
 				}
 
+				$reservationTime = (int)$_POST['ReservationTime'];
+				if($reservationTime <= 0)
+				{
+					$errors[] = __('Reservation time should be greater than 0', 'redi-restaurant-reservation');
+					$form_valid = false;
+				}
+				$place = array(
+					'place' => array (
+						'Name' => $_POST['Name'],
+						'City' => $_POST['City'],
+						'Country' => $_POST['Country'],
+						'Address' => $_POST['Address'],
+						'Email' => $_POST['Email'],
+						'Phone' => $_POST['Phone'],
+						'WebAddress' => $_POST['WebAddress'],
+						'Lang' => $_POST['Lang'],
+						'DescriptionShort' => $_POST['DescriptionShort'],
+						'DescriptionFull' => $_POST['DescriptionFull'],
+						'MinTimeBeforeReservation' => $_POST['MinTimeBeforeReservation'],
+						'Catalog' => (int)$_POST['Catalog'],
+						'DateFormat' =>$_POST['DateFormat']
+					)
+				);
+
+				$serviceTimes = self::GetServiceTimes();
+
+				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
+				$this->options['TimePicker'] = isset($_POST['TimePicker']) ? $_POST['TimePicker'] : null;
+				$services = (int)$_POST['services'];
+				$this->options['services'] = $services;
+				$this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
+				$this->options['DateFormat'] = $_POST['DateFormat'];
+				$this->options['ReservationTime'] = $reservationTime;
+
+				for($i = 1; $i != CUSTOM_FIELDS; $i++)
+				{
+					$field_name = 'field_'.$i.'_name';
+					$field_type = 'field_'.$i.'_type';
+					$field_required = 'field_'.$i.'_required';
+					$field_message = 'field_'.$i.'_message';
+
+					if(isset($_POST[$field_name]))
+					{
+						$this->options[$field_name] = $_POST[$field_name];
+					}
+
+					if(isset($_POST[$field_type]))
+					{
+						$this->options[$field_type] = $_POST[$field_type];
+					}
+
+					$this->options[$field_required] = (isset($_POST[$field_required]) && $_POST[$field_required] === 'on');
+
+					if(isset($_POST[$field_message]))
+					{
+						$this->options[$field_message] = $_POST[$field_message];
+					}
+				}
 
 				if($form_valid)
 				{
@@ -214,23 +271,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$categoryID = $categories[0]->ID;
 					$this->options['OpenTime'] = $_POST['OpenTime'];
 					$this->options['CloseTime'] = $_POST['CloseTime'];
-
-					foreach ($_POST['OpenTime'] as $key => $value)
-					{
-						if (self::set_and_not_empty($value))
-						{
-							$times[$key]['OpenTime'] = $value;
-						}
-					}
-					foreach ($_POST['CloseTime'] as $key => $value)
-					{
-					if (self::set_and_not_empty($value))
-					{
-						$times[$key]['CloseTime'] = $value;
-					}
-					}
-
-					$services = (int)$_POST['services'];
 
 					$getServices = $this->redi->getServices($categoryID);
 					if(isset($getServices['Error']))
@@ -278,43 +318,12 @@ if (!class_exists('ReDiRestaurantReservation'))
 							$ret = array();
 						}
 					}
-					$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
-					$this->options['TimePicker'] = isset($_POST['TimePicker']) ? $_POST['TimePicker'] : null;
-					$this->options['services'] = $services;
-					$this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
-					$this->options['DateFormat'] = $_POST['DateFormat'];
-					$this->options['ReservationTime'] = $_POST['ReservationTime'];
-
-					for($i = 1; $i != CUSTOM_FIELDS; $i++)
-					{
-						$field_name = 'field_'.$i.'_name';
-						$field_type = 'field_'.$i.'_type';
-						$field_required = 'field_'.$i.'_required';
-						$field_message = 'field_'.$i.'_message';
-
-						if(isset($_POST[$field_name]))
-						{
-							$this->options[$field_name] = $_POST[$field_name];
-						}
-
-						if(isset($_POST[$field_type]))
-						{
-							$this->options[$field_type] = $_POST[$field_type];
-						}
-
-						$this->options[$field_required] = (isset($_POST[$field_required]) && $_POST[$field_required] === 'on');
-
-						if(isset($_POST[$field_message]))
-						{
-							$this->options[$field_message] = $_POST[$field_message];
-						}
-					}
 
 					$this->saveAdminOptions();
 
-					if (is_array($times) && count($times))
+					if (is_array($serviceTimes) && count($serviceTimes))
 					{
-						$ret = $this->redi->setServiceTime($categoryID, $times);
+						$ret = $this->redi->setServiceTime($categoryID, $serviceTimes);
 						if(isset($ret['Error']))
 						{
 							$errors[] = $ret['Error'];
@@ -322,43 +331,26 @@ if (!class_exists('ReDiRestaurantReservation'))
 						}
 						$ret = array();
 					}
-					$ret = $this->redi->setPlace($placeID,
-						array (
-							'place' => array (
-								'Name' => $_POST['Name'],
-								'City' => $_POST['City'],
-								'Country' => $_POST['Country'],
-								'Address' => $_POST['Address'],
-								'Email' => $_POST['Email'],
-								'Phone' => $_POST['Phone'],
-								'WebAddress' => $_POST['WebAddress'],
-								'Lang' => $_POST['Lang'],
-								'DescriptionShort' => $_POST['DescriptionShort'],
-								'DescriptionFull' => $_POST['DescriptionFull'],
-								'MinTimeBeforeReservation' => $_POST['MinTimeBeforeReservation'],
-								'Catalog' => (int)$_POST['Catalog'],
-								'DateFormat' =>$_POST['DateFormat']
-								)
-							)
-					);
+					$ret = $this->redi->setPlace($placeID, $place);
+					if(isset($ret['Error']))
+					{
+						$errors[] = $ret['Error'];
+						$settings_saved = false;
+					}
+					$ret = array();
 				}
-				if(isset($ret['Error']))
+				else
 				{
-					$errors[] = $ret['Error'];
-					$settings_saved = false;
+					//Send every setting back to form so user can correct it
+
 				}
 
 				$places = $this->redi->getPlaces();
 				if(isset($places['Error']))
 				{
 					$errors[] = $places['Error'];
+					$settings_saved = false;
 				}
-			}
-            
-			$getServices = $this->redi->getServices($categoryID);
-			if(isset($getServices['Error']))
-			{
-				$errors[] = $getServices['Error'];
 			}
 
 			$options = get_option($this->optionsName);
@@ -395,23 +387,77 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $options[$field_message];
 				}
 			}
-			$ReservationTime = $this->getReservationTime();
+
+			//if settings are saved or this is first time load
+			if (!isset($_POST['submit']) || $settings_saved)
+			{
+				$getServices = $this->redi->getServices($categoryID);
+				if(isset($getServices['Error']))
+				{
+					$errors[] = $getServices['Error'];
+				}
+
+				$reservationTime = $this->getReservationTime();
+			}
 
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
 		}
-        
-        function ajaxed_admin_page($placeID, $categoryID)
-        {
-            require_once(plugin_dir_path(__FILE__).'languages.php');
-            $places = $this->redi->getPlaces();
-            $serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
-            $place = $this->redi->getPlace($placeID); //goes to template 'admin'
-            
-            $getServices = $this->redi->getServices($categoryID);
 
-            require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
-	}
+		function GetServiceTimes()
+		{
+			$serviceTimes = array();
+			foreach ($_POST['OpenTime'] as $key => $value)
+			{
+				if (self::set_and_not_empty($value))
+				{
+					$serviceTimes[$key]['OpenTime'] = $value;
+				}
+			}
+			foreach ($_POST['CloseTime'] as $key => $value)
+			{
+				if (self::set_and_not_empty($value))
+				{
+					$serviceTimes[$key]['CloseTime'] = $value;
+				}
+			}
+			return  $serviceTimes;
+		}
+
+		function ajaxed_admin_page($placeID, $categoryID, $settings_saved =false)
+		{
+			require_once(plugin_dir_path(__FILE__).'languages.php');
+			$places = $this->redi->getPlaces();
+			$getServices = $this->redi->getServices($categoryID);
+			if (!isset($_POST['submit']) || $settings_saved)
+			{
+
+				$serviceTimes = $this->redi->getServiceTime($categoryID); //goes to template 'admin'
+				$serviceTimes = json_decode(json_encode($serviceTimes), true);
+				$place = $this->redi->getPlace($placeID); //goes to template 'admin'
+
+			}
+			else
+			{
+				$place = array(
+					'Name' => $_POST['Name'],
+					'City' => $_POST['City'],
+					'Country' => $_POST['Country'],
+					'Address' => $_POST['Address'],
+					'Email' => $_POST['Email'],
+					'Phone' => $_POST['Phone'],
+					'WebAddress' => $_POST['WebAddress'],
+					'Lang' => $_POST['Lang'],
+					'DescriptionShort' => $_POST['DescriptionShort'],
+					'DescriptionFull' => $_POST['DescriptionFull'],
+					'MinTimeBeforeReservation' => $_POST['MinTimeBeforeReservation'],
+					'Catalog' => (int)$_POST['Catalog'],
+					'DateFormat' =>$_POST['DateFormat']
+				);
+				$serviceTimes = self::GetServiceTimes();
+			}
+			require_once(REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php');
+		}
 
 		function init_sessions()
 		{
@@ -821,15 +867,12 @@ if (!class_exists('ReDiRestaurantReservation'))
                         )
                     );
 
-                    $reservation = $this->redi->createReservation(
-                            $categoryID
-                            //$this->options['categoryID']
-                            , $params);
+                    $reservation = $this->redi->createReservation($categoryID, $params);
                     echo json_encode($reservation);
                     break;
 
                 case 'get_place':
-                    self::ajaxed_admin_page($placeID, $categoryID);
+                    self::ajaxed_admin_page($placeID, $categoryID, true);
 
                     break;
             }
