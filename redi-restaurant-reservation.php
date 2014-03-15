@@ -631,9 +631,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
 					$date_format = $this->getPHPDateFormat($date_format_setting);
 
-                    $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation']>0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
+                    $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
 
-					$reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
+					$reservationStartTime = self::redi_strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
                     $startDate = date($date_format, $reservationStartTime);
                     $startDateISO = date('Y-m-d', $reservationStartTime);
 					$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
@@ -710,10 +710,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
 
                     // convert to int
-                    $startTimeInt = strtotime($startTimeStr, 0);
+                    $startTimeInt = self::redi_strtotime($startTimeStr, 0);
 
                     // calculate end time
-                    $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
+                    $endTimeInt = self::redi_strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
 
                     // format to ISO
                     $startTimeISO   = gmdate('Y-m-d H:i', $startTimeInt);
@@ -749,8 +749,8 @@ if (!class_exists('ReDiRestaurantReservation'))
                         {
                             $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
                             $q->StartTimeISO = $q->StartTime;
-                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
-                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
+                            $q->StartTime    = date($time_format, self::redi_strtotime($q->StartTime));
+                            $q->EndTime      = date($time_format, self::redi_strtotime($q->EndTime));
                         }
                     }
                     echo json_encode($query);
@@ -761,10 +761,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $startTimeStr = $_POST['startTime'];
 
                     // convert to int
-                    $startTimeInt = strtotime($startTimeStr, 0);
+                    $startTimeInt = self::redi_strtotime($startTimeStr, 0);
 
                     // calculate end time
-                    $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
+                    $endTimeInt = self::redi_strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
 
                     // format to ISO
                     $startTimeISO   = gmdate('Y-m-d H:i', $startTimeInt);
@@ -840,6 +840,22 @@ if (!class_exists('ReDiRestaurantReservation'))
                 }
                 return 3*60;
         }
+
+		private function redi_strtotime($str, $time = NULL)
+		{
+			$tz = date_default_timezone_get();
+			date_default_timezone_set('UTC');
+			if($time)
+			{
+				$result = strtotime($str, $time);
+			}
+			else
+			{
+				$result = strtotime($str);
+			}
+			date_default_timezone_set($tz);
+			return $result;
+		}
     }
 }
 new ReDiRestaurantReservation();
