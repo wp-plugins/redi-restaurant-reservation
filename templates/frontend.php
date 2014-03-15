@@ -1,4 +1,4 @@
-<!--{ReDi restaurant reservation plugin version:"<?php echo $this->version?>"}-->
+<!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
 <script type="text/javascript">
 	var date_format = '<?php echo $calendar_date_format ?>';
 	<?php

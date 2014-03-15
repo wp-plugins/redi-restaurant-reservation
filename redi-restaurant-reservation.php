@@ -749,8 +749,8 @@ if (!class_exists('ReDiRestaurantReservation'))
                         {
                             $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
                             $q->StartTimeISO = $q->StartTime;
-                            $q->StartTime    = date($time_format, self::redi_strtotime($q->StartTime));
-                            $q->EndTime      = date($time_format, self::redi_strtotime($q->EndTime));
+                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
+                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
                         }
                     }
                     echo json_encode($query);
