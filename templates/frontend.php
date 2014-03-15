@@ -1,4 +1,4 @@
-<!--{ReDi restaurant reservation plugin version:"<?php echo $this->version?>"}-->
+<!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
 <script type="text/javascript">
 	var date_format = '<?php echo $calendar_date_format ?>';
 	<?php
@@ -58,8 +58,8 @@ var time_format ="HH:mm";
 		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
 		<select name="persons" id="persons" class="redi-reservation-select">
-			<?php for ($i = 1; $i != $maxPersons+1; $i++): ?>
-			<option value="<?php echo $i?>" <?php if ($persons == $i) echo 'selected="selected"';?> >
+			<?php for ($i = $minPersons; $i != $maxPersons+1; $i++): ?>
+			<option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
 				<?php echo $i ?>
 			</option>
 			<?php endfor?>

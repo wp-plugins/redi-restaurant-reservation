@@ -38,13 +38,34 @@
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 	<form name="redi-restaurant" method="post">
 		<table class="form-table" >
-
+			<tr valign="top">
+				<th scope="row" style="width:15%;">
+					<label for="MinPersons"><?php _e('Min persons per reservation', 'redi-restaurant-reservation'); ?> </label>
+				</th>
+				<td>
+					<select name="MinPersons" id="MinPersons">
+						<?php foreach(range(1, 10) as $current):?>
+							<option value="<?php echo $current?>" <?php if($current == $minPersons): ?>selected="selected"<?php endif;?>>
+								<?php echo $current ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+				<td>
+				</td>
+			</tr>
 			<tr valign="top">
 				<th scope="row" style="width:15%;">
 					<label for="MaxPersons"><?php _e('Max persons per reservation', 'redi-restaurant-reservation'); ?> </label>
 				</th>
 				<td>
-					<input id="MaxPersons" type="text" value="<?php echo (int)$maxPersons ?>" name="MaxPersons"/>
+				<select name="MaxPersons" id="MaxPersons">
+					<?php foreach(range(1, 25) as $current):?>
+						<option value="<?php echo $current?>" <?php if($current == $maxPersons): ?>selected="selected"<?php endif;?>>
+							<?php echo $current ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 				</td>
 				<td>
 				</td>
