@@ -59,10 +59,15 @@ var time_format ="HH:mm";
 
 		<select name="persons" id="persons" class="redi-reservation-select">
 			<?php for ($i = $minPersons; $i != $maxPersons+1; $i++): ?>
-			<option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
-				<?php echo $i ?>
-			</option>
+                <option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
+                    <?php echo $i ?>
+                </option>
 			<?php endfor?>
+            <?php if (!empty($largeGroupsMessage)):?>
+                <option value="group" >
+                    <?php echo sprintf( __( 'More than %s people', 'redi-restaurant-reservation' ), $maxPersons );?>
+                </option>
+            <?php endif ?>
 		</select>
 
 		<div style="margin-top: 30px; margin-bottom: 30px;">

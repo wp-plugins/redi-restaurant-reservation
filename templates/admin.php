@@ -70,6 +70,21 @@
 				<td>
 				</td>
 			</tr>
+            <tr>
+                <th scope="row">
+                    <label for="LargeGroupsMessage">
+                        <?php _e('Message for large groups', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <textarea maxlength="250" name="LargeGroupsMessage" id="LargeGroupsMessage" rows="5" cols="60"><?php echo $largeGroupsMessage ?></textarea>
+                </td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('This message will be displayed if user choose large groups', 'redi-restaurant-reservation'); ?>
+                    </p>
+                </td>
+            </tr>
 			<tr>
 				<th scope="row">
 					<label for="ReservationTime">
