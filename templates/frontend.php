@@ -70,12 +70,12 @@ var time_format ="HH:mm";
             <?php endif ?>
 		</select>
 
+        <div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div style="margin-top: 30px; margin-bottom: 30px;">
 			<input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
-
-		<div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
+        <div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
 	</div>
 	<br/>
 
