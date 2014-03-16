@@ -766,11 +766,12 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
 
+					$persons = (int) $_POST['persons'];
                     // convert to int
                     $startTimeInt = strtotime($startTimeStr, 0);
 
                     // calculate end time
-                    $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
+                    $endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
 
                     // format to ISO
                     $startTimeISO   = date('Y-m-d H:i', $startTimeInt);
@@ -780,11 +781,12 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $params = array(
                         'StartTime'    => urlencode($startTimeISO),
                         'EndTime'      => urlencode($endTimeISO),
-                        'Quantity'     => (int) $_POST['persons'],
+                        'Quantity'     => $persons,
                         'Alternatives' => 2,
                         'Lang'         => str_replace('_', '-', get_locale()),
                         'CurrentTime'  => urlencode($currentTimeISO)
                     );
+
                     //get first category on selected place
 
                     $categories = $this->redi->getPlaceCategories($placeID);
@@ -815,13 +817,14 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                 case 'step3':
 
+	                $persons = (int) $_POST['persons'];
                     $startTimeStr = $_POST['startTime'];
 
                     // convert to int
                     $startTimeInt = strtotime($startTimeStr, 0);
 
                     // calculate end time
-                    $endTimeInt = strtotime('+'.$this->getReservationTime().'minutes', $startTimeInt);
+                    $endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
 
                     // format to ISO
                     $startTimeISO   = date('Y-m-d H:i', $startTimeInt);
@@ -862,7 +865,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                         'reservation' => array(
                             'StartTime'    => $startTimeISO,
                             'EndTime'      => $endTimeISO,
-                            'Quantity'     => (int) $_POST['persons'],
+                            'Quantity'     => $persons,
                             "UserName"     => $_POST['UserName'],
                             "UserEmail"    => $_POST['UserEmail'],
                             "UserComments" => $comment,
@@ -886,16 +889,29 @@ if (!class_exists('ReDiRestaurantReservation'))
             die;
         }
 
-        private function getReservationTime()
+        private function getReservationTime($persons = 0)
         {
-                if (isset($this->options['ReservationTime']) && $this->options['ReservationTime']>0)
-                {
-                        return (int) $this->options['ReservationTime'];
-                }
-                return 3*60;
+			$filename =  plugin_dir_path(__FILE__).'reservationtime.json';
+			if(file_exists($filename) && $persons)
+			{
+				$json = json_decode(file_get_contents($filename), TRUE);
+				if($json !== NULL)
+				{
+					if(array_key_exists($persons, $json))
+					{
+						return (int)$json[$persons];
+					}
+				}
+			}
+
+            if (isset($this->options['ReservationTime']) && $this->options['ReservationTime'] > 0)
+            {
+                return (int) $this->options['ReservationTime'];
+            }
+            return 3*60;
         }
-			}
-			}
+	}
+}
 new ReDiRestaurantReservation();
 
 register_activation_hook(__FILE__, array ('ReDiRestaurantReservation', 'install'));
