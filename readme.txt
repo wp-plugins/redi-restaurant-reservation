@@ -74,13 +74,14 @@ Plugin requires curl library to operate.
 09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users). Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users). Photo is taken from Facebook public profile. Photo, Visits and Rating are available only by request.
 11. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
-12. Setting for custom fields that user should fill during reservation
-13. List of Time shifts (Available only for Basic package users)
-14. Open/close time for time shift (Available only for Basic package users)
-15. Time before reservation for time shift by weekday (Available only for Basic package users)
-16. Step 1: Select place, date and time (Multiple places available only for Basic package users)
-17. Blocked Time list. (Available only for Basic package users)
-18. Edit Blocked time. (Available only for Basic package users)
+12. Cancel reservation from Tablet PC version
+13. Setting for custom fields that user should fill during reservation
+14. List of Time shifts (Available only for Basic package users)
+15. Open/close time for time shift (Available only for Basic package users)
+16. Time before reservation for time shift by weekday (Available only for Basic package users)
+17. Step 1: Select place, date and time (Multiple places available only for Basic package users)
+18. Blocked Time list. (Available only for Basic package users)
+19. Edit Blocked time. (Available only for Basic package users)
 
 == Upgrade Notice ==
 
