@@ -73,8 +73,8 @@ Plugin requires curl library to operate.
 08. Setup screen with info on the restaurant including name, address, country, phone, email, URL
 09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users). Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users). Photo is taken from Facebook public profile. Photo, Visits and Rating are available only by request.
-11. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
-12. Cancel reservation from Tablet PC version
+11. Cancel reservation from Tablet PC version
+12. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
 13. Setting for custom fields that user should fill during reservation
 14. List of Time shifts (Available only for Basic package users)
 15. Open/close time for time shift (Available only for Basic package users)
