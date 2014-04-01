@@ -186,7 +186,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($_POST['submit']))
 			{
-				$settings_saved = true;
+				$settings_saved = false;
 				$form_valid = true;
 				//validation
 				$minPersons = (int)$_POST['MinPersons'];
@@ -259,6 +259,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 				if($form_valid)
 				{
+                    $settings_saved = true;
 					$this->options['MinPersons'] = $minPersons;
 					$this->options['MaxPersons'] = $maxPersons;
                     //if(!empty($largeGroupsMessage))
@@ -359,12 +360,14 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$options = get_option($this->optionsName);
 
-			$thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
-			$timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
-			$minPersons = isset($options['MinPersons']) ? $options['MinPersons']: 1;
-			$maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
-            $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
-
+            if($settings_saved || !isset($_POST['submit']))
+            {
+                $thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
+                $timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
+                $minPersons = isset($options['MinPersons']) ? $options['MinPersons']: 1;
+                $maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
+                $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
+            }
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
 			{
 				$field_name = 'field_'.$i.'_name';
