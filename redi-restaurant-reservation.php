@@ -226,6 +226,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
 				$this->options['TimePicker'] = isset($_POST['TimePicker']) ? $_POST['TimePicker'] : null;
+                $this->options['AlternativeTimeStep'] = isset($_POST['AlternativeTimeStep']) ? $_POST['AlternativeTimeStep'] : 30;
+
 				$services = (int)$_POST['services'];
 				$this->options['services'] = $services;
 				$this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
@@ -366,6 +368,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
                 $minPersons = isset($options['MinPersons']) ? $options['MinPersons']: 1;
                 $maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
+                $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                 $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
             }
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -733,6 +736,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$time_format_hours = str_replace(':i', '', get_option('time_format'));
 
 					$timepicker = isset($this->options['TimePicker']) ? $this->options['TimePicker'] : null;
+                    $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
