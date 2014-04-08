@@ -786,7 +786,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                         'EndTime'      => urlencode($endTimeISO),
                         'Quantity'     => $persons,
                         'Alternatives' => 2,
-                        'Lang'         => str_replace('_', '-', get_locale()),
+                        'Lang'         => str_replace('_', '-', $_POST['lang']),
                         'CurrentTime'  => urlencode($currentTimeISO)
                     );
 
@@ -874,7 +874,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                             "UserComments" => $comment,
                             "UserPhone"    => $_POST['UserPhone'],
                             "Name"         => "Person",
-                            "Lang"         => str_replace('_', '-', get_locale()),
+                            "Lang"         => str_replace('_', '-', $_POST['lang']),
                             'CurrentTime'  => $currentTimeISO
                         )
                     );
