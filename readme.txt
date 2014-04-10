@@ -23,8 +23,10 @@ Supported languages:
 * Italian
 * Polish
 * Russian
-* Portuguese
+* Portuguese (Brazil) 
+* Portuguese (Portugal)
 * Spanish
+* Swedish
 
 If you need more languages, please contact us!
 
