@@ -105,7 +105,8 @@ jQuery(function () {
             UserEmail: jQuery('#UserEmail').val(),
             UserComments: jQuery('#UserComments').val(),
             UserPhone: jQuery('#UserPhone').val(),
-            placeID: jQuery('#placeID').val()
+            placeID: jQuery('#placeID').val(),
+            lang : locale
         };
         if (jQuery('#field_1').attr('type') === 'checkbox' && jQuery('#field_1').attr('checked') === "checked") {
             data['field_1'] = 'on';
@@ -165,7 +166,7 @@ jQuery(function () {
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
-            lang: jQuery('#redi-restaurant-lang').val()
+            lang: locale
         };
 
         jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
