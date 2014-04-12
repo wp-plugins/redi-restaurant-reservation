@@ -207,11 +207,11 @@ jQuery(function () {
 				</th>
 				<td>
 					<input id="OpenTime[<?php echo $day ?>]" type="text"
-							value="<?php echo $serviceTimeValue->OpenTime ?>"
+							value="<?php echo $serviceTimeValue['OpenTime'] ?>"
 							name="OpenTime[<?php echo $serviceTimeName ?>]"/>
 				</td>
 				<td>
-					<input id="" type="text" value="<?php echo $serviceTimeValue->CloseTime ?>"
+					<input id="" type="text" value="<?php echo $serviceTimeValue['CloseTime'] ?>"
 							name="CloseTime[<?php echo $serviceTimeName ?>]"/>
 				</td>
 			</tr>

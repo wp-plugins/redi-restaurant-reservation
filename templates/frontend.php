@@ -59,18 +59,23 @@ var time_format ="HH:mm";
 
 		<select name="persons" id="persons" class="redi-reservation-select">
 			<?php for ($i = $minPersons; $i != $maxPersons+1; $i++): ?>
-			<option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
-				<?php echo $i ?>
-			</option>
+                <option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
+                    <?php echo $i ?>
+                </option>
 			<?php endfor?>
+            <?php if (!empty($largeGroupsMessage)):?>
+                <option value="group" >
+                    <?php echo sprintf( __( 'More than %s people', 'redi-restaurant-reservation' ), $maxPersons );?>
+                </option>
+            <?php endif ?>
 		</select>
 
+        <div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div style="margin-top: 30px; margin-bottom: 30px;">
 			<input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
-
-		<div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
+        <div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
 	</div>
 	<br/>
 
