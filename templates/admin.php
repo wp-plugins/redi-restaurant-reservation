@@ -81,7 +81,7 @@
                 </td>
                 <td style="width:80%">
                     <p class="description">
-                        <?php _e('This message will be displayed if user choose large groups', 'redi-restaurant-reservation'); ?>
+                        <?php _e('This message displayed when user chooses large group', 'redi-restaurant-reservation'); ?>
                     </p>
                 </td>
             </tr>
