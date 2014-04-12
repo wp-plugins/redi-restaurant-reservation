@@ -229,6 +229,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $this->options['AlternativeTimeStep'] = isset($_POST['AlternativeTimeStep']) ? $_POST['AlternativeTimeStep'] : 30;
 
 				$services = (int)$_POST['services'];
+
 				$this->options['services'] = $services;
 				$this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
 				$this->options['DateFormat'] = $_POST['DateFormat'];
@@ -371,6 +372,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                 $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
             }
+
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
 			{
 				$field_name = 'field_'.$i.'_name';
@@ -897,10 +899,11 @@ if (!class_exists('ReDiRestaurantReservation'))
             die;
         }
 
-        private function getAlternativeTimeStep($persons = 0)
+		private function getAlternativeTimeStep($persons = 0)
         {
             $filename =  plugin_dir_path(__FILE__).'alternativetimestep.json';
-            if(file_exists($filename) && $persons)
+
+            if (file_exists($filename) && $persons)
             {
                 $json = json_decode(file_get_contents($filename), TRUE);
                 if($json !== NULL)
@@ -916,13 +919,15 @@ if (!class_exists('ReDiRestaurantReservation'))
             {
                 return (int) $this->options['AlternativeTimeStep'];
             }
+
             return 30;
         }
 
         private function getReservationTime($persons = 0)
         {
 			$filename =  plugin_dir_path(__FILE__).'reservationtime.json';
-			if(file_exists($filename) && $persons)
+			
+			if (file_exists($filename) && $persons)
 			{
 				$json = json_decode(file_get_contents($filename), TRUE);
 				if($json !== NULL)
