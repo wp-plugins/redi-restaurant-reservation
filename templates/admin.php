@@ -134,9 +134,23 @@
 					</p>
 				</td>
 			</tr>
+            <tr>
+                <th scope="row">
+                    <label for="AlternativeTimeStep">
+                        <?php _e('Alternative time step', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="AlternativeTimeStep">
+                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>>15 min</option>
+                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>>30 min</option>
+                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>>60 min</option>
+                    </select>
+                </td>
+            </tr>
 		</table>
 		<br/>
-		
+
 		<!-- custom fields-->
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>

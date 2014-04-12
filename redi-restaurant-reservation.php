@@ -226,7 +226,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 				$this->options['Thanks'] = isset($_POST['Thanks']) ? (int)$_POST['Thanks'] : 0;
 				$this->options['TimePicker'] = isset($_POST['TimePicker']) ? $_POST['TimePicker'] : null;
+                $this->options['AlternativeTimeStep'] = isset($_POST['AlternativeTimeStep']) ? $_POST['AlternativeTimeStep'] : 30;
+
 				$services = (int)$_POST['services'];
+
 				$this->options['services'] = $services;
 				$this->options['MinTimeBeforeReservation'] = $_POST['MinTimeBeforeReservation'];
 				$this->options['DateFormat'] = $_POST['DateFormat'];
@@ -366,8 +369,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
                 $minPersons = isset($options['MinPersons']) ? $options['MinPersons']: 1;
                 $maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
+                $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                 $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
             }
+
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
 			{
 				$field_name = 'field_'.$i.'_name';
@@ -733,6 +738,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$time_format_hours = str_replace(':i', '', get_option('time_format'));
 
 					$timepicker = isset($this->options['TimePicker']) ? $this->options['TimePicker'] : null;
+                    $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
@@ -757,8 +763,8 @@ if (!class_exists('ReDiRestaurantReservation'))
             switch ($_POST['get'])
             {
                 case 'step1':
-                    //$placeID = (int)$_POST['placeID'];
                     // convert date to array
+
                     $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
 
                     if ($date['error_count'] > 0)
@@ -787,7 +793,8 @@ if (!class_exists('ReDiRestaurantReservation'))
                         'Quantity'     => $persons,
                         'Alternatives' => 2,
                         'Lang'         => str_replace('_', '-', $_POST['lang']),
-                        'CurrentTime'  => urlencode($currentTimeISO)
+                        'CurrentTime'  => urlencode($currentTimeISO),
+                        'AlternativeTimeStep' => self::getAlternativeTimeStep($persons)
                     );
 
                     //get first category on selected place
@@ -892,10 +899,35 @@ if (!class_exists('ReDiRestaurantReservation'))
             die;
         }
 
+		private function getAlternativeTimeStep($persons = 0)
+        {
+            $filename =  plugin_dir_path(__FILE__).'alternativetimestep.json';
+
+            if (file_exists($filename) && $persons)
+            {
+                $json = json_decode(file_get_contents($filename), TRUE);
+                if($json !== NULL)
+                {
+                    if(array_key_exists($persons, $json))
+                    {
+                        return (int)$json[$persons];
+                    }
+                }
+            }
+
+            if (isset($this->options['AlternativeTimeStep']) && $this->options['AlternativeTimeStep'] > 0)
+            {
+                return (int) $this->options['AlternativeTimeStep'];
+            }
+
+            return 30;
+        }
+
         private function getReservationTime($persons = 0)
         {
 			$filename =  plugin_dir_path(__FILE__).'reservationtime.json';
-			if(file_exists($filename) && $persons)
+			
+			if (file_exists($filename) && $persons)
 			{
 				$json = json_decode(file_get_contents($filename), TRUE);
 				if($json !== NULL)
