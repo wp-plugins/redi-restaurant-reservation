@@ -94,6 +94,13 @@ Plugin requires curl library to operate.
 * Added alternative time picker for better reservation time selection on mobile devices
 * Added limits to text areas
 * Moved all texts to language files
+* (+) Added settings to select Min and Max party size
+* (+) Added message to client when he select Large group
+* (+) Added setting to specify alternative time step
+* (+) Added Portuguese (Brazil) translation
+* (+) Added Swedish translation
+* (+) Fixed multi language support
+* (+) Fixed time displayed in drop down
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)
