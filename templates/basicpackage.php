@@ -1,7 +1,9 @@
 <div class="wrap">
-    <div id="icon-themes" class="icon32">
-        <br/>
-    </div>
+
+	<h2><?php _e('ApiKey:'); ?></h2> <br/>
+	<b><i><?php echo ($this->ApiKey); ?></i></b>
+
+	<br/><br/>
     <h2><?php _e('Basic package (paid version)','redi-restaurant-reservation'); ?></h2>
     <br/>
         <?php _e('* View upcoming reservations on Mobile/Tablet PC', 'redi-restaurant-reservation'); ?><br/>

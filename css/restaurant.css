@@ -13,7 +13,9 @@
     padding: 0.4em;
     transition: all 0.2s ease-in-out 0s;
 }
-.redi-reservation-alert {
+
+.redi-reservation-alert 
+{
     background-color: #FCF8E3;
     border: 1px solid #FBEED5;
     border-radius: 4px 4px 4px 4px;
@@ -21,28 +23,38 @@
     padding: 8px 35px 8px 14px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-strong {
+
+strong 
+{
     font-weight: bold;
 }
-.redi-reservation-alert-error {
+
+.redi-reservation-alert-error 
+{
     background-color: #F2DEDE;
     border-color: #EED3D7;
     color: #B94A48;
 }
-.redi-reservation-error h4 {
+
+.redi-reservation-error h4 
+{
     color: #B94A48;
 }
 
-.redi-reservation-alert-info {
+.redi-reservation-alert-info 
+{
     background-color: #D9EDF7;
     border-color: #BCE8F1;
     color: #3A87AD;
 }
-.redi-reservation-alert-success {
+
+.redi-reservation-alert-success 
+{
     background-color: #DFF0D8;
     border-color: #D6E9C6;
     color: #468847;
 }
+
 .redi_required
 {
     color: #DD0000;
@@ -62,7 +74,38 @@ strong {
 {
     margin: 0 0 20px;
 }
-#persons, #redi-restaurant-startDate
+
+#persons, #redi-restaurant-startDate, #redi-restaurant-startTime
 {
     width:175px;
+}
+
+#redi-restaurant-startHour, #redi-restaurant-startMinute
+{
+    width: 83px;
+}
+
+.redi-restaurant-button
+{
+    font-weight: normal;
+}
+
+.redi-restaurant-button[disabled="disabled"]
+{
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.redi-restaurant-button[select="select"]
+{
+    font-weight: bold;
+}
+#step1button[disabled="disabled"]
+{
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+#step1button, #redi-restaurant-step3
+{
 }
