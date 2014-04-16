@@ -23,6 +23,13 @@ require_once('redi.php');
 
 if (!class_exists('ReDiRestaurantReservation'))
 {
+	class AlternativeTime
+	{
+		const AlternativeTimeBlocks = 1;
+		const AlternativeTimeByShiftStartTime = 2;
+		const AlternativeTimeByDay = 3;
+	}
+
 	class ReDiRestaurantReservation
 	{
 		public $version = '14.0221';
@@ -89,13 +96,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 				                                  ));
 
 
-				//$this->options['placeID'] = 
                 $placeID = (int)$place[ID];
 
 				$category = $this->redi->createCategory($placeID,
 					array ('category' => array ('Name' => 'Restaurant')));
 
-				//$this->options['categoryID'] = 
                 $categoryID = (int)$category[ID];
 				$service = $this->redi->createService($categoryID,
 					array ('service' => array ('Name' => 'Person', 'Quantity' => 10)));
@@ -787,33 +792,66 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     $StartTime = gmdate('Y-m-d 00:00', strtotime($_POST['startDateISO'])); //CalendarDate + 00:00
                     $EndTime = gmdate('Y-m-d 00:00', strtotime("+1 day",strtotime($_POST['startDateISO'])));//CalendarDate + 1day + 00:00
-                    $params = array(
-                        'Quantity'     => $persons,
-                        'Lang'         => str_replace('_', '-', $_POST['lang']),
-                        'CurrentTime'  => urlencode($currentTimeISO),
-                        'StartTime' => urlencode($StartTime),
-                        'EndTime' => urlencode($EndTime),
-                        'AlternativeTimeStep' => self::getAlternativeTimeStep($persons)
-                    );
+	                $params = array(
+		                'Quantity'            => $persons,
+		                'Lang'                => str_replace( '_', '-', $_POST['lang'] ),
+		                'CurrentTime'         => urlencode( $currentTimeISO ),
+		                'StartTime'           => urlencode( $StartTime ),
+		                'EndTime'             => urlencode( $EndTime ),
+		                'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons ),
+	                );
 
-                    //get first category on selected place
+					$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
-	                $query = $this->redi->availabilityByShifts($categoryID, $params);
+	                switch ( $alternativeTime ) {
+		                case AlternativeTime::AlternativeTimeBlocks:
+			                $query = $this->redi->query($categoryID, $params);
+			                break;
+
+		                case AlternativeTime::AlternativeTimeByShiftStartTime:
+			                $query = $this->redi->availabilityByShifts( $categoryID, $params );
+			                break;
+
+		                case AlternativeTime::AlternativeTimeByDay:
+			                $params['ReservationDuration'] = $this->getReservationTime( $persons );
+			                $query = $this->redi->availabilityByDay( $categoryID, $params );
+			                break;
+	                }
 
                     $time_format = get_option('time_format');
 
-                    if (!isset($query['Error']))
-                    {
-                        unset($query['debug']);
-                        foreach ($query as $q)
-                        {
-                            $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
-                            $q->StartTimeISO = $q->StartTime;
-                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
-                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
-                        }
-                    }
-                    echo json_encode($query);
+	                if ( isset( $query['Error'] ) ) {
+		                echo json_encode( $query );
+		                die;
+	                }
+	                unset( $query['debug'] );
+
+	                $query['alternativeTime'] = $alternativeTime;
+	                switch ( $alternativeTime ) {
+		                case AlternativeTime::AlternativeTimeBlocks: // pass thought
+		                case AlternativeTime::AlternativeTimeByShiftStartTime:
+			                foreach ( $query as $q ) {
+				                $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+				                $q->StartTimeISO = $q->StartTime;
+				                $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+				                $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+			                }
+			                break;
+		                case AlternativeTime::AlternativeTimeByDay:
+			                foreach ( $query as $q2 ) {
+				                if ( isset( $q2->Availability ) ) {
+					                foreach ( $q2->Availability as $q ) {
+						                $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+						                $q->StartTimeISO = $q->StartTime;
+						                $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+						                $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+					                }
+				                }
+			                }
+			                break;
+	                }
+
+	                echo json_encode( $query );
                     break;
 
                 case 'step3':

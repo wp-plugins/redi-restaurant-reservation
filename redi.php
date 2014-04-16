@@ -53,6 +53,7 @@ define('CUSTOM_FIELDS', 6);
 
 class Redi
 {
+
 	private $ApiKey;
 
 	public function Redi($ApiKey)
@@ -143,10 +144,14 @@ class Redi
 		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/shiftsStartTime', GET, $this->strParams($params));
 	}
 
+	public function availabilityByDay( $categoryID, $params )
+	{
+		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/availabilityByDay/Person', GET, $this->strParams($params));
+	}
+
 	public function availabilityByShifts($categoryID, $params)
 	{
-        //http://api.reservationdiary.eu/service/Reservation.svc/10e46e14-6a38-4200-b8d2-aa0b871bf2c5/5675/availabilityByShifts/Person?Quantity=2&Lang=en-US&CurrentTime=2014-02-08%2023:05&StartTime=2014-02-25%2000:00&EndTime=2014-02-26%2000:00
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/availabilityByShifts/Person', GET, $this->strParams($params));
+        return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/availabilityByShifts/Person', GET, $this->strParams($params));
 	}
 
 	public function getPlace($placeID)
