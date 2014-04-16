@@ -68,7 +68,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($new_account[REDI_APIKEY]) && !empty($new_account[REDI_APIKEY]))
 			{
-
 				$this->options[REDI_APIKEY] = $new_account[REDI_APIKEY];
 				$this->redi->setApiKey($this->options[REDI_APIKEY]);
 				$place = $this->redi->createPlace(array (
@@ -89,13 +88,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 				                                  ));
 
 
-				//$this->options['placeID'] = 
                 $placeID = (int)$place[ID];
 
 				$category = $this->redi->createCategory($placeID,
 					array ('category' => array ('Name' => 'Restaurant')));
 
-				//$this->options['categoryID'] = 
                 $categoryID = (int)$category[ID];
 				$service = $this->redi->createService($categoryID,
 					array ('service' => array ('Name' => 'Person', 'Quantity' => 10)));
@@ -107,6 +104,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->options['serviceID'] = $serviceID = (int)$service[ID];
 				$this->saveAdminOptions();
 			}
+			return $new_account;
 		}
 
 		public function __construct()
@@ -144,20 +142,46 @@ if (!class_exists('ReDiRestaurantReservation'))
 			return update_option($this->optionsName, $this->options);
 		}
 
+		function display_errors( $errors, $admin = false ) {
+			if ( isset( $errors['Error'] ) ) {
+				foreach ( (array) $errors['Error'] as $error ) {
+					echo '<div class="error"><p>' . $error . '</p></div>';
+				}
+			}
+			//WP-errors
+			if ( isset( $errors['Wp-Error'] ) && $admin ) {
+				foreach ( (array) $errors['Wp-Error'] as $error_key => $error ) {
+					foreach ( (array) $error as $err ) {
+						echo '<div class="error"><p>' . $error_key . ' : ' . $err . '</p></div>';
+					}
+				}
+			}
+		}
 
 		/**
 		 * Adds settings/options page
 		 */
 		function redi_restaurant_admin_options_page()
 		{
+			$return = array();
 			$errors = array();
+
 			if ($this->ApiKey == NULL) /// TODO: move to install
 			{
-				$this->register();
+				$return = $this->register();
 			}
 
+			if ( $this->ApiKey == null ) {
+
+				$this->display_errors( $return, true );
+				die;
+			}
 			$places = $this->redi->getPlaces();
 
+			if ( isset( $places['Error'] ) ) {
+				$this->display_errors( $places, true );
+				die;
+			}
 			$placeID = $places[0]->ID;
 
 			$categories = $this->redi->getPlaceCategories($placeID);
@@ -265,10 +289,8 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $settings_saved = true;
 					$this->options['MinPersons'] = $minPersons;
 					$this->options['MaxPersons'] = $maxPersons;
-                    //if(!empty($largeGroupsMessage))
-                    {
-                        $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
-                    }
+                    $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
+					
 					$placeID = $_POST['Place'];
 					$categories = $this->redi->getPlaceCategories($placeID);
 					if(isset($categories['Error']))
@@ -679,10 +701,18 @@ if (!class_exists('ReDiRestaurantReservation'))
                             REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
                     wp_enqueue_style('redi-restaurant');
                   //  $persons = 2; //min can be bigger than 2
+					if ( $this->ApiKey == null ) {
 
+						$this->display_errors(array('Error'=> '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>'));
+						return;
+					}
                     //places 
                     $places = $this->redi->getPlaces();
+					if ( isset($places['Error']) ) {
 
+						$this->display_errors($places);
+						return;
+					}
                     $placeID = $places[0]->ID;
 
 
