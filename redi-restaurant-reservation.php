@@ -719,9 +719,6 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $time_format = get_option('time_format');
                     $date_format_setting = $this->options['DateFormat'];
 
-                    $time_format = get_option('time_format');
-					$date_format_setting = $this->options['DateFormat'];
-
 					$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
 					$date_format = $this->getPHPDateFormat($date_format_setting);
 
@@ -765,7 +762,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                         }
                     }
 
-					$time_format_hours = str_replace(':i', '', get_option('time_format'));
+					$time_format_hours = self::dropdown_time_format();
 
 					$timepicker = isset($this->options['TimePicker']) ? $this->options['TimePicker'] : null;
                     $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
@@ -774,6 +771,56 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     ob_end_clean();
                     return $out;
+		}
+
+		function dropdown_time_format()
+		{
+			$wp_time_format = get_option('time_format');
+			$wp_time_format_array = str_split($wp_time_format);
+			foreach($wp_time_format_array as $index=>$format_char) // some users have G \h i \m\i\n
+			{
+				if($format_char ==='\\')
+				{
+					$wp_time_format_array[$index] = '';
+					if(isset($wp_time_format_array[$index + 1]))
+					{
+						$wp_time_format_array[$index + 1] = '';
+					}
+				}
+			}
+			$wp_time_format = implode('', $wp_time_format_array);
+			$is_am_pm = strpos($wp_time_format, 'g');
+			$is_am_pm_lead_zero = strpos($wp_time_format, 'h');
+
+			$is_24 = strpos($wp_time_format, 'G');
+			$is_24_lead_zero = strpos($wp_time_format, 'H');
+
+			if($is_am_pm !== FALSE || $is_am_pm_lead_zero !== FALSE)
+			{
+				$a = stripos($wp_time_format, 'a');
+				$am_text = '';
+				if($a !== FALSE)
+				{
+					$am_text =$wp_time_format[$a];
+				}
+				if($is_am_pm !== FALSE)
+				{
+					return $wp_time_format[$is_am_pm].' '.$am_text;
+				}
+				if( $is_am_pm_lead_zero !== FALSE)
+				{
+					return $wp_time_format[$is_am_pm_lead_zero].' '.$am_text;
+				}
+			}
+			if($is_24 !== FALSE)
+			{
+				return $wp_time_format[$is_24];
+			}
+			if($is_24_lead_zero !== FALSE)
+			{
+				return $wp_time_format[$is_24_lead_zero];
+			}
+			return 'H'; //if no time format found use 24 h with lead zero
 		}
 
         function redi_restaurant_ajax()
