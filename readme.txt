@@ -23,8 +23,10 @@ Supported languages:
 * Italian
 * Polish
 * Russian
-* Portuguese
+* Portuguese (Brazil) 
+* Portuguese (Portugal)
 * Spanish
+* Swedish
 
 If you need more languages, please contact us!
 
@@ -43,6 +45,8 @@ Basic package price is 5 EUR per month per place. To subscribe please use follow
 * Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
 * Remind your customer about upcoming reservation via Email or by SMS
+* Collect pre-payment for reservations
+* Are you building catalogue with restaurants and you are looking for reservation plugin for that? We can provide it for you.
 
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
@@ -72,14 +76,15 @@ Plugin requires curl library to operate.
 08. Setup screen with info on the restaurant including name, address, country, phone, email, URL
 09. List of upcoming reservations on Mobile/Tablet PC (Available only for Basic package users). Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 10. Detailed reservation information on Mobile/Tablet PC (Available only for Basic package users). Photo is taken from Facebook public profile. Photo, Visits and Rating are available only by request.
-11. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
-12. Setting for custom fields that user should fill during reservation
-13. List of Time shifts (Available only for Basic package users)
-14. Open/close time for time shift (Available only for Basic package users)
-15. Time before reservation for time shift by weekday (Available only for Basic package users)
-16. Step 1: Select place, date and time (Multiple places available only for Basic package users)
-17. Blocked Time list. (Available only for Basic package users)
-18. Edit Blocked time. (Available only for Basic package users)
+11. Cancel reservation from Tablet PC version
+12. Configuration for maximum available seats for online reservation by week day. (Available only for Basic package users)
+13. Setting for custom fields that user should fill during reservation
+14. List of Time shifts (Available only for Basic package users)
+15. Open/close time for time shift (Available only for Basic package users)
+16. Time before reservation for time shift by weekday (Available only for Basic package users)
+17. Step 1: Select place, date and time (Multiple places available only for Basic package users)
+18. Blocked Time list. (Available only for Basic package users)
+19. Edit Blocked time. (Available only for Basic package users)
 
 == Upgrade Notice ==
 
@@ -89,6 +94,13 @@ Plugin requires curl library to operate.
 * Added alternative time picker for better reservation time selection on mobile devices
 * Added limits to text areas
 * Moved all texts to language files
+* (+) Added settings to select Min and Max party size
+* (+) Added message to client when he select Large group
+* (+) Added setting to specify alternative time step
+* (+) Added Portuguese (Brazil) translation
+* (+) Added Swedish translation
+* (+) Fixed multi language support
+* (+) Fixed time displayed in drop down
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)

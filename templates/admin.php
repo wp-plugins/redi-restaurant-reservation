@@ -38,17 +38,53 @@
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 	<form name="redi-restaurant" method="post">
 		<table class="form-table" >
-
+			<tr valign="top">
+				<th scope="row" style="width:15%;">
+					<label for="MinPersons"><?php _e('Min persons per reservation', 'redi-restaurant-reservation'); ?> </label>
+				</th>
+				<td>
+					<select name="MinPersons" id="MinPersons">
+						<?php foreach(range(1, 10) as $current):?>
+							<option value="<?php echo $current?>" <?php if($current == $minPersons): ?>selected="selected"<?php endif;?>>
+								<?php echo $current ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+				<td>
+				</td>
+			</tr>
 			<tr valign="top">
 				<th scope="row" style="width:15%;">
 					<label for="MaxPersons"><?php _e('Max persons per reservation', 'redi-restaurant-reservation'); ?> </label>
 				</th>
 				<td>
-					<input id="MaxPersons" type="text" value="<?php echo (int)$maxPersons ?>" name="MaxPersons"/>
+				<select name="MaxPersons" id="MaxPersons">
+					<?php foreach(range(1, 25) as $current):?>
+						<option value="<?php echo $current?>" <?php if($current == $maxPersons): ?>selected="selected"<?php endif;?>>
+							<?php echo $current ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 				</td>
 				<td>
 				</td>
 			</tr>
+            <tr>
+                <th scope="row">
+                    <label for="LargeGroupsMessage">
+                        <?php _e('Message for large groups', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <textarea maxlength="250" name="LargeGroupsMessage" id="LargeGroupsMessage" rows="5" cols="60"><?php echo $largeGroupsMessage ?></textarea>
+                </td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('This message displayed when user chooses large group', 'redi-restaurant-reservation'); ?>
+                    </p>
+                </td>
+            </tr>
 			<tr>
 				<th scope="row">
 					<label for="ReservationTime">
@@ -56,7 +92,7 @@
 					</label>
 				</th>
 				<td>
-					<input id="ReservationTime" type="text" value="<?php echo $ReservationTime ?>" name="ReservationTime"/>
+					<input id="ReservationTime" type="text" value="<?php echo $reservationTime ?>" name="ReservationTime"/>
 				</td>
 				<td style="width:80%">
 					<p class="description">
@@ -98,9 +134,23 @@
 					</p>
 				</td>
 			</tr>
+            <tr>
+                <th scope="row">
+                    <label for="AlternativeTimeStep">
+                        <?php _e('Alternative time step', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="AlternativeTimeStep">
+                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>>15 min</option>
+                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>>30 min</option>
+                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>>60 min</option>
+                    </select>
+                </td>
+            </tr>
 		</table>
 		<br/>
-		
+
 		<!-- custom fields-->
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
@@ -158,7 +208,7 @@
 		<!-- /custom fields-->
                 
 		<div id="ajaxed">
-                    <?php self::ajaxed_admin_page($placeID, $categoryID); ?>
+                    <?php self::ajaxed_admin_page($placeID, $categoryID, $settings_saved); ?>
 		</div>
 		
 		
