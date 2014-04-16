@@ -187,37 +187,37 @@ class Redi
 		return $unescaped_array;
 	}
 
-	private function request($url, $method = GET, $params_string = NULL)
-	{
+	private function request( $url, $method = GET, $params_string = null ) {
 		$request = new WP_Http;
-		$output = $request->request(
-			$url.(($method === GET || $method === DELETE) ? $params_string : ''), array(
-			'method' => $method,
-			'body' => $params_string,
-			'headers' => array(
-				'Content-Type' => 'application/json; charset=utf-8'
-			)
-		));
-		if(is_wp_error($output))
-		{
-			return array('Error' => current($output->errors));
+		$output  = $request->request(
+			$url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ),
+			array(
+				'method'  => $method,
+				'body'    => $params_string,
+				'headers' => array(
+					'Content-Type' => 'application/json; charset=utf-8'
+				)
+			) );
+		if ( is_wp_error( $output ) ) {
+			return array(
+				'Error'    => __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ),
+				'Wp-Error' => $output->errors
+			);
 		}
 
-		if ($output['response']['code'] != 200 && $output['response']['code'] != 400)
-		{
-			return array('Error' => __('Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation'));
+		if ( $output['response']['code'] != 200 && $output['response']['code'] != 400 ) {
+			return array( 'Error' => __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) );
 		}
 		$output = $output['body'];
 
 		// convert response
-		$output = (array)json_decode($output);
-		if (REDI_RESTAURANT_DEBUG)
-		{
+		$output = (array) json_decode( $output );
+		if ( REDI_RESTAURANT_DEBUG ) {
 			$output['debug'] = array
 			(
 				'method' => $method,
-				'params' => self::p($params_string, TRUE),
-				'url' => self::p($url.(($method == GET || $method == DELETE) ? $params_string : ''), TRUE),
+				'params' => self::p( $params_string, true ),
+				'url'    => self::p( $url . ( ( $method == GET || $method == DELETE ) ? $params_string : '' ), true ),
 			);
 		}
 
