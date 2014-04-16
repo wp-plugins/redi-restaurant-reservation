@@ -1,23 +1,5 @@
-<!--{version:"<?php echo $this->version?>"}-->
-<script type="text/javascript">
-	var date_format = '<?php echo $calendar_date_format ?>';
-	<?php
-	$time_format_s =explode(':', $time_format);
-
-	if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>
-var time_format ="h:mm tt";
-	<?php else: ?>
-var time_format ="HH:mm";
-	<?php endif ?>
-
-	var locale = "<?php echo get_locale()?>";
-
-	if ((/^en/).test(locale))
-	{
-		locale = "";
-	}
-	
-</script>
+<!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
+<script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ="h:mm tt";<?php else: ?>var time_format ="HH:mm";<?php endif ?>var locale = "<?php echo get_locale()?>";if ((/^en/).test(locale))locale = "";</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
 	<div id="step1">
 		
@@ -58,19 +40,24 @@ var time_format ="HH:mm";
 		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
 		<select name="persons" id="persons" class="redi-reservation-select">
-			<?php for ($i = 1; $i != $maxPersons+1; $i++): ?>
-			<option value="<?php echo $i?>" <?php if ($persons == $i) echo 'selected="selected"';?> >
-				<?php echo $i ?>
-			</option>
+			<?php for ($i = $minPersons; $i != $maxPersons+1; $i++): ?>
+                <option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
+                    <?php echo $i ?>
+                </option>
 			<?php endfor?>
+            <?php if (!empty($largeGroupsMessage)):?>
+                <option value="group" >
+                    <?php echo sprintf( __( 'More than %s people', 'redi-restaurant-reservation' ), $maxPersons );?>
+                </option>
+            <?php endif ?>
 		</select>
 
+        <div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div style="margin-top: 30px; margin-bottom: 30px;">
 			<input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
-
-		<div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
+        <div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
 	</div>
 	<br/>
 

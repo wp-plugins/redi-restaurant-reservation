@@ -62,12 +62,12 @@ class Redi
 
 	public function cancelReservation($id, $lang, $reason)
 	{
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.urlencode($reason), DELETE);
+		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.urlencode($reason), DELETE);
 	}
 
 	public function createReservation($categoryID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
 	}
 
 	/**
@@ -83,74 +83,74 @@ class Redi
 	 */
 	public function query($categoryID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/Person', GET, $this->strParams($params));
+		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/Person', GET, $this->strParams($params));
 	}
 
 	public function createCategory($placeID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$placeID, POST, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$placeID, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function getServices($categoryID)
 	{
-		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID.'/Person', GET);
+		return $this->request(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID.'/Person', GET);
 	}
 
 	public function deleteServices($ids)
 	{
-		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'?serviceID='.join(',', $ids), DELETE);
+		return $this->request(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'?serviceID='.join(',', $ids), DELETE);
 	}
 
 	public function setServiceTime($categoryID, $timeSet)
 	{
-		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time',
+		return $this->request(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time',
 			PUT,
 			json_encode(self::unescape_array(array ('timeSet' => $timeSet))));
 	}
 
 	public function getServiceTime($categoryID)
 	{
-		return $this->curl(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time', GET);
+		return $this->request(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time', GET);
 	}
 
 	public function createService($categoryID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function userGetError()
 	{
-		return $this->curl(REDI_RESTAURANT_API.USERGET);
+		return $this->request(REDI_RESTAURANT_API.USERGET);
 	}
 
 	public function createUser($params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.USER, POST, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_RESTAURANT_API.USER, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function setPlace($placeID, $params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, PUT, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, PUT, json_encode(self::unescape_array($params)));
 	}
 
 	public function createPlace($params)
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(self::unescape_array($params)));
 	}
 
 	public function getPlace($placeID)
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
+		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
 	}
     
     public function getPlaceCategories($placeID)
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
+		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
 	}
 
     public function getPlaces()
 	{
-		return $this->curl(REDI_RESTAURANT_API.PLACE.$this->ApiKey, GET);
+		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey, GET);
 	}
     
 	public function setApiKey($ApiKey)
@@ -187,64 +187,37 @@ class Redi
 		return $unescaped_array;
 	}
 
-	private function curl($url, $method = GET, $params_string = NULL)
-	{
-		$ch = curl_init();
-
-		$params = self::p($params_string, TRUE);
-
-		$debug_url = self::p($url.(($method == GET || $method == DELETE) ? $params_string : ''), TRUE);
-		curl_setopt($ch, CURLOPT_URL, $url.(($method == GET || $method == DELETE) ? $params_string : ''));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-		switch ($method)
-		{
-			case GET:
-				curl_setopt($ch, CURLOPT_HEADER, false);
-				break;
-
-			case POST:
-				curl_setopt($ch, CURLOPT_POST, TRUE);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $params_string);
-				curl_setopt($ch,
-					CURLOPT_HTTPHEADER,
-					array ('Content-Type: application/json; charset=utf-8'));
-				break;
-
-			case PUT:
-				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $params_string);
-				curl_setopt($ch,
-					CURLOPT_HTTPHEADER,
-					array ('Content-Type: application/json; charset=utf-8'));
-				break;
-
-			case DELETE:
-				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-				break;
+	private function request( $url, $method = GET, $params_string = null ) {
+		$request = new WP_Http;
+		$output  = $request->request(
+			$url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ),
+			array(
+				'method'  => $method,
+				'body'    => $params_string,
+				'headers' => array(
+					'Content-Type' => 'application/json; charset=utf-8'
+				)
+			) );
+		if ( is_wp_error( $output ) ) {
+			return array(
+				'Error'    => __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ),
+				'Wp-Error' => $output->errors
+			);
 		}
 
-		$output = curl_exec($ch);
-		
-        
-                $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        
-		if ($output === FALSE || $http_status != 200 && $http_status != 400)
-		{
-			return array('Error' => __('Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation'));
+		if ( $output['response']['code'] != 200 && $output['response']['code'] != 400 ) {
+			return array( 'Error' => __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) );
 		}
-
-		curl_close($ch);
+		$output = $output['body'];
 
 		// convert response
-		$output = (array)json_decode($output);
-		if (REDI_RESTAURANT_DEBUG)
-		{
+		$output = (array) json_decode( $output );
+		if ( REDI_RESTAURANT_DEBUG ) {
 			$output['debug'] = array
 			(
 				'method' => $method,
-				'params' => $params,
-				'url' => $debug_url,
+				'params' => self::p( $params_string, true ),
+				'url'    => self::p( $url . ( ( $method == GET || $method == DELETE ) ? $params_string : '' ), true ),
 			);
 		}
 
