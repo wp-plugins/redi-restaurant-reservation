@@ -101,7 +101,7 @@ Plugin requires curl library to operate.
 * (+) Added Swedish translation
 * (+) Fixed multi language support
 * (+) Fixed time displayed in drop down
-* (+) Removed line brakes from javascript to prevent WordPress inserting <p> elements there when content formatting is turned on
+* (+) Removed line brakes from javascript to prevent WordPress inserting p elements there when content formatting is turned on
 * (+) Removed direct dependency from curl library
 
 = 14.0114 =
