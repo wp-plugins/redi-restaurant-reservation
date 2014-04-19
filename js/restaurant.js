@@ -190,7 +190,8 @@ jQuery(function () {
                     case 3: //AlternativeTimeByDay
                         for (var availability in response) {
                             if(response[availability]['Name']!==undefined) {
-                                jQuery('#buttons').append(response[availability]['Name'] + ':</br>');
+                                if (response[availability]['Name'])
+                                    jQuery('#buttons').append(response[availability]['Name'] + ':</br>');
                                 for (var current_button_index in response[availability]['Availability']) {
                                     var b = response[availability]['Availability'][current_button_index];
 
@@ -200,6 +201,7 @@ jQuery(function () {
                                 }
                                 jQuery('#buttons').append('</br>');
                             }
+                            jQuery('#buttons').append('</br>');
                         }
                         break;
                 }
