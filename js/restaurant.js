@@ -55,7 +55,6 @@ jQuery(function () {
         var month1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getMonth() + 1;
         var year1 = jQuery("#redi-restaurant-startDate").datepicker('getDate').getFullYear();
         var fullDate = year1 + "-" + month1 + "-" + day1;
-
         jQuery("#redi-restaurant-startDateISO").val(fullDate);
     });
 
@@ -176,13 +175,35 @@ jQuery(function () {
             if (response['Error']) {
                 jQuery('#step1errors').html(response['Error']).show('slow');
             } else {
-                for (res in response) {
-
-                    jQuery('#buttons').append(
-                            '<button class="redi-restaurant-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
+                switch (response['alternativeTime']) {
+                    case 1: //AlternativeTimeBlocks see class AlternativeTime::
+                      //pass thought
+                    case 2: //AlternativeTimeByShiftStartTime
+                        for (var res in response) {
+                            jQuery('#buttons').append(
+                                '<button class="redi-restaurant-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
                                 ' ' + (response[res]['Select'] ? 'select="select"' : '') +
                                 '>' + response[res]['StartTime'] + '</button>'
-                        );
+                            );
+                        }
+                        break;
+                    case 3: //AlternativeTimeByDay
+                        for (var availability in response) {
+                            if(response[availability]['Name']!==undefined) {
+                                if (response[availability]['Name'])
+                                    jQuery('#buttons').append(response[availability]['Name'] + ':</br>');
+                                for (var current_button_index in response[availability]['Availability']) {
+                                    var b = response[availability]['Availability'][current_button_index];
+
+                                    jQuery('#buttons').append(
+                                        '<button class="redi-restaurant-button" value="' + b['StartTimeISO'] + '" ' + (b['Available'] ? '' : 'disabled="disabled"') + ' ' + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>'
+                                    );
+                                }
+                                jQuery('#buttons').append('</br>');
+                            }
+                            jQuery('#buttons').append('</br>');
+                        }
+                        break;
                 }
 
                 jQuery('#step2').show('slow');

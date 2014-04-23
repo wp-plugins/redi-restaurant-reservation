@@ -23,6 +23,13 @@ require_once('redi.php');
 
 if (!class_exists('ReDiRestaurantReservation'))
 {
+	class AlternativeTime
+	{
+		const AlternativeTimeBlocks = 1;
+		const AlternativeTimeByShiftStartTime = 2;
+		const AlternativeTimeByDay = 3;
+	}
+
 	class ReDiRestaurantReservation
 	{
 		public $version = '14.0221';
@@ -68,6 +75,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($new_account[REDI_APIKEY]) && !empty($new_account[REDI_APIKEY]))
 			{
+
 				$this->options[REDI_APIKEY] = $new_account[REDI_APIKEY];
 				$this->redi->setApiKey($this->options[REDI_APIKEY]);
 				$place = $this->redi->createPlace(array (
@@ -104,7 +112,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->options['serviceID'] = $serviceID = (int)$service[ID];
 				$this->saveAdminOptions();
 			}
-			return $new_account;
 		}
 
 		public function __construct()
@@ -142,57 +149,26 @@ if (!class_exists('ReDiRestaurantReservation'))
 			return update_option($this->optionsName, $this->options);
 		}
 
-		function display_errors( $errors, $admin = false ) {
-			if ( isset( $errors['Error'] ) ) {
-				foreach ( (array) $errors['Error'] as $error ) {
-					echo '<div class="error"><p>' . $error . '</p></div>';
-				}
-			}
-			//WP-errors
-			if ( isset( $errors['Wp-Error'] ) && $admin ) {
-				foreach ( (array) $errors['Wp-Error'] as $error_key => $error ) {
-					foreach ( (array) $error as $err ) {
-						echo '<div class="error"><p>' . $error_key . ' : ' . $err . '</p></div>';
-					}
-				}
-			}
-		}
 
 		/**
 		 * Adds settings/options page
 		 */
 		function redi_restaurant_admin_options_page()
 		{
-			$return = array();
 			$errors = array();
-
 			if ($this->ApiKey == NULL) /// TODO: move to install
 			{
-				$return = $this->register();
+				$this->register();
 			}
 
-			if ( $this->ApiKey == null ) {
+            $places = $this->redi->getPlaces();
+            $placeID = $places[0]->ID;
+            $categories = $this->redi->getPlaceCategories($placeID);
+            $serviceID = $this->options['serviceID'];
+            $categoryID =  $categories[0]->ID;
 
-				$this->display_errors( $return, true );
-				die;
-			}
-			$places = $this->redi->getPlaces();
-
-			if ( isset( $places['Error'] ) ) {
-				$this->display_errors( $places, true );
-				die;
-			}
-			$placeID = $places[0]->ID;
-
-			$categories = $this->redi->getPlaceCategories($placeID);
-
-			$serviceID = $this->options['serviceID'];
-
-			$categoryID =  $categories[0]->ID;
-
-			if(isset($_POST['action']) && $_POST['action']=='cancel')
+            if(isset($_POST['action']) && $_POST['action']=='cancel')
 			{
-                
 				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
 				{
 					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
@@ -216,6 +192,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$minPersons = (int)$_POST['MinPersons'];
 				$maxPersons = (int)$_POST['MaxPersons'];
                 $largeGroupsMessage = $_POST['LargeGroupsMessage'];
+
 				if($minPersons >= $maxPersons)
 				{
 					$errors[] = __('Min Persons should be lower than Max Persons', 'redi-restaurant-reservation');
@@ -289,8 +266,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $settings_saved = true;
 					$this->options['MinPersons'] = $minPersons;
 					$this->options['MaxPersons'] = $maxPersons;
-                    $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
-					
+                    //if(!empty($largeGroupsMessage))
+                    {
+                        $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
+                    }
 					$placeID = $_POST['Place'];
 					$categories = $this->redi->getPlaceCategories($placeID);
 					if(isset($categories['Error']))
@@ -695,35 +674,32 @@ if (!class_exists('ReDiRestaurantReservation'))
                                   'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
                                   'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
                             ));
-                    wp_enqueue_script('restaurant');
+					wp_enqueue_script('restaurant');
 
                     wp_register_style('redi-restaurant',
                             REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
                     wp_enqueue_style('redi-restaurant');
-                  //  $persons = 2; //min can be bigger than 2
-					if ( $this->ApiKey == null ) {
 
-						$this->display_errors(array('Error'=> '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>'));
-						return;
-					}
-                    //places 
-                    $places = $this->redi->getPlaces();
-					if ( isset($places['Error']) ) {
+					//places
+					$places = $this->redi->getPlaces();
 
-						$this->display_errors($places);
-						return;
-					}
                     $placeID = $places[0]->ID;
+					$categories = $this->redi->getPlaceCategories($placeID);
+					$categoryID = $categories[0]->ID;
+					$time_format = get_option('time_format');
+					$date_format_setting = $this->options['DateFormat'];
 
-
-                    $time_format = get_option('time_format');
-                    $date_format_setting = $this->options['DateFormat'];
+					$time_format = get_option('time_format');
+					$date_format_setting = $this->options['DateFormat'];
 
 					$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
 					$date_format = $this->getPHPDateFormat($date_format_setting);
 
+                    $time_format = get_option('time_format');
+					$date_format_setting = $this->options['DateFormat'];
+					$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
+					$date_format = $this->getPHPDateFormat($date_format_setting);
                     $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
-
 					$reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
                     $startDate = date($date_format, $reservationStartTime);
                     $startDateISO = date('Y-m-d', $reservationStartTime);
@@ -762,65 +738,12 @@ if (!class_exists('ReDiRestaurantReservation'))
                         }
                     }
 
-					$time_format_hours = self::dropdown_time_format();
-
-					$timepicker = isset($this->options['TimePicker']) ? $this->options['TimePicker'] : null;
-                    $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
+					$hide_clock = TRUE;
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
                     ob_end_clean();
                     return $out;
-		}
-
-		function dropdown_time_format()
-		{
-			$wp_time_format = get_option('time_format');
-			$wp_time_format_array = str_split($wp_time_format);
-			foreach($wp_time_format_array as $index=>$format_char) // some users have G \h i \m\i\n
-			{
-				if($format_char ==='\\')
-				{
-					$wp_time_format_array[$index] = '';
-					if(isset($wp_time_format_array[$index + 1]))
-					{
-						$wp_time_format_array[$index + 1] = '';
-					}
-				}
-			}
-			$wp_time_format = implode('', $wp_time_format_array);
-			$is_am_pm = strpos($wp_time_format, 'g');
-			$is_am_pm_lead_zero = strpos($wp_time_format, 'h');
-
-			$is_24 = strpos($wp_time_format, 'G');
-			$is_24_lead_zero = strpos($wp_time_format, 'H');
-
-			if($is_am_pm !== FALSE || $is_am_pm_lead_zero !== FALSE)
-			{
-				$a = stripos($wp_time_format, 'a');
-				$am_text = '';
-				if($a !== FALSE)
-				{
-					$am_text =$wp_time_format[$a];
-				}
-				if($is_am_pm !== FALSE)
-				{
-					return $wp_time_format[$is_am_pm].' '.$am_text;
-				}
-				if( $is_am_pm_lead_zero !== FALSE)
-				{
-					return $wp_time_format[$is_am_pm_lead_zero].' '.$am_text;
-				}
-			}
-			if($is_24 !== FALSE)
-			{
-				return $wp_time_format[$is_24];
-			}
-			if($is_24_lead_zero !== FALSE)
-			{
-				return $wp_time_format[$is_24_lead_zero];
-			}
-			return 'H'; //if no time format found use 24 h with lead zero
 		}
 
         function redi_restaurant_ajax()
@@ -837,6 +760,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $categoryID = $categories[0]->ID;
                 
             }
+
             switch ($_POST['get'])
             {
                 case 'step1':
@@ -864,42 +788,70 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $endTimeISO     = date('Y-m-d H:i', $endTimeInt);
                     $currentTimeISO = date('Y-m-d H:i', current_time('timestamp'));
 
-                    $params = array(
-                        'StartTime'    => urlencode($startTimeISO),
-                        'EndTime'      => urlencode($endTimeISO),
-                        'Quantity'     => $persons,
-                        'Alternatives' => 2,
-                        'Lang'         => str_replace('_', '-', $_POST['lang']),
-                        'CurrentTime'  => urlencode($currentTimeISO),
-                        'AlternativeTimeStep' => self::getAlternativeTimeStep($persons)
-                    );
+	                $startDateISO  = gmdate('Y-m-d', strtotime($_POST['startDateISO']));
 
-                    //get first category on selected place
+                    $StartTime = gmdate('Y-m-d 00:00', strtotime($_POST['startDateISO'])); //CalendarDate + 00:00
+                    $EndTime = gmdate('Y-m-d 00:00', strtotime("+1 day",strtotime($_POST['startDateISO'])));//CalendarDate + 1day + 00:00
+	                $params = array(
+		                'Quantity'            => $persons,
+		                'Lang'                => str_replace( '_', '-', $_POST['lang'] ),
+		                'CurrentTime'         => urlencode( $currentTimeISO ),
+		                'StartTime'           => urlencode( $StartTime ),
+		                'EndTime'             => urlencode( $EndTime ),
+		                'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons ),
+	                );
 
-                    $categories = $this->redi->getPlaceCategories($placeID);
-                    if(isset($categories['Error']))
-                    {
-                        echo json_encode($categories);
-                        die;
-                    }
-                    $category   = $categories[0];
+					$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
-                    $query = $this->redi->query($category->ID, $params);
+	                switch ( $alternativeTime ) {
+		                case AlternativeTime::AlternativeTimeBlocks:
+			                $query = $this->redi->query($categoryID, $params);
+			                break;
+
+		                case AlternativeTime::AlternativeTimeByShiftStartTime:
+			                $query = $this->redi->availabilityByShifts( $categoryID, $params );
+			                break;
+
+		                case AlternativeTime::AlternativeTimeByDay:
+			                $params['ReservationDuration'] = $this->getReservationTime( $persons );
+			                $query = $this->redi->availabilityByDay( $categoryID, $params );
+			                break;
+	                }
 
                     $time_format = get_option('time_format');
 
-                    if (!isset($query['Error']))
-                    {
-                        unset($query['debug']);
-                        foreach ($query as $q)
-                        {
-                            $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
-                            $q->StartTimeISO = $q->StartTime;
-                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
-                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
-                        }
-                    }
-                    echo json_encode($query);
+	                if ( isset( $query['Error'] ) ) {
+		                echo json_encode( $query );
+		                die;
+	                }
+	                unset( $query['debug'] );
+
+	                $query['alternativeTime'] = $alternativeTime;
+	                switch ( $alternativeTime ) {
+		                case AlternativeTime::AlternativeTimeBlocks: // pass thought
+		                case AlternativeTime::AlternativeTimeByShiftStartTime:
+			                foreach ( $query as $q ) {
+				                $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+				                $q->StartTimeISO = $q->StartTime;
+				                $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+				                $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+			                }
+			                break;
+		                case AlternativeTime::AlternativeTimeByDay:
+			                foreach ( $query as $q2 ) {
+				                if ( isset( $q2->Availability ) ) {
+					                foreach ( $q2->Availability as $q ) {
+						                $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+						                $q->StartTimeISO = $q->StartTime;
+						                $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+						                $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+					                }
+				                }
+			                }
+			                break;
+	                }
+
+	                echo json_encode( $query );
                     break;
 
                 case 'step3':

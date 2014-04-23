@@ -88,22 +88,16 @@ strong
 .redi-restaurant-button
 {
     font-weight: normal;
+    width: 90px;
 }
 
 .redi-restaurant-button[disabled="disabled"]
 {
-    opacity:0.4;
-    filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
 .redi-restaurant-button[select="select"]
 {
     font-weight: bold;
-}
-#step1button[disabled="disabled"]
-{
-    opacity:0.4;
-    filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
 #step1button, #redi-restaurant-step3

@@ -1,5 +1,23 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
-<script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ="h:mm tt";<?php else: ?>var time_format ="HH:mm";<?php endif ?>var locale = "<?php echo get_locale()?>";if ((/^en/).test(locale))locale = "";</script>
+<script type="text/javascript">
+	var date_format = '<?php echo $calendar_date_format ?>';
+	<?php
+	$time_format_s =explode(':', $time_format);
+
+	if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>
+var time_format ="h:mm tt";
+	<?php else: ?>
+var time_format ="HH:mm";
+	<?php endif ?>
+
+	var locale = "<?php echo get_locale()?>";
+
+	if ((/^en/).test(locale))
+	{
+		locale = "";
+	}
+	
+</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
 	<div id="step1">
 		
@@ -15,35 +33,28 @@
 		 </select>
          <br/>
          <?php else: ?>
-         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
+         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date', 'redi-restaurant-reservation')?></h2>
             <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
 		<br/><label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
-        <br/>
-        <br/><label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
-		<?php if (isset($timepicker) && $timepicker === 'dropdown'):?>
-			<select id="redi-restaurant-startHour" class="redi-reservation-select">
-				<?php foreach(range(0, 23) as $hour):?>
-					<option value="<?php echo $hour;?>" <?php if(date('H',$startTime)==$hour):?>selected="selected"<?php endif;?>><?php echo date($time_format_hours, strtotime( $hour.':00'));?></option>
-				<?php endforeach;?>
-			</select>&nbsp;:&nbsp;<select id="redi-restaurant-startMinute" class="redi-reservation-select">
-				<?php foreach(range(0, 45, 15) as $minute):?>
-					<option value="<?php echo $minute;?>"><?php printf('%02d', $minute);?></option>
-				<?php endforeach;?>
-			</select>
-			<input id="redi-restaurant-startTime" type="hidden" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
-		<?php else:?>
-			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
-		<?php endif ?>
 		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
-		<br/><label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
+		<?php if(!$hide_clock):?>
+			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br/>
+		<?php endif;?>
+
+		<?php if(isset($start_time_array)):?>
+			<input id="redi-restaurant-startTimeArray" type="hidden" name="StartTimeArray" value="<?php echo $start_time_array; ?>" />
+		<?php endif;?>
+		<br/>
+        <br/>
+        <label for="persons"><?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br/>
 
 		<select name="persons" id="persons" class="redi-reservation-select">
-			<?php for ($i = $minPersons; $i != $maxPersons+1; $i++): ?>
-                <option value="<?php echo $i?>" ><?php /*<?php if ($persons == $i) echo 'selected="selected"';?> */ ?>
-                    <?php echo $i ?>
-                </option>
+			<?php for ($i = 1; $i != $maxPersons+1; $i++): ?>
+			<option value="<?php echo $i?>" <?php if ($persons == $i) echo 'selected="selected"';?> >
+				<?php echo $i ?>
+			</option>
 			<?php endfor?>
             <?php if (!empty($largeGroupsMessage)):?>
                 <option value="group" >
@@ -57,7 +68,12 @@
 			<input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
-        <div id="step1errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
+
+		<div id="step1errors" <?php if (!isset($shifts['Error'])):?>style="display: none;"<?php endif;?> class="redi-reservation-alert-error redi-reservation-alert">
+			<?php if (isset($shifts['Error'])):?>
+				<?php echo $shifts['Error'];?><br/>
+			<?php endif;?>
+		</div>
 	</div>
 	<br/>
 
