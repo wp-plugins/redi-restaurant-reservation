@@ -134,7 +134,6 @@ jQuery(function () {
             data['field_5'] = jQuery('#field_5').val();
         }
 
-
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
         jQuery('#redi-restaurant-step3').attr('disabled', true);
@@ -144,6 +143,7 @@ jQuery(function () {
             if (response['Error']) {
                 jQuery('#step3errors').html(response['Error']).show('slow');
             } else {
+                ga_event('Reservation confirmed','');
                 jQuery('#step1').hide('slow');
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
@@ -221,4 +221,11 @@ jQuery(function () {
         jQuery('#step3').hide('slow');
         jQuery('#step1errors').hide('slow');
     });
+
+    function ga_event(event, comment)
+    {
+        if(_gaq){
+            _gaq.push(['_trackEvent', 'ReDi Restaurant Reservation', event, comment]);
+        }
+    }
 });
