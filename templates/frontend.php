@@ -78,15 +78,17 @@ var time_format ="HH:mm";
 <!--	<br/>-->
 
 	<div id="step2">
-<!--		<h2>--><?php //_e('Step', 'redi-restaurant-reservation')?><!-- 2: --><?php //_e('Select available time', 'redi-restaurant-reservation')?><!--</h2>-->
+
 		<div id="buttons">
-			<?php if ( isset( $step1 ) ): ?>
+            
+			<?php if ( isset( $step1 ) && is_array($step1)&& !isset($step1['Error'] )): ?>
 				<?php foreach ( $step1 as $available ): ?>
 					<?php if ( isset( $available['Name'] ) ): ?>
+
 						<?php echo( $available['Name'] ); ?>:</br>
 					<?php endif ?>
-					<?php if ( isset( $available['Availability'] ) ): ?>
-						<?php foreach ( $available['Availability'] as $button ): ?><button class="redi-restaurant-button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button><?php endforeach; ?>
+					<?php if ( isset( $available['Availability'] ) && is_array($available['Availability']) ): ?>
+                        <?php foreach ( $available['Availability'] as $button ): ?><button class="redi-restaurant-button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button><?php endforeach; ?>
 						</br>
 					<?php endif; ?>
 					</br>
