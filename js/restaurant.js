@@ -224,7 +224,7 @@ jQuery(function () {
 
     function ga_event(event, comment)
     {
-        if(_gaq){
+        if(typeof _gaq !== 'undefined'){
             _gaq.push(['_trackEvent', 'ReDi Restaurant Reservation', event, comment]);
         }
     }
