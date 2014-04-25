@@ -642,8 +642,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			return 'Y-m-d';
 		}
 
-		public function shortcode()
-		{
+		public function shortcode() {
                     ob_start();
                     wp_enqueue_script('jquery');
                     wp_register_style('jquery_ui', null, array ('jquery'));
@@ -710,40 +709,146 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $largeGroupsMessage = isset($this->options['LargeGroupsMessage']) ? $this->options['LargeGroupsMessage'] : '';
                     $thanks = $this->options['Thanks'];
 
-                    for($i = 1; $i != CUSTOM_FIELDS; $i++)
-                    {
+			for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
                         $field_name = 'field_'.$i.'_name';
                         $field_type = 'field_'.$i.'_type';
                         $field_required = 'field_'.$i.'_required';
                         $field_message = 'field_'.$i.'_message';
 
-                        if(isset($this->options[$field_name]))
-                        {
+				if ( isset( $this->options[$field_name] ) ) {
                             $$field_name = $this->options[$field_name];
                         }
 
-                        if(isset($this->options[$field_type]))
-                        {
+				if ( isset( $this->options[$field_type] ) ) {
                             $$field_type = $this->options[$field_type];
                         }
 
-                        if(isset($this->options[$field_required]))
-                        {
+				if ( isset( $this->options[$field_required] ) ) {
                             $$field_required = $this->options[$field_required];
                         }
 
-                        if(isset($this->options[$field_message]))
-                        {
+				if ( isset( $this->options[$field_message] ) ) {
                             $$field_message = $this->options[$field_message];
                         }
                     }
 
-					$hide_clock = TRUE;
+			//pre call
+			$step1 = self::object_to_array(
+			             $this->step1( $categoryID,
+				             array(
+					             'startDateISO' => $startDateISO,
+					             'startTime'    => date_i18n( $time_format, $startTime ),
+					             'persons'      => 1,
+					             'lang'         => get_locale()
+				             )
+			             )
+			);
+
+			//var_dump($step1);
+
+			$hide_clock = true;
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
                     ob_end_clean();
                     return $out;
+		}
+
+		private function object_to_array( $object ) {
+			return json_decode( json_encode( $object ), true );
+		}
+
+		private function step1( $categoryID, $post ) {
+
+			// convert date to array
+			$date = date_parse( $post['startDateISO'] . ' ' . $post['startTime'] );
+
+			if ( $date['error_count'] > 0 ) {
+				return array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) );
+			}
+
+			$startTimeStr = $date['year'] . '-' . $date['month'] . '-' . $date['day'] . ' ' . $date['hour'] . ':' . $date['minute'];
+
+			$persons = (int) $post['persons'];
+			// convert to int
+			$startTimeInt = strtotime( $startTimeStr, 0 );
+
+			// calculate end time
+			$endTimeInt = strtotime( '+' . $this->getReservationTime( $persons ) . 'minutes', $startTimeInt );
+
+			// format to ISO
+			$startTimeISO   = date( 'Y-m-d H:i', $startTimeInt );
+			//$endTimeISO     = date( 'Y-m-d H:i', $endTimeInt );
+			$currentTimeISO = date( 'Y-m-d H:i', current_time( 'timestamp' ) );
+
+			//$startDateISO = gmdate( 'Y-m-d', strtotime( $post['startDateISO'] ) );
+
+			$StartTime = gmdate( 'Y-m-d 00:00', strtotime( $post['startDateISO'] ) ); //CalendarDate + 00:00
+			$EndTime   = gmdate( 'Y-m-d 00:00', strtotime( "+1 day", strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
+			$params    = array(
+				'Quantity'            => $persons,
+				'Lang'                => str_replace( '_', '-', $post['lang'] ),
+				'CurrentTime'         => urlencode( $currentTimeISO ),
+				'StartTime'           => urlencode( $StartTime ),
+				'EndTime'             => urlencode( $EndTime ),
+				'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons )
+
+			);
+
+			if ( isset( $post['alternatives'] ) ) {
+				$params['Alternatives'] = $post['alternatives'];
+			}
+
+			$alternativeTime = AlternativeTime::AlternativeTimeByDay;
+
+			switch ( $alternativeTime ) {
+				case AlternativeTime::AlternativeTimeBlocks:
+					$query = $this->redi->query( $categoryID, $params );
+					break;
+
+				case AlternativeTime::AlternativeTimeByShiftStartTime:
+					$query = $this->redi->availabilityByShifts( $categoryID, $params );
+					break;
+
+				case AlternativeTime::AlternativeTimeByDay:
+					$params['ReservationDuration'] = $this->getReservationTime( $persons );
+					$query                         = $this->redi->availabilityByDay( $categoryID, $params );
+					break;
+			}
+
+			$time_format = get_option( 'time_format' );
+
+			if ( isset( $query['Error'] ) ) {
+				return $query;
+			}
+			unset( $query['debug'] );
+
+			$query['alternativeTime'] = $alternativeTime;
+			switch ( $alternativeTime ) {
+				case AlternativeTime::AlternativeTimeBlocks: // pass thought
+				case AlternativeTime::AlternativeTimeByShiftStartTime:
+					foreach ( $query as $q ) {
+						$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+						$q->StartTimeISO = $q->StartTime;
+						$q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+						$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+					}
+					break;
+				case AlternativeTime::AlternativeTimeByDay:
+					foreach ( $query as $q2 ) {
+						if ( isset( $q2->Availability ) ) {
+							foreach ( $q2->Availability as $q ) {
+								$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+								$q->StartTimeISO = $q->StartTime;
+								$q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+								$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+							}
+						}
+					}
+					break;
+			}
+
+			return $query;
 		}
 
         function redi_restaurant_ajax()
@@ -763,96 +868,96 @@ if (!class_exists('ReDiRestaurantReservation'))
 
             switch ($_POST['get'])
             {
-                case 'step1':
-                    // convert date to array
-
-                    $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
-
-                    if ($date['error_count'] > 0)
-                    {
-                        echo json_encode(array('Error' => __('Selected date or time is not valid.', 'redi-restaurant-reservation')));
-                        die;
-                    }
-
-                    $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
-
-					$persons = (int) $_POST['persons'];
-                    // convert to int
-                    $startTimeInt = strtotime($startTimeStr, 0);
-
-                    // calculate end time
-                    $endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
-
-                    // format to ISO
-                    $startTimeISO   = date('Y-m-d H:i', $startTimeInt);
-                    $endTimeISO     = date('Y-m-d H:i', $endTimeInt);
-                    $currentTimeISO = date('Y-m-d H:i', current_time('timestamp'));
-
-	                $startDateISO  = gmdate('Y-m-d', strtotime($_POST['startDateISO']));
-
-                    $StartTime = gmdate('Y-m-d 00:00', strtotime($_POST['startDateISO'])); //CalendarDate + 00:00
-                    $EndTime = gmdate('Y-m-d 00:00', strtotime("+1 day",strtotime($_POST['startDateISO'])));//CalendarDate + 1day + 00:00
-	                $params = array(
-		                'Quantity'            => $persons,
-		                'Lang'                => str_replace( '_', '-', $_POST['lang'] ),
-		                'CurrentTime'         => urlencode( $currentTimeISO ),
-		                'StartTime'           => urlencode( $StartTime ),
-		                'EndTime'             => urlencode( $EndTime ),
-		                'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons ),
-	                );
-
-					$alternativeTime = AlternativeTime::AlternativeTimeByDay;
-
-	                switch ( $alternativeTime ) {
-		                case AlternativeTime::AlternativeTimeBlocks:
-			                $query = $this->redi->query($categoryID, $params);
-			                break;
-
-		                case AlternativeTime::AlternativeTimeByShiftStartTime:
-			                $query = $this->redi->availabilityByShifts( $categoryID, $params );
-			                break;
-
-		                case AlternativeTime::AlternativeTimeByDay:
-			                $params['ReservationDuration'] = $this->getReservationTime( $persons );
-			                $query = $this->redi->availabilityByDay( $categoryID, $params );
-			                break;
-	                }
-
-                    $time_format = get_option('time_format');
-
-	                if ( isset( $query['Error'] ) ) {
-		                echo json_encode( $query );
-		                die;
-	                }
-	                unset( $query['debug'] );
-
-	                $query['alternativeTime'] = $alternativeTime;
-	                switch ( $alternativeTime ) {
-		                case AlternativeTime::AlternativeTimeBlocks: // pass thought
-		                case AlternativeTime::AlternativeTimeByShiftStartTime:
-			                foreach ( $query as $q ) {
-				                $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
-				                $q->StartTimeISO = $q->StartTime;
-				                $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
-				                $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
-			                }
-			                break;
-		                case AlternativeTime::AlternativeTimeByDay:
-			                foreach ( $query as $q2 ) {
-				                if ( isset( $q2->Availability ) ) {
-					                foreach ( $q2->Availability as $q ) {
-						                $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
-						                $q->StartTimeISO = $q->StartTime;
-						                $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
-						                $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
-					                }
-				                }
-			                }
-			                break;
-	                }
-
-	                echo json_encode( $query );
-                    break;
+	            case 'step1':
+		            // convert date to array
+		            echo json_encode( $this->step1( $categoryID, $_POST ) );
+//		            $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
+//
+//		            if ($date['error_count'] > 0)
+//		            {
+//			            echo json_encode(array('Error' => __('Selected date or time is not valid.', 'redi-restaurant-reservation')));
+//			            die;
+//		            }
+//
+//		            $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
+//
+//		            $persons = (int) $_POST['persons'];
+//		            // convert to int
+//		            $startTimeInt = strtotime($startTimeStr, 0);
+//
+//		            // calculate end time
+//		            $endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
+//
+//		            // format to ISO
+//		            $startTimeISO   = date('Y-m-d H:i', $startTimeInt);
+//		            $endTimeISO     = date('Y-m-d H:i', $endTimeInt);
+//		            $currentTimeISO = date('Y-m-d H:i', current_time('timestamp'));
+//
+//		            $startDateISO  = gmdate('Y-m-d', strtotime($_POST['startDateISO']));
+//
+//		            $StartTime = gmdate('Y-m-d 00:00', strtotime($_POST['startDateISO'])); //CalendarDate + 00:00
+//		            $EndTime = gmdate('Y-m-d 00:00', strtotime("+1 day",strtotime($_POST['startDateISO'])));//CalendarDate + 1day + 00:00
+//		            $params = array(
+//			            'Quantity'            => $persons,
+//			            'Lang'                => str_replace( '_', '-', $_POST['lang'] ),
+//			            'CurrentTime'         => urlencode( $currentTimeISO ),
+//			            'StartTime'           => urlencode( $StartTime ),
+//			            'EndTime'             => urlencode( $EndTime ),
+//			            'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons ),
+//		            );
+//
+//		            $alternativeTime = AlternativeTime::AlternativeTimeByDay;
+//
+//		            switch ( $alternativeTime ) {
+//			            case AlternativeTime::AlternativeTimeBlocks:
+//				            $query = $this->redi->query($categoryID, $params);
+//				            break;
+//
+//			            case AlternativeTime::AlternativeTimeByShiftStartTime:
+//				            $query = $this->redi->availabilityByShifts( $categoryID, $params );
+//				            break;
+//
+//			            case AlternativeTime::AlternativeTimeByDay:
+//				            $params['ReservationDuration'] = $this->getReservationTime( $persons );
+//				            $query = $this->redi->availabilityByDay( $categoryID, $params );
+//				            break;
+//		            }
+//
+//		            $time_format = get_option('time_format');
+//
+//		            if ( isset( $query['Error'] ) ) {
+//			            echo json_encode( $query );
+//			            die;
+//		            }
+//		            unset( $query['debug'] );
+//
+//		            $query['alternativeTime'] = $alternativeTime;
+//		            switch ( $alternativeTime ) {
+//			            case AlternativeTime::AlternativeTimeBlocks: // pass thought
+//			            case AlternativeTime::AlternativeTimeByShiftStartTime:
+//				            foreach ( $query as $q ) {
+//					            $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+//					            $q->StartTimeISO = $q->StartTime;
+//					            $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+//					            $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+//				            }
+//				            break;
+//			            case AlternativeTime::AlternativeTimeByDay:
+//				            foreach ( $query as $q2 ) {
+//					            if ( isset( $q2->Availability ) ) {
+//						            foreach ( $q2->Availability as $q ) {
+//							            $q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+//							            $q->StartTimeISO = $q->StartTime;
+//							            $q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+//							            $q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+//						            }
+//					            }
+//				            }
+//				            break;
+//		            }
+//
+//		            echo json_encode( $query );
+		            break;
 
                 case 'step3':
 

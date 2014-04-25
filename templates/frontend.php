@@ -65,21 +65,34 @@ var time_format ="HH:mm";
 
         <div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div style="margin-top: 30px; margin-bottom: 30px;">
-			<input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
+<!--			<input id="step1button" type="submit" value="--><?php //_e('Check available time', 'redi-restaurant-reservation');?><!--" name="submit">-->
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
 
-		<div id="step1errors" <?php if (!isset($shifts['Error'])):?>style="display: none;"<?php endif;?> class="redi-reservation-alert-error redi-reservation-alert">
-			<?php if (isset($shifts['Error'])):?>
-				<?php echo $shifts['Error'];?><br/>
+		<div id="step1errors" <?php if (!isset($step1['Error'])):?>style="display: none;"<?php endif;?> class="redi-reservation-alert-error redi-reservation-alert">
+			<?php if (isset($step1['Error'])):?>
+				<?php echo $step1['Error'];?><br/>
 			<?php endif;?>
 		</div>
 	</div>
-	<br/>
+<!--	<br/>-->
 
-	<div id="step2" style="display: none;">
-		<h2><?php _e('Step', 'redi-restaurant-reservation')?> 2: <?php _e('Select available time', 'redi-restaurant-reservation')?></h2>
+	<div id="step2">
+<!--		<h2>--><?php //_e('Step', 'redi-restaurant-reservation')?><!-- 2: --><?php //_e('Select available time', 'redi-restaurant-reservation')?><!--</h2>-->
 		<div id="buttons">
+			<?php if ( isset( $step1 ) ): ?>
+				<?php foreach ( $step1 as $available ): ?>
+					<?php if ( isset( $available['Name'] ) ): ?>
+						<?php echo( $available['Name'] ); ?>:</br>
+					<?php endif ?>
+					<?php if ( isset( $available['Availability'] ) ): ?>
+						<?php foreach ( $available['Availability'] as $button ): ?><button class="redi-restaurant-button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button><?php endforeach; ?>
+						</br>
+					<?php endif; ?>
+					</br>
+				<?php endforeach; ?>
+
+			<?php endif; ?>
 		</div>
 		<input type="hidden" id="redi-restaurant-startTimeHidden" value=""/>
 	</div>

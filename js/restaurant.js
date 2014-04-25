@@ -12,18 +12,18 @@ jQuery(function () {
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
     jQuery('#persons').change(function () {
-        if(jQuery(this).val()==='group')
-        {
-            jQuery('#step1button').attr('disabled', true);
-            jQuery('#large_groups_message').show('slow');
-        }
-        else
-        {
-            jQuery('#step1button').attr('disabled', false);
-            jQuery('#large_groups_message').hide('slow');
-        }
-        hideSteps();
-        jQuery('#step1errors').hide('slow');
+//        if(jQuery(this).val()==='group')
+//        {
+//            jQuery('#step1button').attr('disabled', true);
+//            jQuery('#large_groups_message').show('slow');
+//        }
+//        else
+//        {
+//            jQuery('#step1button').attr('disabled', false);
+//            jQuery('#large_groups_message').hide('slow');
+//        }
+//        hideSteps();
+//        jQuery('#step1errors').hide('slow');
     });
 
     // http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
@@ -70,7 +70,107 @@ jQuery(function () {
             var fullDate = year1 + "-" + month1 + "-" + day1;
 
             jQuery("#redi-restaurant-startDateISO").val(fullDate);
+
+          //  jQuery('#step1button').attr('disabled', true);
+            jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+            jQuery('#step3').hide('slow');
+            jQuery('#step1load').show();
+            jQuery('#step1errors').hide('slow');
+            var data = {
+                action: 'redi_restaurant-submit',
+                get: 'step1',
+                placeID: jQuery('#placeID').val(),
+                startTime: jQuery('#redi-restaurant-startTime').val(),
+                startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
+                persons: jQuery('#persons').val(),
+                lang: locale
+            };
+
+            jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+                    jQuery('#step1load').hide();
+                    jQuery('#step1button').attr('disabled', false);
+                    jQuery('#buttons').html('');
+                    if (response['Error']) {
+                        jQuery('#step1errors').html(response['Error']).show('slow');
+                    } else {
+                        switch (response['alternativeTime']) {
+                            case 1: //AlternativeTimeBlocks see class AlternativeTime::
+                            //pass thought
+                            case 2: //AlternativeTimeByShiftStartTime
+                                for (var res in response) {
+                                    jQuery('#buttons').append(
+                                        '<button class="redi-restaurant-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
+                                            ' ' + (response[res]['Select'] ? 'select="select"' : '') +
+                                            '>' + response[res]['StartTime'] + '</button>'
+                                    );
+                                }
+                                break;
+                            case 3: //AlternativeTimeByDay
+                                for (var availability in response) {
+                                    if(response[availability]['Name']!==undefined) {
+                                        if (response[availability]['Name'])
+                                            jQuery('#buttons').append(response[availability]['Name'] + ':</br>');
+                                        for (var current_button_index in response[availability]['Availability']) {
+                                            var b = response[availability]['Availability'][current_button_index];
+
+                                            jQuery('#buttons').append(
+                                                '<button class="redi-restaurant-button" value="' + b['StartTimeISO'] + '" ' + (b['Available'] ? '' : 'disabled="disabled"') + ' ' + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>'
+                                            );
+                                        }
+                                        jQuery('#buttons').append('</br>');
+                                    }
+                                    jQuery('#buttons').append('</br>');
+                                }
+                                break;
+                        }
+
+                        jQuery('#step2').show('slow');
+
+                        // if selected time is avilable make it bold and show fields
+                        jQuery('.redi-restaurant-button').each(function () {
+                            if (jQuery(this).attr('select')) {
+                                jQuery(this).click();
+                            }
+                        });
+                    }
+                }
+                , 'json');
         }
+    });
+
+    jQuery('.redi-restaurant-button').live('click', function () {
+
+        jQuery('.redi-restaurant-button').each(function () {
+            jQuery(this).removeAttr("select");
+        });
+
+        jQuery(this).attr("select", "select");
+
+        jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
+
+
+       // jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        jQuery('#step3').hide('slow');
+        jQuery('#step2load').show();
+        jQuery('#step1errors').hide('slow');
+        var data = {
+            action: 'redi_restaurant-submit',
+            get: 'step1',
+            placeID: jQuery('#placeID').val(),
+            startTime: jQuery('#redi-restaurant-startTime').val(),
+            startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
+            persons: jQuery('#persons').val(),
+            alternatives : 0,
+            lang: locale
+        };
+
+        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+            alert(response);
+        });
+       // jQuery('#step3').show('slow');
+       // jQuery('#UserName').focus();
+
+        return false;
     });
 
     jQuery('#redi-restaurant-step3').click(function () {
@@ -153,86 +253,7 @@ jQuery(function () {
         return false;
     });
     jQuery('#step1button').click(function () {
-        jQuery('#step1button').attr('disabled', true);
-        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
-        jQuery('#step3').hide('slow');
-        jQuery('#step1load').show();
-        jQuery('#step1errors').hide('slow');
-        var data = {
-            action: 'redi_restaurant-submit',
-            get: 'step1',
-            placeID: jQuery('#placeID').val(),
-            startTime: jQuery('#redi-restaurant-startTime').val(),
-            startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
-            persons: jQuery('#persons').val(),
-            lang: locale
-        };
 
-        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
-            jQuery('#step1load').hide();
-            jQuery('#step1button').attr('disabled', false);
-            jQuery('#buttons').html('');
-            if (response['Error']) {
-                jQuery('#step1errors').html(response['Error']).show('slow');
-            } else {
-                switch (response['alternativeTime']) {
-                    case 1: //AlternativeTimeBlocks see class AlternativeTime::
-                      //pass thought
-                    case 2: //AlternativeTimeByShiftStartTime
-                        for (var res in response) {
-                            jQuery('#buttons').append(
-                                '<button class="redi-restaurant-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
-                                ' ' + (response[res]['Select'] ? 'select="select"' : '') +
-                                '>' + response[res]['StartTime'] + '</button>'
-                            );
-                        }
-                        break;
-                    case 3: //AlternativeTimeByDay
-                        for (var availability in response) {
-                            if(response[availability]['Name']!==undefined) {
-                                if (response[availability]['Name'])
-                                    jQuery('#buttons').append(response[availability]['Name'] + ':</br>');
-                                for (var current_button_index in response[availability]['Availability']) {
-                                    var b = response[availability]['Availability'][current_button_index];
-
-                                    jQuery('#buttons').append(
-                                        '<button class="redi-restaurant-button" value="' + b['StartTimeISO'] + '" ' + (b['Available'] ? '' : 'disabled="disabled"') + ' ' + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>'
-                                    );
-                                }
-                                jQuery('#buttons').append('</br>');
-                            }
-                            jQuery('#buttons').append('</br>');
-                        }
-                        break;
-                }
-
-                jQuery('#step2').show('slow');
-
-                jQuery('.redi-restaurant-button').click(function () {
-
-                    jQuery('.redi-restaurant-button').each(function () {
-                        jQuery(this).removeAttr("select");
-                    });
-
-                    jQuery(this).attr("select", "select");
-
-                    jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
-                    jQuery('#step3').show('slow');
-                    jQuery('#UserName').focus();
-
-                    return false;
-                });
-
-                // if selected time is avilable make it bold and show fields
-                jQuery('.redi-restaurant-button').each(function () {
-                    if (jQuery(this).attr('select')) {
-                        jQuery(this).click();
-                    }
-                });
-            }
-        }
-            , 'json')
-        ;
         return false;
 
     });
