@@ -2,7 +2,7 @@
 Contributors: thecatkin, robby.roboter
 Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking
 Requires at least: 3.0.0
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
@@ -83,6 +83,8 @@ In case you have any problems with plugin installation or you need some customiz
 17. Step 1: Select place, date and time (Multiple places available only for Basic package users)
 18. Blocked Time list. (Available only for Basic package users)
 19. Edit Blocked time. (Available only for Basic package users)
+20. Step 1: Setup Goal with Google Analytics Tracking Code (google analytics/Conversions/Goals/Overview/Set up goals/New goal). 
+21. Step 2: Setup Goal details (Category: ReDi Restaurant Reservation, Action: Reservation confirmed)
 
 == Upgrade Notice ==
 
@@ -101,6 +103,7 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Fixed time displayed in drop down
 * (+) Removed line brakes from javascript to prevent WordPress inserting p elements there when content formatting is turned on
 * (+) Removed direct dependency from curl library
+* (+) Added Google Analytics Tracking Code to thank you page
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)
