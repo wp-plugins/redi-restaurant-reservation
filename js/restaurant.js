@@ -12,22 +12,12 @@ jQuery(function () {
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
     jQuery('#persons').change(function () {
-//        if(jQuery(this).val()==='group')
-//        {
-//            jQuery('#step1button').attr('disabled', true);
-//            jQuery('#large_groups_message').show('slow');
-//        }
-//        else
-//        {
-//            jQuery('#step1button').attr('disabled', false);
-//            jQuery('#large_groups_message').hide('slow');
-//        }
-//        hideSteps();
-//        jQuery('#step1errors').hide('slow');
+        jQuery('#step3').hide('slow');
+        jQuery('.redi-restaurant-button').each(function () {
+            jQuery(this).removeAttr("disabled");
+        });
     });
 
-    // http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
-    // https://github.com/trentrichardson/jQuery-Timepicker-Addon/tree/master/dist/i18n
     if (jQuery.timepicker.regional[locale] != undefined) {
         jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
     }
@@ -71,7 +61,6 @@ jQuery(function () {
 
             jQuery("#redi-restaurant-startDateISO").val(fullDate);
 
-          //  jQuery('#step1button').attr('disabled', true);
             jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
             jQuery('#step3').hide('slow');
             jQuery('#step1load').show();
@@ -138,38 +127,60 @@ jQuery(function () {
         }
     });
 
+    var request = 0;
     jQuery('.redi-restaurant-button').live('click', function () {
-
         jQuery('.redi-restaurant-button').each(function () {
             jQuery(this).removeAttr("select");
         });
 
         jQuery(this).attr("select", "select");
 
-        jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
+        var startTime = jQuery(this).val();
 
-
-       // jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
         jQuery('#step2load').show();
-        jQuery('#step1errors').hide('slow');
+        jQuery('#step2errors').hide('slow');
         var data = {
             action: 'redi_restaurant-submit',
-            get: 'step1',
+            get: 'step2',
             placeID: jQuery('#placeID').val(),
-            startTime: jQuery('#redi-restaurant-startTime').val(),
-            startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
+            startDate: jQuery('#redi-restaurant-startDate').val(),
+            startTime: startTime,
             persons: jQuery('#persons').val(),
-            alternatives : 0,
+            alternatives: 0,
             lang: locale
         };
 
-        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
-            alert(response);
-        });
-       // jQuery('#step3').show('slow');
-       // jQuery('#UserName').focus();
+        var button = jQuery(this);
 
+
+        request++;
+        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+            request--;
+            if (request == 0) {
+                jQuery('#step2load').hide();
+            }
+                if (response['Error']) {
+
+                    if (request == 0) {
+                        jQuery('#step3').hide('slow');
+                        jQuery('#step2errors').html(response['Error']).show('slow');
+                    }
+                    button.attr('disabled', true);
+                } else if (response['Available']) {
+                    if (request == 0) {
+                        jQuery('#step3').show('slow');
+                        jQuery('#UserName').focus();
+                        jQuery('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
+                    }
+                } else {
+                    if (request == 0) {
+                        jQuery('#step3').hide('slow');
+                    }
+                    button.attr('disabled', true);
+                }
+
+        }, 'json');
         return false;
     });
 
@@ -232,8 +243,6 @@ jQuery(function () {
         } else {
             data['field_5'] = jQuery('#field_5').val();
         }
-
-
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
         jQuery('#redi-restaurant-step3').attr('disabled', true);

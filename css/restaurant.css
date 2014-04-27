@@ -89,10 +89,11 @@ strong
 {
     font-weight: normal;
     width: 90px;
+    white-space:nowrap;
 }
 
-.redi-restaurant-button[disabled="disabled"]
-{
+.redi-restaurant-button[disabled]{
+    background-color: #D3D3D3;
 }
 
 .redi-restaurant-button[select="select"]

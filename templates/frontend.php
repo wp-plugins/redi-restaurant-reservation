@@ -80,7 +80,7 @@ var time_format ="HH:mm";
 	<div id="step2">
 
 		<div id="buttons">
-            
+
 			<?php if ( isset( $step1 ) && is_array($step1)&& !isset($step1['Error'] )): ?>
 				<?php foreach ( $step1 as $available ): ?>
 					<?php if ( isset( $available['Name'] ) ): ?>
@@ -97,6 +97,8 @@ var time_format ="HH:mm";
 			<?php endif; ?>
 		</div>
 		<input type="hidden" id="redi-restaurant-startTimeHidden" value=""/>
+        <img id="step2load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
+        <div id="step2errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
 	</div>
 	<br/>
 
