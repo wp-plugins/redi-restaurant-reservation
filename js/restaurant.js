@@ -15,6 +15,7 @@ jQuery(function () {
         jQuery('#step3').hide('slow');
         jQuery('.redi-restaurant-button').each(function () {
             jQuery(this).removeAttr("disabled");
+            jQuery(this).removeAttr("select");
         });
     });
 
