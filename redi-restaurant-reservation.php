@@ -737,7 +737,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $this->step1($categoryID,
                     array(
                         'startDateISO' => $startDateISO,
-                        'startTime' => date_i18n($time_format, $startTime),
+                        'startTime' => '0:00',
                         'persons' => 1,
                         'lang' => get_locale()
                     )
