@@ -104,7 +104,7 @@ jQuery(function () {
                                             var b = response[availability]['Availability'][current_button_index];
 
                                             jQuery('#buttons').append(
-                                                '<button class="redi-restaurant-button" value="' + b['StartTimeISO'] + '" ' + (b['Available'] ? '' : 'disabled="disabled"') + ' ' + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>'
+                                                '<button class="redi-restaurant-button" value="' + b['StartTimeISO'] + '" ' + ' ' + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>'
                                             );
                                         }
                                         jQuery('#buttons').append('</br>');
