@@ -142,9 +142,9 @@
                 </th>
                 <td>
                     <select name="AlternativeTimeStep">
-                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>>15 min</option>
-                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>>30 min</option>
-                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>>60 min</option>
+                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 15);?></option>
+                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 30);?></option>
+                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 60);?></option>
                     </select>
                 </td>
             </tr>
