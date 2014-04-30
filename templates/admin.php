@@ -162,7 +162,21 @@
                     </select>
                 </td>
             </tr>
-
+            <tr>
+                <th scope="row">
+                    <label for="Report">
+                        <?php _e('Send confirmation email to client', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="Report">
+                        <option value="Full" <?php if ($report == Report::Full):?>selected="selected" <?php endif;?>><?php _e('Full', 'redi-restaurant-reservation'); ?></option>
+                        <option value="None" <?php if ($report == Report::None):?>selected="selected" <?php endif;?>><?php _e('None', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Single" <?php if ($report == Report::Single):?>selected="selected" <?php endif;?>><?php _e('Single', 'redi-restaurant-reservation'); ?></option>
+                    </select>
+                </td>
+            </tr>
+            Disable report
 		</table>
 		<br/>
 

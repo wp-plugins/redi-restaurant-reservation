@@ -23,6 +23,11 @@ require_once('redi.php');
 
 if (!class_exists('ReDiRestaurantReservation'))
 {
+    class Report{
+        const Full ='Full';
+        const None ='None';
+        const Single ='Single';
+    }
     class EmailFrom{
         const ReDi = 'ReDi';
         const WordPress = 'WordPress';
@@ -223,6 +228,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$maxPersons = (int)$_POST['MaxPersons'];
                 $largeGroupsMessage = $_POST['LargeGroupsMessage'];
                 $emailFrom = $_POST['EmailFrom'];
+                $report = $_POST['Report'];
 				if($minPersons >= $maxPersons)
 				{
 					$errors[] = __('Min Persons should be lower than Max Persons', 'redi-restaurant-reservation');
@@ -298,6 +304,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$this->options['MaxPersons'] = $maxPersons;
                     $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
                     $this->options['EmailFrom'] = $emailFrom;
+                    $this->options['Report'] = $report;
 					
 					$placeID = $_POST['Place'];
 					$categories = $this->redi->getPlaceCategories($placeID);
@@ -402,6 +409,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                 $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
                 $emailFrom = isset($options['EmailFrom']) ? $options['EmailFrom']: EmailFrom::ReDi;
+                $report = isset($options['Report']) ? $options['Report']: Report::Full;
             }
 
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -742,6 +750,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
                     $largeGroupsMessage = isset($this->options['LargeGroupsMessage']) ? $this->options['LargeGroupsMessage'] : '';
                     $emailFrom = isset($this->options['EmailFrom']) ? $this->options['EmailFrom'] : EmailFrom::ReDi;
+                    $report = isset($this->options['Report']) ? $this->options['Report'] : Report::Full;
                     $thanks = $this->options['Thanks'];
 
                     for($i = 1; $i != CUSTOM_FIELDS; $i++)
