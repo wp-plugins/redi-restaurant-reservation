@@ -894,7 +894,6 @@ if (!class_exists('ReDiRestaurantReservation'))
                     );
 
                     //get first category on selected place
-
                     $categories = $this->redi->getPlaceCategories($placeID);
                     if(isset($categories['Error']))
                     {
@@ -981,7 +980,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'CurrentTime'  => $currentTimeISO
                         )
                     );
-
+                    if ($this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress) {
+                        $params['reservation']['DontNotifyClient'] = 'true';
+                    }
+                    
                     $reservation = $this->redi->createReservation($categoryID, $params);
                     echo json_encode($reservation);
                     break;
