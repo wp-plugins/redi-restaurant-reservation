@@ -23,6 +23,12 @@ require_once('redi.php');
 
 if (!class_exists('ReDiRestaurantReservation'))
 {
+    class EmailFrom{
+        const ReDi = 'ReDi';
+        const WordPress = 'WordPress';
+        const Disabled = 'Disabled';
+    }
+
 	class ReDiRestaurantReservation
 	{
 		public $version = '14.0221';
@@ -216,6 +222,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$minPersons = (int)$_POST['MinPersons'];
 				$maxPersons = (int)$_POST['MaxPersons'];
                 $largeGroupsMessage = $_POST['LargeGroupsMessage'];
+                $emailFrom = $_POST['EmailFrom'];
 				if($minPersons >= $maxPersons)
 				{
 					$errors[] = __('Min Persons should be lower than Max Persons', 'redi-restaurant-reservation');
@@ -290,6 +297,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$this->options['MinPersons'] = $minPersons;
 					$this->options['MaxPersons'] = $maxPersons;
                     $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
+                    $this->options['EmailFrom'] = $emailFrom;
 					
 					$placeID = $_POST['Place'];
 					$categories = $this->redi->getPlaceCategories($placeID);
@@ -393,6 +401,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
                 $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                 $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
+                $emailFrom = isset($options['EmailFrom']) ? $options['EmailFrom']: EmailFrom::ReDi;
             }
 
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -732,6 +741,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$minPersons = isset($this->options['MinPersons']) ? $this->options['MinPersons'] : 1;
 					$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
                     $largeGroupsMessage = isset($this->options['LargeGroupsMessage']) ? $this->options['LargeGroupsMessage'] : '';
+                    $emailFrom = isset($this->options['EmailFrom']) ? $this->options['EmailFrom'] : EmailFrom::ReDi;
                     $thanks = $this->options['Thanks'];
 
                     for($i = 1; $i != CUSTOM_FIELDS; $i++)

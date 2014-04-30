@@ -148,6 +148,21 @@
                     </select>
                 </td>
             </tr>
+            <tr>
+                <th scope="row">
+                    <label for="EmailFrom">
+                        <?php _e('Send confirmation email to client', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="EmailFrom">
+                        <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('ReservationDiary.eu (default)', 'redi-restaurant-reservation'); ?></option>
+                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('my wordpress email account', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('disable confirmation email', 'redi-restaurant-reservation'); ?></option>
+                    </select>
+                </td>
+            </tr>
+
 		</table>
 		<br/>
 
