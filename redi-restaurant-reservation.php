@@ -706,7 +706,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						$this->display_errors(array('Error'=> '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>'));
 						return;
 					}
-                    //places 
+                    //places
                     $places = $this->redi->getPlaces();
 					if ( isset($places['Error']) ) {
 
@@ -835,7 +835,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     die;
                 }
                 $categoryID = $categories[0]->ID;
-                
+
             }
             switch ($_POST['get'])
             {
@@ -875,10 +875,10 @@ if (!class_exists('ReDiRestaurantReservation'))
                     );
 
                     //get first category on selected place
-
                     $categories = $this->redi->getPlaceCategories($placeID);
                     if(isset($categories['Error']))
                     {
+                        $categories['Error'] = __($categories['Error'], 'redi-restaurant-reservation' );
                         echo json_encode($categories);
                         die;
                     }
@@ -888,16 +888,16 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     $time_format = get_option('time_format');
 
-                    if (!isset($query['Error']))
-                    {
+                    if (!isset($query['Error'])) {
                         unset($query['debug']);
-                        foreach ($query as $q)
-                        {
-                            $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
+                        foreach ($query as $q) {
+                            $q->Select = ($startTimeISO == $q->StartTime && $q->Available);
                             $q->StartTimeISO = $q->StartTime;
-                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
-                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
+                            $q->StartTime = date($time_format, strtotime($q->StartTime));
+                            $q->EndTime = date($time_format, strtotime($q->EndTime));
                         }
+                    } else {
+                        $query['Error'] = __($query['Error'], 'redi-restaurant-reservation');
                     }
                     echo json_encode($query);
                     break;
@@ -964,12 +964,14 @@ if (!class_exists('ReDiRestaurantReservation'))
                     );
 
                     $reservation = $this->redi->createReservation($categoryID, $params);
+                    if(isset($reservation['Error'])) {
+                        $reservation['Error'] = __($reservation['Error'], 'redi-restaurant-reservation');
+                    }
                     echo json_encode($reservation);
                     break;
 
                 case 'get_place':
                     self::ajaxed_admin_page($placeID, $categoryID, true);
-
                     break;
             }
 
