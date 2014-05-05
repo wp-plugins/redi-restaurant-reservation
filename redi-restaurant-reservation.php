@@ -975,22 +975,21 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'StartTime'    => $startTimeISO,
                             'EndTime'      => $endTimeISO,
                             'Quantity'     => $persons,
-                            "UserName"     => $_POST['UserName'],
-                            "UserEmail"    => $_POST['UserEmail'],
-                            "UserComments" => $comment,
-                            "UserPhone"    => $_POST['UserPhone'],
-                            "Name"         => "Person",
-                            "Lang"         => str_replace('_', '-', $_POST['lang']),
-                            'CurrentTime'  => $currentTimeISO
+                            'UserName'     => $_POST['UserName'],
+                            'UserEmail'    => $_POST['UserEmail'],
+                            'UserComments' => $comment,
+                            'UserPhone'    => $_POST['UserPhone'],
+                            'Name'         => 'Person',
+                            'Lang'         => str_replace('_', '-', $_POST['lang']),
+                            'CurrentTime'  => $currentTimeISO,
+                            'Version'      => $this->version
                         )
                     );
                     if ($this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress) {
                         $params['reservation']['DontNotifyClient'] = 'true';
-
                     }
-                    
+
                     $reservation = $this->redi->createReservation($categoryID, $params);
-                    //var_dump($reservation);
 
                     if ($this->options['EmailFrom'] == EmailFrom::WordPress && !isset($reservation['Error'])) {
                         //call api for content
