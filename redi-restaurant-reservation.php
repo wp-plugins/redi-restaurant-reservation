@@ -33,6 +33,10 @@ if (!class_exists('ReDiRestaurantReservation'))
         const WordPress = 'WordPress';
         const Disabled = 'Disabled';
     }
+    class EmailContentType{
+        const Canceled = 'Canceled';
+        const Confirmed = 'Confirmed';
+    }
 
 	class ReDiRestaurantReservation
 	{
@@ -982,9 +986,27 @@ if (!class_exists('ReDiRestaurantReservation'))
                     );
                     if ($this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress) {
                         $params['reservation']['DontNotifyClient'] = 'true';
+
                     }
                     
                     $reservation = $this->redi->createReservation($categoryID, $params);
+                    //var_dump($reservation);
+
+                    if ($this->options['EmailFrom'] == EmailFrom::WordPress && !isset($reservation['Error'])) {
+                        //call api for content
+                        $emailContent = $this->redi->getEmailContent(
+                            (int)$reservation['ID'],
+                            EmailContentType::Confirmed,
+                            array(
+                                "Lang" => str_replace('_', '-', $_POST['lang'])
+                            )
+                        );
+
+                        //send
+                        if (!isset($emailContent['Error'])) {
+                            wp_mail($emailContent['To'], $emailContent['Subject'], $emailContent['Body']);
+                        }
+                    }
                     echo json_encode($reservation);
                     break;
 

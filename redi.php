@@ -26,6 +26,9 @@ if (!defined('CATEGORY'))
 if (!defined('RESERVATION'))
 	define ('RESERVATION', 'Reservation.svc/');
 
+if(!defined('EMAILCONTENT'))
+    define('EMAILCONTENT','emailcontent.svc/');
+
 if (!defined('POST'))
 	define('POST', 'POST');
 
@@ -59,6 +62,11 @@ class Redi
 	{
 		$this->ApiKey = $ApiKey;
 	}
+
+    public function getEmailContent($reservationID, $type, $params)
+    {
+        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.$reservationID.'/ClientReservation'.$type, GET, $this->strParams($params));
+    }
 
 	public function cancelReservation($id, $lang, $reason)
 	{
