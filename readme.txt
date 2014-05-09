@@ -18,6 +18,7 @@ Supported languages:
 * Dutch
 * English
 * Estonian
+* Finnish
 * French, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
 * German
 * Italian
@@ -34,7 +35,7 @@ If you need more languages, please contact us!
 * View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 * Setup maximum available seats for online reservation by week day
 * Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
-* Support for multiple places.
+* Support for multiple places. Number of places depends on number of subscriptions.
 * Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted to explain it to clients.
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
@@ -104,6 +105,7 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Removed line brakes from javascript to prevent WordPress inserting p elements there when content formatting is turned on
 * (+) Removed direct dependency from curl library
 * (+) Added Google Analytics Tracking Code to thank you page
+* (+) Add extra attribute to br to prevent controls displacement
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)
