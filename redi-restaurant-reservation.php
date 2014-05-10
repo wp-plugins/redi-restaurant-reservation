@@ -993,6 +993,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                         $params['reservation']['DontNotifyClient'] = 'true';
                     }
 
+
                     $reservation = $this->redi->createReservation($categoryID, $params);
 
                     if ($this->options['EmailFrom'] == EmailFrom::WordPress && !isset($reservation['Error'])) {
@@ -1007,7 +1008,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                         //send
                         if (!isset($emailContent['Error'])) {
-                            wp_mail($emailContent['To'], $emailContent['Subject'], $emailContent['Body']);
+                            wp_mail($emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array('Content-Type: text/html; charset=UTF-8') );
                         }
                     }
                     echo json_encode($reservation);
