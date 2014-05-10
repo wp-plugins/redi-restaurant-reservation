@@ -208,15 +208,32 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$params = array(
 						'ID'          => $_POST['id'],
 						'Lang'        => str_replace( '_', '-', get_locale() ),
-						'Reason'      => urlencode($_POST['reason']),
+						'Reason'      => urlencode( $_POST['reason'] ),
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
-						'Version'     => urlencode(self::plugin_get_version())
+						'Version'     => urlencode( self::plugin_get_version() )
 					);
-					$ret = $this->redi->cancelReservation( $params );
-                
-					if ( isset( $ret['Error'] ) ) {
-						$errors[] = $ret['Error'];
-					}else {
+					if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+						$params['DontNotifyClient'] = 'true';
+					}
+					$cancel = $this->redi->cancelReservation( $params );
+					if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
+						//call api for content
+						$emailContent = $this->redi->getEmailContent(
+							(int) $cancel['ID'],
+							EmailContentType::Canceled,
+							array(
+								"Lang" => str_replace( '_', '-', $_POST['lang'] )
+							)
+						);
+
+						//send
+						if ( ! isset( $emailContent['Error'] ) ) {
+							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+						}
+					}
+					if ( isset( $cancel['Error'] ) ) {
+						$errors[] = $cancel['Error'];
+					} else {
 						$cancel_success = __( 'Reservation has been successfully canceled.', 'redi-restaurant-reservation' );
 					}
 
@@ -341,32 +358,32 @@ if (!class_exists('ReDiRestaurantReservation'))
 							foreach ($removeServices AS $service)
 								$ids[] = $service->ID;
 
-							$ret = $this->redi->deleteServices($ids);
-							if(isset($ret['Error']))
+							$cancel = $this->redi->deleteServices($ids);
+							if(isset($cancel['Error']))
 							{
-								$errors[] = $ret['Error'];
+								$errors[] = $cancel['Error'];
 								$settings_saved = false;
 							}
-							$ret = array();
+							$cancel = array();
 						}
 						else
 						{
 							//add
 							$diff = $services - count($getServices);
 
-							$ret = $this->redi->createService($categoryID,
+							$cancel = $this->redi->createService($categoryID,
 								array (
 									'service' => array (
 										'Name' => 'Person',
 										'Quantity' => $diff
 									)
 								));
-							if(isset($ret['Error']))
+							if(isset($cancel['Error']))
 							{
-								$errors[] = $ret['Error'];
+								$errors[] = $cancel['Error'];
 								$settings_saved = false;
 							}
-							$ret = array();
+							$cancel = array();
 						}
 					}
 
@@ -374,21 +391,21 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 					if (is_array($serviceTimes) && count($serviceTimes))
 					{
-						$ret = $this->redi->setServiceTime($categoryID, $serviceTimes);
-						if(isset($ret['Error']))
+						$cancel = $this->redi->setServiceTime($categoryID, $serviceTimes);
+						if(isset($cancel['Error']))
 						{
-							$errors[] = $ret['Error'];
+							$errors[] = $cancel['Error'];
 							$settings_saved = false;
 						}
-						$ret = array();
+						$cancel = array();
 					}
-					$ret = $this->redi->setPlace($placeID, $place);
-					if(isset($ret['Error']))
+					$cancel = $this->redi->setPlace($placeID, $place);
+					if(isset($cancel['Error']))
 					{
-						$errors[] = $ret['Error'];
+						$errors[] = $cancel['Error'];
 						$settings_saved = false;
 					}
-					$ret = array();
+					$cancel = array();
 				}
 				else
 				{
@@ -989,29 +1006,27 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'Version'      => $this->version
                         )
                     );
-                    if ($this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress) {
-                        $params['reservation']['DontNotifyClient'] = 'true';
-                    }
+	                if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+		                $params['reservation']['DontNotifyClient'] = 'true';
+	                }
+	                $reservation = $this->redi->createReservation( $categoryID, $params );
 
+	                if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $reservation['Error'] ) ) {
+		                //call api for content
+		                $emailContent = $this->redi->getEmailContent(
+			                (int) $reservation['ID'],
+			                EmailContentType::Confirmed,
+			                array(
+				                "Lang" => str_replace( '_', '-', $_POST['lang'] )
+			                )
+		                );
 
-                    $reservation = $this->redi->createReservation($categoryID, $params);
-
-                    if ($this->options['EmailFrom'] == EmailFrom::WordPress && !isset($reservation['Error'])) {
-                        //call api for content
-                        $emailContent = $this->redi->getEmailContent(
-                            (int)$reservation['ID'],
-                            EmailContentType::Confirmed,
-                            array(
-                                "Lang" => str_replace('_', '-', $_POST['lang'])
-                            )
-                        );
-
-                        //send
-                        if (!isset($emailContent['Error'])) {
-                            wp_mail($emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array('Content-Type: text/html; charset=UTF-8') );
-                        }
-                    }
-                    echo json_encode($reservation);
+		                //send
+		                if ( ! isset( $emailContent['Error'] ) ) {
+			                wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+		                }
+	                }
+	                echo json_encode( $reservation );
                     break;
 
                 case 'get_place':
@@ -1027,7 +1042,25 @@ if (!class_exists('ReDiRestaurantReservation'))
 			            'CurrentTime' => urlencode(date('Y-m-d H:i', current_time('timestamp'))),
 			            'Version'     => urlencode(self::plugin_get_version())
 		            );
+		            if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+			            $params['DontNotifyClient'] = 'true';
+		            }
 		            $cancel = $this->redi->cancelReservationByClient( $params );
+		            if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
+			            //call api for content
+			            $emailContent = $this->redi->getEmailContent(
+				            (int) $cancel['ID'],
+				            EmailContentType::Canceled,
+				            array(
+					            "Lang" => str_replace( '_', '-', $_POST['lang'] )
+				            )
+			            );
+
+			            //send
+			            if ( ! isset( $emailContent['Error'] ) ) {
+				            wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+			            }
+		            }
 		            echo json_encode( $cancel );
 
                     break;

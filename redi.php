@@ -64,7 +64,7 @@ class Redi
 	}
 
     public function getEmailContent($reservationID, $type, $params){
-        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.$reservationID.'/ClientReservation'.$type, GET, $this->strParams($params));
+        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.'/'.$reservationID.'/ClientReservation'.$type, GET, $this->strParams($params));
     }
 
 	public function cancelReservationByClient( $params ) {
@@ -222,7 +222,7 @@ class Redi
 
 		// convert response
 		$output = (array) json_decode( $output );
-		if ( REDI_RESTAURANT_DEBUG ) {
+		if ( REDI_RESTAURANT_DEBUG ){
 			$output['debug'] = array
 			(
 				'method' => $method,
