@@ -275,6 +275,7 @@ jQuery(function () {
                 jQuery('#cancel-success').slideDown();
                 jQuery('#cancel-errors').slideUp();
                 jQuery('#cancel-reservation-form').slideUp();
+                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
             }
         }, 'json');
         return false;

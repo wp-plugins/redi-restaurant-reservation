@@ -193,9 +193,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$params = array(
 						'ID'          => $_POST['id'],
 						'Lang'        => str_replace( '_', '-', get_locale() ),
-						'Reason'      => $_POST['reason'],
+						'Reason'      => urlencode($_POST['reason']),
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
-						'Version'     => self::plugin_get_version()
+						'Version'     => urlencode(self::plugin_get_version())
 					);
 					$ret = $this->redi->cancelReservation( $params );
 
@@ -978,11 +978,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 	            case 'cancel':
 		            $params = array(
 			            'ID'          => (int) $_POST['ID'],
-			            'Email'       => $_POST['Email'],
-			            'Reason'      => $_POST['Reason'],
+			            'Email'       => urlencode($_POST['Email']),
+			            'Reason'      => urlencode($_POST['Reason']),
 			            "Lang"        => str_replace( '_', '-', $_POST['lang'] ),
 			            'CurrentTime' => urlencode(date('Y-m-d H:i', current_time('timestamp'))),
-			            'Version'     => self::plugin_get_version()
+			            'Version'     => urlencode(self::plugin_get_version())
 		            );
 		            $cancel = $this->redi->cancelReservationByClient( $params );
 		            echo json_encode( $cancel );
