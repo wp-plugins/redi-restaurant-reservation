@@ -61,13 +61,11 @@ class Redi
 	}
 
 	public function cancelReservationByClient( $params ) {
-
-		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByClient', DELETE, $this->strParams($params));
+		return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByClient', DELETE, $this->strParams( $params ) );
 	}
 
-	public function cancelReservation($id, $lang, $reason)
-	{
-		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.urlencode($reason), DELETE);
+	public function cancelReservation( $params ) {
+		return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByProvider', DELETE, $this->strParams( $params ) );
 	}
 
 	public function createReservation($categoryID, $params)

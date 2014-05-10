@@ -188,21 +188,25 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$categoryID =  $categories[0]->ID;
 
-			if(isset($_POST['action']) && $_POST['action']=='cancel')
-			{
-                
-				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
-				{
-					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
+			if ( isset( $_POST['action'] ) && $_POST['action'] == 'cancel' ) {
+				if ( isset( $_POST['id'] ) && ( (int) $_POST['id'] ) > 0 ) {
+					$params = array(
+						'ID'          => $_POST['id'],
+						'Lang'        => str_replace( '_', '-', get_locale() ),
+						'Reason'      => $_POST['reason'],
+						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
+						'Version'     => self::plugin_get_version()
+					);
+					$ret = $this->redi->cancelReservation( $params );
 
-					if(isset($ret['Error']))
-					{
+					if ( isset( $ret['Error'] ) ) {
 						$errors[] = $ret['Error'];
+					}else {
+						$cancel_success = __( 'Reservation has been successfully canceled.', 'redi-restaurant-reservation' );
 					}
-				}
-				else
-				{
-					$errors[] = __('id and reason are required', 'redi-restaurant-reservation');
+
+				} else {
+					$errors[] = __( 'Id and reason are required', 'redi-restaurant-reservation' );
 				}
 			}
 
@@ -977,8 +981,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 			            'Email'       => $_POST['Email'],
 			            'Reason'      => $_POST['Reason'],
 			            "Lang"        => str_replace( '_', '-', $_POST['lang'] ),
-			            'CurrentTime' => '',
-			            'Version'     => ''
+			            'CurrentTime' => urlencode(date('Y-m-d H:i', current_time('timestamp'))),
+			            'Version'     => self::plugin_get_version()
 		            );
 		            $cancel = $this->redi->cancelReservationByClient( $params );
 		            echo json_encode( $cancel );
