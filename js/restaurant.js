@@ -179,7 +179,7 @@ jQuery(function () {
                 for (res in response) {
 
                     jQuery('#buttons').append(
-                            '<button class="redi-restaurant-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
+                            '<button class="redi-restaurant-button redi-restaurant-time-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
                                 ' ' + (response[res]['Select'] ? 'select="select"' : '') +
                                 '>' + response[res]['StartTime'] + '</button>'
                         );
@@ -187,9 +187,9 @@ jQuery(function () {
 
                 jQuery('#step2').show('slow');
 
-                jQuery('.redi-restaurant-button').click(function () {
+                jQuery('.redi-restaurant-time-button').click(function () {
 
-                    jQuery('.redi-restaurant-button').each(function () {
+                    jQuery('.redi-restaurant-time-button').each(function () {
                         jQuery(this).removeAttr("select");
                     });
 
@@ -203,7 +203,7 @@ jQuery(function () {
                 });
 
                 // if selected time is avilable make it bold and show fields
-                jQuery('.redi-restaurant-button').each(function () {
+                jQuery('.redi-restaurant-time-button').each(function () {
                     if (jQuery(this).attr('select')) {
                         jQuery(this).click();
                     }
@@ -274,6 +274,7 @@ jQuery(function () {
             } else {
                 jQuery('#cancel-success').slideDown();
                 jQuery('#cancel-errors').slideUp();
+                jQuery('#cancel-reservation-form').slideUp();
             }
         }, 'json');
         return false;

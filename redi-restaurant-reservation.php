@@ -693,7 +693,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'redi_restaraurant_reservation',
                             array ( // URL to wp-admin/admin-ajax.php to process the request
                                   'ajaxurl' => admin_url('admin-ajax.php'),
-                                  'id_missing' => __('Id can\'t be empty', 'redi-restaurant-reservation'),
+                                  'id_missing' => __('Reservation number can\'t be empty', 'redi-restaurant-reservation'),
                                   'name_missing'  => __('Name can\'t be empty', 'redi-restaurant-reservation'),
                                   'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
                                   'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
