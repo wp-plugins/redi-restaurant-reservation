@@ -689,9 +689,11 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'redi_restaraurant_reservation',
                             array ( // URL to wp-admin/admin-ajax.php to process the request
                                   'ajaxurl' => admin_url('admin-ajax.php'),
+                                  'id_missing' => __('Id can\'t be empty', 'redi-restaurant-reservation'),
                                   'name_missing'  => __('Name can\'t be empty', 'redi-restaurant-reservation'),
                                   'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
                                   'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
+                                  'reason_missing' => __('Reason can\'t be empty', 'redi-restaurant-reservation'),
                             ));
                     wp_enqueue_script('restaurant');
 
@@ -970,14 +972,17 @@ if (!class_exists('ReDiRestaurantReservation'))
                     break;
 
 	            case 'cancel':
-		            $params      = array(
-			            'ID'     => (int) $_POST['ID'],
-			            'Email'  => $_POST['Email'],
-			            'Reason' => $_POST['Reason'],
-			            "Lang"   => str_replace( '_', '-', $_POST['lang'] ),
+		            $params = array(
+			            'ID'          => (int) $_POST['ID'],
+			            'Email'       => $_POST['Email'],
+			            'Reason'      => $_POST['Reason'],
+			            "Lang"        => str_replace( '_', '-', $_POST['lang'] ),
+			            'CurrentTime' => '',
+			            'Version'     => ''
 		            );
-		            $reservation = $this->redi->cancelReservationByClient( $params );
-		            echo json_encode( $reservation );
+		            $cancel = $this->redi->cancelReservationByClient( $params );
+		            echo json_encode( $cancel );
+
 		            break;
             }
 
