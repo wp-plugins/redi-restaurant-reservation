@@ -6,7 +6,7 @@
  *
  */
 if (!defined('REDI_RESTAURANT_DEBUG'))
-	define('REDI_RESTAURANT_DEBUG', TRUE);
+	define('REDI_RESTAURANT_DEBUG', FALSE);
 
 if (!defined('USER'))
 	define('USER', 'User.svc/');
