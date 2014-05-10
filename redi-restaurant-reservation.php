@@ -206,7 +206,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					}
 
 				} else {
-					$errors[] = __( 'Id and reason are required', 'redi-restaurant-reservation' );
+					$errors[] = __( 'Reservation number is required', 'redi-restaurant-reservation' );
 				}
 			}
 

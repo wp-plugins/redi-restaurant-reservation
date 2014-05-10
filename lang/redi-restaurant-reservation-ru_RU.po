@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2014-01-27 20:32+0200\n"
-"PO-Revision-Date: 2014-01-27 20:35+0200\n"
+"POT-Creation-Date: 2014-05-10 19:10+0200\n"
+"PO-Revision-Date: 2014-05-10 19:14+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: Russian\n"
@@ -20,48 +20,60 @@ msgstr ""
 "\\wp-content\\plugins\\redi-restaurant-reservation\n"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:183
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:207
 msgid "id and reason are required"
 msgstr "Номер и причина обязательны."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:593
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:221
+msgid "Min Persons should be lower than Max Persons"
+msgstr "Минимальное количество человек должно быть меньше максимального"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:228
+msgid "Reservation time should be greater than 0"
+msgstr "Время резервирования должно быть больше 0"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:694
 msgid "Name can't be empty"
 msgstr "Поле Имя не может быть пустым."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:594
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:695
 msgid "Email can't be empty"
 msgstr "Поле Емайл не может быть пустым."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:595
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:696
 msgid "Phone can't be empty"
 msgstr "Поле Телефон не может быть пустым."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:687
-msgid "Selected date or time is not valid."
-msgstr "Указанное время или дата не корректные."
-
-#: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:765
-msgid "Yes"
-msgstr "Да"
-
-#: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:765
-msgid "No"
-msgstr "Нет"
-
-#: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi.php:236
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:706
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi.php:203
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi.php:209
 msgid ""
 "Online reservation service is not available at this time. Try again later or "
 "contact us directly."
 msgstr ""
 "Онлайн бронирование в данный момент не доступно. Повторите попытку пожже или "
 "свяжитесь с нами напрямую."
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:849
+msgid "Selected date or time is not valid."
+msgstr "Указанное время или дата не корректные."
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:931
+msgid "Yes"
+msgstr "Да"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/redi-restaurant-reservation.php:931
+msgid "No"
+msgstr "Нет"
 
 #: C:\Users\Sergei\Documents\My Web
 #: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:12
@@ -75,8 +87,8 @@ msgstr "Настройки базового пакета"
 
 #: C:\Users\Sergei\Documents\My Web
 #: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:16
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:155
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:166
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:224
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:235
 msgid "Cancel reservation"
 msgstr "Отмена резервирования"
 
@@ -91,67 +103,97 @@ msgid "Common settings"
 msgstr "Общие настройки"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:44
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:43
+msgid "Min persons per reservation"
+msgstr "Максимальное количество людей"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:59
 msgid "Max persons per reservation"
 msgstr "Максимальное количество людей"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:55
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:76
+msgid "Message for large groups"
+msgstr "Сообщение для больших групп"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:84
+msgid "This message displayed when user chooses large group"
+msgstr "Это сообщение отображается для больших групп"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:91
 msgid "Reservation time"
 msgstr "Время резервирования"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:63
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:99
 msgid "Reservation duration in minutes"
 msgstr "Время резервирования в минутах"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:70
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:106
 msgid "Support us"
 msgstr "Поддержите нас"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:78
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:114
 msgid "Please support our plugin by publishing Reservation Diary logo"
 msgstr "Поддержите наш плагин разместив Reservation Diary лого"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:87
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:122
+msgid "TimePicker type"
+msgstr ""
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:133
+msgid "jQuery plugin or HTML dropdown"
+msgstr ""
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:140
+msgid "Alternative time step"
+msgstr "Шаг альтернативного времени"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:156
 msgid "Custom fields"
 msgstr "Дополнительные поля"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:94
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:163
 msgid "Field name"
 msgstr "Название поля"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:99
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:168
 msgid "Field type"
 msgstr "Тип"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:104
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:173
 msgid "Is required?"
 msgstr "Обязательный?"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:109
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:178
 msgid "Required error message"
 msgstr "Ошибка если поле не указано"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:147
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:216
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:159
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:228
 msgid "Reservation number"
 msgstr "Номер резервирования"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:162
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin.php:231
 msgid "Reason"
 msgstr "Причина"
 
@@ -162,7 +204,7 @@ msgstr "Настройки ресторана"
 
 #: C:\Users\Sergei\Documents\My Web
 #: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin_ajaxed.php:27
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:26
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:8
 msgid "Place"
 msgstr "Место"
 
@@ -198,13 +240,13 @@ msgstr "Веб адрес"
 
 #: C:\Users\Sergei\Documents\My Web
 #: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin_ajaxed.php:100
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:90
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:93
 msgid "Email"
 msgstr "Емайл"
 
 #: C:\Users\Sergei\Documents\My Web
 #: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/admin_ajaxed.php:110
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:82
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:85
 msgid "Phone"
 msgstr "Телефон"
 
@@ -321,17 +363,22 @@ msgid "Slash"
 msgstr "Слеш"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:5
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:3
+msgid "ApiKey:"
+msgstr ""
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:7
 msgid "Basic package (paid version)"
 msgstr "Базовый пакет (платная версия)"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:7
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:9
 msgid "* View upcoming reservations on Mobile/Tablet PC"
 msgstr "* Просмотр резервирований на мобильном телефоне/планшете"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:9
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:11
 msgid ""
 "View upcoming reservations from your Mobile/Tablet PC and never miss your "
 "customer. This page should be open on a Tablet PC so waitress can see all "
@@ -348,24 +395,24 @@ msgstr ""
 "длижайшие 24 часа. Нажав по резервирования вы увидите его детали."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:11
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:13
 msgid "Fully functional demo can be accessed by following link for 30 days:"
 msgstr ""
 "Ознакомится со всем функционалом в течении 30 дней, можно следуя следующей "
 "ссылке:"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:11
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:13
 msgid "Open upcoming reservations"
 msgstr "Открыть список резервирований"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:14
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:16
 msgid "* Setup maximum available seats for online reservation by week day"
 msgstr "* Конфигурация доступных места для онлайн-бронирования по дням недели"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:16
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:18
 msgid ""
 "* Time shifts. Define multiple open/close time by week day. Define time "
 "before reservation by shift and week day."
@@ -374,87 +421,98 @@ msgstr ""
 "недели."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:18
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:20
 msgid "* Support for multiple places."
 msgstr "* Поддержка нескольких мест."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:21
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/basicpackage.php:23
 msgid "For paid packages please contact us by email:"
 msgstr ""
 "Для получения платного пакета пожалуйста свяжитесь с нами по электронной "
 "почте:"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:25
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:36
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:63
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:71
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:7
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:18
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:66
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:74
 msgid "Step"
 msgstr "Шаг"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:25
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:7
 msgid "Select place, date and time"
 msgstr "Выбор места, даты и времени"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:36
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:18
 msgid "Select date and time"
 msgstr "Выбор даты и времени"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:39
-msgid "Date and time"
-msgstr "Дата и время"
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:21
+msgid "Date"
+msgstr "Дата"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:43
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:24
+msgid "Time"
+msgstr "Время"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:40
 msgid "Persons"
 msgstr "Количество людей"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:54
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:50
+#, php-format
+msgid "More than %s people"
+msgstr "Больше чем %s человек"
+
+#: C:\Users\Sergei\Documents\My Web
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:57
 msgid "Check available time"
 msgstr "Проверить доступность"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:63
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:66
 msgid "Select available time"
 msgstr "Выбор доступного времени"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:71
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:74
 msgid "Provide reservation details"
 msgstr "Информация для обратной связи"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:74
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:77
 msgid "Name"
 msgstr "Имя"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:118
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:121
 msgid "Custom field is required"
 msgstr "Поле обязательное"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:133
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:136
 msgid "Comment"
 msgstr "Коментарии"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:140
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:143
 msgid "Make a reservation"
 msgstr "Забронировать"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:149
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:153
 msgid "Thank you for your reservation."
 msgstr "Спасибо за ваше бронирование"
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:151
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:155
 msgid ""
 "We will create a confirmation and email it to you at the email address you "
 "entered on the reservations form. You should receive your confirmation by "
@@ -465,6 +523,9 @@ msgstr ""
 "ближайшее время."
 
 #: C:\Users\Sergei\Documents\My Web
-#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:158
+#: Sites\wordpress\wp-content\plugins\redi-restaurant-reservation/templates/frontend.php:162
 msgid "Powered by"
 msgstr "Разработано"
+
+#~ msgid "Date and time"
+#~ msgstr "Дата и время"
