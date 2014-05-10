@@ -26,6 +26,9 @@ if (!defined('CATEGORY'))
 if (!defined('RESERVATION'))
 	define ('RESERVATION', 'Reservation.svc/');
 
+if(!defined('EMAILCONTENT'))
+    define('EMAILCONTENT','emailcontent.svc/');
+
 if (!defined('POST'))
 	define('POST', 'POST');
 
@@ -59,6 +62,10 @@ class Redi
 	{
 		$this->ApiKey = $ApiKey;
 	}
+
+    public function getEmailContent($reservationID, $type, $params){
+        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.'/'.$reservationID.'/ClientReservation'.$type, GET, $this->strParams($params));
+    }
 
 	public function cancelReservationByClient( $params ) {
 		return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByClient', DELETE, $this->strParams( $params ) );
@@ -231,13 +238,13 @@ class Redi
 		if ( REDI_RESTAURANT_DEBUG ) {
 			if ( ! $color ) {
 				echo '<pre>';
-				var_dump( $object );
+				var_dump($object);
 				echo '<pre>';
 
 				return;
 			}
 			$result = highlight_string( "<?php\n" . print_r( $object, true ), true );
-			echo '<pre style="text-align: left;">' . preg_replace( '/&lt;\\?php<br \\/>/', '', $result, 1 ) . '</pre><br />';
+			echo '<pre style="text-align: left;">'.preg_replace('/&lt;\\?php<br \\/>/', '', $result, 1).'</pre><br />';
 		}
 
 	}
@@ -245,6 +252,6 @@ class Redi
 	public static function p( $object ) {
 		if ( REDI_RESTAURANT_DEBUG ) {
 			return var_export( $object, true );
-		}
 	}
+}
 }
