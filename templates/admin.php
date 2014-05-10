@@ -171,7 +171,7 @@
             <tr>
                 <th scope="row">
                     <label for="Report">
-                        <?php _e('Send confirmation email to client', 'redi-restaurant-reservation'); ?>
+                        <?php _e('Receive confirmations by email', 'redi-restaurant-reservation'); ?>
                     </label>
                 </th>
                 <td>
@@ -182,7 +182,7 @@
                     </select>
                 </td>
             </tr>
-            Disable report
+
 		</table>
 		<br/>
 
