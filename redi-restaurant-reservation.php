@@ -14,8 +14,6 @@ if (!defined('REDI_RESTAURANT_PLUGIN_URL'))
 	define('REDI_RESTAURANT_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('REDI_RESTAURANT_TEMPLATE'))
 	define('REDI_RESTAURANT_TEMPLATE', plugin_dir_path(__FILE__).'templates'.DIRECTORY_SEPARATOR);
-if (!defined('REDI_RESTAURANT_DEBUG'))
-	define('REDI_RESTAURANT_DEBUG', FALSE);
 if (!defined('ID'))
 	define('ID', 'ID');
 require_once('redi.php');
@@ -978,7 +976,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			            'Reason' => $_POST['Reason'],
 			            "Lang"   => str_replace( '_', '-', $_POST['lang'] ),
 		            );
-		            $reservation = $this->redi->cancelReservationByClient( $categoryID, $params );
+		            $reservation = $this->redi->cancelReservationByClient( $params );
 		            echo json_encode( $reservation );
 		            break;
             }
