@@ -100,12 +100,11 @@ strong
 {
     font-weight: bold;
 }
-#step1button[disabled="disabled"]
-{
-    opacity:0.4;
-    filter:alpha(opacity=40); /* For IE8 and earlier */
-}
 
 #step1button, #redi-restaurant-step3
 {
+}
+
+.cancel-reservation {
+    float: right;
 }

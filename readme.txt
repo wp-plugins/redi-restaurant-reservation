@@ -106,6 +106,7 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Removed direct dependency from curl library
 * (+) Added Google Analytics Tracking Code to thank you page
 * (+) Add extra attribute to br to prevent controls displacement
+* (+) Added ability to cancel reservation by client
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)

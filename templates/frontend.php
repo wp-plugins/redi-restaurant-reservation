@@ -1,10 +1,12 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
+<?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
 <script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ="h:mm tt";<?php else: ?>var time_format ="HH:mm";<?php endif ?>var locale = "<?php echo get_locale()?>";if ((/^en/).test(locale))locale = "";</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
+
 	<div id="step1">
 		
         <?php if(count((array)$places) > 1 ): ?>
-            <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2>
+            <h2 style="float:left;"> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2><a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
             <br clear="both"/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br clear="both"/>
 		 <select name="placeID" id="placeID" class="redi-reservation-select">
 			<?php foreach((array)$places as $place_current):?>
@@ -15,7 +17,7 @@
 		 </select>
          <br clear="both"/>
          <?php else: ?>
-         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
+         <h2 style="float:left;"> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2><a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
             <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
 		<br clear="both"/><label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
@@ -54,7 +56,7 @@
 
         <div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div style="margin-top: 30px;">
-			<input id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
+			<input class="redi-restaurant-button" id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
         <br clear="both"/>
@@ -140,7 +142,7 @@
 		</div>
 		<div>
 			<br clear="both"/><br clear="both"/>
-			<input type="submit" id="redi-restaurant-step3" name="Action" value="<?php _e('Make a reservation', 'redi-restaurant-reservation')?>">
+			<input class="redi-restaurant-button" type="submit" id="redi-restaurant-step3" name="Action" value="<?php _e('Make a reservation', 'redi-restaurant-reservation')?>">
 			<img id="step3load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 			<br clear="both"/>
 		</div>
