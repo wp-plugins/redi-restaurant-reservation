@@ -60,6 +60,10 @@ class Redi
 		$this->ApiKey = $ApiKey;
 	}
 
+	public function cancelReservationByClient( $id, $params ) {
+		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelReservationByClient'.$id, GET, $this->strParams($params));
+	}
+
 	public function cancelReservation($id, $lang, $reason)
 	{
 		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.urlencode($reason), DELETE);

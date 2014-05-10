@@ -1,6 +1,8 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
+<?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
 <script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ="h:mm tt";<?php else: ?>var time_format ="HH:mm";<?php endif ?>var locale = "<?php echo get_locale()?>";if ((/^en/).test(locale))locale = "";</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
+	<a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
 	<div id="step1">
 		
         <?php if(count((array)$places) > 1 ): ?>

@@ -969,8 +969,18 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                 case 'get_place':
                     self::ajaxed_admin_page($placeID, $categoryID, true);
-
                     break;
+
+	            case 'cancel':
+		            $params      = array(
+			            'ID'     => (int) $_POST['ID'],
+			            'Email'  => $_POST['Email'],
+			            'Reason' => $_POST['Reason'],
+			            "Lang"   => str_replace( '_', '-', $_POST['lang'] ),
+		            );
+		            $reservation = $this->redi->cancelReservationByClient( $categoryID, $params );
+		            echo json_encode( $reservation );
+		            break;
             }
 
             die;

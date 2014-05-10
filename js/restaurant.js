@@ -209,8 +209,7 @@ jQuery(function () {
                     }
                 });
             }
-        }
-            , 'json')
+        },'json')
         ;
         return false;
 
@@ -222,10 +221,40 @@ jQuery(function () {
         jQuery('#step1errors').hide('slow');
     });
 
-    function ga_event(event, comment)
-    {
-        if(typeof _gaq !== 'undefined'){
+    function ga_event(event, comment) {
+        if (typeof _gaq !== 'undefined') {
             _gaq.push(['_trackEvent', 'ReDi Restaurant Reservation', event, comment]);
         }
     }
+
+    //Cancel reservation
+    jQuery('#cancel-reservation').click(function () {
+        jQuery('#redi-reservation').slideUp();
+        jQuery('#cancel-reservation-div').slideDown();
+    });
+
+    jQuery('#back-to-reservation').click(function () {
+        jQuery('#redi-reservation').slideDown();
+        jQuery('#cancel-reservation-div').slideUp();
+    });
+
+    jQuery('#redi-restaurant-cancel').click(function () {
+        //Ajax
+        var data = {
+            action: 'redi_restaurant-submit',
+            get: 'cancel',
+            ID: jQuery('#redi-restaurant-cancelReservationID').val(),
+            Email: jQuery('#redi-restaurant-cancelEmail').val(),
+            Reason: jQuery('#redi-restaurant-cancelReason').val(),
+            lang: locale
+        };
+        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+            if (response['Error']) {
+                jQuery('#cancel-errors').html(response['Error']).show('slow');
+            } else {
+
+            }
+        }, 'json');
+        return false;
+    });
 });
