@@ -2,11 +2,11 @@
 <?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
 <script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ="h:mm tt";<?php else: ?>var time_format ="HH:mm";<?php endif ?>var locale = "<?php echo get_locale()?>";if ((/^en/).test(locale))locale = "";</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
-	<a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
+
 	<div id="step1">
 		
         <?php if(count((array)$places) > 1 ): ?>
-            <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2>
+            <h2 style="float:left;"> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2><a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
             <br clear="both"/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br clear="both"/>
 		 <select name="placeID" id="placeID" class="redi-reservation-select">
 			<?php foreach((array)$places as $place_current):?>
@@ -17,7 +17,7 @@
 		 </select>
          <br clear="both"/>
          <?php else: ?>
-         <h2> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2>
+         <h2 style="float:left;"> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?></h2><a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
             <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
 		<br clear="both"/><label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>

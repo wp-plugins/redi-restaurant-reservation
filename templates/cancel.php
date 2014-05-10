@@ -1,6 +1,6 @@
 <div id="cancel-reservation-div" style="display: none">
-	<a href="#cancel" id="back-to-reservation" class="cancel-reservation"><?php _e('Back to reservation page', 'redi-restaurant-reservation')?></a>
-	<h2> <?php _e('Cancel reservation', 'redi-restaurant-reservation')?></h2>
+
+	<h2 style="float:left;"> <?php _e('Cancel reservation', 'redi-restaurant-reservation')?></h2><a href="#cancel" id="back-to-reservation" class="cancel-reservation"><?php _e('Back to reservation page', 'redi-restaurant-reservation')?></a>
 	<br clear="both"/>
 	<label for="redi-restaurant-cancelReservationID"><?php _e('Reservation number', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label>
 	<br clear="both"/>
