@@ -14,8 +14,6 @@ if (!defined('REDI_RESTAURANT_PLUGIN_URL'))
 	define('REDI_RESTAURANT_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('REDI_RESTAURANT_TEMPLATE'))
 	define('REDI_RESTAURANT_TEMPLATE', plugin_dir_path(__FILE__).'templates'.DIRECTORY_SEPARATOR);
-if (!defined('REDI_RESTAURANT_DEBUG'))
-	define('REDI_RESTAURANT_DEBUG', FALSE);
 if (!defined('ID'))
 	define('ID', 'ID');
 require_once('redi.php');
@@ -205,23 +203,27 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$categoryID =  $categories[0]->ID;
 
-			if(isset($_POST['action']) && $_POST['action']=='cancel')
-			{
+			if ( isset( $_POST['action'] ) && $_POST['action'] == 'cancel' ) {
+				if ( isset( $_POST['id'] ) && ( (int) $_POST['id'] ) > 0 ) {
+					$params = array(
+						'ID'          => $_POST['id'],
+						'Lang'        => str_replace( '_', '-', get_locale() ),
+						'Reason'      => urlencode($_POST['reason']),
+						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
+						'Version'     => urlencode(self::plugin_get_version())
+					);
+					$ret = $this->redi->cancelReservation( $params );
                 
-				if(isset($_POST['id']) && ((int)$_POST['id']) > 0)
-				{
-					$ret = $this->redi->cancelReservation($_POST['id'], str_replace('_', '-', get_locale()), $_POST['reason']);
-
-					if(isset($ret['Error']))
-					{
+					if ( isset( $ret['Error'] ) ) {
 						$errors[] = $ret['Error'];
+					}else {
+						$cancel_success = __( 'Reservation has been successfully canceled.', 'redi-restaurant-reservation' );
 					}
+
+				} else {
+					$errors[] = __( 'Id and reason are required', 'redi-restaurant-reservation' );
 				}
-				else
-				{
-					$errors[] = __('id and reason are required', 'redi-restaurant-reservation');
 				}
-			}
 
 			if (isset($_POST['submit']))
 			{
@@ -712,9 +714,11 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'redi_restaraurant_reservation',
                             array ( // URL to wp-admin/admin-ajax.php to process the request
                                   'ajaxurl' => admin_url('admin-ajax.php'),
+                                  'id_missing' => __('Reservation number can\'t be empty', 'redi-restaurant-reservation'),
                                   'name_missing'  => __('Name can\'t be empty', 'redi-restaurant-reservation'),
                                   'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
                                   'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
+                                  'reason_missing' => __('Reason can\'t be empty', 'redi-restaurant-reservation'),
                             ));
                     wp_enqueue_script('restaurant');
 
@@ -1011,6 +1015,19 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                 case 'get_place':
                     self::ajaxed_admin_page($placeID, $categoryID, true);
+                    break;
+
+	            case 'cancel':
+		            $params = array(
+			            'ID'          => (int) $_POST['ID'],
+			            'Email'       => urlencode($_POST['Email']),
+			            'Reason'      => urlencode($_POST['Reason']),
+			            "Lang"        => str_replace( '_', '-', $_POST['lang'] ),
+			            'CurrentTime' => urlencode(date('Y-m-d H:i', current_time('timestamp'))),
+			            'Version'     => urlencode(self::plugin_get_version())
+		            );
+		            $cancel = $this->redi->cancelReservationByClient( $params );
+		            echo json_encode( $cancel );
 
                     break;
             }

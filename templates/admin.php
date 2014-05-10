@@ -22,7 +22,13 @@
 			</p>
 		</div>
 	<?php endif ?>
-
+	<?php if ( isset( $cancel_success ) ): ?>
+		<div class="updated">
+			<p>
+				<?php echo $cancel_success; ?>
+			</p>
+		</div>
+	<?php endif; ?>
 	<?php if (isset($errors)): ?>
 		<?php foreach((array)$errors as $error):?>
 		<div class="error">
