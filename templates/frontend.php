@@ -65,7 +65,6 @@ var time_format ="HH:mm";
 
         <div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div style="margin-top: 30px; margin-bottom: 30px;">
-<!--			<input id="step1button" type="submit" value="--><?php //_e('Check available time', 'redi-restaurant-reservation');?><!--" name="submit">-->
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
 
@@ -88,7 +87,10 @@ var time_format ="HH:mm";
 						<?php echo( $available['Name'] ); ?>:</br>
 					<?php endif ?>
 					<?php if ( isset( $available['Availability'] ) && is_array($available['Availability']) ): ?>
-                        <?php foreach ( $available['Availability'] as $button ): ?><button class="redi-restaurant-button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button><?php endforeach; ?>
+						<?php $all_busy = true; ?>
+                        <?php foreach ( $available['Availability'] as $button ): ?><button <?php if(!$button['Available']):?>disabled="disabled"<?php endif?> class="redi-restaurant-button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button>
+							<?php if($button['Available']) $all_busy = false; ?>
+							<?php endforeach; ?>
 						</br>
 					<?php endif; ?>
 					</br>
@@ -99,10 +101,13 @@ var time_format ="HH:mm";
 		<input type="hidden" id="redi-restaurant-startTimeHidden" value=""/>
         <img id="step2load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
         <div id="step2errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
+		<div id="step2busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
+			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
+		</div>
 	</div>
 	<br/>
 
-	<div id="step3" style="display: none;">
+	<div id="step3" <?php if($all_busy):?>style="display: none;"<?php endif; ?>>
 		<h2><?php _e('Step', 'redi-restaurant-reservation')?> 3: <?php _e('Provide reservation details', 'redi-restaurant-reservation')?></h2>
 		<div>
 			<br/>
