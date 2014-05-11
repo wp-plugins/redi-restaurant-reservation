@@ -179,7 +179,7 @@ jQuery(function () {
                 for (res in response) {
 
                     jQuery('#buttons').append(
-                            '<button class="redi-restaurant-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
+                            '<button class="redi-restaurant-button redi-restaurant-time-button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
                                 ' ' + (response[res]['Select'] ? 'select="select"' : '') +
                                 '>' + response[res]['StartTime'] + '</button>'
                         );
@@ -187,9 +187,9 @@ jQuery(function () {
 
                 jQuery('#step2').show('slow');
 
-                jQuery('.redi-restaurant-button').click(function () {
+                jQuery('.redi-restaurant-time-button').click(function () {
 
-                    jQuery('.redi-restaurant-button').each(function () {
+                    jQuery('.redi-restaurant-time-button').each(function () {
                         jQuery(this).removeAttr("select");
                     });
 
@@ -203,14 +203,13 @@ jQuery(function () {
                 });
 
                 // if selected time is avilable make it bold and show fields
-                jQuery('.redi-restaurant-button').each(function () {
+                jQuery('.redi-restaurant-time-button').each(function () {
                     if (jQuery(this).attr('select')) {
                         jQuery(this).click();
                     }
                 });
             }
-        }
-            , 'json')
+        },'json')
         ;
         return false;
 
@@ -222,10 +221,63 @@ jQuery(function () {
         jQuery('#step1errors').hide('slow');
     });
 
-    function ga_event(event, comment)
-    {
-        if(typeof _gaq !== 'undefined'){
+    function ga_event(event, comment) {
+        if (typeof _gaq !== 'undefined') {
             _gaq.push(['_trackEvent', 'ReDi Restaurant Reservation', event, comment]);
         }
     }
+
+    //Cancel reservation
+    jQuery('#cancel-reservation').click(function () {
+        jQuery('#redi-reservation').slideUp();
+        jQuery('#cancel-reservation-div').slideDown();
+    });
+
+    jQuery('#back-to-reservation').click(function () {
+        jQuery('#redi-reservation').slideDown();
+        jQuery('#cancel-reservation-div').slideUp();
+    });
+
+    jQuery('#redi-restaurant-cancel').click(function () {
+        var error = '';
+        if (jQuery('#redi-restaurant-cancelID').val() === '') {
+            error += redi_restaraurant_reservation.id_missing + '<br/>';
+        }
+        if (jQuery('#redi-restaurant-cancelEmail').val() === '') {
+            error += redi_restaraurant_reservation.email_missing + '<br/>';
+        }
+        if (jQuery('#redi-restaurant-cancelReason').val() === '') {
+            error += redi_restaraurant_reservation.reason_missing + '<br/>';
+        }
+        if (error) {
+            jQuery('#cancel-errors').html(error).show('slow');
+            return false;
+        }
+        //Ajax
+        var data = {
+            action: 'redi_restaurant-submit',
+            get: 'cancel',
+            ID: jQuery('#redi-restaurant-cancelID').val(),
+            Email: jQuery('#redi-restaurant-cancelEmail').val(),
+            Reason: jQuery('#redi-restaurant-cancelReason').val(),
+            lang: locale
+        };
+        jQuery('#cancel-errors').slideUp();
+        jQuery('#cancel-success').slideUp();
+        jQuery('#cancel-load').show();
+        jQuery('#redi-restaurant-cancel').attr('disabled', true);
+        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+            jQuery('#redi-restaurant-cancel').attr('disabled', false);
+            jQuery('#cancel-load').hide();
+            if (response['Error']) {
+                jQuery('#cancel-errors').html(response['Error']).show('slow');
+            } else {
+                jQuery('#cancel-success').slideDown();
+                jQuery('#cancel-errors').slideUp();
+                jQuery('#cancel-reservation-form').slideUp();
+                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+            }
+        }, 'json');
+        return false;
+    });
 });

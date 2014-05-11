@@ -26,6 +26,9 @@ if (!defined('CATEGORY'))
 if (!defined('RESERVATION'))
 	define ('RESERVATION', 'Reservation.svc/');
 
+if(!defined('EMAILCONTENT'))
+    define('EMAILCONTENT','emailcontent.svc/');
+
 if (!defined('POST'))
 	define('POST', 'POST');
 
@@ -60,9 +63,16 @@ class Redi
 		$this->ApiKey = $ApiKey;
 	}
 
-	public function cancelReservation($id, $lang, $reason)
-	{
-		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/cancelByProvider?id='.$id.'&Lang='.$lang.'&reason='.urlencode($reason), DELETE);
+    public function getEmailContent($reservationID, $type, $params){
+        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.'/'.$reservationID.'/ClientReservation'.$type, GET, $this->strParams($params));
+    }
+
+	public function cancelReservationByClient( $params ) {
+		return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByClient', DELETE, $this->strParams( $params ) );
+	}
+
+	public function cancelReservation( $params ) {
+		return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByProvider', DELETE, $this->strParams( $params ) );
 	}
 
 	public function createReservation($categoryID, $params)
@@ -212,7 +222,7 @@ class Redi
 
 		// convert response
 		$output = (array) json_decode( $output );
-		if ( REDI_RESTAURANT_DEBUG ) {
+		if ( REDI_RESTAURANT_DEBUG ){
 			$output['debug'] = array
 			(
 				'method' => $method,
@@ -224,26 +234,24 @@ class Redi
 		return $output;
 	}
 
-	public static function d($object, $color = true)
-	{
-		if (REDI_RESTAURANT_DEBUG)
-		{
-			if (!$color)
-			{
+	public static function d( $object, $color = true ) {
+		if ( REDI_RESTAURANT_DEBUG ) {
+			if ( ! $color ) {
 				echo '<pre>';
 				var_dump($object);
 				echo '<pre>';
+
 				return;
 			}
-			$result = highlight_string("<?php\n".print_r($object, TRUE), TRUE);
+			$result = highlight_string( "<?php\n" . print_r( $object, true ), true );
 			echo '<pre style="text-align: left;">'.preg_replace('/&lt;\\?php<br \\/>/', '', $result, 1).'</pre><br />';
 		}
 
 	}
 
-	public static function p($object)
-	{
-		if (REDI_RESTAURANT_DEBUG)
-			return $object;
+	public static function p( $object ) {
+		if ( REDI_RESTAURANT_DEBUG ) {
+			return var_export( $object, true );
 	}
+}
 }

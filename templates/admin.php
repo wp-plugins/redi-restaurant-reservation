@@ -22,7 +22,13 @@
 			</p>
 		</div>
 	<?php endif ?>
-
+	<?php if ( isset( $cancel_success ) ): ?>
+		<div class="updated">
+			<p>
+				<?php echo $cancel_success; ?>
+			</p>
+		</div>
+	<?php endif; ?>
 	<?php if (isset($errors)): ?>
 		<?php foreach((array)$errors as $error):?>
 		<div class="error">
@@ -142,12 +148,41 @@
                 </th>
                 <td>
                     <select name="AlternativeTimeStep">
-                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>>15 min</option>
-                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>>30 min</option>
-                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>>60 min</option>
+                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 15);?></option>
+                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 30);?></option>
+                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 60);?></option>
                     </select>
                 </td>
             </tr>
+            <tr>
+                <th scope="row">
+                    <label for="EmailFrom">
+                        <?php _e('Send confirmation email to client', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="EmailFrom">
+                        <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('ReservationDiary.eu (default)', 'redi-restaurant-reservation'); ?></option>
+                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('my wordpress email account', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('disable confirmation email', 'redi-restaurant-reservation'); ?></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="Report">
+                        <?php _e('Receive confirmations by email', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="Report">
+                        <option value="Full" <?php if ($report == Report::Full):?>selected="selected" <?php endif;?>><?php _e('Full', 'redi-restaurant-reservation'); ?></option>
+                        <option value="None" <?php if ($report == Report::None):?>selected="selected" <?php endif;?>><?php _e('None', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Single" <?php if ($report == Report::Single):?>selected="selected" <?php endif;?>><?php _e('Single', 'redi-restaurant-reservation'); ?></option>
+                    </select>
+                </td>
+            </tr>
+
 		</table>
 		<br/>
 
