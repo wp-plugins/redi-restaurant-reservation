@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2014-05-11 21:08+0200\n"
-"PO-Revision-Date: 2014-05-11 21:08+0200\n"
+"PO-Revision-Date: 2014-05-11 21:24+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: French\n"
@@ -355,7 +355,7 @@ msgstr "Pour la version Premium, contactez-nous par e-mail : "
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:36
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:111
 msgid "Step"
-msgstr "Étape"
+msgstr "Réservez une table"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:25
 msgid "Select place, date and time"
