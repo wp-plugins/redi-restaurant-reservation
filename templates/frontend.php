@@ -107,8 +107,8 @@ var time_format ="HH:mm";
 	</div>
 	<br/>
 
-	<div id="step3" <?php if($all_busy):?>style="display: none;"<?php endif; ?>>
-		<h2><?php _e('Step', 'redi-restaurant-reservation')?> 3: <?php _e('Provide reservation details', 'redi-restaurant-reservation')?></h2>
+	<div id="step3" style="display: none;">
+		<h2><?php _e('Step', 'redi-restaurant-reservation')?> 2: <?php _e('Provide reservation details', 'redi-restaurant-reservation')?></h2>
 		<div>
 			<br/>
 			<label for="UserName"><?php _e('Name', 'redi-restaurant-reservation');?>:

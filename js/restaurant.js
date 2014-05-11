@@ -243,9 +243,7 @@ jQuery(function () {
     function display_all_busy(display){
         if(display){
             jQuery('#step2busy').show();
-            jQuery('#step3').hide('slow');
         }else{
-            jQuery('#step3').show('slow');
             jQuery('#step2busy').hide();
         }
     }
