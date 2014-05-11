@@ -542,7 +542,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 			if (function_exists('load_plugin_textdomain'))
 			{
 				load_plugin_textdomain( 'redi-restaurant-reservation', false, 'redi-restaurant-reservation/lang');
+				load_plugin_textdomain( 'redi-restaurant-reservation-errors', false, 'redi-restaurant-reservation/lang');
 			}
+
 		}
 		/**
 		 * @desc Adds the options subpanel
@@ -920,8 +922,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     //get first category on selected place
                     $categories = $this->redi->getPlaceCategories($placeID);
-                    if(isset($categories['Error']))
-                    {
+                    if(isset($categories['Error'])){
+	                    $categories['Error'] = __( $categories['Error'], 'redi-restaurant-reservation-errors' );
                         echo json_encode($categories);
                         die;
                     }
@@ -931,8 +933,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
                     $time_format = get_option('time_format');
 
-                    if (!isset($query['Error']))
-                    {
+                    if (!isset($query['Error'])){
                         unset($query['debug']);
                         foreach ($query as $q)
                         {
@@ -942,6 +943,9 @@ if (!class_exists('ReDiRestaurantReservation'))
                             $q->EndTime      = date($time_format, strtotime($q->EndTime));
                         }
                     }
+					else{
+						$query['Error'] = __( $query['Error'], 'redi-restaurant-reservation-errors' );
+					}
                     echo json_encode($query);
                     break;
 
