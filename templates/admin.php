@@ -162,10 +162,13 @@
                 </th>
                 <td>
                     <select name="EmailFrom">
-                        <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('ReservationDiary.eu (default)', 'redi-restaurant-reservation'); ?></option>
-                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('my wordpress email account', 'redi-restaurant-reservation'); ?></option>
-                        <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('disable confirmation email', 'redi-restaurant-reservation'); ?></option>
+                        <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation'); ?></option>
+                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('From my wordpress email account', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
                     </select>
+                </td>
+                <td>
+                    "My wordpress email account" setting is available for Basic package clients
                 </td>
             </tr>
             <tr>
