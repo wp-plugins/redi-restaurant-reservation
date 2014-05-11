@@ -91,24 +91,26 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 14.0511 =
+* Added settings to select Min and Max party size
+* Added message to client when he select Large group
+* Added setting to specify alternative time step
+* Added Portuguese (Brazil) translation
+* Added Swedish translation
+* Fixed multi language support
+* Fixed time displayed in drop down
+* Removed line brakes from javascript to prevent WordPress inserting p elements there when content formatting is turned on
+* Removed direct dependency from curl library
+* Added Google Analytic Tracking Code to thank you page
+* Add extra attribute to br to prevent controls displacement
+* Added ability to cancel reservation by client
+* Added possibility to override errors returned by API
+* New client reservation confirmation email template
+
 = 14.0221 =
 * Added alternative time picker for better reservation time selection on mobile devices
 * Added limits to text areas
 * Moved all texts to language files
-* (+) Added settings to select Min and Max party size
-* (+) Added message to client when he select Large group
-* (+) Added setting to specify alternative time step
-* (+) Added Portuguese (Brazil) translation
-* (+) Added Swedish translation
-* (+) Fixed multi language support
-* (+) Fixed time displayed in drop down
-* (+) Removed line brakes from javascript to prevent WordPress inserting p elements there when content formatting is turned on
-* (+) Removed direct dependency from curl library
-* (+) Added Google Analytic Tracking Code to thank you page
-* (+) Add extra attribute to br to prevent controls displacement
-* (+) Added ability to cancel reservation by client
-* (+) Added possibility to override errors returned by API
-* (+) New client reservation confirmation email template
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)
