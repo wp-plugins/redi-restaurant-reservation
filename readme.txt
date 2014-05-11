@@ -108,6 +108,7 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Add extra attribute to br to prevent controls displacement
 * (+) Added ability to cancel reservation by client
 * (+) Added possibility to override errors returned by API
+* (+) New client reservation confirmation email template
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)
