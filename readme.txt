@@ -37,6 +37,7 @@ If you need more languages, please contact us!
 * Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
 * Support for multiple places. Number of places depends on number of subscriptions.
 * Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted to explain it to clients.
+* Send client reservation confirmation emails from wordpress account
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
 
