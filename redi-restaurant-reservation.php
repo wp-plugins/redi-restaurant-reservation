@@ -281,7 +281,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'MinTimeBeforeReservation' => $_POST['MinTimeBeforeReservation'],
 						'Catalog'                  => (int) $_POST['Catalog'],
 						'DateFormat'               => $_POST['DateFormat'],
-						'MaxTimeBeforeReservation' => $maxTime
+						'MaxTimeBeforeReservation' => $maxTime,
+						'Version'                  => $this->version
 					)
 				);
 
