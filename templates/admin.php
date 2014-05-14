@@ -171,7 +171,7 @@
                     "My wordpress email account" setting is available for Basic package clients
                 </td>
             </tr>
-            <tr>
+            <!--<tr> Coming soon
                 <th scope="row">
                     <label for="Report">
                         <?php _e('Receive confirmations by email', 'redi-restaurant-reservation'); ?>
@@ -184,7 +184,7 @@
                         <option value="Single" <?php if ($report == Report::Single):?>selected="selected" <?php endif;?>><?php _e('Single', 'redi-restaurant-reservation'); ?></option>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
 
 		</table>
 		<br/>
