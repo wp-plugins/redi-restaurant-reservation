@@ -185,7 +185,22 @@
                     </select>
                 </td>
             </tr>-->
-
+			<tr>
+				<th scope="row">
+					<label for="MaxTime">
+						<?php _e('Max time before reservations', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="MaxTime">
+						<?php foreach(range(1, 12) as $current):?>
+							<option value="<?php echo $current?>" <?php if($current == $maxTime): ?>selected="selected"<?php endif;?>>
+								<?php echo $current ?> <?php echo _n( 'Month', 'Months', $current, 'redi-restaurant-reservation' )?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
 		</table>
 		<br/>
 
