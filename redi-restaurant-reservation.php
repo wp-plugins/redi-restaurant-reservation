@@ -21,20 +21,24 @@ require_once('redi.php');
 
 if (!class_exists('ReDiRestaurantReservation'))
 {
-    class Report{
-        const Full ='Full';
-        const None ='None';
-        const Single ='Single';
-    }
-    class EmailFrom{
-        const ReDi = 'ReDi';
-        const WordPress = 'WordPress';
-        const Disabled = 'Disabled';
-    }
-    class EmailContentType{
-        const Canceled = 'Canceled';
-        const Confirmed = 'Confirmed';
-    }
+	class Report {
+		const None = 0;
+		const All = 1;
+		const Single = 2;
+		const GroupedByDay = 3;
+	}
+
+	class From {
+		const ReDi = 'ReDi';
+		const WordPress = 'WordPress';
+		const Disabled = 'Disabled';
+	}
+
+	class EmailContentType {
+		const Canceled = 'ClientReservationCanceled';
+		const Confirmed = 'ClientReservationConfirmed';
+		const Changed = 'ProviderReservationChange';
+	}
 
 	class ReDiRestaurantReservation
 	{
@@ -171,6 +175,24 @@ if (!class_exists('ReDiRestaurantReservation'))
 			}
 		}
 
+		private function sendEmail( $id, $type ) {
+			//call api for content
+			$emailContent = $this->redi->getEmailContent(
+				$id,
+				$type,
+				array(
+					'Lang' => str_replace( '_', '-', get_locale() ),
+					'ReportType' => $this->options['Report'],
+					'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
+				)
+			);
+
+			//send
+			if ( !isset( $emailContent['Error'] ) ) {
+				wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+			}
+		}
+
 		/**
 		 * Adds settings/options page
 		 */
@@ -212,24 +234,19 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
 						'Version'     => urlencode(self::plugin_get_version())
 					);
-					if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+					if ( $this->options['EmailFrom'] == From::Disabled || $this->options['EmailFrom'] == From::WordPress ) {
 						$params['DontNotifyClient'] = 'true';
 					}
+					if ( $this->options['ReportFrom'] == From::Disabled || $this->options['ReportFrom'] == From::WordPress ) {
+						$params['DontSendReport'] = 'true';
+					}
 					$cancel = $this->redi->cancelReservation( $params );
-					if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
-						//call api for content
-						$emailContent = $this->redi->getEmailContent(
-							(int) $cancel['ID'],
-							EmailContentType::Canceled,
-							array(
-								"Lang" => str_replace( '_', '-', $_POST['lang'] )
-							)
-						);
-
-						//send
-						if ( ! isset( $emailContent['Error'] ) ) {
-							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
-						}
+					//Send Email
+					if ( $this->options['EmailFrom'] == From::WordPress && !isset( $cancel['Error'] ) ) {
+						$this->sendEmail( (int) $cancel['ID'], EmailContentType::Canceled );
+					}
+					if ( $this->options['ReportFrom'] == From::WordPress && !isset( $cancel['Error'] ) ) {
+						$this->sendEmail( (int) $cancel['ID'], EmailContentType::Changed );
 					}
 					if ( isset( $cancel['Error'] ) ) {
 						$errors[] = $cancel['Error'];
@@ -251,6 +268,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$maxPersons = (int)$_POST['MaxPersons'];
                 $largeGroupsMessage = $_POST['LargeGroupsMessage'];
                 $emailFrom = $_POST['EmailFrom'];
+				$reportFrom = $_POST['ReportFrom'];
                 $report = $_POST['Report'];
 				if($minPersons >= $maxPersons)
 				{
@@ -327,6 +345,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$this->options['MaxPersons'] = $maxPersons;
                     $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
                     $this->options['EmailFrom'] = $emailFrom;
+					$this->options['ReportFrom'] = $reportFrom;
                     $this->options['Report'] = $report;
 					
 					$placeID = $_POST['Place'];
@@ -431,8 +450,9 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
                 $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
                 $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
-                $emailFrom = isset($options['EmailFrom']) ? $options['EmailFrom']: EmailFrom::ReDi;
-                $report = isset($options['Report']) ? $options['Report']: Report::Full;
+                $emailFrom = isset($options['EmailFrom']) ? $options['EmailFrom']: From::ReDi;
+	            $reportFrom = isset($options['ReportFrom']) ? $options['ReportFrom']: From::ReDi;
+                $report = isset($options['Report']) ? $options['Report']: Report::All;
             }
 
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -776,8 +796,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$minPersons = isset($this->options['MinPersons']) ? $this->options['MinPersons'] : 1;
 					$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
                     $largeGroupsMessage = isset($this->options['LargeGroupsMessage']) ? $this->options['LargeGroupsMessage'] : '';
-                    $emailFrom = isset($this->options['EmailFrom']) ? $this->options['EmailFrom'] : EmailFrom::ReDi;
-                    $report = isset($this->options['Report']) ? $this->options['Report'] : Report::Full;
+                    $emailFrom = isset($this->options['EmailFrom']) ? $this->options['EmailFrom'] : From::ReDi;
+					$reportFrom = isset($this->options['ReportFrom']) ? $this->options['ReportFrom'] : From::ReDi;
+                    $report = isset($this->options['Report']) ? $this->options['Report'] : Report::All;
                     $thanks = $this->options['Thanks'];
 
                     for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -1010,25 +1031,19 @@ if (!class_exists('ReDiRestaurantReservation'))
                             'Version'      => $this->version
                         )
                     );
-	                if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+	                if ( $this->options['EmailFrom'] == From::Disabled || $this->options['EmailFrom'] == From::WordPress ) {
 		                $params['reservation']['DontNotifyClient'] = 'true';
+	                }
+	                if ( $this->options['ReportFrom'] == From::Disabled || $this->options['ReportFrom'] == From::WordPress ) {
+						$params['reservation']['DontSendReport'] = 'true';
 	                }
 	                $reservation = $this->redi->createReservation( $categoryID, $params );
 
-	                if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $reservation['Error'] ) ) {
-		                //call api for content
-		                $emailContent = $this->redi->getEmailContent(
-			                (int) $reservation['ID'],
-			                EmailContentType::Confirmed,
-			                array(
-				                "Lang" => str_replace( '_', '-', $_POST['lang'] )
-			                )
-		                );
-
-		                //send
-		                if ( ! isset( $emailContent['Error'] ) ) {
-			                wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
-		                }
+	                if ( $this->options['EmailFrom'] == From::WordPress && !isset( $reservation['Error'] ) ) {
+		                $this->sendEmail( (int) $reservation['ID'], EmailContentType::Confirmed );
+	                }
+	                if ( $this->options['ReportFrom'] == From::WordPress && !isset( $reservation['Error'] ) ) {
+		                $this->sendEmail( (int) $reservation['ID'], EmailContentType::Changed );
 	                }
                     echo json_encode($reservation);
                     break;
@@ -1042,28 +1057,22 @@ if (!class_exists('ReDiRestaurantReservation'))
 			            'ID'          => (int) $_POST['ID'],
 			            'Email'       => urlencode($_POST['Email']),
 			            'Reason'      => urlencode($_POST['Reason']),
-			            "Lang"        => str_replace( '_', '-', $_POST['lang'] ),
+			            'lang'        => str_replace( '_', '-', $_POST['lang'] ),
 			            'CurrentTime' => urlencode(date('Y-m-d H:i', current_time('timestamp'))),
 			            'Version'     => urlencode(self::plugin_get_version())
 		            );
-		            if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+		            if ( $this->options['EmailFrom'] == From::Disabled || $this->options['EmailFrom'] == From::WordPress ) {
 			            $params['DontNotifyClient'] = 'true';
 		            }
+		            if ( $this->options['ReportFrom'] == From::Disabled || $this->options['ReportFrom'] == From::WordPress ) {
+			            $params['DontSendReport'] = 'true';
+		            }
 		            $cancel = $this->redi->cancelReservationByClient( $params );
-		            if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
-			            //call api for content
-			            $emailContent = $this->redi->getEmailContent(
-				            (int) $cancel['ID'],
-				            EmailContentType::Canceled,
-				            array(
-					            "Lang" => str_replace( '_', '-', $_POST['lang'] )
-				            )
-			            );
-
-			            //send
-			            if ( ! isset( $emailContent['Error'] ) ) {
-				            wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
-			            }
+		            if ( $this->options['EmailFrom'] == From::WordPress && !isset( $cancel['Error'] ) ) {
+			            $this->sendEmail( (int) $cancel['ID'], EmailContentType::Canceled );
+		            }
+		            if ( $this->options['ReportFrom'] == From::WordPress && !isset( $cancel['Error'] ) ) {
+			            $this->sendEmail( (int) $cancel['ID'], EmailContentType::Changed );
 		            }
 		            echo json_encode( $cancel );
 

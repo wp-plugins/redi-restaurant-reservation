@@ -162,16 +162,33 @@
                 </th>
                 <td>
                     <select name="EmailFrom">
-                        <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation'); ?></option>
-                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('From my wordpress email account', 'redi-restaurant-reservation'); ?></option>
-                        <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
+                        <option value="ReDi" <?php if ($emailFrom == From::ReDi):?>selected="selected" <?php endif;?>><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation'); ?></option>
+                        <option value="WordPress" <?php if ($emailFrom == From::WordPress):?>selected="selected" <?php endif;?>><?php _e('From my wordpress email account', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Disabled" <?php if ($emailFrom == From::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
                     </select>
                 </td>
                 <td>
                     "My wordpress email account" setting is available for Basic package clients
                 </td>
             </tr>
-            <!--<tr> Coming soon
+			<tr>
+				<th scope="row">
+					<label for="ReportFrom">
+						<?php _e('Send report from', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="ReportFrom">
+						<option value="ReDi" <?php if ($reportFrom == From::ReDi):?>selected="selected" <?php endif;?>><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation'); ?></option>
+						<option value="WordPress" <?php if ($reportFrom == From::WordPress):?>selected="selected" <?php endif;?>><?php _e('From my wordpress email account', 'redi-restaurant-reservation'); ?></option>
+						<option value="Disabled" <?php if ($reportFrom == From::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable report email', 'redi-restaurant-reservation'); ?></option>
+					</select>
+				</td>
+				<td>
+					"My wordpress email account" setting is available for Basic package clients
+				</td>
+			</tr>
+            <tr>
                 <th scope="row">
                     <label for="Report">
                         <?php _e('Receive confirmations by email', 'redi-restaurant-reservation'); ?>
@@ -179,12 +196,13 @@
                 </th>
                 <td>
                     <select name="Report">
-                        <option value="Full" <?php if ($report == Report::Full):?>selected="selected" <?php endif;?>><?php _e('Full', 'redi-restaurant-reservation'); ?></option>
-                        <option value="None" <?php if ($report == Report::None):?>selected="selected" <?php endif;?>><?php _e('None', 'redi-restaurant-reservation'); ?></option>
-                        <option value="Single" <?php if ($report == Report::Single):?>selected="selected" <?php endif;?>><?php _e('Single', 'redi-restaurant-reservation'); ?></option>
+                        <option value="<?php echo Report::All ?>" <?php if ($report == Report::All):?>selected="selected" <?php endif;?>><?php _e('ALL', 'redi-restaurant-reservation'); ?></option>
+                        <option value="<?php echo Report::None ?>" <?php if ($report == Report::None):?>selected="selected" <?php endif;?>><?php _e('None', 'redi-restaurant-reservation'); ?></option>
+                        <option value="<?php echo Report::Single ?>" <?php if ($report == Report::Single):?>selected="selected" <?php endif;?>><?php _e('Single', 'redi-restaurant-reservation'); ?></option>
+	                    <option value="<?php echo Report::GroupedByDay ?>" <?php if ($report == Report::GroupedByDay):?>selected="selected" <?php endif;?>><?php _e('Grouped by day', 'redi-restaurant-reservation'); ?></option>
                     </select>
                 </td>
-            </tr>-->
+            </tr>
 
 		</table>
 		<br/>

@@ -64,7 +64,7 @@ class Redi
 	}
 
     public function getEmailContent($reservationID, $type, $params){
-        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.'/'.$reservationID.'/ClientReservation'.$type, GET, $this->strParams($params));
+        return $this->request(REDI_RESTAURANT_API.EMAILCONTENT.$this->ApiKey.'/'.$reservationID.'/'.$type, GET, $this->strParams($params));
     }
 
 	public function cancelReservationByClient( $params ) {
