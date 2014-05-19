@@ -241,17 +241,16 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$errors[] = __( 'Reservation number is required', 'redi-restaurant-reservation' );
 				}
 			}
-
+			$settings_saved = false;
 			if (isset($_POST['submit']))
 			{
-				$settings_saved = false;
 				$form_valid = true;
 				//validation
 				$minPersons = (int)$_POST['MinPersons'];
 				$maxPersons = (int)$_POST['MaxPersons'];
                 $largeGroupsMessage = $_POST['LargeGroupsMessage'];
                 $emailFrom = $_POST['EmailFrom'];
-                $report = $_POST['Report'];
+				$report = isset( $_POST['Report'] ) ? $_POST['Report'] : Report::Full;
 				if($minPersons >= $maxPersons)
 				{
 					$errors[] = __('Min Persons should be lower than Max Persons', 'redi-restaurant-reservation');
