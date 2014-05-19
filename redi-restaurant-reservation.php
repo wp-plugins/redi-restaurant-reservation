@@ -258,10 +258,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$errors[] = __( 'Reservation number is required', 'redi-restaurant-reservation' );
 				}
 			}
-
+			$settings_saved = false;
 			if (isset($_POST['submit']))
 			{
-				$settings_saved = false;
 				$form_valid = true;
 				//validation
 				$minPersons = (int)$_POST['MinPersons'];
