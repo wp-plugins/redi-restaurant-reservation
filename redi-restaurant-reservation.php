@@ -251,6 +251,8 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $largeGroupsMessage = $_POST['LargeGroupsMessage'];
                 $emailFrom = $_POST['EmailFrom'];
 				$report = isset( $_POST['Report'] ) ? $_POST['Report'] : Report::Full;
+				$maxTime = $_POST['MaxTime'];
+
 				if($minPersons >= $maxPersons)
 				{
 					$errors[] = __('Min Persons should be lower than Max Persons', 'redi-restaurant-reservation');
@@ -264,20 +266,22 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$form_valid = false;
 				}
 				$place = array(
-					'place' => array (
-						'Name' => $_POST['Name'],
-						'City' => $_POST['City'],
-						'Country' => $_POST['Country'],
-						'Address' => $_POST['Address'],
-						'Email' => $_POST['Email'],
-						'Phone' => $_POST['Phone'],
-						'WebAddress' => $_POST['WebAddress'],
-						'Lang' => $_POST['Lang'],
-						'DescriptionShort' => $_POST['DescriptionShort'],
-						'DescriptionFull' => $_POST['DescriptionFull'],
+					'place' => array(
+						'Name'                     => $_POST['Name'],
+						'City'                     => $_POST['City'],
+						'Country'                  => $_POST['Country'],
+						'Address'                  => $_POST['Address'],
+						'Email'                    => $_POST['Email'],
+						'Phone'                    => $_POST['Phone'],
+						'WebAddress'               => $_POST['WebAddress'],
+						'Lang'                     => $_POST['Lang'],
+						'DescriptionShort'         => $_POST['DescriptionShort'],
+						'DescriptionFull'          => $_POST['DescriptionFull'],
 						'MinTimeBeforeReservation' => $_POST['MinTimeBeforeReservation'],
-						'Catalog' => (int)$_POST['Catalog'],
-						'DateFormat' =>$_POST['DateFormat']
+						'Catalog'                  => (int) $_POST['Catalog'],
+						'DateFormat'               => $_POST['DateFormat'],
+						'MaxTimeBeforeReservation' => $maxTime,
+						'Version'                  => $this->version
 					)
 				);
 
@@ -327,6 +331,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $this->options['LargeGroupsMessage'] = $largeGroupsMessage;
                     $this->options['EmailFrom'] = $emailFrom;
                     $this->options['Report'] = $report;
+					$this->options['MaxTime'] = $maxTime;
 					
 					$placeID = $_POST['Place'];
 					$categories = $this->redi->getPlaceCategories($placeID);
@@ -386,6 +391,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						}
 					}
 
+
 					$this->saveAdminOptions();
 
 					if (is_array($serviceTimes) && count($serviceTimes))
@@ -420,19 +426,19 @@ if (!class_exists('ReDiRestaurantReservation'))
 				}
 			}
 
-			$options = get_option($this->optionsName);
+			$this->options = get_option($this->optionsName);
 
-            if($settings_saved || !isset($_POST['submit']))
-            {
-                $thanks = isset($options['Thanks']) ? $options['Thanks'] : 0;
-                $timepicker = isset($options['TimePicker']) ? $options['TimePicker'] : null;
-                $minPersons = isset($options['MinPersons']) ? $options['MinPersons']: 1;
-                $maxPersons = isset($options['MaxPersons']) ? $options['MaxPersons']: 10;
-                $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
-                $largeGroupsMessage = isset($options['LargeGroupsMessage']) ? $options['LargeGroupsMessage']: '';
-                $emailFrom = isset($options['EmailFrom']) ? $options['EmailFrom']: EmailFrom::ReDi;
-                $report = isset($options['Report']) ? $options['Report']: Report::Full;
-            }
+			if ( $settings_saved || ! isset( $_POST['submit'] ) ) {
+				$thanks              = $this->GetOption( 'Thanks', 0 );
+				$timepicker          = $this->GetOption( 'TimePicker' );
+				$minPersons          = $this->GetOption( 'MinPersons', 1 );
+				$maxPersons          = $this->GetOption( 'MaxPersons', 10 );
+				$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
+				$largeGroupsMessage  = $this->GetOption( 'LargeGroupsMessage', '' );
+				$emailFrom           = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
+				$report              = $this->GetOption( 'Report', Report::Full );
+				$maxTime             = $this->GetOption( 'MaxTime', 1 );
+			}
 
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
 			{
@@ -441,24 +447,24 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$field_required = 'field_'.$i.'_required';
 				$field_message = 'field_'.$i.'_message';
 
-				if(isset($options[$field_name]))
+				if(isset($this->options[$field_name]))
 				{
-					$$field_name = $options[$field_name];
+					$$field_name = $this->options[$field_name];
 				}
 
-				if(isset($options[$field_type]))
+				if(isset($this->options[$field_type]))
 				{
-					$$field_type = $options[$field_type];
+					$$field_type = $this->options[$field_type];
 				}
 
-				if(isset($options[$field_required]))
+				if(isset($this->options[$field_required]))
 				{
-					$$field_required = $options[$field_required];
+					$$field_required = $this->options[$field_required];
 				}
 
-				if(isset($options[$field_message]))
+				if(isset($this->options[$field_message]))
 				{
-					$$field_message = $options[$field_message];
+					$$field_message = $this->options[$field_message];
 				}
 			}
 
@@ -476,6 +482,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			require_once(REDI_RESTAURANT_TEMPLATE.'admin.php');
 			require_once(REDI_RESTAURANT_TEMPLATE.'basicpackage.php');
+		}
+
+		private function GetOption( $name, $default = null ) {
+			return isset( $this->options[ $name ] ) ? $this->options[ $name ] : $default;
 		}
 
 		function GetServiceTimes()
@@ -772,12 +782,13 @@ if (!class_exists('ReDiRestaurantReservation'))
                     $startDateISO = date('Y-m-d', $reservationStartTime);
 					$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
 
-					$minPersons = isset($this->options['MinPersons']) ? $this->options['MinPersons'] : 1;
-					$maxPersons = isset($this->options['MaxPersons']) ? $this->options['MaxPersons'] : 10;
-                    $largeGroupsMessage = isset($this->options['LargeGroupsMessage']) ? $this->options['LargeGroupsMessage'] : '';
-                    $emailFrom = isset($this->options['EmailFrom']) ? $this->options['EmailFrom'] : EmailFrom::ReDi;
-                    $report = isset($this->options['Report']) ? $this->options['Report'] : Report::Full;
-                    $thanks = $this->options['Thanks'];
+					$minPersons         = $this->GetOption( 'MinPersons', 1 );
+					$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
+					$largeGroupsMessage = $this->GetOption( 'LargeGroupsMessage', '' );
+					$emailFrom          = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
+					$report             = $this->GetOption( 'Report', Report::Full );
+					$maxTime            = $this->GetOption( 'MaxTime', 1 );
+					$thanks             = $this->GetOption('Thanks');
 
                     for($i = 1; $i != CUSTOM_FIELDS; $i++)
                     {
@@ -809,8 +820,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 					$time_format_hours = self::dropdown_time_format();
 
-					$timepicker = isset($this->options['TimePicker']) ? $this->options['TimePicker'] : null;
-                    $alternativeTimeStep = isset($options['AlternativeTimeStep']) ? $options['AlternativeTimeStep'] : 30;
+					$timepicker          = $this->GetOption( 'TimePicker' );
+					$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
                     require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
                     $out = ob_get_contents();
 
