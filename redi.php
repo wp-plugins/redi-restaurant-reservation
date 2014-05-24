@@ -49,8 +49,7 @@ if (!defined('REDI_APIKEY'))
 
 if (!defined('REDI_RESTAURANT_API'))
 {
-	define('REDI_RESTAURANT_API', 
-     'http://localhost:65126/service/');
+	define('REDI_RESTAURANT_API', 'http://api.reservationdiary.eu/service/');
 }
 
 define('CUSTOM_FIELDS', 6);
