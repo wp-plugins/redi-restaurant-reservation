@@ -57,7 +57,10 @@
 						<?php endforeach; ?>
 					</select>
 				</td>
-				<td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Minimum number of persons available to select from person drop down.', 'redi-restaurant-reservation') ?>
+                    </p>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -73,7 +76,10 @@
 					<?php endforeach; ?>
 				</select>
 				</td>
-				<td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Maximum number of persons available to select from person drop down.', 'redi-restaurant-reservation') ?>
+                    </p>
 				</td>
 			</tr>
             <tr>
@@ -153,6 +159,11 @@
                         <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 60);?></option>
                     </select>
                 </td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Show to clients available time with time step. For example if you select 15 min, alternative time will be 10:00, 10:15, 10:30 etc.', 'redi-restaurant-reservation') ?>
+                    </p>
+                </td>
             </tr>
             <tr>
                 <th scope="row">
@@ -167,8 +178,10 @@
                         <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
                     </select>
                 </td>
-                <td>
-                    "My wordpress email account" setting is available for Basic package clients
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('My wordpress email account" setting is available for Basic package clients', 'redi-restaurant-reservation') ?>
+                    </p>
                 </td>
             </tr>
             <!--<tr> Coming soon
@@ -200,6 +213,11 @@
 						<?php endforeach; ?>
 					</select>
 				</td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Maximum time before reservation is accepted.', 'redi-restaurant-reservation') ?>
+                    </p>
+                </td>
 			</tr>
 		</table>
 		<br/>
@@ -207,6 +225,9 @@
 		<!-- custom fields-->
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
+        <p class="description">
+			<b style="color: red"><?php _e('NOTE: Name, Email and Phone are required fields of reservtion form and does not needs to be defined here.', 'redi-restaurant-reservation') ?></b>
+		</p>
 
 		<table class="form-table" style="width: 80%;">
 			<thead>
@@ -266,7 +287,7 @@
 		
 		
 
-		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes' );?>" name="submit">
+		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes', 'redi-restaurant-reservation') ?>" name="submit">
 	</form>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
             <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 500px;"></iframe>

@@ -108,6 +108,9 @@ In case you have any problems with plugin installation or you need some customiz
 * Added ability to cancel reservation by client
 * Added possibility to override errors returned by API
 * New client reservation confirmation email template
+* (+) Limit maximum time before reservation
+* (+) Fixed warnings
+
 
 = 14.0221 =
 * Added alternative time picker for better reservation time selection on mobile devices

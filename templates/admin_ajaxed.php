@@ -226,6 +226,8 @@ jQuery(function () {
 		<?php _e('If you close next day at night then set closing time on a same day. For example 18:00 - 3:00', 'redi-restaurant-reservation'); ?>
 		<br/>
 		<?php _e('Set Open and Close fields to blank if restaurant is closed.', 'redi-restaurant-reservation'); ?>
+		<br/>
+		<?php _e('Multiple open and close times are available in Basic package.', 'redi-restaurant-reservation'); ?>
 	</p>
 	<br/>
         <div class="icon32" id="icon-edit-comments"><br></div>
