@@ -197,7 +197,7 @@ jQuery(function () {
 		</tr>
 
 		<?php foreach ($this->weekday as $serviceTimeName): ?>
-			<?php $serviceTimeValue = $serviceTimes[$serviceTimeName]; ?>
+			<?php $serviceTimeValue = isset($serviceTimes[$serviceTimeName]) ? $serviceTimes[$serviceTimeName] : ''; ?>
 
 			<tr valign="top">
 				<th scope="row">
@@ -206,12 +206,12 @@ jQuery(function () {
 					</label>
 				</th>
 				<td>
-					<input id="OpenTime[<?php echo $day ?>]" type="text"
-							value="<?php echo $serviceTimeValue['OpenTime'] ?>"
+					<input id="OpenTime[<?php echo $serviceTimeName ?>]" type="text"
+							value="<?php echo isset($serviceTimeValue['OpenTime'])?$serviceTimeValue['OpenTime']:'' ?>"
 							name="OpenTime[<?php echo $serviceTimeName ?>]"/>
 				</td>
 				<td>
-					<input id="" type="text" value="<?php echo $serviceTimeValue['CloseTime'] ?>"
+					<input id="" type="text" value="<?php echo isset($serviceTimeValue['CloseTime'])?$serviceTimeValue['CloseTime']:'' ?>"
 							name="CloseTime[<?php echo $serviceTimeName ?>]"/>
 				</td>
 			</tr>
