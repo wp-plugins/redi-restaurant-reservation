@@ -205,9 +205,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$params = array(
 						'ID'          => $_POST['id'],
 						'Lang'        => str_replace( '_', '-', get_locale() ),
-						'Reason'      => urlencode($_POST['reason']),
+						'Reason'      => urlencode( mb_substr( $_POST['Reason'], 0, 250 ) ),
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
-						'Version'     => urlencode(self::plugin_get_version())
+						'Version'     => urlencode( self::plugin_get_version() )
 					);
 					if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
 						$params['DontNotifyClient'] = 'true';
@@ -999,8 +999,7 @@ if (!class_exists('ReDiRestaurantReservation'))
                     {
                         $comment .= '<br/>';
                     }
-                    $comment .= $_POST['UserComments'];
-
+                    $comment .= mb_substr( $_POST['UserComments'], 0, 250 );
 
                     $params = array(
                         'reservation' => array(
@@ -1047,11 +1046,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 	            case 'cancel':
 		            $params = array(
 			            'ID'          => (int) $_POST['ID'],
-			            'Email'       => urlencode($_POST['Email']),
-			            'Reason'      => urlencode($_POST['Reason']),
+			            'Email'       => urlencode( $_POST['Email'] ),
+			            'Reason'      => urlencode( mb_substr( $_POST['Reason'], 0, 250 ) ),
 			            "Lang"        => str_replace( '_', '-', $_POST['lang'] ),
-			            'CurrentTime' => urlencode(date('Y-m-d H:i', current_time('timestamp'))),
-			            'Version'     => urlencode(self::plugin_get_version())
+			            'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
+			            'Version'     => urlencode( self::plugin_get_version() )
 		            );
 		            if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
 			            $params['DontNotifyClient'] = 'true';
