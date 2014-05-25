@@ -12,13 +12,11 @@ jQuery(function () {
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
     jQuery('#persons').change(function () {
-        if(jQuery(this).val()==='group')
-        {
+        if (jQuery(this).val() === 'group') {
             jQuery('#step1button').attr('disabled', true);
             jQuery('#large_groups_message').show('slow');
         }
-        else
-        {
+        else {
             jQuery('#step1button').attr('disabled', false);
             jQuery('#large_groups_message').hide('slow');
         }
