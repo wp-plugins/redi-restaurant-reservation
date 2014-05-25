@@ -49,8 +49,32 @@ if (!class_exists('ReDiRestaurantReservation'))
 		private $redi;
 		private $weekday = array ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 
-		function ReDiRestaurantReservation()
-		{
+		public function __construct() {
+			$this->_name = self::$name;
+			//Initialize the options
+			$this->get_options();
+
+			$this->ApiKey = isset( $this->options[ REDI_APIKEY ] ) ? $this->options[ REDI_APIKEY ] : null;
+			$this->redi   = new Redi( $this->ApiKey );
+			//Actions
+			add_action( 'init', array( &$this, 'init_sessions' ) );
+			add_action( 'admin_menu', array( &$this, 'redi_restaurant_admin_menu_link' ) );
+
+			$this->page_title = 'Reservation';
+			$this->content    = '[redirestaurant]';
+			$this->page_name  = $this->_name;
+			$this->page_id    = '0';
+
+			register_activation_hook( __FILE__, array( $this, 'activate' ) );
+			register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
+			register_uninstall_hook( __FILE__, array( 'ReDiRestaurantReservation', 'uninstall' ) );
+
+			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
+			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
+			add_shortcode( 'redirestaurant', array( $this, 'shortcode' ) );
+		}
+
+		function ReDiRestaurantReservation() {
 			$this->__construct();
 		}
 
@@ -118,33 +142,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$this->saveAdminOptions();
 			}
 			return $new_account;
-		}
-
-		public function __construct()
-		{
-			$this->_name = self::$name;
-			//Initialize the options
-			$this->get_options();
-
-			$this->ApiKey = isset($this->options[REDI_APIKEY]) ? $this->options[REDI_APIKEY] : NULL;
-			$this->redi = new Redi($this->ApiKey);
-			//Actions
-			add_action('init', array (&$this, 'init_sessions'));
-			add_action('admin_menu', array (&$this, 'redi_restaurant_admin_menu_link'));
-
-			$this->page_title = 'Reservation';
-			$this->content = '[redirestaurant]';
-			$this->page_name = $this->_name;
-			$this->page_id = '0';
-
-			register_activation_hook(__FILE__, array ($this, 'activate'));
-			register_deactivation_hook(__FILE__, array ($this, 'deactivate'));
-			register_uninstall_hook(__FILE__, array ('ReDiRestaurantReservation', 'uninstall'));
-
-			add_action('wp_ajax_nopriv_redi_restaurant-submit', array (&$this, 'redi_restaurant_ajax'));
-			add_action('wp_ajax_redi_restaurant-submit', array (&$this, 'redi_restaurant_ajax'));
-			add_shortcode('redirestaurant', array ($this, 'shortcode'));
-
 		}
 
 		/**
