@@ -176,16 +176,15 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$return = array();
 			$errors = array();
 
-			if ($this->ApiKey == NULL) /// TODO: move to install
-			{
-				$return = $this->register();
-			}
+            if ($this->ApiKey == null){ /// TODO: move to install
+                $return = $this->register();
+            }
 
-			if ( $this->ApiKey == null ) {
+            if ($this->ApiKey == null) {
+                $this->display_errors(array('Error' => array(__('Can\'t connect to REDI server, this is usually because server does not allow remote connections. ', 'redi-restaurant-reservation'))), true);
+                die;
+            }
 
-				$this->display_errors( $return, true );
-				die;
-			}
 			$places = $this->redi->getPlaces();
 
 			if ( isset( $places['Error'] ) ) {
