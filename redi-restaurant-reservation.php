@@ -107,6 +107,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			{
 				$this->options[REDI_APIKEY] = $new_account[REDI_APIKEY];
 				$this->redi->setApiKey($this->options[REDI_APIKEY]);
+                $this->ApiKey = REDI_APIKEY;
 				$place = $this->redi->createPlace(array (
 				                                        'place' => array (
 					                                        'Name' => 'Name[change it in admin]',
@@ -131,8 +132,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					array ('category' => array ('Name' => 'Restaurant')));
 
                 $categoryID = (int)$category[ID];
-				$service = $this->redi->createService($categoryID,
+				$services = $this->redi->createService($categoryID,
 					array ('service' => array ('Name' => 'Person', 'Quantity' => 10)));
+                $service = (array)$services[0];
 
 				foreach ($this->weekday as $value)
 					$times[$value] = array ('OpenTime' => '12:00', 'CloseTime' => '00:00');
@@ -434,35 +436,20 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$emailFrom           = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
 				$report              = $this->GetOption( 'Report', Report::Full );
 				$maxTime             = $this->GetOption( 'MaxTime', 1 );
-			}
+                for ($i = 1; $i != CUSTOM_FIELDS; $i++) {
+                    $field_name = 'field_' . $i . '_name';
+                    $field_type = 'field_' . $i . '_type';
+                    $field_required = 'field_' . $i . '_required';
+                    $field_message = 'field_' . $i . '_message';
 
-			for($i = 1; $i != CUSTOM_FIELDS; $i++)
-			{
-				$field_name = 'field_'.$i.'_name';
-				$field_type = 'field_'.$i.'_type';
-				$field_required = 'field_'.$i.'_required';
-				$field_message = 'field_'.$i.'_message';
+                    $$field_name = (isset($this->options[$field_name])) ? $this->options[$field_name] : '';
+                    $$field_type = (isset($this->options[$field_type])) ? $this->options[$field_type] : '';
+                    $$field_required = (isset($this->options[$field_required])) ? $this->options[$field_required] : '';
+                    $$field_message = (isset($this->options[$field_message])) ? $this->options[$field_message] : '';
+                }
+            }
 
-				if(isset($this->options[$field_name]))
-				{
-					$$field_name = $this->options[$field_name];
-				}
 
-				if(isset($this->options[$field_type]))
-				{
-					$$field_type = $this->options[$field_type];
-				}
-
-				if(isset($this->options[$field_required]))
-				{
-					$$field_required = $this->options[$field_required];
-				}
-
-				if(isset($this->options[$field_message]))
-				{
-					$$field_message = $this->options[$field_message];
-				}
-			}
 
 			//if settings are saved or this is first time load
 			if (!isset($_POST['submit']) || $settings_saved)
