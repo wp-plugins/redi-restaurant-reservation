@@ -49,6 +49,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 		private $redi;
 		private $weekday = array ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 
+		function filter_timeout_time($time) {
+			$time = 30; //new number of seconds
+			return $time;
+		}
+		
 		public function __construct() {
 			$this->_name = self::$name;
 			//Initialize the options
@@ -71,6 +76,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
 			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
+			add_filter( 'http_request_timeout', array( &$this,'filter_timeout_time'));
 			add_shortcode( 'redirestaurant', array( $this, 'shortcode' ) );
 		}
 
