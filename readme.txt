@@ -93,6 +93,14 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 14.0630 =
+* Limit maximum time before reservation
+* Fixed warnings
+* Fixed upcoming reservation list
+* New style for upcoming reservation email
+* Increased timeout for API call
+* Added check for comments size
+
 = 14.0511 =
 * Added settings to select Min and Max party size
 * Added message to client when he select Large group
@@ -108,8 +116,6 @@ In case you have any problems with plugin installation or you need some customiz
 * Added ability to cancel reservation by client
 * Added possibility to override errors returned by API
 * New client reservation confirmation email template
-* (+) Limit maximum time before reservation
-* (+) Fixed warnings
 
 
 = 14.0221 =

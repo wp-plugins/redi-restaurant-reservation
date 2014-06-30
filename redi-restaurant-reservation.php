@@ -3,7 +3,7 @@
   Plugin Name: ReDi Restaurant Reservation
   Plugin URI: http://reservationdiary.eu/eng/reservation-wordpress-plugin/
   Description: ReDi Reservation plugin for Restaurants
-  Version: 14.0511
+  Version: 14.0630
   Author: reservationdiary.eu
   Author URI: http://reservationdiary.eu/
   Text Domain: redi-restaurant-reservation
@@ -38,7 +38,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 	class ReDiRestaurantReservation
 	{
-		public $version = '14.0511';
+		public $version = '14.0630';
 		/**
 		 * @var string The options string name for this plugin
 		 */
