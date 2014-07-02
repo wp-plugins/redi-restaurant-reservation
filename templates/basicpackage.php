@@ -20,5 +20,8 @@
     <?php _e('* Support for multiple places.', 'redi-restaurant-reservation');?><br/>
     <br/>
 
-    <?php _e('For paid packages please contact us by email:', 'redi-restaurant-reservation');?> <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+    <?php _e('Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link:') ?>
+	<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN" target="_blank"><?php _e('Subscribe to basic package') ?></a><br/>
+	<?php _e('Please allow 1 business day for us to confirm your payment and upgrade your account.') ?>
+	
 </div>
