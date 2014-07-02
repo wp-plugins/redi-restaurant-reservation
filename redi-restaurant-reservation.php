@@ -111,11 +111,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			if (isset($new_account[REDI_APIKEY]) && !empty($new_account[REDI_APIKEY]))
 			{
-				$this->options[REDI_APIKEY] = $new_account[REDI_APIKEY];
+				$this->ApiKey = $this->options[REDI_APIKEY] = $new_account[REDI_APIKEY];
 				$this->redi->setApiKey($this->options[REDI_APIKEY]);
 				$place = $this->redi->createPlace(array (
 				                                        'place' => array (
-					                                        'Name' => 'Name[change it in admin]',
+					                                        'Name' => get_bloginfo('name'),//get from site name
 					                                        'City' => 'city',
 					                                        'Country' => 'country',
 					                                        'Address' => 'Address line 1',
@@ -130,23 +130,33 @@ if (!class_exists('ReDiRestaurantReservation'))
 				                                        )
 				                                  ));
 
+				if(isset($place['Error']))
+					return $place;
 
                 $placeID = (int)$place[ID];
 
 				$category = $this->redi->createCategory($placeID,
 					array ('category' => array ('Name' => 'Restaurant')));
 
+				if(isset($category['Error']))
+					return $category;
+
                 $categoryID = (int)$category[ID];
 				$service = $this->redi->createService($categoryID,
 					array ('service' => array ('Name' => 'Person', 'Quantity' => 10)));
+
+				if(isset($service['Error']))
+					return $service;
 
 				foreach ($this->weekday as $value)
 					$times[$value] = array ('OpenTime' => '12:00', 'CloseTime' => '00:00');
 				$this->redi->setServiceTime($categoryID, $times);
 
-				$this->options['serviceID'] = $serviceID = (int)$service[ID];
+				$this->options['serviceID'] = $serviceID = (int)$service[0]->ID;
 				$this->saveAdminOptions();
 			}
+
+
 			return $new_account;
 		}
 
@@ -394,7 +404,6 @@ if (!class_exists('ReDiRestaurantReservation'))
 						}
 					}
 
-
 					$this->saveAdminOptions();
 
 					if (is_array($serviceTimes) && count($serviceTimes))
@@ -450,25 +459,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$field_required = 'field_'.$i.'_required';
 				$field_message = 'field_'.$i.'_message';
 
-				if(isset($this->options[$field_name]))
-				{
-					$$field_name = $this->options[$field_name];
-				}
-
-				if(isset($this->options[$field_type]))
-				{
-					$$field_type = $this->options[$field_type];
-				}
-
-				if(isset($this->options[$field_required]))
-				{
-					$$field_required = $this->options[$field_required];
-				}
-
-				if(isset($this->options[$field_message]))
-				{
-					$$field_message = $this->options[$field_message];
-				}
+				$$field_name = self::GetOption($field_name);
+				$$field_type = self::GetOption($field_type);
+				$$field_required = self::GetOption($field_required);
+				$$field_message = self::GetOption($field_message);
 			}
 
 			//if settings are saved or this is first time load
@@ -719,117 +713,116 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 		public function shortcode()
 		{
-                    ob_start();
-                    wp_enqueue_script('jquery');
-                    wp_register_style('jquery_ui', null, array ('jquery'));
-                    wp_enqueue_style('jquery_ui');
+            ob_start();
+            wp_enqueue_script('jquery');
+            wp_register_style('jquery_ui', null, array ('jquery'));
+            wp_enqueue_style('jquery_ui');
 
-                    wp_register_style('jquery-ui-custom-style',
-                            REDI_RESTAURANT_PLUGIN_URL.'/css/custom-theme/jquery-ui-1.8.18.custom.css');
-                    wp_enqueue_style('jquery-ui-custom-style');
-                    wp_enqueue_script('jquery-ui-datepicker');
-                    wp_register_script('datetimepicker',
-                            REDI_RESTAURANT_PLUGIN_URL.'/lib/datetimepicker/js/jquery-ui-timepicker-addon.js',
-                            array ('jquery', 'jquery-ui-core', 'jquery-ui-slider', 'jquery-ui-datepicker'));
-                    wp_enqueue_script('datetimepicker');
+            wp_register_style('jquery-ui-custom-style',
+                    REDI_RESTAURANT_PLUGIN_URL.'/css/custom-theme/jquery-ui-1.8.18.custom.css');
+            wp_enqueue_style('jquery-ui-custom-style');
+            wp_enqueue_script('jquery-ui-datepicker');
+            wp_register_script('datetimepicker',
+                    REDI_RESTAURANT_PLUGIN_URL.'/lib/datetimepicker/js/jquery-ui-timepicker-addon.js',
+                    array ('jquery', 'jquery-ui-core', 'jquery-ui-slider', 'jquery-ui-datepicker'));
+            wp_enqueue_script('datetimepicker');
 
-                    wp_register_script('datetimepicker-lang',REDI_RESTAURANT_PLUGIN_URL.'/lib/datetimepicker/js/jquery.ui.i18n.all.min.js');
-                    wp_enqueue_script('datetimepicker-lang');
+            wp_register_script('datetimepicker-lang',REDI_RESTAURANT_PLUGIN_URL.'/lib/datetimepicker/js/jquery.ui.i18n.all.min.js');
+            wp_enqueue_script('datetimepicker-lang');
 
-                    wp_register_script('timepicker-lang',REDI_RESTAURANT_PLUGIN_URL.'/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js');
-                    wp_enqueue_script('timepicker-lang');
+            wp_register_script('timepicker-lang',REDI_RESTAURANT_PLUGIN_URL.'/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js');
+            wp_enqueue_script('timepicker-lang');
 
-                    wp_register_script('restaurant', REDI_RESTAURANT_PLUGIN_URL.'js/restaurant.js', array ('jquery'));
+            wp_register_script('restaurant', REDI_RESTAURANT_PLUGIN_URL.'js/restaurant.js', array ('jquery'));
 
-                    wp_localize_script('restaurant',
-                            'redi_restaraurant_reservation',
-                            array ( // URL to wp-admin/admin-ajax.php to process the request
-                                  'ajaxurl' => admin_url('admin-ajax.php'),
-                                  'id_missing' => __('Reservation number can\'t be empty', 'redi-restaurant-reservation'),
-                                  'name_missing'  => __('Name can\'t be empty', 'redi-restaurant-reservation'),
-                                  'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
-                                  'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
-                                  'reason_missing' => __('Reason can\'t be empty', 'redi-restaurant-reservation'),
-                            ));
-                    wp_enqueue_script('restaurant');
+            wp_localize_script('restaurant',
+                'redi_restaraurant_reservation',
+                array ( // URL to wp-admin/admin-ajax.php to process the request
+                      'ajaxurl' => admin_url('admin-ajax.php'),
+                      'id_missing' => __('Reservation number can\'t be empty', 'redi-restaurant-reservation'),
+                      'name_missing'  => __('Name can\'t be empty', 'redi-restaurant-reservation'),
+                      'email_missing' => __('Email can\'t be empty', 'redi-restaurant-reservation'),
+                      'phone_missing' => __('Phone can\'t be empty', 'redi-restaurant-reservation'),
+                      'reason_missing' => __('Reason can\'t be empty', 'redi-restaurant-reservation'),
+                ));
+            wp_enqueue_script('restaurant');
 
-                    wp_register_style('redi-restaurant',
-                            REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
-                    wp_enqueue_style('redi-restaurant');
-                  //  $persons = 2; //min can be bigger than 2
-					if ( $this->ApiKey == null ) {
+            wp_register_style('redi-restaurant', REDI_RESTAURANT_PLUGIN_URL.'/css/restaurant.css');
+            wp_enqueue_style('redi-restaurant');
+          //  $persons = 2; //min can be bigger than 2
+			if ( $this->ApiKey == null ) {
 
-						$this->display_errors(array('Error'=> '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>'));
-						return;
-					}
-                    //places 
-                    $places = $this->redi->getPlaces();
-					if ( isset($places['Error']) ) {
+				$this->display_errors(array('Error'=> '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>'));
+				return;
+			}
+            //places
+            $places = $this->redi->getPlaces();
+			if ( isset($places['Error']) ) {
 
-						$this->display_errors($places);
-						return;
-					}
-                    $placeID = $places[0]->ID;
+				$this->display_errors($places);
+				return;
+			}
+            $placeID = $places[0]->ID;
 
 
-                    $time_format = get_option('time_format');
-                    $date_format_setting = $this->options['DateFormat'];
+            $time_format = get_option('time_format');
+            $date_format_setting = $this->options['DateFormat'];
 
-					$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
-					$date_format = $this->getPHPDateFormat($date_format_setting);
+			$calendar_date_format = $this->getCalendarDateFormat($date_format_setting);
+			$date_format = $this->getPHPDateFormat($date_format_setting);
 
-                    $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
+            $MinTimeBeforeReservation = (int)($this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0) + 1;
 
-					$reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
-                    $startDate = date($date_format, $reservationStartTime);
-                    $startDateISO = date('Y-m-d', $reservationStartTime);
-					$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
+			$reservationStartTime = strtotime('+'.$MinTimeBeforeReservation.' hour', current_time('timestamp'));
+            $startDate = date($date_format, $reservationStartTime);
+            $startDateISO = date('Y-m-d', $reservationStartTime);
+			$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
 
-					$minPersons         = $this->GetOption( 'MinPersons', 1 );
-					$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
-					$largeGroupsMessage = $this->GetOption( 'LargeGroupsMessage', '' );
-					$emailFrom          = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
-					$report             = $this->GetOption( 'Report', Report::Full );
-					$maxTime            = $this->GetOption( 'MaxTime', 1 );
-					$thanks             = $this->GetOption('Thanks');
+			$minPersons         = $this->GetOption( 'MinPersons', 1 );
+			$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
+			$largeGroupsMessage = $this->GetOption( 'LargeGroupsMessage', '' );
+			$emailFrom          = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
+			$report             = $this->GetOption( 'Report', Report::Full );
+			$maxTime            = $this->GetOption( 'MaxTime', 1 );
+			$thanks             = $this->GetOption('Thanks');
 
-                    for($i = 1; $i != CUSTOM_FIELDS; $i++)
-                    {
-                        $field_name = 'field_'.$i.'_name';
-                        $field_type = 'field_'.$i.'_type';
-                        $field_required = 'field_'.$i.'_required';
-                        $field_message = 'field_'.$i.'_message';
+            for($i = 1; $i != CUSTOM_FIELDS; $i++)
+            {
+                $field_name = 'field_'.$i.'_name';
+                $field_type = 'field_'.$i.'_type';
+                $field_required = 'field_'.$i.'_required';
+                $field_message = 'field_'.$i.'_message';
 
-                        if(isset($this->options[$field_name]))
-                        {
-                            $$field_name = $this->options[$field_name];
-                        }
+                if(isset($this->options[$field_name]))
+                {
+                    $$field_name = $this->options[$field_name];
+                }
 
-                        if(isset($this->options[$field_type]))
-                        {
-                            $$field_type = $this->options[$field_type];
-                        }
+                if(isset($this->options[$field_type]))
+                {
+                    $$field_type = $this->options[$field_type];
+                }
 
-                        if(isset($this->options[$field_required]))
-                        {
-                            $$field_required = $this->options[$field_required];
-                        }
+                if(isset($this->options[$field_required]))
+                {
+                    $$field_required = $this->options[$field_required];
+                }
 
-                        if(isset($this->options[$field_message]))
-                        {
-                            $$field_message = $this->options[$field_message];
-                        }
-                    }
+                if(isset($this->options[$field_message]))
+                {
+                    $$field_message = $this->options[$field_message];
+                }
+            }
 
-					$time_format_hours = self::dropdown_time_format();
+			$time_format_hours = self::dropdown_time_format();
 
-					$timepicker          = $this->GetOption( 'TimePicker' );
-					$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
-                    require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
-                    $out = ob_get_contents();
+			$timepicker          = $this->GetOption( 'TimePicker' );
+			$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
+            require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
+            $out = ob_get_contents();
 
-                    ob_end_clean();
-                    return $out;
+            ob_end_clean();
+            return $out;
 		}
 
 		function dropdown_time_format()
