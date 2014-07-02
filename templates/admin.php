@@ -226,7 +226,7 @@
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
         <p class="description">
-			<b style="color: red"><?php _e('NOTE: Name, Email and Phone are required fields of reservtion form and does not needs to be defined here.', 'redi-restaurant-reservation') ?></b>
+			<b style="color: red"><?php _e('NOTE: Name, Email and Phone are required fields of reservation form and does not need to be defined here.', 'redi-restaurant-reservation') ?></b>
 		</p>
 
 		<table class="form-table" style="width: 80%;">

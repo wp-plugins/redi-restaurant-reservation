@@ -40,6 +40,7 @@ If you need more languages, please contact us!
 * Send client reservation confirmation emails from wordpress account
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
+Please allow 1 business day for us to confirm your payment and upgrade your account.
 
 = Additional services =
 * Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
@@ -100,6 +101,9 @@ In case you have any problems with plugin installation or you need some customiz
 * New style for upcoming reservation email
 * Increased timeout for API call
 * Added check for comments size
+* (+) Extended view for basic package settings
+* (+) Removed warnings
+* (+) Improved error handling during first registration
 
 = 14.0511 =
 * Added settings to select Min and Max party size
