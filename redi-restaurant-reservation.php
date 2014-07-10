@@ -189,17 +189,25 @@ if (!class_exists('ReDiRestaurantReservation'))
 		 */
 		function redi_restaurant_admin_options_page()
 		{
-			$return = array();
 			$errors = array();
 
 			if ($this->ApiKey == NULL) /// TODO: move to install
 			{
 				$return = $this->register();
+				$this->display_errors($return, true);
 			}
 
-			if ( $this->ApiKey == null ) {
+			if ($this->ApiKey == NULL)
+			{
 
-				$this->display_errors( $return, true );
+				$errors['Error'] = array(
+					__('ReDi Restaurant Reservation plugin could not get an API key from the reservationdiary.eu server when it activated.' .
+						'<br/> You can try to fix this by going to the ReDi Restaurant Reservation "options" page. ' .
+						'<br/>This will cause ReDi Restaurant Reservation plugin to retry fetching an API key for you. ' .
+						'<br/>If you keep seeing this error it usually means that server where you host your web site can\'t connect to our reservationdiary.eu server. ' .
+						'<br/>You can try asking your WordPress host to allow your WordPress server to connect to api.reservationdiary.eu' .
+						'<br/>In case you can not solve this problem yourself, please contact us directly by <a href="mailo:info@reservationdiary.eu">info@reservationdiary.eu</a>', 'redi-restaurant-reservation'));
+				$this->display_errors($errors, true);
 				die;
 			}
 			$places = $this->redi->getPlaces();
