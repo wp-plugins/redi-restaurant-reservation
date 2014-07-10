@@ -171,7 +171,13 @@ jQuery(function () {
 				<label for="services"><?php _e('Available seats', 'redi-restaurant-reservation'); ?> </label>
 			</th>
 			<td>
-				<input id="services" type="text" value="<?php echo (int)count($getServices) ?>" name="services"/>
+				<select name="services" id="services">
+					<?php foreach(range(1, 200) as $current):?>
+						<option value="<?php echo $current?>" <?php if($current == (int)count($getServices)): ?>selected="selected"<?php endif;?>>
+							<?php echo $current ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</td>
 			<td>
 			</td>
