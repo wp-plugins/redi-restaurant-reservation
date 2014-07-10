@@ -69,7 +69,7 @@
 				</th>
 				<td>
 				<select name="MaxPersons" id="MaxPersons">
-					<?php foreach(range(1, 25) as $current):?>
+					<?php foreach(range(1, 100) as $current):?>
 						<option value="<?php echo $current?>" <?php if($current == $maxPersons): ?>selected="selected"<?php endif;?>>
 							<?php echo $current ?>
 						</option>
