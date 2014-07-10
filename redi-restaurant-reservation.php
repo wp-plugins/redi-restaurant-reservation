@@ -600,7 +600,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$_p['post_type'] = 'page';
 				$_p['comment_status'] = 'closed';
 				$_p['ping_status'] = 'closed';
-				$_p['post_category'] = array (1); // the default 'Uncatrgorised'
+				$_p['post_category'] = array (1); // the default 'Uncategorized'
 				// Insert the post into the database
 				$this->page_id = wp_insert_post($_p);
 			}
