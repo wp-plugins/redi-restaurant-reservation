@@ -107,7 +107,7 @@ jQuery(function () {
 		<tr>
 			<th scope="row">
 				<label for="EmailCC">
-					<?php _e('Mail CC', 'redi-restaurant-reservation'); ?>
+					<?php _e('Email CC', 'redi-restaurant-reservation'); ?>
 				</label>
 			</th>
 			<td>
@@ -115,7 +115,7 @@ jQuery(function () {
 			</td>
 			<td>
 				<p class="description">
-					<?php _e('Copy of email', 'redi-restaurant-reservation'); ?>
+					<?php _e('Send copy of reservation emails to specific recipients. Separate multiple recipients with ,', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
 		</tr>

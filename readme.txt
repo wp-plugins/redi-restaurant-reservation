@@ -104,6 +104,7 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Extended view for basic package settings
 * (+) Removed warnings
 * (+) Improved error handling during first registration
+* (+) Added support for Email CC for reservation notifications
 
 = 14.0511 =
 * Added settings to select Min and Max party size

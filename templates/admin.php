@@ -180,24 +180,10 @@
                 </td>
                 <td style="width:80%">
                     <p class="description">
-                        <?php _e('My wordpress email account" setting is available for Basic package clients', 'redi-restaurant-reservation') ?>
+                        <?php _e('Sending from wordpress account setting will work only for Basic package clients', 'redi-restaurant-reservation') ?>
                     </p>
                 </td>
             </tr>
-            <!--<tr> Coming soon
-                <th scope="row">
-                    <label for="Report">
-                        <?php _e('Receive confirmations by email', 'redi-restaurant-reservation'); ?>
-                    </label>
-                </th>
-                <td>
-                    <select name="Report">
-                        <option value="Full" <?php if ($report == Report::Full):?>selected="selected" <?php endif;?>><?php _e('Full', 'redi-restaurant-reservation'); ?></option>
-                        <option value="None" <?php if ($report == Report::None):?>selected="selected" <?php endif;?>><?php _e('None', 'redi-restaurant-reservation'); ?></option>
-                        <option value="Single" <?php if ($report == Report::Single):?>selected="selected" <?php endif;?>><?php _e('Single', 'redi-restaurant-reservation'); ?></option>
-                    </select>
-                </td>
-            </tr>-->
 			<tr>
 				<th scope="row">
 					<label for="MaxTime">
