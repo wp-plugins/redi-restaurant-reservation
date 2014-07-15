@@ -106,6 +106,21 @@ jQuery(function () {
 		</tr>
 		<tr>
 			<th scope="row">
+				<label for="EmailCC">
+					<?php _e('Mail CC', 'redi-restaurant-reservation'); ?>
+				</label>
+			</th>
+			<td>
+				<input id="EmailCC" type="text" value="<?php echo $place['EmailCC'] ?>" name="EmailCC"/>
+			</td>
+			<td>
+				<p class="description">
+					<?php _e('Copy of email', 'redi-restaurant-reservation'); ?>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
 				<label for="Phone">
 					<?php _e('Phone', 'redi-restaurant-reservation'); ?>
 				</label>

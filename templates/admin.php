@@ -119,7 +119,7 @@
 					</label>
 				</th>
 				<td>
-					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if ($thanks) echo 'checked="checked"' ?>>
+					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if (isset($thanks) && $thanks)  echo 'checked="checked"' ?>>
 				</td>
 				<td style="width:80%">
 					<p class="description">

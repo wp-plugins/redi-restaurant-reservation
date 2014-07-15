@@ -120,6 +120,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					                                        'Country' => 'country',
 					                                        'Address' => 'Address line 1',
 					                                        'Email' => get_option('admin_email'),
+					                                        'EmailCC' => '',
 					                                        'Phone' => '[areacode] [number]',
 					                                        'WebAddress' => get_option('siteurl'),
 					                                        'Lang' => str_replace('_', '-', get_locale()),
@@ -293,6 +294,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						'Country'                  => $_POST['Country'],
 						'Address'                  => $_POST['Address'],
 						'Email'                    => $_POST['Email'],
+						'EmailCC'                  => $_POST['EmailCC'],
 						'Phone'                    => $_POST['Phone'],
 						'WebAddress'               => $_POST['WebAddress'],
 						'Lang'                     => $_POST['Lang'],
@@ -451,6 +453,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			if ( $settings_saved || ! isset( $_POST['submit'] ) ) {
 				$thanks              = $this->GetOption( 'Thanks', 0 );
 				$timepicker          = $this->GetOption( 'TimePicker' );
+
 				$minPersons          = $this->GetOption( 'MinPersons', 1 );
 				$maxPersons          = $this->GetOption( 'MaxPersons', 10 );
 				$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
@@ -458,6 +461,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 				$emailFrom           = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
 				$report              = $this->GetOption( 'Report', Report::Full );
 				$maxTime             = $this->GetOption( 'MaxTime', 1 );
+			}
+			if(!$settings_saved && isset($_POST['submit']))
+			{
+				$timepicker         = $_POST['TimePicker'];
+				$alternativeTimeStep = $_POST['AlternativeTimeStep'];
 			}
 
 			for($i = 1; $i != CUSTOM_FIELDS; $i++)
@@ -518,6 +526,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			require_once(plugin_dir_path(__FILE__).'languages.php');
 			$places = $this->redi->getPlaces();
 			$getServices = $this->redi->getServices($categoryID);
+
 			if (!isset($_POST['submit']) || $settings_saved)
 			{
 
@@ -534,6 +543,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					'Country' => $_POST['Country'],
 					'Address' => $_POST['Address'],
 					'Email' => $_POST['Email'],
+					'EmailCC' => $_POST['EmailCC'],
 					'Phone' => $_POST['Phone'],
 					'WebAddress' => $_POST['WebAddress'],
 					'Lang' => $_POST['Lang'],
@@ -785,6 +795,7 @@ if (!class_exists('ReDiRestaurantReservation'))
             $startDate = date($date_format, $reservationStartTime);
             $startDateISO = date('Y-m-d', $reservationStartTime);
 			$startTime = mktime(date("G", $reservationStartTime), 0, 0, 0, 0, 0);
+
 
 			$minPersons         = $this->GetOption( 'MinPersons', 1 );
 			$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
