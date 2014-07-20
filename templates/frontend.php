@@ -111,18 +111,7 @@
 					<label for="field_<?php echo $i; ?>"><?php echo $$field_name; ?>:
 						<?php if(isset($$field_required) && $$field_required):?>
 							<span class="redi_required">*</span>
-							<input type="hidden" id="<?php echo 'field_'.$i.'_message'; ?>"
-								value="<?php
-								if(!empty($$field_message))
-								{
-									echo $$field_message;
-								}
-								else
-								{
-									/// TODO: Custom field ${name} is required, $$field_name
-									echo ( _e('Custom field is required', 'redi-restaurant-reservation'));
-								}
-								?>">
+							<input type="hidden" id="<?php echo 'field_'.$i.'_message'; ?>" value="<?php echo !empty($$field_message) ? $$field_message : _e('Custom field is required', 'redi-restaurant-reservation');?>">
 						<?php endif;?>
 					</label>
 					<br clear="both"/>
