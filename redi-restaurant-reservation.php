@@ -729,8 +729,11 @@ if (!class_exists('ReDiRestaurantReservation'))
 			return 'Y-m-d';
 		}
 
-		public function shortcode()
+		public function shortcode($atts)
 		{
+			if(is_array($atts)){
+				$this->options = array_merge($this->options, $atts);
+			}
             ob_start();
             wp_enqueue_script('jquery');
             wp_register_style('jquery_ui', null, array ('jquery'));
@@ -835,7 +838,8 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$time_format_hours = self::dropdown_time_format();
 
-			$timepicker          = $this->GetOption( 'TimePicker' );
+			$timepicker          = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
+
 			$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
             require_once(REDI_RESTAURANT_TEMPLATE.'frontend.php');
             $out = ob_get_contents();
