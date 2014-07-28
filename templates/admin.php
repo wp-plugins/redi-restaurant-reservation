@@ -22,7 +22,13 @@
 			</p>
 		</div>
 	<?php endif ?>
-
+	<?php if ( isset( $cancel_success ) ): ?>
+		<div class="updated">
+			<p>
+				<?php echo $cancel_success; ?>
+			</p>
+		</div>
+	<?php endif; ?>
 	<?php if (isset($errors)): ?>
 		<?php foreach((array)$errors as $error):?>
 		<div class="error">
@@ -51,7 +57,10 @@
 						<?php endforeach; ?>
 					</select>
 				</td>
-				<td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Minimum number of persons available to select from person drop down.', 'redi-restaurant-reservation') ?>
+                    </p>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -60,14 +69,17 @@
 				</th>
 				<td>
 				<select name="MaxPersons" id="MaxPersons">
-					<?php foreach(range(1, 25) as $current):?>
+					<?php foreach(range(1, 100) as $current):?>
 						<option value="<?php echo $current?>" <?php if($current == $maxPersons): ?>selected="selected"<?php endif;?>>
 							<?php echo $current ?>
 						</option>
 					<?php endforeach; ?>
 				</select>
 				</td>
-				<td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Maximum number of persons available to select from person drop down.', 'redi-restaurant-reservation') ?>
+                    </p>
 				</td>
 			</tr>
             <tr>
@@ -107,7 +119,7 @@
 					</label>
 				</th>
 				<td>
-					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if ($thanks) echo 'checked="checked"' ?>>
+					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if (isset($thanks) && $thanks)  echo 'checked="checked"' ?>>
 				</td>
 				<td style="width:80%">
 					<p class="description">
@@ -142,18 +154,66 @@
                 </th>
                 <td>
                     <select name="AlternativeTimeStep">
-                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>>15 min</option>
-                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>>30 min</option>
-                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>>60 min</option>
+                        <option value="15" <?php if ($alternativeTimeStep == 15):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 15);?></option>
+                        <option value="30" <?php if ($alternativeTimeStep == 30):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 30);?></option>
+                        <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 60);?></option>
                     </select>
                 </td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Show to clients available time with time step. For example if you select 15 min, alternative time will be 10:00, 10:15, 10:30 etc.', 'redi-restaurant-reservation') ?>
+                    </p>
+                </td>
             </tr>
+            <tr>
+                <th scope="row">
+                    <label for="EmailFrom">
+                        <?php _e('Send confirmation email to client', 'redi-restaurant-reservation'); ?>
+                    </label>
+                </th>
+                <td>
+                    <select name="EmailFrom">
+                        <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation'); ?></option>
+                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('From my wordpress email account', 'redi-restaurant-reservation'); ?></option>
+                        <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
+                    </select>
+                </td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Sending from wordpress account setting will work only for Basic package clients', 'redi-restaurant-reservation') ?>
+                    </p>
+                </td>
+            </tr>
+			<tr>
+				<th scope="row">
+					<label for="MaxTime">
+						<?php _e('Max time before reservations', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="MaxTime">
+						<?php foreach(range(1, 12) as $current):?>
+							<option value="<?php echo $current?>" <?php if($current == $maxTime): ?>selected="selected"<?php endif;?>>
+								<?php echo $current ?> <?php echo _n( 'Month', 'Months', $current, 'redi-restaurant-reservation' )?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+                <td style="width:80%">
+                    <p class="description">
+                        <?php _e('Maximum time before reservation is accepted.', 'redi-restaurant-reservation') ?>
+                    </p>
+                </td>
+			</tr>
 		</table>
 		<br/>
 
 		<!-- custom fields-->
 		<div class="icon32" id="icon-edit-comments"><br></div>
 		<h2><?php _e('Custom fields', 'redi-restaurant-reservation'); ?></h2>
+        <p class="description">
+			<b style="color: red"><?php _e('NOTE: Name, Email and Phone are required fields of reservation form and does not need to be defined here.', 'redi-restaurant-reservation') ?></b>
+		</p>
 
 		<table class="form-table" style="width: 80%;">
 			<thead>
@@ -213,10 +273,10 @@
 		
 		
 
-		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes' );?>" name="submit">
+		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes', 'redi-restaurant-reservation') ?>" name="submit">
 	</form>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
-            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 500px;"></iframe>
+            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1600px;"></iframe>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='cancel')):?>
         <div id="icon-admin" class="icon32">
             <br>

@@ -88,12 +88,12 @@ strong
 .redi-restaurant-button
 {
     font-weight: normal;
-    width: 90px;
-    white-space:nowrap;
 }
 
-.redi-restaurant-button[disabled]{
-    background-color: #D3D3D3;
+.redi-restaurant-button[disabled="disabled"]
+{
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
 .redi-restaurant-button[select="select"]
@@ -103,4 +103,8 @@ strong
 
 #step1button, #redi-restaurant-step3
 {
+}
+
+.cancel-reservation {
+    float: right;
 }

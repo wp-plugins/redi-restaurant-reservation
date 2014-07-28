@@ -2,7 +2,7 @@
 Contributors: thecatkin, robby.roboter
 Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking
 Requires at least: 3.0.0
-Tested up to: 3.8
+Tested up to: 3.9.1
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
@@ -18,6 +18,7 @@ Supported languages:
 * Dutch
 * English
 * Estonian
+* Finnish
 * French, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
 * German
 * Italian
@@ -34,10 +35,12 @@ If you need more languages, please contact us!
 * View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 * Setup maximum available seats for online reservation by week day
 * Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
-* Support for multiple places.
+* Support for multiple places. Number of places depends on number of subscriptions.
 * Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted to explain it to clients.
+* Send client reservation confirmation emails from wordpress account
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
+Please allow 1 business day for us to confirm your payment and upgrade your account.
 
 = Additional services =
 * Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
@@ -63,8 +66,6 @@ Do you want to have some new functionality or if you have any other questions pl
 When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public <a href="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
 In case you have any problems with plugin installation or you need some customization, please don't hesitate to contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
-Plugin requires curl library to operate.
-
 == Screenshots ==
 01. Example of plugin first page installed into default theme. When plugin is activated, new "Reservation" page is created. Step 1: Requests from user to select reservation date and time, and number of seats. User has to click on a button "Check available time". System will query online database for available places at specified time and shows result.
 02. Example of calendar control.
@@ -85,22 +86,47 @@ Plugin requires curl library to operate.
 17. Step 1: Select place, date and time (Multiple places available only for Basic package users)
 18. Blocked Time list. (Available only for Basic package users)
 19. Edit Blocked time. (Available only for Basic package users)
+20. Step 1: Setup Goal with Google Analytics Tracking Code (google analytics/Conversions/Goals/Overview/Set up goals/New goal). 
+21. Step 2: Setup Goal details (Category: ReDi Restaurant Reservation, Action: Reservation confirmed)
+22. Cancel reservation page for clients.
 
 == Upgrade Notice ==
 
 == Changelog ==
 
+= 14.0630 =
+* Limit maximum time before reservation
+* Fixed warnings
+* Fixed upcoming reservation list
+* New style for upcoming reservation email
+* Increased timeout for API call
+* Added check for comments size
+* (+) Extended view for basic package settings
+* (+) Removed warnings
+* (+) Improved error handling during first registration
+* (+) Added support for Email CC for reservation notifications
+
+= 14.0511 =
+* Added settings to select Min and Max party size
+* Added message to client when he select Large group
+* Added setting to specify alternative time step
+* Added Portuguese (Brazil) translation
+* Added Swedish translation
+* Fixed multi language support
+* Fixed time displayed in drop down
+* Removed line brakes from javascript to prevent WordPress inserting p elements there when content formatting is turned on
+* Removed direct dependency from curl library
+* Added Google Analytic Tracking Code to thank you page
+* Add extra attribute to br to prevent controls displacement
+* Added ability to cancel reservation by client
+* Added possibility to override errors returned by API
+* New client reservation confirmation email template
+
+
 = 14.0221 =
 * Added alternative time picker for better reservation time selection on mobile devices
 * Added limits to text areas
 * Moved all texts to language files
-* (+) Added settings to select Min and Max party size
-* (+) Added message to client when he select Large group
-* (+) Added setting to specify alternative time step
-* (+) Added Portuguese (Brazil) translation
-* (+) Added Swedish translation
-* (+) Fixed multi language support
-* (+) Fixed time displayed in drop down
 
 = 14.0114 =
 * Added support for multiple places (for basic package users)

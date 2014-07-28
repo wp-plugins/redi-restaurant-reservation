@@ -106,6 +106,21 @@ jQuery(function () {
 		</tr>
 		<tr>
 			<th scope="row">
+				<label for="EmailCC">
+					<?php _e('Email CC', 'redi-restaurant-reservation'); ?>
+				</label>
+			</th>
+			<td>
+				<input id="EmailCC" type="text" value="<?php echo $place['EmailCC'] ?>" name="EmailCC"/>
+			</td>
+			<td>
+				<p class="description">
+					<?php _e('Send copy of reservation emails to specific recipients. Separate multiple recipients with ,', 'redi-restaurant-reservation'); ?>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
 				<label for="Phone">
 					<?php _e('Phone', 'redi-restaurant-reservation'); ?>
 				</label>
@@ -171,7 +186,13 @@ jQuery(function () {
 				<label for="services"><?php _e('Available seats', 'redi-restaurant-reservation'); ?> </label>
 			</th>
 			<td>
-				<input id="services" type="text" value="<?php echo (int)count($getServices) ?>" name="services"/>
+				<select name="services" id="services">
+					<?php foreach(range(1, 200) as $current):?>
+						<option value="<?php echo $current?>" <?php if($current == (int)count($getServices)): ?>selected="selected"<?php endif;?>>
+							<?php echo $current ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</td>
 			<td>
 			</td>
@@ -197,7 +218,7 @@ jQuery(function () {
 		</tr>
 
 		<?php foreach ($this->weekday as $serviceTimeName): ?>
-			<?php $serviceTimeValue = $serviceTimes[$serviceTimeName]; ?>
+			<?php $serviceTimeValue = isset($serviceTimes[$serviceTimeName]) ? $serviceTimes[$serviceTimeName] : ''; ?>
 
 			<tr valign="top">
 				<th scope="row">
@@ -206,12 +227,12 @@ jQuery(function () {
 					</label>
 				</th>
 				<td>
-					<input id="OpenTime[<?php echo $day ?>]" type="text"
-							value="<?php echo $serviceTimeValue['OpenTime'] ?>"
+					<input id="OpenTime[<?php echo $serviceTimeName ?>]" type="text"
+							value="<?php echo isset($serviceTimeValue['OpenTime'])?$serviceTimeValue['OpenTime']:'' ?>"
 							name="OpenTime[<?php echo $serviceTimeName ?>]"/>
 				</td>
 				<td>
-					<input id="" type="text" value="<?php echo $serviceTimeValue['CloseTime'] ?>"
+					<input id="" type="text" value="<?php echo isset($serviceTimeValue['CloseTime'])?$serviceTimeValue['CloseTime']:'' ?>"
 							name="CloseTime[<?php echo $serviceTimeName ?>]"/>
 				</td>
 			</tr>
@@ -226,6 +247,8 @@ jQuery(function () {
 		<?php _e('If you close next day at night then set closing time on a same day. For example 18:00 - 3:00', 'redi-restaurant-reservation'); ?>
 		<br/>
 		<?php _e('Set Open and Close fields to blank if restaurant is closed.', 'redi-restaurant-reservation'); ?>
+		<br/>
+		<?php _e('Multiple open and close times are available in Basic package.', 'redi-restaurant-reservation'); ?>
 	</p>
 	<br/>
         <div class="icon32" id="icon-edit-comments"><br></div>
