@@ -911,7 +911,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 		private function step1( $categoryID, $post ) {
 
 			// convert date to array
-			$date = date_parse( $post['startDateISO'].' '.$post['startTime'] );
+			$date = date_parse( $post['startDateISO'].' '.(isset($post['startTime']) ? $post['startTime'] : null) );
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) ) );
