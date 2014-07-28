@@ -830,18 +830,24 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $this->options[ $field_message ];
 				}
 			}
-
-			//pre call
-			$step1 = self::object_to_array(
-				$this->step1( $categoryID,
-					array(
-						'startDateISO' => $startDateISO,
-						'startTime'    => '0:00',
-						'persons'      => 1,
-						'lang'         => get_locale()
+			$timeshiftmode = $this->GetOption('timeshiftmode');
+			if ($timeshiftmode === 'byshifts')
+			{
+				//pre call
+				$categories = $this->redi->getPlaceCategories($placeID);
+				$categoryID = $categories[0]->ID;
+				$step1 = self::object_to_array(
+					$this->step1($categoryID,
+						array(
+							'startDateISO' => $startDateISO,
+							'startTime' => '0:00',
+							'persons' => 1,
+							'lang' => get_locale()
+						)
 					)
-				)
-			);
+				);
+			}
+
 
 			$hide_clock = true;
 			require_once( REDI_RESTAURANT_TEMPLATE.'frontend.php' );
