@@ -60,6 +60,7 @@
 	        <br clear="both"/>
 
 	        <span id="step1times">
+		        <br clear="all">
 		        <label><?php _e('Time', 'redi-restaurant-reservation')?>:</label><br clear="both"/>
 				<?php $current = 0;?>
 				<?php if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ): ?>
