@@ -1,4 +1,5 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
+<?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
 <script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ='h:mm tt';<?php else: ?>var time_format ='HH:mm';<?php endif ?>var locale = '<?php echo get_locale()?>';if ((/^en/).test(locale))locale = ''; var timeshiftmode='<?php echo $timeshiftmode; ?>'; var hidesteps =<?php echo $hidesteps?1:0; ?>;</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
 	<div id="step1">
@@ -7,7 +8,7 @@
             <h2 style="float:left;">
 				<?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?>
 			</h2>
-			<!--<a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>-->
+<!--			<a href="#cancel" id="cancel-reservation" class="cancel-reservation">--><?php //_e('Cancel reservation', 'redi-restaurant-reservation')?><!--</a>-->
             <br clear="both"/>
 			<label for="placeID">
 			<?php _e('Place', 'redi-restaurant-reservation')?>:</label>
@@ -25,6 +26,7 @@
 			<?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?>
 
          </h2>
+<!--	        <a href="#cancel" id="cancel-reservation" class="cancel-reservation">--><?php //_e('Cancel reservation', 'redi-restaurant-reservation')?><!--</a>-->
             <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
          <?php endif ?>
 		<br clear="both"/>

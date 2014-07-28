@@ -142,6 +142,7 @@ jQuery(function () {
         } else {
             data['field_5'] = jQuery('#field_5').val();
         }
+
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
         jQuery('#redi-restaurant-step3').attr('disabled', true);
@@ -151,11 +152,12 @@ jQuery(function () {
             if (response['Error']) {
                 jQuery('#step3errors').html(response['Error']).show('slow');
             } else {
+                ga_event('Reservation confirmed','');
                 jQuery('#step1').hide('slow');
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
                 jQuery('#step4').show('slow'); //success message
-                jQuery('html, body').animate({scrollTop: 0}, 'slow');
+                jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
             }
         }, 'json');
         return false;
@@ -290,6 +292,71 @@ jQuery(function () {
             }
         }
     }
+
+    function ga_event(event, comment) {
+        if (typeof _gaq !== 'undefined') {
+            _gaq.push(['_trackEvent', 'ReDi Restaurant Reservation', event, comment]);
+        }
+    }
+    //Cancel reservation
+    jQuery('#cancel-reservation').click(function () {
+        jQuery('#redi-reservation').slideUp();
+        jQuery('#cancel-reservation-div').slideDown();
+    });
+
+    jQuery('#back-to-reservation').click(function () {
+        jQuery('#redi-reservation').slideDown();
+        jQuery('#cancel-reservation-div').slideUp();
+        jQuery('#cancel-reservation-form').slideDown();
+        jQuery('#cancel-success').slideUp();
+    });
+
+    jQuery('#redi-restaurant-cancel').click(function () {
+        var error = '';
+        if (jQuery('#redi-restaurant-cancelID').val() === '') {
+            error += redi_restaurant_reservation.id_missing + '<br/>';
+        }
+        if (jQuery('#redi-restaurant-cancelEmail').val() === '') {
+            error += redi_restaurant_reservation.email_missing + '<br/>';
+        }
+        if (jQuery('#redi-restaurant-cancelReason').val() === '') {
+            error += redi_restaurant_reservation.reason_missing + '<br/>';
+        }
+        if (error) {
+            jQuery('#cancel-errors').html(error).show('slow');
+            return false;
+        }
+        //Ajax
+        var data = {
+            action: 'redi_restaurant-submit',
+            get: 'cancel',
+            ID: jQuery('#redi-restaurant-cancelID').val(),
+            Email: jQuery('#redi-restaurant-cancelEmail').val(),
+            Reason: jQuery('#redi-restaurant-cancelReason').val(),
+            lang: locale
+        };
+        jQuery('#cancel-errors').slideUp();
+        jQuery('#cancel-success').slideUp();
+        jQuery('#cancel-load').show();
+        jQuery('#redi-restaurant-cancel').attr('disabled', true);
+        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+            jQuery('#redi-restaurant-cancel').attr('disabled', false);
+            jQuery('#cancel-load').hide();
+            if (response['Error']) {
+                jQuery('#cancel-errors').html(response['Error']).show('slow');
+            } else {
+                jQuery('#cancel-success').slideDown();
+                jQuery('#cancel-errors').slideUp();
+                jQuery('#cancel-reservation-form').slideUp();
+                jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+                //clear form
+                jQuery('#redi-restaurant-cancelID').val('');
+                jQuery('#redi-restaurant-cancelEmail').val('');
+                jQuery('#redi-restaurant-cancelReason').val('');
+            }
+        }, 'json');
+        return false;
+    });
 
     jQuery('.available').click(function (event) {
         event.preventDefault();
