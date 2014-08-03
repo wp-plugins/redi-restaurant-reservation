@@ -181,7 +181,7 @@ jQuery(function () {
         jQuery('#step1load').show();
         jQuery('#step1errors').hide('slow');
         if(hidesteps) {
-            jQuery('#step1times').hide('slow');
+            jQuery('#step1times').hide();
         }
         var data = {
             action: 'redi_restaurant-submit',
@@ -201,7 +201,7 @@ jQuery(function () {
                 jQuery('#step1errors').html(response['Error']).show('slow');
             } else {
                 if(hidesteps) {
-                    jQuery('#step1times').show('slow');
+                    jQuery('#step1times').show();
                 }
                 switch (response['alternativeTime']) {
                     case 1: //AlternativeTimeBlocks see class AlternativeTime::
@@ -221,16 +221,21 @@ jQuery(function () {
                     case 3: //AlternativeTimeByDay
                         var all_busy = true;
                         var current = 0;
+                        var step1buttons_html = '';
+                        jQuery('#step1buttons_html').html(step1buttons_html).hide();
                         for (var availability in response) {
-                            if (response[availability]['Name'] !== undefined) {
+                            if (response[availability]['Name'] !== undefined){
                                 var html = '';
-                                if (!hidesteps) {
-                                    if (response[availability]['Name']) {
-                                        html += response[availability]['Name'] + ':</br>';
-                                    }
-                                }
+                                //if (!hidesteps) {
+//                                    if (response[availability]['Name']) {
+//                                        html += response[availability]['Name'] + ':</br>';
+//                                    }
+                                //}
 
-                                if (hidesteps) {
+                                step1buttons_html +='<input class="redi-restaurant-button button available" type="submit" id="time_'+(current)+'" value="'+response[availability]['Name']+'" >';
+
+                                //if (hidesteps)
+                                {
                                     html += '<span id="opentime_' + (current++) + '" style="display: none">';
                                     html += jQuery('#time2label').html();
                                 }
@@ -249,6 +254,7 @@ jQuery(function () {
                             }
                             jQuery('#buttons').append('</br>');
                         }
+                            jQuery('#step1buttons').html(step1buttons_html).show();
                         display_all_busy(all_busy);
                         break;
                 }
@@ -258,11 +264,11 @@ jQuery(function () {
                 }
 
                 // if selected time is available make it bold and show fields
-                jQuery('.redi-restaurant-time-button').each(function () {
-                    if (jQuery(this).attr('select')) {
-                        jQuery(this).click();
-                    }
-                });
+//                jQuery('.redi-restaurant-time-button').each(function () {
+//                    if (jQuery(this).attr('select')) {
+//                        jQuery(this).click();
+//                    }
+//                });
                 jQuery('#UserName').focus();
                 jQuery('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
             }
@@ -358,7 +364,7 @@ jQuery(function () {
         return false;
     });
 
-    jQuery('.available').click(function (event) {
+    jQuery('.available').live('click', function (event) {
         event.preventDefault();
         jQuery('#step1').hide();
         jQuery('#step2').show();

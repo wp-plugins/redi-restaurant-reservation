@@ -57,13 +57,15 @@
                 </option>
             <?php endif ?>
 		</select>
-
-        <?php if ( $hidesteps ): ?>
-	        <br clear="both"/>
+		<br clear="both"/>
 
 	        <span id="step1times">
 		        <br clear="all">
 		        <label><?php _e('Time', 'redi-restaurant-reservation')?>:</label><br clear="both"/>
+		        <span id="step1buttons">
+        <?php if ( $hidesteps ): ?>
+
+
 				<?php $current = 0;?>
 				<?php if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ): ?>
 					<?php $all_busy = true; ?>
@@ -82,12 +84,14 @@
 						<?php endif ?>
 					<?php endforeach ?>
 				<?php endif ?>
-		    </span>
-			<br clear="both"/><br clear="both"/>
-			<div id="step1busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
-				<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
-			</div>
+
 		<?php endif ?>
+			        </span>
+		        </span>
+		<br clear="both"/><br clear="both"/>
+		<div id="step1busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
+			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
+		</div>
 		<div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div>
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
