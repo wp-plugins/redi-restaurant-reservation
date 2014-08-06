@@ -32,9 +32,10 @@
 		<br clear="both"/>
 		<label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
-		<?php if ($timeshiftmode !== 'byshifts'):?>
+		<?php if ($timeshiftmode === 'byshifts'):?>
 			<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
 		<?php endif ?>
+		<? //var_dump($hide_clock);?>
 		<?php if(!$hide_clock):?>
 			<br clear="both"/>
 			<br clear="both"/><label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
@@ -78,10 +79,11 @@
 			<br clear="both"/>
 
 			<span id="step1times">
-
-		        <br clear="all">
-		        <label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label><br clear="both"/>
-
+				<?php if ( $hidesteps ): ?>
+			        <br clear="all">
+			        <label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label>
+					<br clear="all">
+				<?php endif ?>
 		        <span id="step1buttons">
 			        <?php if ( $hidesteps ):
 				        $current = 0;
