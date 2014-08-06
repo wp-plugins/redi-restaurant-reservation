@@ -3,38 +3,55 @@
 <script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s =explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format ='h:mm tt';<?php else: ?>var time_format ='HH:mm';<?php endif ?>var locale = '<?php echo get_locale()?>';if ((/^en/).test(locale))locale = ''; var timeshiftmode='<?php echo $timeshiftmode; ?>'; var hidesteps =<?php echo $hidesteps?1:0; ?>;</script>
 <form id="redi-reservation" name="redi-reservation" method="post">
 	<div id="step1">
-		
-        <?php if(count((array)$places) > 1 ): ?>
-            <h2 style="float:left;">
-				<?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?>
-			</h2>
-<!--			<a href="#cancel" id="cancel-reservation" class="cancel-reservation">--><?php //_e('Cancel reservation', 'redi-restaurant-reservation')?><!--</a>-->
-            <br clear="both"/>
-			<label for="placeID">
-			<?php _e('Place', 'redi-restaurant-reservation')?>:</label>
-			<br clear="both"/>
-		 <select name="placeID" id="placeID" class="redi-reservation-select">
-			<?php foreach((array)$places as $place_current):?>
-				<option value="<?php echo $place_current->ID ?>">
-					<?php echo $place_current->Name ?>
-				</option>
-			<?php endforeach; ?>
-		 </select>
-         <br clear="both"/>
-         <?php else: ?>
-         <h2 style="float:left;">
-			<?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select date and time', 'redi-restaurant-reservation')?>
 
-         </h2>
-<!--	        <a href="#cancel" id="cancel-reservation" class="cancel-reservation">--><?php //_e('Cancel reservation', 'redi-restaurant-reservation')?><!--</a>-->
-            <input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
-         <?php endif ?>
+		<?php if ( count( (array) $places ) > 1 ): /* multiple places */ ?>
+			<h2 style="float:left;">
+				<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> 1: <?php _e( 'Select place, date and time', 'redi-restaurant-reservation' ) ?>
+			</h2>
+			<a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
+			<br clear="both"/>
+			<label for="placeID">
+				<?php _e( 'Place', 'redi-restaurant-reservation' ) ?>:</label>
+			<br clear="both"/>
+			<select name="placeID" id="placeID" class="redi-reservation-select">
+				<?php foreach ( (array) $places as $place_current ): ?>
+					<option value="<?php echo $place_current->ID ?>">
+						<?php echo $place_current->Name ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+			<br clear="both"/>
+		<?php else: /* only one place */ ?>
+			<h2 style="float:left;">
+				<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> 1: <?php _e( 'Select date and time', 'redi-restaurant-reservation' ) ?>
+
+			</h2>
+			<a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
+			<input type="hidden" id="placeID" name="placeID" value="<?php echo $places[0]->ID ?>"/>
+		<?php endif ?>
 		<br clear="both"/>
 		<label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
 		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
-		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
+		<?php if ($timeshiftmode !== 'byshifts'):?>
+			<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
+		<?php endif ?>
 		<?php if(!$hide_clock):?>
-			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
+			<br clear="both"/>
+			<br clear="both"/><label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
+			<?php if (isset($timepicker) && $timepicker === 'dropdown'):?>
+				<select id="redi-restaurant-startHour" class="redi-reservation-select">
+					<?php foreach(range(0, 23) as $hour):?>
+						<option value="<?php echo $hour;?>" <?php if(date('H',$startTime)==$hour):?>selected="selected"<?php endif;?>><?php echo date($time_format_hours, strtotime( $hour.':00'));?></option>
+					<?php endforeach;?>
+				</select>&nbsp;:&nbsp;<select id="redi-restaurant-startMinute" class="redi-reservation-select">
+					<?php foreach(range(0, 45, 15) as $minute):?>
+						<option value="<?php echo $minute;?>"><?php printf('%02d', $minute);?></option>
+					<?php endforeach;?>
+				</select>
+				<input id="redi-restaurant-startTime" type="hidden" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
+			<?php else:?>
+				<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
+			<?php endif ?>
 		<?php endif;?>
 
 		<?php if(isset($start_time_array)):?>
@@ -57,37 +74,46 @@
                 </option>
             <?php endif ?>
 		</select>
-		<br clear="both"/>
+		<?php if ( $timeshiftmode === 'byshifts' ): ?>
+			<br clear="both"/>
 
-	        <span id="step1times">
+			<span id="step1times">
+
 		        <br clear="all">
-		        <label><?php _e('Time', 'redi-restaurant-reservation')?>:</label><br clear="both"/>
+		        <label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label><br clear="both"/>
+
 		        <span id="step1buttons">
-        <?php if ( $hidesteps ): ?>
+			        <?php if ( $hidesteps ):
+				        $current = 0;
+				        if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ):
+					        $all_busy = true;
+					        foreach ( $step1 as $available ): ?>
+						        <?php $current_busy = true;
+						        if ( isset( $available['Availability'] ) && is_array( $available['Availability'] ) ) {
+							        foreach ( $available['Availability'] as $button ) {
+								        if ( $button['Available'] ) {
+									        $all_busy = $current_busy = false;
+								        }
+							        }
+						        }
+						        if ( isset( $available['Name'] ) ): ?>
+							        <input class="redi-restaurant-button button available" type="submit"
+							               id="time_<?php echo $current ++; ?>" value="<?php echo( $available['Name'] ); ?>"
+							               <?php if ($current_busy): ?>disabled="disabled"<?php endif ?>/>
+						        <?php endif ?>
+					        <?php endforeach ?>
+				        <?php endif ?>
 
-
-				<?php $current = 0;?>
-				<?php if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ): ?>
-					<?php $all_busy = true; ?>
-					<?php foreach ( $step1 as $available ): ?>
-						<?php $current_busy = true;
-						if ( isset( $available['Availability'] ) && is_array( $available['Availability'] ) ) {
-							foreach ( $available['Availability'] as $button ) {
-								if ( $button['Available'] ) {
-									$all_busy = $current_busy = false;
-								}
-							}
-						}
-						?>
-						<?php if ( isset( $available['Name'] ) ): ?>
-							<input class="redi-restaurant-button button available" type="submit" id="time_<?php echo $current++;?>" value="<?php echo( $available['Name'] ); ?>" <?php if($current_busy):?>disabled="disabled"<?php endif ?>/>
-						<?php endif ?>
-					<?php endforeach ?>
-				<?php endif ?>
-
-		<?php endif ?>
-			        </span>
+			        <?php endif ?>
 		        </span>
+	        </span>
+		<?php else: /* byshifts */?>
+	        <div style="margin-top: 30px;">
+		        <?php if($timeshiftmode!= 'byshifts'):?>
+			        <input class="redi-restaurant-button" id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
+		        <?php endif?>
+		    </div>
+		<?php endif /* normal */ ?>
 		<br clear="both"/><br clear="both"/>
 		<div id="step1busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
 			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
@@ -105,8 +131,9 @@
 	</div>
 
 
-	<div id="step2" <?php if ($hidesteps): ?>style="display: none" <? endif ?>>
-		<?php if ( $hidesteps ): ?>
+	<div id="step2" <?php if ($timeshiftmode !=='byshifts' || $hidesteps): ?>style="display: none" <? endif ?>>
+
+		<?php if ( $timeshiftmode !=='byshifts' ||$hidesteps ): ?>
 			<h2 style="float:left;">
 				<?php _e('Step', 'redi-restaurant-reservation')?> 2: <?php _e('Select available time', 'redi-restaurant-reservation')?>
 			</h2>
