@@ -276,7 +276,7 @@
 		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes', 'redi-restaurant-reservation') ?>" name="submit">
 	</form>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
-            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1500px;"></iframe>
+            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1600px;"></iframe>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='cancel')):?>
         <div id="icon-admin" class="icon32">
             <br>

@@ -53,7 +53,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$time = 30; //new number of seconds
 			return $time;
 		}
-		
+
 		public function __construct() {
 			$this->_name = self::$name;
 			//Initialize the options
@@ -757,7 +757,7 @@ if (!class_exists('ReDiRestaurantReservation'))
             wp_register_script('restaurant', REDI_RESTAURANT_PLUGIN_URL.'js/restaurant.js', array ('jquery'));
 
             wp_localize_script('restaurant',
-                'redi_restaraurant_reservation',
+                'redi_restaurant_reservation',
                 array ( // URL to wp-admin/admin-ajax.php to process the request
                       'ajaxurl' => admin_url('admin-ajax.php'),
                       'id_missing' => __('Reservation number can\'t be empty', 'redi-restaurant-reservation'),
@@ -816,22 +816,19 @@ if (!class_exists('ReDiRestaurantReservation'))
                 $field_message = 'field_'.$i.'_message';
 
                 if(isset($this->options[$field_name]))
-                {
+				if ( isset( $this->options[ $field_name ] ) ) {
                     $$field_name = $this->options[$field_name];
                 }
 
-                if(isset($this->options[$field_type]))
-                {
+				if ( isset( $this->options[ $field_type ] ) ) {
                     $$field_type = $this->options[$field_type];
                 }
 
-                if(isset($this->options[$field_required]))
-                {
+				if ( isset( $this->options[ $field_required ] ) ) {
                     $$field_required = $this->options[$field_required];
                 }
 
-                if(isset($this->options[$field_message]))
-                {
+				if ( isset( $this->options[ $field_message ] ) ) {
                     $$field_message = $this->options[$field_message];
                 }
             }
@@ -898,6 +895,67 @@ if (!class_exists('ReDiRestaurantReservation'))
 			return 'H'; //if no time format found use 24 h with lead zero
 		}
 
+		private function step1( $placeID, $post ) {
+			// convert date to array
+
+			$date = date_parse( $post['startDateISO'] . ' ' . ( isset( $post['startTime'] ) ? $post['startTime'] : null ) );
+
+			if ( $date['error_count'] > 0 ) {
+				echo json_encode( array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) ) );
+				die;
+			}
+
+			$startTimeStr = $date['year'] . '-' . $date['month'] . '-' . $date['day'] . ' ' . $date['hour'] . ':' . $date['minute'];
+
+			$persons = (int) $post['persons'];
+			// convert to int
+			$startTimeInt = strtotime( $startTimeStr, 0 );
+
+			// calculate end time
+			$endTimeInt = strtotime( '+' . $this->getReservationTime( $persons ) . 'minutes', $startTimeInt );
+
+			// format to ISO
+			$startTimeISO   = date( 'Y-m-d H:i', $startTimeInt );
+			$endTimeISO     = date( 'Y-m-d H:i', $endTimeInt );
+			$currentTimeISO = date( 'Y-m-d H:i', current_time( 'timestamp' ) );
+
+			$params = array(
+				'StartTime'           => urlencode( $startTimeISO ),
+				'EndTime'             => urlencode( $endTimeISO ),
+				'Quantity'            => $persons,
+				'Alternatives'        => 2,
+				'Lang'                => str_replace( '_', '-', $post['lang'] ),
+				'CurrentTime'         => urlencode( $currentTimeISO ),
+				'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons )
+			);
+
+			//get first category on selected place
+			$categories = $this->redi->getPlaceCategories( $placeID );
+			if ( isset( $categories['Error'] ) ) {
+				$categories['Error'] = __( $categories['Error'], 'redi-restaurant-reservation-errors' );
+				echo json_encode( $categories );
+				die;
+			}
+			$category = $categories[0];
+
+			$query = $this->redi->query( $category->ID, $params );
+
+			$time_format = get_option( 'time_format' );
+
+			if ( isset( $query['Error'] ) ) {
+				return $query;
+			}
+			unset( $query['debug'] );
+			foreach ( $query as $q ) {
+				$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
+				$q->StartTimeISO = $q->StartTime;
+				$q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+				$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
+			}
+
+
+			return $query;
+		}
         function redi_restaurant_ajax()
         {
             if (isset($_POST['placeID']))
@@ -915,68 +973,9 @@ if (!class_exists('ReDiRestaurantReservation'))
             switch ($_POST['get'])
             {
                 case 'step1':
-                    // convert date to array
+		            echo json_encode( $this->step1( $placeID, $_POST ) );
+		            break;
 
-                    $date = date_parse($_POST['startDateISO'].' '.$_POST['startTime']);
-
-                    if ($date['error_count'] > 0)
-                    {
-                        echo json_encode(array('Error' => __('Selected date or time is not valid.', 'redi-restaurant-reservation')));
-                        die;
-                    }
-
-                    $startTimeStr = $date['year'].'-'.$date['month'].'-'.$date['day'].' '.$date['hour'].':'.$date['minute'];
-
-					$persons = (int) $_POST['persons'];
-                    // convert to int
-                    $startTimeInt = strtotime($startTimeStr, 0);
-
-                    // calculate end time
-                    $endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
-
-                    // format to ISO
-                    $startTimeISO   = date('Y-m-d H:i', $startTimeInt);
-                    $endTimeISO     = date('Y-m-d H:i', $endTimeInt);
-                    $currentTimeISO = date('Y-m-d H:i', current_time('timestamp'));
-
-                    $params = array(
-                        'StartTime'    => urlencode($startTimeISO),
-                        'EndTime'      => urlencode($endTimeISO),
-                        'Quantity'     => $persons,
-                        'Alternatives' => 2,
-                        'Lang'         => str_replace('_', '-', $_POST['lang']),
-                        'CurrentTime'  => urlencode($currentTimeISO),
-                        'AlternativeTimeStep' => self::getAlternativeTimeStep($persons)
-                    );
-
-                    //get first category on selected place
-                    $categories = $this->redi->getPlaceCategories($placeID);
-                    if(isset($categories['Error'])){
-	                    $categories['Error'] = __( $categories['Error'], 'redi-restaurant-reservation-errors' );
-                        echo json_encode($categories);
-                        die;
-                    }
-                    $category   = $categories[0];
-
-                    $query = $this->redi->query($category->ID, $params);
-
-                    $time_format = get_option('time_format');
-
-                    if (!isset($query['Error'])){
-                        unset($query['debug']);
-                        foreach ($query as $q)
-                        {
-                            $q->Select       = ($startTimeISO == $q->StartTime && $q->Available);
-                            $q->StartTimeISO = $q->StartTime;
-                            $q->StartTime    = date($time_format, strtotime($q->StartTime));
-                            $q->EndTime      = date($time_format, strtotime($q->EndTime));
-                        }
-                    }
-					else{
-						$query['Error'] = __( $query['Error'], 'redi-restaurant-reservation-errors' );
-					}
-                    echo json_encode($query);
-                    break;
 
                 case 'step3':
 

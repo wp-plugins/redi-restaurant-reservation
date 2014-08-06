@@ -75,14 +75,14 @@ jQuery(function () {
     jQuery('#redi-restaurant-step3').click(function () {
         var error = '';
         if (jQuery('#UserName').val() === '') {
-            error += redi_restaraurant_reservation.name_missing + '<br/>';
+            error += redi_restaurant_reservation.name_missing + '<br/>';
         }
         if (jQuery('#UserEmail').val() === '') {
-            error += redi_restaraurant_reservation.email_missing + '<br/>';
+            error += redi_restaurant_reservation.email_missing + '<br/>';
         }
         if (jQuery('#UserPhone').val() === '') {
 
-            error += redi_restaraurant_reservation.phone_missing + '<br/>';
+            error += redi_restaurant_reservation.phone_missing + '<br/>';
         }
         jQuery('.field_required').each(function () {
             if (jQuery(this).attr('type') === 'checkbox' && jQuery(this).attr('checked') !== 'checked' || jQuery(this).attr('type') === 'textbox' && jQuery(this).val() === '') {
@@ -135,7 +135,7 @@ jQuery(function () {
         jQuery('#step3load').show();
         jQuery('#step3errors').hide('slow');
         jQuery('#redi-restaurant-step3').attr('disabled', true);
-        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
             jQuery('#redi-restaurant-step3').attr('disabled', false);
             jQuery('#step3load').hide();
             if (response['Error']) {
@@ -167,7 +167,7 @@ jQuery(function () {
             lang: locale
         };
 
-        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
             jQuery('#step1load').hide();
             jQuery('#step1button').attr('disabled', false);
             jQuery('#buttons').html('');
@@ -241,13 +241,13 @@ jQuery(function () {
     jQuery('#redi-restaurant-cancel').click(function () {
         var error = '';
         if (jQuery('#redi-restaurant-cancelID').val() === '') {
-            error += redi_restaraurant_reservation.id_missing + '<br/>';
+            error += redi_restaurant_reservation.id_missing + '<br/>';
         }
         if (jQuery('#redi-restaurant-cancelEmail').val() === '') {
-            error += redi_restaraurant_reservation.email_missing + '<br/>';
+            error += redi_restaurant_reservation.email_missing + '<br/>';
         }
         if (jQuery('#redi-restaurant-cancelReason').val() === '') {
-            error += redi_restaraurant_reservation.reason_missing + '<br/>';
+            error += redi_restaurant_reservation.reason_missing + '<br/>';
         }
         if (error) {
             jQuery('#cancel-errors').html(error).show('slow');
@@ -266,7 +266,7 @@ jQuery(function () {
         jQuery('#cancel-success').slideUp();
         jQuery('#cancel-load').show();
         jQuery('#redi-restaurant-cancel').attr('disabled', true);
-        jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
+        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
             jQuery('#redi-restaurant-cancel').attr('disabled', false);
             jQuery('#cancel-load').hide();
             if (response['Error']) {
