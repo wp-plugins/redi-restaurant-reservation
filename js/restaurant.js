@@ -226,15 +226,16 @@ jQuery(function () {
                         for (var availability in response) {
                             if (response[availability]['Name'] !== undefined){
                                 var html = '';
-                                //if (!hidesteps) {
-//                                    if (response[availability]['Name']) {
-//                                        html += response[availability]['Name'] + ':</br>';
-//                                    }
-                                //}
+
+                                if (!hidesteps) {
+                                    if (response[availability]['Name']) {
+                                        html += response[availability]['Name'] + ':</br>';
+                                    }
+                                }
 
                                 step1buttons_html +='<input class="redi-restaurant-button button available" type="submit" id="time_'+(current)+'" value="'+response[availability]['Name']+'" >';
 
-                                //if (hidesteps)
+                                if (hidesteps)
                                 {
                                     html += '<span id="opentime_' + (current++) + '" style="display: none">';
                                     html += jQuery('#time2label').html();
