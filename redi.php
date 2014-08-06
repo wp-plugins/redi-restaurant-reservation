@@ -147,6 +147,20 @@ class Redi
 	{
 		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey, POST, json_encode(self::unescape_array($params)));
 	}
+	public function shiftsStartTime($categoryID, $params)
+	{
+		return $this->request(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/shiftsStartTime', GET, $this->strParams($params));
+	}
+
+	public function availabilityByDay( $categoryID, $params )
+	{
+		return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/availabilityByDay/Person', GET, $this->strParams($params));
+	}
+
+	public function availabilityByShifts($categoryID, $params)
+	{
+        return $this->request(REDI_RESTAURANT_API.RESERVATION.$this->ApiKey.'/'.$categoryID.'/availabilityByShifts/Person', GET, $this->strParams($params));
+	}
 
 	public function getPlace($placeID)
 	{
