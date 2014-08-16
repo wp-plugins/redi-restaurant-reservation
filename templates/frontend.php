@@ -90,10 +90,11 @@
 					<br clear="all">
 				<?php endif ?>
 		        <span id="step1buttons">
+			        <?php $all_busy = true; ?>
 			        <?php if ( $hidesteps ):
 				        $current = 0;
 				        if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ):
-					        $all_busy = true;
+
 					        foreach ( $step1 as $available ): ?>
 						        <?php $current_busy = true;
 						        if ( isset( $available['Availability'] ) && is_array( $available['Availability'] ) ) {
