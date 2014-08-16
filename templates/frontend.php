@@ -141,7 +141,7 @@
 	</div>
 
 
-	<div id="step2" <?php if ($timeshiftmode !=='byshifts' || $hidesteps): ?>style="display: none" <? endif ?>>
+	<div id="step2" <?php if ($timeshiftmode !=='byshifts' || $hidesteps): ?>style="display: none" <?php endif ?>>
 
 		<?php if ( $timeshiftmode !=='byshifts' ||$hidesteps ): ?>
 			<h2 style="float:left;">
