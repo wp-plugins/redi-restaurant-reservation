@@ -31,14 +31,19 @@
 		<?php endif ?>
 		<br clear="both"/>
 		<label for="redi-restaurant-startDate"><?php _e('Date', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
-		<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
+		<?php if($calendar === 'show'): ?>
+			<div id="redi-restaurant-startDate"></div>
+		<?php else: ?>
+			<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
+		<?php endif ?>
 		<?php if ($timeshiftmode === 'byshifts'):?>
 			<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
 		<?php endif ?>
-		<? //var_dump($hide_clock);?>
+
 		<?php if(!$hide_clock):?>
 			<br clear="both"/>
 			<br clear="both"/><label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
+
 			<?php if (isset($timepicker) && $timepicker === 'dropdown'):?>
 				<select id="redi-restaurant-startHour" class="redi-reservation-select">
 					<?php foreach(range(0, 23) as $hour):?>

@@ -456,6 +456,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 			$this->options = get_option($this->optionsName);
 
+
 			if ( $settings_saved || ! isset( $_POST['submit'] ) ) {
 				$thanks              = $this->GetOption( 'Thanks', 0 );
 				$timepicker          = $this->GetOption( 'TimePicker' );
@@ -807,6 +808,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$thanks             = $this->options['Thanks'];
 			$hidesteps          = self::GetOption( 'hidesteps' ) == 'true';
 
+			$timepicker = self::GetOption( 'timepicker', self::GetOption( 'TimePicker' ) );
+			$time_format_hours = self::dropdown_time_format();
+			$calendar = self::GetOption( 'calendar', false );
 			for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 				$field_name     = 'field_'.$i.'_name';
 				$field_type     = 'field_'.$i.'_type';
@@ -829,6 +833,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $this->options[ $field_message ];
 				}
 			}
+			$hide_clock = FALSE;
 			$timeshiftmode = $this->GetOption('timeshiftmode');
 			if ($timeshiftmode === 'byshifts')
 			{
@@ -845,7 +850,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						)
 					)
 				);
-				$hide_clock = true;
+				$hide_clock = TRUE;
 			}
 
 			require_once( REDI_RESTAURANT_TEMPLATE.'frontend.php' );
