@@ -852,6 +852,10 @@ if (!class_exists('ReDiRestaurantReservation'))
 				);
 				$hide_clock = TRUE;
 			}
+			else
+			{
+				$persons =1;
+			}
 
 			require_once( REDI_RESTAURANT_TEMPLATE.'frontend.php' );
 			$out = ob_get_contents();
