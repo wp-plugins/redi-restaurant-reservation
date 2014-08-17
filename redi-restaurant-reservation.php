@@ -15,7 +15,7 @@ if (!defined('REDI_RESTAURANT_PLUGIN_URL'))
 if (!defined('REDI_RESTAURANT_TEMPLATE'))
 	define('REDI_RESTAURANT_TEMPLATE', plugin_dir_path(__FILE__).'templates'.DIRECTORY_SEPARATOR);
 if (!defined('REDI_RESTAURANT_DEBUG'))
-	define('REDI_RESTAURANT_DEBUG', FALSE);
+	define('REDI_RESTAURANT_DEBUG', false);
 if (!defined('ID'))
 	define('ID', 'ID');
 require_once('redi.php');
@@ -652,16 +652,16 @@ if (!class_exists('ReDiRestaurantReservation'))
 
 		public static function uninstall()
 		{
-			self::deletePage(TRUE);
+			self::deletePage(true);
 			self::deleteOptions();
 		}
 
-		private function deletePage($hard = FALSE)
+		private function deletePage($hard = false)
 		{
 			$id = get_option(self::$name.'_page_id');
-			if ($id && $hard == TRUE)
-				wp_delete_post($id, TRUE);
-			elseif ($id && $hard == FALSE)
+			if ($id && $hard == true)
+				wp_delete_post($id, true);
+			elseif ($id && $hard == false)
 				wp_delete_post($id);
 		}
 
@@ -833,7 +833,9 @@ if (!class_exists('ReDiRestaurantReservation'))
 					$$field_message = $this->options[ $field_message ];
 				}
 			}
-			$hide_clock = FALSE;
+			$hide_clock = false;
+			$persons =1;
+
 			$timeshiftmode = $this->GetOption('timeshiftmode');
 			if ($timeshiftmode === 'byshifts')
 			{
@@ -850,11 +852,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 						)
 					)
 				);
-				$hide_clock = TRUE;
-			}
-			else
-			{
-				$persons =1;
+				$hide_clock = true;
 			}
 
 			require_once( REDI_RESTAURANT_TEMPLATE.'frontend.php' );
@@ -887,28 +885,28 @@ if (!class_exists('ReDiRestaurantReservation'))
 			$is_24 = strpos($wp_time_format, 'G');
 			$is_24_lead_zero = strpos($wp_time_format, 'H');
 
-			if($is_am_pm !== FALSE || $is_am_pm_lead_zero !== FALSE)
+			if($is_am_pm !== false || $is_am_pm_lead_zero !== false)
 			{
 				$a = stripos($wp_time_format, 'a');
 				$am_text = '';
-				if($a !== FALSE)
+				if($a !== false)
 				{
 					$am_text =$wp_time_format[$a];
 				}
-				if($is_am_pm !== FALSE)
+				if($is_am_pm !== false)
 				{
 					return $wp_time_format[$is_am_pm].' '.$am_text;
 				}
-				if( $is_am_pm_lead_zero !== FALSE)
+				if( $is_am_pm_lead_zero !== false)
 				{
 					return $wp_time_format[$is_am_pm_lead_zero].' '.$am_text;
 				}
 			}
-			if($is_24 !== FALSE)
+			if($is_24 !== false)
 			{
 				return $wp_time_format[$is_24];
 			}
-			if($is_24_lead_zero !== FALSE)
+			if($is_24_lead_zero !== false)
 			{
 				return $wp_time_format[$is_24_lead_zero];
 			}
@@ -1235,7 +1233,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 
             if (file_exists($filename) && $persons)
             {
-                $json = json_decode(file_get_contents($filename), TRUE);
+                $json = json_decode(file_get_contents($filename), true);
                 if($json !== NULL)
                 {
                     if(array_key_exists($persons, $json))
@@ -1259,7 +1257,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			
 			if (file_exists($filename) && $persons)
 			{
-				$json = json_decode(file_get_contents($filename), TRUE);
+				$json = json_decode(file_get_contents($filename), true);
 				if($json !== NULL)
 				{
 					if(array_key_exists($persons, $json))
