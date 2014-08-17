@@ -36,9 +36,9 @@
 		<?php else: ?>
 			<input type="text" value="<?php echo $startDate ?>" name="startDate" id="redi-restaurant-startDate"/>
 		<?php endif ?>
-		<?php if ($timeshiftmode === 'byshifts'):?>
-			<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
-		<?php endif ?>
+
+		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
+
 
 		<?php if(!$hide_clock):?>
 			<br clear="both"/>

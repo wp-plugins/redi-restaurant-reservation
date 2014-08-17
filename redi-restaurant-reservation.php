@@ -487,7 +487,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return isset( $this->options[ $name ] ) ? $this->options[ $name ] : $default;
 		}
 
-		private function GetPost( $name, $default = null ) {
+		private function GetPost( $name, $default = null, $post = null) {
+			if($post){
+				return isset( $post[ $name ] ) ? $post[ $name ] : $default;
+			}
 			return isset( $_POST[ $name ] ) ? $_POST[ $name ] : $default;
 		}
 
@@ -870,9 +873,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		private function step1( $categoryID, $post, $placeID = null ) {
 
-			$timeshiftmode = self::GetPost( 'timeshiftmode', self::GetOption( 'timeshiftmode' ) );
+			$timeshiftmode = self::GetPost( 'timeshiftmode', self::GetOption('timeshiftmode') );
 			// convert date to array
-			$date = date_parse( $post['startDateISO'].' '.self::GetPost( 'startTime' ) );
+			$date = date_parse( $post['startDateISO'].' '.( isset( $post['startTime'] ) ? $post['startTime'] : null ) );
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) ) );
@@ -943,7 +946,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					'EndTime'             => urlencode( $endTimeISO ),
 					'Quantity'            => $persons,
 					'Alternatives'        => 2,
-					'Lang'                => str_replace( '_', '-', self::GetPost( 'lang' ) ),
+					'Lang'                => str_replace( '_', '-', $post['lang'] ),
 					'CurrentTime'         => urlencode( $currentTimeISO ),
 					'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons )
 				);
