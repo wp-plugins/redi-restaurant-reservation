@@ -875,7 +875,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$timeshiftmode = self::GetPost( 'timeshiftmode', self::GetOption('timeshiftmode') );
 			// convert date to array
-			$date = date_parse( $post['startDateISO'].' '.( isset( $post['startTime'] ) ? $post['startTime'] : null ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ).' '.self::GetPost( 'startTime', null, $post ) );
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) ) );
@@ -917,8 +917,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
-				//var_dump($params);
-				//var_dump($alternativeTime);
 				switch ( $alternativeTime ) {
 					case AlternativeTime::AlternativeTimeBlocks:
 						$query = $this->redi->query( $categoryID, $params );
