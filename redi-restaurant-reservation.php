@@ -198,13 +198,13 @@ if (!class_exists('ReDiRestaurantReservation'))
 		{
 			$errors = array();
 
-			if ($this->ApiKey == NULL) /// TODO: move to install
+			if ($this->ApiKey == null) /// TODO: move to install
 			{
 				$return = $this->register();
 				$this->display_errors($return, true);
 			}
 
-			if ($this->ApiKey == NULL)
+			if ($this->ApiKey == null)
 			{
 
 				$errors['Error'] = array(
@@ -634,7 +634,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			delete_option($this->_name.'_page_id');
 			add_option($this->_name.'_page_id', $this->page_id);
 
-			if ($this->ApiKey == NULL) // TODO: move to install
+			if ($this->ApiKey == null) // TODO: move to install
 				$this->register();
 
 		}
@@ -835,6 +835,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			}
 			$hide_clock = false;
 			$persons =1;
+			$all_busy = false;
 
 			$timeshiftmode = $this->GetOption('timeshiftmode');
 			if ($timeshiftmode === 'byshifts')
@@ -1234,7 +1235,7 @@ if (!class_exists('ReDiRestaurantReservation'))
             if (file_exists($filename) && $persons)
             {
                 $json = json_decode(file_get_contents($filename), true);
-                if($json !== NULL)
+                if($json !== null)
                 {
                     if(array_key_exists($persons, $json))
                     {
@@ -1258,7 +1259,7 @@ if (!class_exists('ReDiRestaurantReservation'))
 			if (file_exists($filename) && $persons)
 			{
 				$json = json_decode(file_get_contents($filename), true);
-				if($json !== NULL)
+				if($json !== null)
 				{
 					if(array_key_exists($persons, $json))
 					{
