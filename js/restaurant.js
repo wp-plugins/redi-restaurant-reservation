@@ -210,7 +210,8 @@ jQuery(function () {
             startTime: jQuery('#redi-restaurant-startTime').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
-            lang: locale
+            lang: locale,
+            timeshiftmode:timeshiftmode
         };
 
         jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
