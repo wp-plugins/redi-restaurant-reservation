@@ -123,7 +123,8 @@ jQuery(function () {
             UserComments: jQuery('#UserComments').val(),
             UserPhone: jQuery('#UserPhone').val(),
             placeID: jQuery('#placeID').val(),
-            lang: locale
+            lang: locale,
+            apikeyid:apikeyid
         };
         if (jQuery('#field_1').attr('type') === 'checkbox' && jQuery('#field_1').attr('checked') === 'checked') {
             data['field_1'] = 'on';
@@ -211,7 +212,8 @@ jQuery(function () {
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
             lang: locale,
-            timeshiftmode:timeshiftmode
+            timeshiftmode:timeshiftmode,
+            apikeyid:apikeyid
         };
 
         jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
@@ -373,7 +375,8 @@ jQuery(function () {
             ID: jQuery('#redi-restaurant-cancelID').val(),
             Email: jQuery('#redi-restaurant-cancelEmail').val(),
             Reason: jQuery('#redi-restaurant-cancelReason').val(),
-            lang: locale
+            lang: locale,
+            apikeyid: apikeyid
         };
         jQuery('#cancel-errors').slideUp();
         jQuery('#cancel-success').slideUp();
