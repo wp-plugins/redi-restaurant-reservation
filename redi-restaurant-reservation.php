@@ -317,16 +317,14 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				$serviceTimes = self::GetServiceTimes();
 
-				$this->options['Thanks']              = self::GetPost( 'Thanks', 0 );
-				$this->options['TimePicker']          = self::GetPost( 'TimePicker' );
-				$this->options['AlternativeTimeStep'] = self::GetPost( 'AlternativeTimeStep', 30 );
-
-				$services = (int) self::GetPost( 'services' );
-
-				$this->options['services']                 = $services;
+				$this->options['Thanks']                   = self::GetPost( 'Thanks', 0 );
+				$this->options['TimePicker']               = self::GetPost( 'TimePicker' );
+				$this->options['AlternativeTimeStep']      = self::GetPost( 'AlternativeTimeStep', 30 );
+				$this->options['services']                 = $services = (int) self::GetPost( 'services' );
 				$this->options['MinTimeBeforeReservation'] = self::GetPost( 'MinTimeBeforeReservation' );
 				$this->options['DateFormat']               = self::GetPost( 'DateFormat' );
 				$this->options['ReservationTime']          = $reservationTime;
+				$this->options['Calendar']                 = self::GetPost( 'Calendar' );
 
 				for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 					$field_name     = 'field_'.$i.'_name';
@@ -441,9 +439,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 
 			if ( $settings_saved || ! isset( $_POST['submit'] ) ) {
-				$thanks     = $this->GetOption( 'Thanks', 0 );
-				$timepicker = $this->GetOption( 'TimePicker' );
-
+				$thanks              = $this->GetOption( 'Thanks', 0 );
+				$calendar            = $this->GetOption( 'Calendar', 'hide' );
+				$timepicker          = $this->GetOption( 'TimePicker' );
 				$minPersons          = $this->GetOption( 'MinPersons', 1 );
 				$maxPersons          = $this->GetOption( 'MaxPersons', 10 );
 				$alternativeTimeStep = $this->GetOption( 'AlternativeTimeStep', 30 );
@@ -463,10 +461,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$field_required = 'field_'.$i.'_required';
 				$field_message  = 'field_'.$i.'_message';
 
-				$$field_name     = self::GetOption( $field_name );
-				$$field_type     = self::GetOption( $field_type );
-				$$field_required = self::GetOption( $field_required );
-				$$field_message  = self::GetOption( $field_message );
+				$$field_name     = $this->GetOption( $field_name );
+				$$field_type     = $this->GetOption( $field_type );
+				$$field_required = $this->GetOption( $field_required );
+				$$field_message  = $this->GetOption( $field_message );
 			}
 
 			//if settings are saved or this is first time load
@@ -487,7 +485,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return isset( $this->options[ $name ] ) ? $this->options[ $name ] : $default;
 		}
 
-		private function GetPost( $name, $default = null, $post = null) {
+		private static function GetPost( $name, $default = null, $post = null) {
 			if($post){
 				return isset( $post[ $name ] ) ? $post[ $name ] : $default;
 			}
@@ -744,20 +742,16 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			wp_enqueue_style( 'redi-restaurant' );
 
 			//places
-			$places = $this->redi->getPlaces();
-
-			$placeID             = $places[0]->ID;
-			$categories          = $this->redi->getPlaceCategories( $placeID );
-			$categoryID          = $categories[0]->ID;
-			$time_format         = get_option( 'time_format' );
-			$date_format_setting = $this->options['DateFormat'];
-
-			$time_format         = get_option( 'time_format' );
-			$date_format_setting = $this->options['DateFormat'];
-
-			$calendar_date_format = $this->getCalendarDateFormat( $date_format_setting );
-			$date_format          = $this->getPHPDateFormat( $date_format_setting );
-
+			$places                   = $this->redi->getPlaces();
+			$placeID                  = $places[0]->ID;
+			$categories               = $this->redi->getPlaceCategories( $placeID );
+			$categoryID               = $categories[0]->ID;
+			$time_format              = get_option( 'time_format' );
+			$date_format_setting      = $this->options['DateFormat'];
+			$time_format              = get_option( 'time_format' );
+			$date_format_setting      = $this->options['DateFormat'];
+			$calendar_date_format     = $this->getCalendarDateFormat( $date_format_setting );
+			$date_format              = $this->getPHPDateFormat( $date_format_setting );
 			$time_format              = get_option( 'time_format' );
 			$date_format_setting      = $this->options['DateFormat'];
 			$calendar_date_format     = $this->getCalendarDateFormat( $date_format_setting );
@@ -767,16 +761,15 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$startDate                = date( $date_format, $reservationStartTime );
 			$startDateISO             = date( 'Y-m-d', $reservationStartTime );
 			$startTime                = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
+			$minPersons               = isset( $this->options['MinPersons'] ) ? $this->options['MinPersons'] : 1;
+			$maxPersons               = isset( $this->options['MaxPersons'] ) ? $this->options['MaxPersons'] : 10;
+			$largeGroupsMessage       = isset( $this->options['LargeGroupsMessage'] ) ? $this->options['LargeGroupsMessage'] : '';
+			$thanks                   = $this->options['Thanks'];
+			$hidesteps                = $this->GetOption( 'hidesteps' ) == 'true';
+			$timepicker               = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
+			$time_format_hours        = self::dropdown_time_format();
+			$calendar                 = $this->GetOption( 'calendar', $this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
 
-			$minPersons         = isset( $this->options['MinPersons'] ) ? $this->options['MinPersons'] : 1;
-			$maxPersons         = isset( $this->options['MaxPersons'] ) ? $this->options['MaxPersons'] : 10;
-			$largeGroupsMessage = isset( $this->options['LargeGroupsMessage'] ) ? $this->options['LargeGroupsMessage'] : '';
-			$thanks             = $this->options['Thanks'];
-			$hidesteps          = self::GetOption( 'hidesteps' ) == 'true';
-
-			$timepicker        = self::GetOption( 'timepicker', self::GetOption( 'TimePicker' ) );
-			$time_format_hours = self::dropdown_time_format();
-			$calendar          = self::GetOption( 'calendar', false );
 			for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 				$field_name     = 'field_'.$i.'_name';
 				$field_type     = 'field_'.$i.'_type';
@@ -873,7 +866,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		private function step1( $categoryID, $post, $placeID = null ) {
 
-			$timeshiftmode = self::GetPost( 'timeshiftmode', self::GetOption('timeshiftmode') );
+			$timeshiftmode = self::GetPost( 'timeshiftmode', $this->GetOption('timeshiftmode') );
 			// convert date to array
 			$date = date_parse( self::GetPost( 'startDateISO', null, $post ).' '.self::GetPost( 'startTime', null, $post ) );
 
