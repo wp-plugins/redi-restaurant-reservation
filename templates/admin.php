@@ -178,6 +178,42 @@
 			</tr>
 			<tr style="width: 250px">
 				<th scope="row">
+					<label for="TimeShiftMode">
+						<?php _e('Hidesteps', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="TimeShiftMode">
+						<option value="normal" <?php if ($timeshiftmode === 'normal'):?>selected="selected"<?php endif;?>>normal</option>
+						<option value="byshifts" <?php if ($timeshiftmode === 'byshifts'):?>selected="selected"<?php endif;?>>byshifts</option>
+					</select>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('TimeShiftMode', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr style="width: 250px">
+				<th scope="row">
+					<label for="Hidesteps">
+						<?php _e('Hidesteps', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="Hidesteps">
+						<option value="true" <?php if ($hidesteps === 'true'):?>selected="selected"<?php endif;?>>true</option>
+						<option value="true" <?php if ($hidesteps === 'false'):?>selected="selected"<?php endif;?>>false</option>
+					</select>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('Hide previous steps (only for timeshiftmode byshifts)', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr style="width: 250px">
+				<th scope="row">
 					<label for="Calendar">
 						<?php _e('Calendar type', 'redi-restaurant-reservation'); ?>
 					</label>

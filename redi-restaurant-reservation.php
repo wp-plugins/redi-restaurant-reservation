@@ -325,6 +325,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$this->options['DateFormat']               = self::GetPost( 'DateFormat' );
 				$this->options['ReservationTime']          = $reservationTime;
 				$this->options['Calendar']                 = self::GetPost( 'Calendar' );
+				$this->options['Hidesteps']                = self::GetPost( 'Hidesteps' );
+				$this->options['TimeShiftMode']            = self::GetPost( 'TimeShiftMode' );
 
 				for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 					$field_name     = 'field_'.$i.'_name';
@@ -441,6 +443,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $settings_saved || ! isset( $_POST['submit'] ) ) {
 				$thanks              = $this->GetOption( 'Thanks', 0 );
 				$calendar            = $this->GetOption( 'Calendar', 'hide' );
+				$hidesteps           = $this->GetOption( 'Hidesteps', 'false' );
+				$timeshiftmode       = $this->GetOption( 'TimeShiftMode', 'normal' );
 				$timepicker          = $this->GetOption( 'TimePicker' );
 				$minPersons          = $this->GetOption( 'MinPersons', 1 );
 				$maxPersons          = $this->GetOption( 'MaxPersons', 10 );
@@ -765,7 +769,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$maxPersons               = isset( $this->options['MaxPersons'] ) ? $this->options['MaxPersons'] : 10;
 			$largeGroupsMessage       = isset( $this->options['LargeGroupsMessage'] ) ? $this->options['LargeGroupsMessage'] : '';
 			$thanks                   = $this->options['Thanks'];
-			$hidesteps                = $this->GetOption( 'hidesteps' ) == 'true';
+			$hidesteps                = $this->GetOption( 'hidesteps', $this->GetOption('Hidesteps') ) == 'true'; // first admin settings then shortcode
 			$timepicker               = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
 			$time_format_hours        = self::dropdown_time_format();
 			$calendar                 = $this->GetOption( 'calendar', $this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
@@ -796,7 +800,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$persons    = 1;
 			$all_busy   = false;
 
-			$timeshiftmode = $this->GetOption( 'timeshiftmode' );
+			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption('TimeShiftMode') );
 			if ( $timeshiftmode === 'byshifts' ) {
 				//pre call
 				$categories = $this->redi->getPlaceCategories( $placeID );
@@ -866,7 +870,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		private function step1( $categoryID, $post, $placeID = null ) {
 
-			$timeshiftmode = self::GetPost( 'timeshiftmode', $this->GetOption('timeshiftmode') );
+			$timeshiftmode = self::GetPost( 'timeshiftmode', $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
 			$date = date_parse( self::GetPost( 'startDateISO', null, $post ).' '.self::GetPost( 'startTime', null, $post ) );
 
