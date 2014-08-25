@@ -1,6 +1,6 @@
 ﻿=== ReDi Restaurant Reservation ===
 Contributors: thecatkin, robby.roboter
-Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin
+Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin, restaurant
 Requires at least: 3.0.0
 Tested up to: 3.9.1
 Stable tag: trunk
@@ -57,6 +57,7 @@ Do you want to have some new functionality or if you have any other questions pl
 = Other plugins =
 * If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a>
  plugin too.
+* Improve restaurant turnaround time by allowing clients to call a waiter with help of their smart phones via mobile web page. <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">Open QR Code Waiter Calling System plugin</a>
  
 == Installation ==
 
@@ -123,7 +124,6 @@ In case you have any problems with plugin installation or you need some customiz
 * Added ability to cancel reservation by client
 * Added possibility to override errors returned by API
 * New client reservation confirmation email template
-
 
 = 14.0221 =
 * Added alternative time picker for better reservation time selection on mobile devices
