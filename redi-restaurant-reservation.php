@@ -203,8 +203,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		function redi_restaurant_admin_options_page() {
 			$errors = array();
 
-			if ( $this->ApiKey == null ) /// TODO: move to install
-			{
+			if ( $this->ApiKey == null ) { /// TODO: move to install
+			
 				$return = $this->register();
 				$this->display_errors( $return, true );
 			}
