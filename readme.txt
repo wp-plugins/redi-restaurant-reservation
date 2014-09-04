@@ -93,6 +93,9 @@ In case you have any problems with plugin installation or you need some customiz
 20. Step 1: Setup Goal with Google Analytics Tracking Code (google analytics/Conversions/Goals/Overview/Set up goals/New goal). 
 21. Step 2: Setup Goal details (Category: ReDi Restaurant Reservation, Action: Reservation confirmed)
 22. Cancel reservation page for clients.
+23. Step 1: Display all available time grouped by Opening Times (Available only for Basic package users)
+24. List of all emails available for customization
+25. Example of Email customization page
 
 == Upgrade Notice ==
 
