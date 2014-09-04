@@ -41,6 +41,7 @@ If you need more languages, please contact us!
 * Email template customization for all supported languages
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
+
 Please allow 1 business day for us to confirm your payment and upgrade your account.
 
 = Additional services =
@@ -199,8 +200,8 @@ In case you have any problems with plugin installation or you need some customiz
 
 = 13.0128 =
 * Added settings saved message box to admin page
-* Added checkbox that asks for permission to publish restaurant details into reservationdiary.eu catalog
-* Fixed prepopulating of URL field in admin page
+* Added check box that asks for permission to publish restaurant details into reservationdiary.eu catalogue
+* Fixed pre populating of URL field in admin page
 
 = 13.0119 =
 * Updated reservation confirmation text
