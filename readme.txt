@@ -97,6 +97,12 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 14.0904 =
+* Extended view for basic package settings
+* Removed warnings
+* Improved error handling during first registration
+* Added support for Email CC for reservation notifications
+
 = 14.0630 =
 * Limit maximum time before reservation
 * Fixed warnings
@@ -104,10 +110,6 @@ In case you have any problems with plugin installation or you need some customiz
 * New style for upcoming reservation email
 * Increased timeout for API call
 * Added check for comments size
-* (+) Extended view for basic package settings
-* (+) Removed warnings
-* (+) Improved error handling during first registration
-* (+) Added support for Email CC for reservation notifications
 
 = 14.0511 =
 * Added settings to select Min and Max party size
