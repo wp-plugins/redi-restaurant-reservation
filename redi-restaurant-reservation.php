@@ -766,7 +766,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				die;
 			}
 			$placeID                  = $places[0]->ID;
-			
+
 			if ( isset( $this->options['placeid'] ) ) {
 				$placeID = $this->options['placeid'];
 			}

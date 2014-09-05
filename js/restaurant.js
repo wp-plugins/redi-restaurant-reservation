@@ -257,9 +257,10 @@ jQuery(function () {
                                         }
                                     }
 
-                                    step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
+
 
                                     if (hidesteps) {
+                                        step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
                                         html += '<span id="opentime_' + (current++) + '" style="display: none">';
                                         html += jQuery('#time2label').html();
                                     }

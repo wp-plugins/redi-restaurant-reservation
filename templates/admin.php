@@ -179,7 +179,7 @@
 			<tr style="width: 250px">
 				<th scope="row">
 					<label for="TimeShiftMode">
-						<?php _e('Hidesteps', 'redi-restaurant-reservation'); ?>
+						<?php _e('TimeShift Mode', 'redi-restaurant-reservation'); ?>
 					</label>
 				</th>
 				<td>
@@ -203,7 +203,7 @@
 				<td>
 					<select name="Hidesteps">
 						<option value="true" <?php if ($hidesteps === 'true'):?>selected="selected"<?php endif;?>>true</option>
-						<option value="true" <?php if ($hidesteps === 'false'):?>selected="selected"<?php endif;?>>false</option>
+						<option value="false" <?php if ($hidesteps === 'false'):?>selected="selected"<?php endif;?>>false</option>
 					</select>
 				</td>
 				<td style="width:75%">
