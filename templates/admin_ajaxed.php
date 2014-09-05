@@ -2,6 +2,7 @@
 jQuery(function () {
 	jQuery('#Place').change(function () {
 		jQuery('#Place option:selected').each(function () {
+			jQuery("#selected_place_id").html(this.value);
 				var data = {
 					action: 'redi_restaurant-submit',
 					get: 'get_place',
@@ -41,7 +42,13 @@ jQuery(function () {
                                 <?php _e('Multiple places are available for Basic package users', 'redi-restaurant-reservation') ?>
                             </p>
                         </td>
+
                 </tr>
+		<tr valign="top">
+			<th scope="row" colspan="3">
+			 <label><?php _e('Current Place ID', 'redi-restaurant-reservation'); ?>: <span id="selected_place_id"><?php echo $placeID ?></span></label>
+			</th>
+		</tr>
 		<tr valign="top">
 
 			<th scope="row" style="width:15%;">

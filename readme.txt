@@ -2,7 +2,7 @@
 Contributors: thecatkin, robby.roboter
 Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking
 Requires at least: 3.0.0
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.

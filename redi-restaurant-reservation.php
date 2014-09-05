@@ -761,8 +761,22 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			//places
 			$places                   = $this->redi->getPlaces();
+			if ( isset( $places['Error'] ) ) {
+				$this->display_errors( $places, true );
+				die;
+			}
 			$placeID                  = $places[0]->ID;
+			
+			if ( isset( $this->options['placeid'] ) ) {
+				$placeID = $this->options['placeid'];
+			}
+
 			$categories               = $this->redi->getPlaceCategories( $placeID );
+			if ( isset( $categories['Error'] ) ) {
+				$this->display_errors( $categories, true );
+				die;
+			}
+
 			$categoryID               = $categories[0]->ID;
 			$time_format              = get_option( 'time_format' );
 			$date_format_setting      = $this->options['DateFormat'];
