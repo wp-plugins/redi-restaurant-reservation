@@ -765,13 +765,14 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$this->display_errors( $places, true );
 				die;
 			}
-			$placeID                  = $places[0]->ID;
+
 
 			if ( isset( $this->options['placeid'] ) ) {
-				$placeID = $this->options['placeid'];
+				$places = array( (object) array( 'ID' => $this->options['placeid'] ) );
 			}
+			$placeID = $places[0]->ID;
 
-			$categories               = $this->redi->getPlaceCategories( $placeID );
+			$categories = $this->redi->getPlaceCategories( $placeID );
 			if ( isset( $categories['Error'] ) ) {
 				$this->display_errors( $categories, true );
 				die;
