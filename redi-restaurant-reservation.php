@@ -757,6 +757,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					//Save Key if newed
 					update_option( $this->apiKeyOptionName.$apiKeyId, $this->ApiKey );
 				}
+				$this->redi->setApiKey($this->ApiKey);
 			}
 
 			//places
@@ -1029,6 +1030,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$apiKeyId = $this->GetPost('apikeyid');
 			if($apiKeyId){
 				$this->ApiKey = get_option( $this->apiKeyOptionName.$apiKeyId );
+				$this->redi->setApiKey($this->ApiKey);
 			}
 
 			if ( isset( $_POST['placeID'] ) ) {
