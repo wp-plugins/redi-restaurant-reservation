@@ -566,7 +566,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			add_options_page( 'Redi Restaurant Reservation',
 				'Redi Restaurant Reservation',
 				'manage_options',
-				'redi_restaurant_reservation',
+				'redi-restaurant-reservation',
 				array( &$this, 'redi_restaurant_admin_options_page' ) );
 		}
 
