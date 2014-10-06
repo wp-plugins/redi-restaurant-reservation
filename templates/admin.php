@@ -9,11 +9,11 @@
 
 <div class="wrap">
 <a class="nav-tab <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?> nav-tab-active<?php endif;?>"
-   href="options-general.php?page=redi-spa-reservation&sm=free"><?php _e('Free package settings', 'redi-restaurant-reservation') ?></a>
+   href="options-general.php?page=redi-restaurant-reservation&sm=free"><?php _e('Free package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='basic')): ?> nav-tab-active<?php endif;?>"
-   href="options-general.php?page=redi-spa-reservation&sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
+   href="options-general.php?page=redi-restaurant-reservation&sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='cancel')): ?> nav-tab-active<?php endif;?>"
-   href="options-general.php?page=redi-spa-reservation&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
+   href="options-general.php?page=redi-restaurant-reservation&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
 <div class="tab_wrap">
 	<?php if (isset($settings_saved) && $settings_saved): ?>
 		<div class="updated" id="message">
