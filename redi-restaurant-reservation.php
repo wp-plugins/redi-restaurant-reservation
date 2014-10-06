@@ -767,7 +767,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				die;
 			}
 
-
 			if ( isset( $this->options['placeid'] ) ) {
 				$places = array( (object) array( 'ID' => $this->options['placeid'] ) );
 			}
@@ -799,7 +798,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$maxPersons               = isset( $this->options['MaxPersons'] ) ? $this->options['MaxPersons'] : 10;
 			$largeGroupsMessage       = isset( $this->options['LargeGroupsMessage'] ) ? $this->options['LargeGroupsMessage'] : '';
 			$thanks                   = $this->options['Thanks'];
-			$hidesteps                = $this->GetOption( 'hidesteps', $this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
+
 			$timepicker               = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
 			$time_format_hours        = self::dropdown_time_format();
 			$calendar                 = $this->GetOption( 'calendar', $this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
@@ -829,9 +828,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$hide_clock = false;
 			$persons    = 1;
 			$all_busy   = false;
-
+			$hidesteps = false; // this settings only for 'byshifts' mode
 			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
 			if ( $timeshiftmode === 'byshifts' ) {
+				$hidesteps                = $this->GetOption( 'hidesteps', $this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
 				//pre call
 				$categories = $this->redi->getPlaceCategories( $placeID );
 				$categoryID = $categories[0]->ID;
