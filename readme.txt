@@ -41,6 +41,7 @@ If you need more languages, please contact us!
 * Email template customization for all supported languages
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
+Please provide API key into comment field. You can find API key from setting page.
 
 Please allow 1 business day for us to confirm your payment and upgrade your account.
 
