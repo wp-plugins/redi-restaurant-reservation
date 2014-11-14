@@ -707,6 +707,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		public function shortcode( $atts ) {
+			global $locale;
 			if ( is_array( $atts ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
