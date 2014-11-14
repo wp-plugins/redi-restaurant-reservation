@@ -24,20 +24,18 @@ jQuery(function () {
         jQuery('#step1errors').hide('slow');
     });
 
-    // http://code.google.com/p/logicss/source/browse/trunk/media/js/jquery.ui/?r=45
-    // https://github.com/trentrichardson/jQuery-Timepicker-Addon/tree/master/dist/i18n
     if (jQuery.timepicker.regional[locale] != undefined) {
         jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
     }
     else {
-        jQuery.timepicker.setDefaults(jQuery.timepicker.regional[""]);
+        jQuery.timepicker.setDefaults(jQuery.timepicker.regional['']);
     }
 
     if (jQuery.datepicker.regional[locale] != undefined) {
         jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale]);
     }
     else {
-        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[""]);
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
     }
 
     jQuery('#redi-restaurant-startTime').timepicker({
@@ -81,7 +79,6 @@ jQuery(function () {
             error += redi_restaurant_reservation.email_missing + '<br/>';
         }
         if (jQuery('#UserPhone').val() === '') {
-
             error += redi_restaurant_reservation.phone_missing + '<br/>';
         }
         jQuery('.field_required').each(function () {
@@ -104,7 +101,7 @@ jQuery(function () {
             UserComments: jQuery('#UserComments').val(),
             UserPhone: jQuery('#UserPhone').val(),
             placeID: jQuery('#placeID').val(),
-            lang : locale
+            lang: locale
         };
         if (jQuery('#field_1').attr('type') === 'checkbox' && jQuery('#field_1').attr('checked') === 'checked') {
             data['field_1'] = 'on';
