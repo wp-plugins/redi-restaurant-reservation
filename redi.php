@@ -44,6 +44,9 @@ if (!defined('DELETE'))
 if (!defined('REDI_SUCCESS'))
 	define('REDI_SUCCESS', 'SUCCESS');
 
+if (!defined('REDI_APIKEY'))
+	define('REDI_APIKEY', 'ID');
+
 if (!defined('REDI_RESTAURANT_API'))
 {
 	define('REDI_RESTAURANT_API', 'http://api.reservationdiary.eu/service/');
