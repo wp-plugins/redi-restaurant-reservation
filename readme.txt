@@ -107,13 +107,14 @@ In case you have any problems with plugin installation or you need some customiz
 * Removed warnings
 * Improved error handling during first registration
 * Added support for Email CC for reservation notifications
+* (+) Fixed cancel reservation with space in number
 
 = 14.0630 =
 * Limit maximum time before reservation
 * Fixed warnings
 * Fixed upcoming reservation list
 * New style for upcoming reservation email
-* Increased timeout for API call
+* Increased time out for API call
 * Added check for comments size
 
 = 14.0511 =
