@@ -26,27 +26,32 @@ require_once( 'redi.php' );
 
 
 if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
-	class Report {
-		const Full = 'Full';
-		const None = 'None';
-		const Single = 'Single';
+	if ( ! class_exists( 'Report' ) ) {
+		class Report {
+			const Full = 'Full';
+			const None = 'None';
+			const Single = 'Single';
+		}
 	}
-
-	class EmailFrom {
-		const ReDi = 'ReDi';
-		const WordPress = 'WordPress';
-		const Disabled = 'Disabled';
+	if ( ! class_exists( 'EmailFrom' ) ) {
+		class EmailFrom {
+			const ReDi = 'ReDi';
+			const WordPress = 'WordPress';
+			const Disabled = 'Disabled';
+		}
 	}
-
-	class EmailContentType {
-		const Canceled = 'Canceled';
-		const Confirmed = 'Confirmed';
+	if ( ! class_exists( 'EmailContentType' ) ) {
+		class EmailContentType {
+			const Canceled = 'Canceled';
+			const Confirmed = 'Confirmed';
+		}
 	}
-
-	class AlternativeTime {
-		const AlternativeTimeBlocks = 1;
-		const AlternativeTimeByShiftStartTime = 2;
-		const AlternativeTimeByDay = 3;
+	if ( ! class_exists( 'AlternativeTime' ) ) {
+		class AlternativeTime {
+			const AlternativeTimeBlocks = 1;
+			const AlternativeTimeByShiftStartTime = 2;
+			const AlternativeTimeByDay = 3;
+		}
 	}
 
 	class ReDiRestaurantReservation {
@@ -204,7 +209,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$errors = array();
 
 			if ( $this->ApiKey == null ) { /// TODO: move to install
-			
+
 				$return = $this->register();
 				$this->display_errors( $return, true );
 			}
@@ -237,7 +242,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$categoryID = $categories[0]->ID;
 
 			if ( isset( $_POST['action'] ) && $_POST['action'] == 'cancel' ) {
-				if ( isset( $_POST['id'] ) && ( (int) $_POST['id'] ) > 0 ) {
+				if ( isset( $_POST['id'] ) ) {
 					$params = array(
 						'ID'          => self::GetPost( 'id' ),
 						'Lang'        => str_replace( '_', '-', get_locale() ),
@@ -753,16 +758,16 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $apiKeyId ) {
 				$this->ApiKey = $this->GetOption( 'apikey'.$apiKeyId, $this->ApiKey );
 
-				$check = get_option($this->apiKeyOptionName.$apiKeyId);
+				$check = get_option( $this->apiKeyOptionName.$apiKeyId );
 				if ( $check != $this->ApiKey ) { // update only if changed
 					//Save Key if newed
 					update_option( $this->apiKeyOptionName.$apiKeyId, $this->ApiKey );
 				}
-				$this->redi->setApiKey($this->ApiKey);
+				$this->redi->setApiKey( $this->ApiKey );
 			}
 
 			//places
-			$places                   = $this->redi->getPlaces();
+			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
 				$this->display_errors( $places, true );
 				die;
@@ -800,9 +805,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$largeGroupsMessage       = isset( $this->options['LargeGroupsMessage'] ) ? $this->options['LargeGroupsMessage'] : '';
 			$thanks                   = $this->options['Thanks'];
 
-			$timepicker               = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
-			$time_format_hours        = self::dropdown_time_format();
-			$calendar                 = $this->GetOption( 'calendar', $this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
+			$timepicker        = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
+			$time_format_hours = self::dropdown_time_format();
+			$calendar          = $this->GetOption( 'calendar', $this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
 
 			for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 				$field_name     = 'field_'.$i.'_name';
@@ -826,13 +831,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$$field_message = $this->options[ $field_message ];
 				}
 			}
-			$hide_clock = false;
-			$persons    = 1;
-			$all_busy   = false;
-			$hidesteps = false; // this settings only for 'byshifts' mode
+			$hide_clock    = false;
+			$persons       = 1;
+			$all_busy      = false;
+			$hidesteps     = false; // this settings only for 'byshifts' mode
 			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
 			if ( $timeshiftmode === 'byshifts' ) {
-				$hidesteps                = $this->GetOption( 'hidesteps', $this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
+				$hidesteps = $this->GetOption( 'hidesteps', $this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
 				//pre call
 				$categories = $this->redi->getPlaceCategories( $placeID );
 				$categoryID = $categories[0]->ID;
@@ -1028,10 +1033,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		function redi_restaurant_ajax() {
 
-			$apiKeyId = $this->GetPost('apikeyid');
-			if($apiKeyId){
+			$apiKeyId = $this->GetPost( 'apikeyid' );
+			if ( $apiKeyId ) {
 				$this->ApiKey = get_option( $this->apiKeyOptionName.$apiKeyId );
-				$this->redi->setApiKey($this->ApiKey);
+				$this->redi->setApiKey( $this->ApiKey );
 			}
 
 			if ( isset( $_POST['placeID'] ) ) {
@@ -1180,7 +1185,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				case 'cancel':
 					$params = array(
-						'ID'          => (int) self::GetPost( 'ID' ),
+						'ID'          => self::GetPost( 'ID' ),
 						'Email'       => urlencode( self::GetPost( 'Email' ) ),
 						'Reason'      => urlencode( mb_substr( self::GetPost( 'Reason' ), 0, 250 ) ),
 						"Lang"        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
