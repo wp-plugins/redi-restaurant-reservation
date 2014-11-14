@@ -19,22 +19,27 @@ if (!defined('ID'))
 require_once('redi.php');
 
 
-if (!class_exists('ReDiRestaurantReservation'))
-{
-    class Report{
-        const Full ='Full';
-        const None ='None';
-        const Single ='Single';
-    }
-    class EmailFrom{
-        const ReDi = 'ReDi';
-        const WordPress = 'WordPress';
-        const Disabled = 'Disabled';
-    }
-    class EmailContentType{
-        const Canceled = 'Canceled';
-        const Confirmed = 'Confirmed';
-    }
+if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
+	if ( ! class_exists( 'Report' ) ) {
+	    class Report{
+	        const Full ='Full';
+	        const None ='None';
+	        const Single ='Single';
+	    }
+	}
+	if ( ! class_exists( 'EmailFrom' ) ) {
+		class EmailFrom {
+			const ReDi = 'ReDi';
+			const WordPress = 'WordPress';
+			const Disabled = 'Disabled';
+		}
+	}
+	if ( ! class_exists( 'EmailContentType' ) ) {
+		class EmailContentType {
+			const Canceled = 'Canceled';
+			const Confirmed = 'Confirmed';
+		}
+	}
 
 	class ReDiRestaurantReservation
 	{
