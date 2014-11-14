@@ -1020,7 +1020,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				case 'cancel':
 					$params = array(
-						'ID'          => (int) self::GetPost( 'ID' ),
+						'ID'          => self::GetPost( 'ID' ),
 						'Email'       => urlencode( self::GetPost( 'Email' ) ),
 						'Reason'      => urlencode( mb_substr( self::GetPost( 'Reason' ), 0, 250 ) ),
 						"Lang"        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
