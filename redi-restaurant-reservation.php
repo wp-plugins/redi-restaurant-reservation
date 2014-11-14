@@ -77,7 +77,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			//Initialize the options
 			$this->get_options();
 
-			$this->ApiKey = isset( $this->options[ REDI_APIKEY ] ) ? $this->options[ REDI_APIKEY ] : null;
+			$this->ApiKey = isset( $this->options[ ID ] ) ? $this->options[ ID ] : null;
 			$this->redi   = new Redi( $this->ApiKey );
 			//Actions
 			add_action( 'init', array( &$this, 'init_sessions' ) );
@@ -125,9 +125,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			//Gets email and sitename from config
 			$new_account = $this->redi->createUser( array( 'Email' => get_option( 'admin_email' ) ) );
 
-			if ( isset( $new_account[ REDI_APIKEY ] ) && ! empty( $new_account[ REDI_APIKEY ] ) ) {
-				$this->ApiKey = $this->options[ REDI_APIKEY ] = $new_account[ REDI_APIKEY ];
-				$this->redi->setApiKey( $this->options[ REDI_APIKEY ] );
+			if ( isset( $new_account[ ID ] ) && ! empty( $new_account[ ID ] ) ) {
+				$this->ApiKey = $this->options[ ID ] = $new_account[ ID ];
+				$this->redi->setApiKey( $this->options[ ID ] );
 				$place = $this->redi->createPlace( array(
 					'place' => array(
 						'Name'                     => get_bloginfo( 'name' ),//get from site name
