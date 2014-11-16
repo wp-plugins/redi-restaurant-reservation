@@ -244,7 +244,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( isset( $_POST['action'] ) && $_POST['action'] == 'cancel' ) {
 				if ( isset( $_POST['id'] ) ) {
 					$params = array(
-						'ID'          => self::GetPost( 'id' ),
+						'ID'          => urlencode( self::GetPost( 'id' ) ),
 						'Lang'        => str_replace( '_', '-', get_locale() ),
 						'Reason'      => urlencode( mb_substr( self::GetPost( 'Reason' ), 0, 250 ) ),
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
@@ -1185,7 +1185,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				case 'cancel':
 					$params = array(
-						'ID'          => self::GetPost( 'ID' ),
+						'ID'          => urlencode( self::GetPost( 'ID' ) ),
 						'Email'       => urlencode( self::GetPost( 'Email' ) ),
 						'Reason'      => urlencode( mb_substr( self::GetPost( 'Reason' ), 0, 250 ) ),
 						"Lang"        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
