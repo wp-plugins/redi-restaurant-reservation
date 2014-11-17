@@ -250,11 +250,12 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
 						'Version'     => urlencode( self::plugin_get_version() )
 					);
-					if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::Disabled ||
+					     isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress ) {
 						$params['DontNotifyClient'] = 'true';
 					}
 					$cancel = $this->redi->cancelReservation( $params );
-					if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
+					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
 						//call api for content
 						$emailContent = $this->redi->getEmailContent(
 							(int) $cancel['ID'],
@@ -713,7 +714,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		public function shortcode( $atts ) {
 			global $locale;
-			if ( is_array( $atts ) ) {
+			if ( is_array( $atts ) && is_array( $this->options ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
 			ob_start();
@@ -1156,12 +1157,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							'Version'      => $this->version
 						)
 					);
-					if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::Disabled ||
+					     isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress ) {
 						$params['reservation']['DontNotifyClient'] = 'true';
 					}
 					$reservation = $this->redi->createReservation( $categoryID, $params );
 
-					if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $reservation['Error'] ) ) {
+					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $reservation['Error'] ) ) {
 						//call api for content
 						$emailContent = $this->redi->getEmailContent(
 							(int) $reservation['ID'],
@@ -1192,11 +1194,12 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
 						'Version'     => urlencode( self::plugin_get_version() )
 					);
-					if ( $this->options['EmailFrom'] == EmailFrom::Disabled || $this->options['EmailFrom'] == EmailFrom::WordPress ) {
+					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::Disabled ||
+					     isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress ) {
 						$params['DontNotifyClient'] = 'true';
 					}
 					$cancel = $this->redi->cancelReservationByClient( $params );
-					if ( $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
+					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $cancel['Error'] ) ) {
 						//call api for content
 						$emailContent = $this->redi->getEmailContent(
 							(int) $cancel['ID'],
