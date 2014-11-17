@@ -267,7 +267,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 						//send
 						if ( ! isset( $emailContent['Error'] ) ) {
-							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array(
+								'Content-Type: text/html; charset=UTF-8',
+								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>' . "\r\n"
+							) );
 						}
 					}
 					if ( isset( $cancel['Error'] ) ) {
@@ -1175,7 +1178,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 						//send
 						if ( ! isset( $emailContent['Error'] ) ) {
-							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array(
+								'Content-Type: text/html; charset=UTF-8',
+								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>' . "\r\n"
+							) );
 						}
 					}
 					echo json_encode( $reservation );
@@ -1211,7 +1217,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 						//send
 						if ( ! isset( $emailContent['Error'] ) ) {
-							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array( 'Content-Type: text/html; charset=UTF-8' ) );
+							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array(
+								'Content-Type: text/html; charset=UTF-8',
+								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>' . "\r\n"
+							) );
 						}
 					}
 					echo json_encode( $cancel );
