@@ -301,11 +301,18 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$errors[]   = __( 'Reservation time should be greater than 0', 'redi-restaurant-reservation' );
 					$form_valid = false;
 				}
+				$country = self::GetPost( 'Country' );
+				if(empty($country))
+				{
+					$errors[]   = __( 'Country is required', 'redi-restaurant-reservation' );
+					$form_valid = false;
+				}
+
 				$place = array(
 					'place' => array(
 						'Name'                     => self::GetPost( 'Name' ),
 						'City'                     => self::GetPost( 'City' ),
-						'Country'                  => self::GetPost( 'Country' ),
+						'Country'                  => $country,
 						'Address'                  => self::GetPost( 'Address' ),
 						'Email'                    => self::GetPost( 'Email' ),
 						'EmailCC'                  => self::GetPost( 'EmailCC' ),
@@ -544,6 +551,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				);
 				$serviceTimes = self::GetServiceTimes();
 			}
+			require_once ('countrylist.php');
 			require_once( REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php' );
 		}
 

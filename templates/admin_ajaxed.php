@@ -60,7 +60,11 @@ jQuery(function () {
 				</label>
 			</th>
 			<td>
-				<input id="Country" type="text" value="<?php echo $place['Country'] ?>" name="Country"/>
+				<select id="Country" name="Country">
+					<option value=""> -- <?php _e('Select Country', 'redi-restaurant-reservation')?> -- </option>
+					<?php foreach($countries as $country):?>
+					<option value="<?php echo $country ?>" <?php if($place['Country']==$country): ?>selected="selected"<? endif ?>><?php echo $country ?></option>
+					<?php endforeach ?>
 			</td>
 		</tr>
 		<tr>
