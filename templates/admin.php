@@ -4,6 +4,11 @@
 		border: 1px solid #CCCCCC;
 		padding: 10px;
 	}
+
+	.redi_required
+	{
+		color: #DD0000;
+	}
 </style>
 
 
@@ -100,7 +105,7 @@
 			<tr>
 				<th scope="row">
 					<label for="ReservationTime">
-						<?php _e('Reservation time', 'redi-restaurant-reservation'); ?>
+						<?php _e('Reservation time', 'redi-restaurant-reservation'); ?>&nbsp;<span class="redi_required">*</span>
 					</label>
 				</th>
 				<td>

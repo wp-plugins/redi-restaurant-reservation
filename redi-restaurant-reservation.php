@@ -266,7 +266,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'],
 								array(
 									'Content-Type: text/html; charset=UTF-8',
-									'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>' . "\r\n"
+									'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>'."\r\n"
 								) );
 						}
 					}
@@ -301,18 +301,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$errors[]   = __( 'Reservation time should be greater than 0', 'redi-restaurant-reservation' );
 					$form_valid = false;
 				}
-				$country = self::GetPost( 'Country' );
-				if(empty($country))
-				{
-					$errors[]   = __( 'Country is required', 'redi-restaurant-reservation' );
-					$form_valid = false;
-				}
-
 				$place = array(
 					'place' => array(
 						'Name'                     => self::GetPost( 'Name' ),
 						'City'                     => self::GetPost( 'City' ),
-						'Country'                  => $country,
+						'Country'                  => self::GetPost( 'Country' ),
 						'Address'                  => self::GetPost( 'Address' ),
 						'Email'                    => self::GetPost( 'Email' ),
 						'EmailCC'                  => self::GetPost( 'EmailCC' ),
@@ -329,15 +322,17 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					)
 				);
 
-				$serviceTimes = self::GetServiceTimes();
+				if ( empty( $place['place']['Country'] ) ) {
+					$errors[]   = __( 'Country is required', 'redi-restaurant-reservation' );
+					$form_valid = false;
+				}
 
-				$this->options['Thanks']                   = self::GetPost( 'Thanks', 0 );
-				$this->options['TimePicker']               = self::GetPost( 'TimePicker' );
-				$this->options['AlternativeTimeStep']      = self::GetPost( 'AlternativeTimeStep', 30 );
-				$this->options['services']                 = $services = (int) self::GetPost( 'services' );
-				$this->options['MinTimeBeforeReservation'] = self::GetPost( 'MinTimeBeforeReservation' );
-				$this->options['DateFormat']               = self::GetPost( 'DateFormat' );
-				$this->options['ReservationTime']          = $reservationTime;
+				$thanks                   = self::GetPost( 'Thanks', 0 );
+				$timepicker               = self::GetPost( 'TimePicker' );
+				$alternativeTimeStep      = self::GetPost( 'AlternativeTimeStep', 30 );
+				$services                 = (int) self::GetPost( 'services' );
+				$MinTimeBeforeReservation = self::GetPost( 'MinTimeBeforeReservation' );
+				$dateFormat               = self::GetPost( 'DateFormat' );
 
 				for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 					$field_name     = 'field_'.$i.'_name';
@@ -345,22 +340,34 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$field_required = 'field_'.$i.'_required';
 					$field_message  = 'field_'.$i.'_message';
 
+					$field_name     = 'field_'.$i.'_name';
+					$field_type     = 'field_'.$i.'_type';
+					$field_required = 'field_'.$i.'_required';
+					$field_message  = 'field_'.$i.'_message';
+
 					if ( isset( $_POST[ $field_name ] ) ) {
-						$this->options[ $field_name ] = self::GetPost( $field_name );
+						$this->options[ $field_name ] = $$field_name = self::GetPost( $field_name );
 					}
-
 					if ( isset( $_POST[ $field_type ] ) ) {
-						$this->options[ $field_type ] = self::GetPost( $field_type );
+						$this->options[ $field_type ] = $$field_type = self::GetPost( $field_type );
 					}
-
-					$this->options[ $field_required ] = ( self::GetPost( $field_required ) === 'on' );
-
+					$this->options[ $field_required ] = $$field_required = ( self::GetPost( $field_required ) === 'on' );
 					if ( isset( $_POST[ $field_message ] ) ) {
-						$this->options[ $field_message ] = self::GetPost( $field_message );
+						$this->options[ $field_message ] = $$field_message = self::GetPost( $field_message );
 					}
 				}
 
 				if ( $form_valid ) {
+					$serviceTimes = self::GetServiceTimes();
+
+					$this->options['Thanks']                   = $thanks;
+					$this->options['TimePicker']               = $timepicker;
+					$this->options['AlternativeTimeStep']      = $alternativeTimeStep;
+					$this->options['services']                 = $services;
+					$this->options['MinTimeBeforeReservation'] = $MinTimeBeforeReservation;
+					$this->options['DateFormat']               = $dateFormat;
+					$this->options['ReservationTime']          = $reservationTime;
+
 					$settings_saved                      = true;
 					$this->options['MinPersons']         = $minPersons;
 					$this->options['MaxPersons']         = $maxPersons;
@@ -436,9 +443,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						$settings_saved = false;
 					}
 					$cancel = array();
-				} else {
-					//Send every setting back to form so user can correct it
-
 				}
 
 				$places = $this->redi->getPlaces();
@@ -461,32 +465,29 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$emailFrom           = $this->GetOption( 'EmailFrom', EmailFrom::ReDi );
 				$report              = $this->GetOption( 'Report', Report::Full );
 				$maxTime             = $this->GetOption( 'MaxTime', 1 );
-			}
-			if ( ! $settings_saved && isset( $_POST['submit'] ) ) {
-				$timepicker          = self::GetPost( 'TimePicker' );
-				$alternativeTimeStep = self::GetPost( 'AlternativeTimeStep' );
-			}
 
-			for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
-				$field_name     = 'field_'.$i.'_name';
-				$field_type     = 'field_'.$i.'_type';
-				$field_required = 'field_'.$i.'_required';
-				$field_message  = 'field_'.$i.'_message';
-
-				$$field_name     = $this->GetOption( $field_name );
-				$$field_type     = $this->GetOption( $field_type );
-				$$field_required = $this->GetOption( $field_required );
-				$$field_message  = $this->GetOption( $field_message );
-			}
-
-			//if settings are saved or this is first time load
-			if ( ! isset( $_POST['submit'] ) || $settings_saved ) {
 				$getServices = $this->redi->getServices( $categoryID );
 				if ( isset( $getServices['Error'] ) ) {
 					$errors[] = $getServices['Error'];
 				}
 
 				$reservationTime = $this->getReservationTime();
+
+				for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
+					$field_name     = 'field_'.$i.'_name';
+					$field_type     = 'field_'.$i.'_type';
+					$field_required = 'field_'.$i.'_required';
+					$field_message  = 'field_'.$i.'_message';
+
+					$$field_name     = $this->GetOption( $field_name );
+					$$field_type     = $this->GetOption( $field_type );
+					$$field_required = $this->GetOption( $field_required );
+					$$field_message  = $this->GetOption( $field_message );
+				}
+			}
+			if ( ! $settings_saved && isset( $_POST['submit'] ) ) {
+				$timepicker          = self::GetPost( 'TimePicker' );
+				$alternativeTimeStep = self::GetPost( 'AlternativeTimeStep' );
 			}
 
 			require_once( REDI_RESTAURANT_TEMPLATE.'admin.php' );
@@ -551,7 +552,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				);
 				$serviceTimes = self::GetServiceTimes();
 			}
-			require_once ('countrylist.php');
+			require_once( 'countrylist.php' );
 			require_once( REDI_RESTAURANT_TEMPLATE.'admin_ajaxed.php' );
 		}
 
@@ -765,13 +766,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			//places
 			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
-
 				$this->display_errors( $places );
 
 				return;
 			}
 			$placeID = $places[0]->ID;
-
 
 			$time_format         = get_option( 'time_format' );
 			$date_format_setting = $this->options['DateFormat'];
@@ -785,7 +784,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$startDate            = date( $date_format, $reservationStartTime );
 			$startDateISO         = date( 'Y-m-d', $reservationStartTime );
 			$startTime            = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
-
 
 			$minPersons         = $this->GetOption( 'MinPersons', 1 );
 			$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
@@ -954,7 +952,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 
 				case 'step3':
-
 					$persons      = (int) $_POST['persons'];
 					$startTimeStr = $_POST['startTime'];
 
@@ -1025,7 +1022,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						if ( ! isset( $emailContent['Error'] ) ) {
 							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array(
 								'Content-Type: text/html; charset=UTF-8',
-								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>' . "\r\n"
+								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>'."\r\n"
 							) );
 						}
 					}
@@ -1067,7 +1064,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						if ( ! isset( $emailContent['Error'] ) ) {
 							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array(
 								'Content-Type: text/html; charset=UTF-8',
-								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>' . "\r\n"
+								'From: '.get_option( 'blogname' ).' <'.get_option( 'admin_email' ).'>'."\r\n"
 							) );
 						}
 					}

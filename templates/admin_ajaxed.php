@@ -1,3 +1,9 @@
+<style type="text/css">
+	.redi_required
+	{
+		color: #DD0000;
+	}
+</style>
 <script type="text/javascript">
 jQuery(function () {
 	jQuery('#Place').change(function () {
@@ -56,7 +62,7 @@ jQuery(function () {
 		<tr>
 			<th scope="row">
 				<label for="Country">
-					<?php _e('Country', 'redi-restaurant-reservation'); ?>
+					<?php _e('Country', 'redi-restaurant-reservation'); ?> <span class="redi_required">*</span>
 				</label>
 			</th>
 			<td>
