@@ -1,3 +1,9 @@
+<style type="text/css">
+	.redi_required
+	{
+		color: #DD0000;
+	}
+</style>
 <script type="text/javascript">
 jQuery(function () {
 	jQuery('#Place').change(function () {
@@ -63,11 +69,15 @@ jQuery(function () {
 		<tr>
 			<th scope="row">
 				<label for="Country">
-					<?php _e('Country', 'redi-restaurant-reservation'); ?>
+					<?php _e('Country', 'redi-restaurant-reservation'); ?> <span class="redi_required">*</span>
 				</label>
 			</th>
 			<td>
-				<input id="Country" type="text" value="<?php echo $place['Country'] ?>" name="Country"/>
+				<select id="Country" name="Country">
+					<option value=""> -- <?php _e('Select Country', 'redi-restaurant-reservation')?> -- </option>
+					<?php foreach($countries as $country):?>
+					<option value="<?php echo $country ?>" <?php if($place['Country']==$country): ?>selected="selected"<? endif ?>><?php echo $country ?></option>
+					<?php endforeach ?>
 			</td>
 		</tr>
 		<tr>

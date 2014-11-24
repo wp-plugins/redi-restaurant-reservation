@@ -16,6 +16,14 @@ jQuery(function () {
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
     jQuery('#persons').change(function () {
+		if (jQuery(this).val() === 'group') {
+            jQuery('#step1button').attr('disabled', true);
+            jQuery('#large_groups_message').show('slow');
+        }
+        else {
+            jQuery('#step1button').attr('disabled', false);
+            jQuery('#large_groups_message').hide('slow');
+        }
         var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
         var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
         var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
