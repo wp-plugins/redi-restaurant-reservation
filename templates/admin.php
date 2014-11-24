@@ -62,7 +62,7 @@
 						<?php endforeach; ?>
 					</select>
 				</td>
-                <td style="width:80%">
+                <td style="width:75%">
                     <p class="description">
                         <?php _e('Minimum number of persons available to select from person drop down.', 'redi-restaurant-reservation') ?>
                     </p>
@@ -81,27 +81,12 @@
 					<?php endforeach; ?>
 				</select>
 				</td>
-                <td style="width:80%">
+                <td style="width:75%">
                     <p class="description">
                         <?php _e('Maximum number of persons available to select from person drop down.', 'redi-restaurant-reservation') ?>
                     </p>
 				</td>
 			</tr>
-            <tr>
-                <th scope="row">
-                    <label for="LargeGroupsMessage">
-                        <?php _e('Message for large groups', 'redi-restaurant-reservation'); ?>
-                    </label>
-                </th>
-                <td>
-                    <textarea maxlength="250" name="LargeGroupsMessage" id="LargeGroupsMessage" rows="5" cols="60"><?php echo $largeGroupsMessage ?></textarea>
-                </td>
-                <td style="width:80%">
-                    <p class="description">
-                        <?php _e('This message displayed when user chooses large group', 'redi-restaurant-reservation'); ?>
-                    </p>
-                </td>
-            </tr>
 			<tr>
 				<th scope="row">
 					<label for="ReservationTime">
@@ -111,43 +96,9 @@
 				<td>
 					<input id="ReservationTime" type="text" value="<?php echo $reservationTime ?>" name="ReservationTime"/>
 				</td>
-				<td style="width:80%">
+				<td style="width:75%">
 					<p class="description">
 						<?php _e('Reservation duration in minutes', 'redi-restaurant-reservation'); ?>
-					</p>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">
-					<label for="Thanks">
-						<?php _e('Support us', 'redi-restaurant-reservation'); ?>
-					</label>
-				</th>
-				<td>
-					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if (isset($thanks) && $thanks)  echo 'checked="checked"' ?>>
-				</td>
-				<td style="width:80%">
-					<p class="description">
-						<?php _e('Please support our plugin by publishing Reservation Diary logo', 'redi-restaurant-reservation'); ?>
-					</p>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">
-					<label for="TimePicker">
-						<?php _e('TimePicker type', 'redi-restaurant-reservation'); ?>
-					</label>
-				</th>
-				<td>
-					<select name="TimePicker">
-						<option value="plugin" <?php if ($timepicker === 'plugin'):?>selected="selected" <?php endif;?>>jQuery plugin</option>
-						<option value="dropdown" <?php if ($timepicker === 'dropdown'):?>selected="selected" <?php endif;?>>dropdown</option>
-					</select>
-				</td>
-				<td style="width:80%">
-					<p class="description">
-						<?php _e('jQuery plugin or HTML dropdown', 'redi-restaurant-reservation'); ?>
 					</p>
 				</td>
 			</tr>
@@ -164,7 +115,7 @@
                         <option value="60" <?php if ($alternativeTimeStep == 60):?>selected="selected" <?php endif;?>><?php printf(__('%d min', 'redi-restaurant-reservation'), 60);?></option>
                     </select>
                 </td>
-                <td style="width:80%">
+                <td style="width:75%">
                     <p class="description">
                         <?php _e('Show to clients available time with time step. For example if you select 15 min, alternative time will be 10:00, 10:15, 10:30 etc.', 'redi-restaurant-reservation') ?>
                     </p>
@@ -183,7 +134,7 @@
                         <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
                     </select>
                 </td>
-                <td style="width:80%">
+                <td style="width:75%">
                     <p class="description">
                         <?php _e('Sending from wordpress account setting will work only for Basic package clients', 'redi-restaurant-reservation') ?>
                     </p>
@@ -204,7 +155,7 @@
 						<?php endforeach; ?>
 					</select>
 				</td>
-                <td style="width:80%">
+                <td style="width:75%">
                     <p class="description">
                         <?php _e('Maximum time before reservation is accepted.', 'redi-restaurant-reservation') ?>
                     </p>
@@ -212,6 +163,112 @@
 			</tr>
 		</table>
 		<br/>
+		<div class="icon32" id="icon-admin"><br></div>
+		<h2><?php _e('Frontend settings', 'redi-restaurant-reservation'); ?></h2>
+		<table class="form-table">
+			<tr>
+				<th scope="row">
+					<label for="LargeGroupsMessage">
+						<?php _e('Message for large groups', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<textarea maxlength="250" name="LargeGroupsMessage" id="LargeGroupsMessage" rows="5" cols="60"><?php echo $largeGroupsMessage ?></textarea>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('This message displayed when user chooses large group', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr style="width: 250px">
+				<th scope="row">
+					<label for="TimeShiftMode">
+						<?php _e('TimeShift Mode', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="TimeShiftMode">
+						<option value="normal" <?php if ($timeshiftmode === 'normal'):?>selected="selected"<?php endif;?>>normal</option>
+						<option value="byshifts" <?php if ($timeshiftmode === 'byshifts'):?>selected="selected"<?php endif;?>>byshifts</option>
+					</select>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('TimeShiftMode', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr style="width: 250px">
+				<th scope="row">
+					<label for="Hidesteps">
+						<?php _e('Hidesteps', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="Hidesteps">
+						<option value="true" <?php if ($hidesteps === 'true'):?>selected="selected"<?php endif;?>>true</option>
+						<option value="false" <?php if ($hidesteps === 'false'):?>selected="selected"<?php endif;?>>false</option>
+					</select>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('Hide previous steps (only for timeshiftmode byshifts)', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr style="width: 250px">
+				<th scope="row">
+					<label for="Calendar">
+						<?php _e('Calendar type', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="Calendar">
+						<option value="show" <?php if ($calendar === 'show'):?>selected="selected"<?php endif;?>>Always show</option>
+						<option value="hide" <?php if ($calendar === 'hide'):?>selected="selected"<?php endif;?>>Shown on click</option>
+					</select>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('Display calendar style', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
+					<label for="TimePicker">
+						<?php _e('TimePicker type', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<select name="TimePicker">
+						<option value="plugin" <?php if ($timepicker === 'plugin'):?>selected="selected" <?php endif;?>>jQuery plugin</option>
+						<option value="dropdown" <?php if ($timepicker === 'dropdown'):?>selected="selected" <?php endif;?>>dropdown</option>
+					</select>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('jQuery plugin or HTML dropdown', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
+					<label for="Thanks">
+						<?php _e('Support us', 'redi-restaurant-reservation'); ?>
+					</label>
+				</th>
+				<td>
+					<input type="checkbox" name="Thanks" id="Thanks" value="1" <?php if (isset($thanks) && $thanks)  echo 'checked="checked"' ?>>
+				</td>
+				<td style="width:75%">
+					<p class="description">
+						<?php _e('Please support our plugin by publishing Reservation Diary logo', 'redi-restaurant-reservation'); ?>
+					</p>
+				</td>
+			</tr>
+		</table>
 
 		<!-- custom fields-->
 		<div class="icon32" id="icon-edit-comments"><br></div>
