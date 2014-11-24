@@ -287,6 +287,22 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$settings_saved = false;
 			if ( isset( $_POST['submit'] ) ) {
 				$form_valid = true;
+				$services                 = (int) self::GetPost( 'services' );
+				$minPersons               = (int) self::GetPost( 'MinPersons' );
+				$maxPersons               = (int) self::GetPost( 'MaxPersons' );
+				$largeGroupsMessage       = self::GetPost( 'LargeGroupsMessage' );
+				$emailFrom                = self::GetPost( 'EmailFrom' );
+				$report                   = self::GetPost( 'Report', Report::Full );
+				$maxTime                  = self::GetPost( 'MaxTime' );
+				$thanks                   = self::GetPost( 'Thanks', 0 );
+				$timepicker               = self::GetPost( 'TimePicker' );
+				$alternativeTimeStep      = self::GetPost( 'AlternativeTimeStep', 30 );
+				$MinTimeBeforeReservation = self::GetPost( 'MinTimeBeforeReservation' );
+				$dateFormat               = self::GetPost( 'DateFormat' );
+				$calendar                 = self::GetPost( 'Calendar' );
+				$hidesteps                = self::GetPost( 'Hidesteps' );
+				$timeshiftmode            = self::GetPost( 'TimeShiftMode' );
+
 				//validation
 				if ( $minPersons >= $maxPersons ) {
 					$errors[]   = __( 'Min Persons should be lower than Max Persons', 'redi-restaurant-reservation' );
@@ -324,21 +340,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$form_valid = false;
 				}
 
-				$services                 = (int) self::GetPost( 'services' );
-				$minPersons               = (int) self::GetPost( 'MinPersons' );
-				$maxPersons               = (int) self::GetPost( 'MaxPersons' );
-				$largeGroupsMessage       = self::GetPost( 'LargeGroupsMessage' );
-				$emailFrom                = self::GetPost( 'EmailFrom' );
-				$report                   = self::GetPost( 'Report', Report::Full );
-				$maxTime                  = self::GetPost( 'MaxTime' );
-				$thanks                   = self::GetPost( 'Thanks', 0 );
-				$timepicker               = self::GetPost( 'TimePicker' );
-				$alternativeTimeStep      = self::GetPost( 'AlternativeTimeStep', 30 );
-				$MinTimeBeforeReservation = self::GetPost( 'MinTimeBeforeReservation' );
-				$dateFormat               = self::GetPost( 'DateFormat' );
-				$calendar                 = self::GetPost( 'Calendar' );
-				$hidesteps                = self::GetPost( 'Hidesteps' );
-				$timeshiftmode            = self::GetPost( 'TimeShiftMode' );
 
 				for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 					$field_name     = 'field_'.$i.'_name';
