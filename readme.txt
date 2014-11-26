@@ -1,8 +1,8 @@
 ﻿=== ReDi Restaurant Reservation ===
 Contributors: thecatkin, robby.roboter
-Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin, restaurant
+Tags: reservation diary, reservations, reservation, table reservation, restaurant reservation, reservation plugin, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin, restaurant, online reservation, Booking Calendar, online booking services, restaurant reservation, restaurant reservation system, restaurant booking system, online reservation system, restaurant booking plugin, table booking system, table booking online, restaurant reservation module, restaurant reservation software, reservation table restaurant, online restaurant reservation system, free restaurant reservation system, restaurant booking online, restaurant booking software, free restaurant booking software, online restaurant booking system, restaurant booking systems, restaurant table booking, top table booking, restaurant table reservation system
 Requires at least: 3.0.0
-Tested up to: 3.9.1
+Tested up to: 4.0.0
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
@@ -45,7 +45,7 @@ Please provide API key into comment field. You can find API key from setting pag
 
 Please allow 1 business day for us to confirm your payment and upgrade your account.
 
-= Additional services =
+= Additional services (by request) =
 * Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
 * We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 * Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
@@ -53,6 +53,7 @@ Please allow 1 business day for us to confirm your payment and upgrade your acco
 * Remind your customer about upcoming reservation via Email or by SMS
 * Collect pre-payment for reservations
 * Are you building catalogue with restaurants and you are looking for reservation plugin for that? We can provide it for you.
+* Do you want to write your own module, we have an API. Contact us to get more information.
 
 Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
@@ -108,6 +109,8 @@ In case you have any problems with plugin installation or you need some customiz
 * Improved error handling during first registration
 * Added support for Email CC for reservation notifications
 * (+) Fixed cancel reservation with space in number
+* (+) Changed country from free form field to dropdown
+* (+) New variation is added to plugin, that displays all possible times for selected date
 
 = 14.0630 =
 * Limit maximum time before reservation

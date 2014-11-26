@@ -274,7 +274,7 @@
 		<strong>
 			<?php _e('Thank you for your reservation.', 'redi-restaurant-reservation')?><br clear="both"/>
 		</strong>
-		<?php _e('We will create a confirmation and email it to you at the email address you entered on the reservations form. You should receive your confirmation by email shortly.', 'redi-restaurant-reservation');?>
+		<?php _e('Thank you for your reservation. A confirmation email has been sent to you, should you not receive it, please feel rest assured that your booking has been received and is confirmed. If you wish you may contact us by phone to confirm.', 'redi-restaurant-reservation');?>
 	</div>
 </form>
 <?php if($thanks):?>
