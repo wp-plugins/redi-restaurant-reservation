@@ -1,13 +1,30 @@
 <style type="text/css">
+
 	.tab_wrap {
 		background-color: #FFFFFF;
 		border: 1px solid #CCCCCC;
 		padding: 10px;
+		min-width: 763px;
 	}
 
-	.redi_required
-	{
+	.redi_required{
 		color: #DD0000;
+	}
+	.redi-admin-left {
+		margin-right: 300px;
+		float: left;
+	}
+	.redi-admin-right {
+		position: absolute;
+		right: 0;
+		width: 290px;
+	}
+
+	.postbox h3 {
+		font-size: 14px;
+		line-height: 1.4;
+		margin: 0;
+		padding: 8px 12px;
 	}
 </style>
 
@@ -19,7 +36,24 @@
    href="options-general.php?page=redi-restaurant-reservation&sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='cancel')): ?> nav-tab-active<?php endif;?>"
    href="options-general.php?page=redi-restaurant-reservation&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
-<div class="tab_wrap">
+	<?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?>
+		<div class="redi-admin-right" >
+
+			<div class="postbox">
+				<h3><?php _e('Plugin Info', 'redi-restaurant-reservation') ?></h3>
+				<div class="inside">
+					<p><?php _e('Name', 'redi-restaurant-reservation') ?>: Redi Restaurant Reservation</p>
+					<p><?php _e('Version', 'redi-restaurant-reservation') ?>: <?php echo $this->version ?></p>
+					<p><?php _e('Authors', 'redi-restaurant-reservation') ?>: <a href="https://profiles.wordpress.org/thecatkin/" target="_blank">Catkin</a> & <a href="https://profiles.wordpress.org/robbyroboter/" target="_blank">Robby Roboter</a></p>
+					<p><?php _e('Website', 'redi-restaurant-reservation') ?>: <a target="_blank" href="http://www.reservationdiary.eu">reservationdiary.eu</a></p>
+					<p><?php _e('Email', 'redi-restaurant-reservation') ?>: <a target="_blank" href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a></p>
+
+				</div>
+			</div>
+		</div>
+	<?php endif ?>
+<div class="tab_wrap <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?>redi-admin-left<?php endif ?>">
+
 	<?php if (isset($settings_saved) && $settings_saved): ?>
 		<div class="updated" id="message">
 			<p>
@@ -44,7 +78,7 @@
 		<?php endforeach;?>
 	<?php endif ?>
 	<?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?>
-	
+
 	<div class="icon32" id="icon-admin"><br></div>
 	<h2><?php _e('Common settings', 'redi-restaurant-reservation'); ?></h2>
 	<form name="redi-restaurant" method="post">
@@ -359,6 +393,7 @@
 	<?php endif ?>
 </div>
 </div>
+
 <br/>
 <br/>
 <br/>

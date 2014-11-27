@@ -1,3 +1,4 @@
+<br clear="all"/>
 <div class="wrap">
 
 	<h2><?php _e('ApiKey:'); ?></h2> <br/>
