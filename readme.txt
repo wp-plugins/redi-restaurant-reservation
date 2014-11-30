@@ -15,19 +15,20 @@ Initially you need to setup number of persons that can book at one time, working
 Supported languages:
 
 * Danish
-* Dutch
+* Deutsch
 * English
+* Español
 * Estonian
 * Finnish
-* French, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
-* German
-* Italian
-* Polish
-* Russian
-* Portuguese (Brazil) 
-* Portuguese (Portugal)
-* Spanish
-* Swedish
+* Français, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
+* Italiano
+* Nederlands
+* Polski
+* Português
+* Svenska
+* Русский
+* עברית
+* 日本語
 
 If you need more languages, please contact us!
 
@@ -111,6 +112,7 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Fixed cancel reservation with space in number
 * (+) Changed country from free form field to dropdown
 * (+) New variation is added to plugin, that displays all possible times for selected date
+* (+) Updated list of languages and translation
 
 = 14.0630 =
 * Limit maximum time before reservation

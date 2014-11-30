@@ -1,0 +1,434 @@
+# Copyright (C) 2013 ReDi Restaurant Reservation
+# This file is distributed under the same license as the ReDi Restaurant Reservation package.
+msgid ""
+msgstr ""
+"Project-Id-Version: ReDi Restaurant Reservation\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
+"POT-Creation-Date: 2014-05-11 21:08+0200\n"
+"PO-Revision-Date: 2014-06-08 20:59+0200\n"
+"Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
+"Language-Team: ReDi team <info@reservationdiary.eu>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-"
+"reservation\\branches\\TwoStepReservation\n"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:183
+msgid "id and reason are required"
+msgstr "Id et motif sont nécessaires"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:198
+msgid "Min Persons should be lower than Max Persons"
+msgstr ""
+"Le minimum de personnes ne peut pas être inférieur au maximum de personnes"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:205
+msgid "Reservation time should be greater than 0"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:672
+msgid "Name can't be empty"
+msgstr "Indiquez votre nom"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:673
+msgid "Email can't be empty"
+msgstr "Indiquez votre e-mail"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:674
+msgid "Phone can't be empty"
+msgstr "Indiquez votre téléphone"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:765
+msgid "Selected date or time is not valid."
+msgstr "L'horaire sélectionné n'est pas possible."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:946
+msgid "Yes"
+msgstr "Oui "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi-restaurant-reservation.php:946
+msgid "No"
+msgstr "Non "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/redi.php:248
+msgid ""
+"Online reservation service is not available at this time. Try again later or "
+"contact us directly."
+msgstr ""
+"Les réservations en ligne ne sont pas possibles à ce moment. Essayez plus "
+"tard ou contactez-nous directement."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:12
+msgid "Free package settings"
+msgstr "Paramètres du service gratuit"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:14
+msgid "Basic package settings"
+msgstr "Paramètres du service (premium)"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:16
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:224
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:235
+msgid "Cancel reservation"
+msgstr "Annuler la réservation"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:21
+msgid "Your settings have been saved!"
+msgstr "Votre réglage a été enregistré"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:38
+msgid "Common settings"
+msgstr "Les paramètres communs"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:43
+msgid "Min persons per reservation"
+msgstr "Nombre de personne minimum par réservation"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:59
+msgid "Max persons per reservation"
+msgstr "Nombre de personne maximum par réservation"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:76
+msgid "Message for large groups"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:84
+msgid "This message displayed when user chooses large group"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:91
+msgid "Reservation time"
+msgstr "Durée de la réservation"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:99
+msgid "Reservation duration in minutes"
+msgstr "Durée de la réservation en minutes"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:106
+msgid "Support us"
+msgstr "Encouragez-nous"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:114
+msgid "Please support our plugin by publishing Reservation Diary logo"
+msgstr "Encouragez-nous en publiant le logo Reservation Diary"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:122
+msgid "TimePicker type"
+msgstr "Type de sélection horaire"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:133
+msgid "jQuery plugin or HTML dropdown"
+msgstr "Plugin jQuery ou menu déroulant HTML"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:140
+msgid "Alternative time step"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:156
+msgid "Custom fields"
+msgstr "Champs personnalisés"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:163
+msgid "Field name"
+msgstr "Nom du champs"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:168
+msgid "Field type"
+msgstr "Type de champs"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:173
+msgid "Is required?"
+msgstr "Nécessaire ?"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:178
+msgid "Required error message"
+msgstr "Message d'erreur nécessaire"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:216
+msgid "Save Changes"
+msgstr "Sauvegarder"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:228
+msgid "Reservation number"
+msgstr "Numéro de réservation"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin.php:231
+msgid "Reason"
+msgstr "Motif"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:22
+msgid "Restaurant settings"
+msgstr "Informations Restaurant"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:27
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:26
+msgid "Place"
+msgstr "Lieu"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:41
+msgid "Multiple places are available for Basic package users"
+msgstr "Plusieurs lieux différents sont possibles avec la version premium"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:49
+msgid "Restaurant name"
+msgstr "Nom de restaurant"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:59
+msgid "Country"
+msgstr "Pays"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:69
+msgid "City"
+msgstr "Ville"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:79
+msgid "Address"
+msgstr "Adresse"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:89
+msgid "Url"
+msgstr "Url"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:100
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:130
+msgid "Email"
+msgstr "E-mail"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:110
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:122
+msgid "Phone"
+msgstr "Téléphone"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:120
+msgid "Short description"
+msgstr "Description courte"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:131
+msgid "Long description"
+msgstr "Description longue"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:141
+msgid "Hours before reservation"
+msgstr "Combien de temps avant la réservation "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:149
+msgid "Minimum hours before reservation can be accepted from client"
+msgstr "Temps minimum accepté par le client avant une réservation "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:157
+msgid "Catalog"
+msgstr "Sélection"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:165
+msgid "Publish restaurant details to reservationdiary.eu catalog"
+msgstr "Indiquez les informations du restaurant sur reservationdiary.eu "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:171
+msgid "Available seats"
+msgstr "Nombre de places"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:181
+msgid ""
+"NOTE: Reducing number of available seats will remove existing reservations."
+msgstr ""
+"ATTENTION : diminuer le nombre de place effacera les réservations déjà "
+"enregistrées. "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:184
+msgid "Working time"
+msgstr "Horaires d'ouverture"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:192
+msgid "Open"
+msgstr "Ouvert"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:195
+msgid "Close"
+msgstr "Fermé"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:224
+msgid "Specify time in 24h format (00:00 - 23:59)."
+msgstr "Indiquez l'horaire au format 24h (00:00 - 23:59)."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:226
+msgid ""
+"If you close next day at night then set closing time on a same day. For "
+"example 18:00 - 3:00"
+msgstr ""
+"Si vous fermez le jour suivant en soirée, sélectionnez le même horaire que "
+"celui attribué la veille. Par exemple 18:00 - 3:00."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:228
+msgid "Set Open and Close fields to blank if restaurant is closed."
+msgstr "Laissez le champs Ouvert ou Fermé vide si le restaurant est fermé."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:232
+msgid "Email Configuration"
+msgstr "Notification par E-mail"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:238
+msgid "Language"
+msgstr "Langue"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:252
+msgid "Language for admin emails"
+msgstr "Langue pour l'administrateur "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:260
+msgid "Date format"
+msgstr "Format de date"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:265
+msgid "Hyphen"
+msgstr "Trait d'union"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:270
+msgid "Dot"
+msgstr "Point"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/admin_ajaxed.php:275
+msgid "Slash"
+msgstr "Espace"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:3
+msgid "ApiKey:"
+msgstr "ApiKey:"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:7
+msgid "Basic package (paid version)"
+msgstr "Service Premium"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:9
+msgid "* View upcoming reservations on Mobile/Tablet PC"
+msgstr "* Voir les réservations en temps réel sur smartphone et tablette"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:11
+msgid ""
+"View upcoming reservations from your Mobile/Tablet PC and never miss your "
+"customer. This page should be open on a Tablet PC so waitress can see all "
+"upcoming reservations for today. Page refreshes every 15 min and shows "
+"reservations that in past for 3 hours as well as all upcoming reservations "
+"for next 24 hours. By clicking on reservation item you will see reservation "
+"details."
+msgstr ""
+"* Voir les nouvelles réservations sur smartphone et tablette afin de ne rien "
+"manquer pour vos clients. Il est nécessaire d'ouvrir cette page pour voir "
+"les réservations du jour. La page est actualisée toutes les 15mn, avec un "
+"récapitulatif des 3 dernières heures et des 24 prochaines heures à venir. En "
+"cliquant sur Voir les réservations, ​​vous verrez les détails des réservations."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:13
+msgid "Fully functional demo can be accessed by following link for 30 days:"
+msgstr "Essayez le plugin gratuitement pendant 30 jours : "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:13
+msgid "Open upcoming reservations"
+msgstr "Voir les réservations"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:16
+msgid "* Setup maximum available seats for online reservation by week day"
+msgstr "* Indiquez le nombre de réservations en ligne par jour ouvrable."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:18
+msgid ""
+"* Time shifts. Define multiple open/close time by week day. Define time "
+"before reservation by shift and week day."
+msgstr ""
+"* Différents services. Indiquez plusieurs horaires d'Ouverture/Fermeture par "
+"jour ouvrable."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:20
+msgid "* Support for multiple places."
+msgstr "* Informations pour plusieurs restaurants."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/basicpackage.php:23
+msgid "For paid packages please contact us by email:"
+msgstr "Pour la version Premium, contactez-nous par e-mail : "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:25
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:36
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:111
+msgid "Step"
+msgstr "Réservez une table"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:25
+msgid "Select place, date and time"
+msgstr "Sélectionnez le lieu, la date et l'heure "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:36
+msgid "Select date"
+msgstr "Choisir date"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:39
+msgid "Date"
+msgstr "Date"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:51
+msgid "Persons"
+msgstr "Personnes"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:61
+#, php-format
+msgid "More than %s people"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:105
+msgid ""
+"Reservation is not available on selected day. Please select another day."
+msgstr ""
+"Les réservations ne sont pas possibles aujourd’hui, merci de choisir une "
+"nouvelle date."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:111
+msgid "Provide reservation details"
+msgstr "Envoyez votre demande"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:114
+msgid "Name"
+msgstr "Nom"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:158
+msgid "Custom field is required"
+msgstr "Remplir les champs nécessaires"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:173
+msgid "Comment"
+msgstr "Commentaire"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:180
+msgid "Make a reservation"
+msgstr "Réserver"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:189
+msgid "Thank you for your reservation."
+msgstr "Nous vous remercions pour votre réservation."
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:191
+msgid ""
+"We will create a confirmation and email it to you at the email address you "
+"entered on the reservations form. You should receive your confirmation by "
+"email shortly."
+msgstr ""
+"Une confirmation vous a été envoyée. Veuillez consulter votre boite e-mail. "
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\branches\TwoStepReservation/templates/frontend.php:198
+msgid "Powered by"
+msgstr "Propulsé par"
+
+#~ msgid "Time"
+#~ msgstr "Horaire"
+
+#~ msgid "Check available time"
+#~ msgstr "Vérifier la disponibilté"
+
+#~ msgid "Select available time"
+#~ msgstr "Choisir une disponibilité"
+
+#~ msgid "Date and time"
+#~ msgstr "Date et heure"

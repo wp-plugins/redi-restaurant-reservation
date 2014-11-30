@@ -45,9 +45,7 @@
 					<p><?php _e('Name', 'redi-restaurant-reservation') ?>: Redi Restaurant Reservation</p>
 					<p><?php _e('Version', 'redi-restaurant-reservation') ?>: <?php echo $this->version ?></p>
 					<p><?php _e('Authors', 'redi-restaurant-reservation') ?>: <a href="https://profiles.wordpress.org/thecatkin/" target="_blank">Catkin</a> & <a href="https://profiles.wordpress.org/robbyroboter/" target="_blank">Robby Roboter</a></p>
-					<p><?php _e('Website', 'redi-restaurant-reservation') ?>: <a target="_blank" href="http://www.reservationdiary.eu">reservationdiary.eu</a></p>
 					<p><?php _e('Email', 'redi-restaurant-reservation') ?>: <a target="_blank" href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a></p>
-
 				</div>
 			</div>
 		</div>

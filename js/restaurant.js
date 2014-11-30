@@ -40,7 +40,7 @@ jQuery(function () {
     }
 
     if (jQuery.datepicker.regional[locale] !== undefined) {
-        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale]);
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale.substring(0,2)]);
     }
     else {
         jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
