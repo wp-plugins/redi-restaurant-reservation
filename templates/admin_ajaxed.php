@@ -76,7 +76,7 @@ jQuery(function () {
 				<select id="Country" name="Country">
 					<option value=""> -- <?php _e('Select Country', 'redi-restaurant-reservation')?> -- </option>
 					<?php foreach($countries as $country):?>
-					<option value="<?php echo $country ?>" <?php if($place['Country']==$country): ?>selected="selected"<? endif ?>><?php echo $country ?></option>
+					<option value="<?php echo $country ?>" <?php if($place['Country']==$country): ?>selected="selected"<?php endif ?>><?php echo $country ?></option>
 					<?php endforeach ?>
 			</td>
 		</tr>
