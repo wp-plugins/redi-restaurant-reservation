@@ -64,7 +64,7 @@ Do you want to have some new functionality or if you have any other questions pl
  plugin too.
 * Improve restaurant turnaround time by allowing clients to call a waiter with help of their smart phones via mobile web page. <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">Open QR Code Waiter Calling System plugin</a>
 
-<img src="http://pixelsite.info/track/t23721.gif" border=0>
+![alt text](http://pixelsite.info/track/t23721.gif)
  
 == Installation ==
 
