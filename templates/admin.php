@@ -26,13 +26,19 @@
 		margin: 0;
 		padding: 8px 12px;
 	}
+	.nav-tab-basic{
+		background-color:#78DD88;
+	}
+	.nav-tab-basic:hover{
+		background-color:#7FFF8E;
+	}
 </style>
 
 
 <div class="wrap">
 <a class="nav-tab <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?> nav-tab-active<?php endif;?>"
    href="options-general.php?page=redi-restaurant-reservation&sm=free"><?php _e('Free package settings', 'redi-restaurant-reservation') ?></a>
-<a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='basic')): ?> nav-tab-active<?php endif;?>"
+<a class="nav-tab nav-tab-basic <?php if((isset($_GET['sm']) && $_GET['sm']=='basic')): ?> nav-tab-active<?php endif;?>"
    href="options-general.php?page=redi-restaurant-reservation&sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='cancel')): ?> nav-tab-active<?php endif;?>"
    href="options-general.php?page=redi-restaurant-reservation&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
@@ -370,7 +376,7 @@
 		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes', 'redi-restaurant-reservation') ?>" name="submit">
 	</form>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
-            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1600px;"></iframe>
+            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1700px;"></iframe>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='cancel')):?>
         <div id="icon-admin" class="icon32">
             <br>
