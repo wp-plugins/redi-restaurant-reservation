@@ -32,15 +32,15 @@ jQuery(function () {
         }
     });
 
-    if (jQuery.timepicker.regional[locale] !== undefined) {
-        jQuery.timepicker.setDefaults(jQuery.timepicker.regional[locale]);
+    if (jQuery.timepicker.regional[timepicker_locale] !== undefined) {
+        jQuery.timepicker.setDefaults(jQuery.timepicker.regional[timepicker_locale]);
     }
     else {
         jQuery.timepicker.setDefaults(jQuery.timepicker.regional['']);
     }
 
-    if (jQuery.datepicker.regional[locale] !== undefined) {
-        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[locale.substring(0,2)]);
+    if (jQuery.datepicker.regional[timepicker_locale] !== undefined) {
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[timepicker_locale.substring(0,2)]);
     }
     else {
         jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
