@@ -97,6 +97,25 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
 			add_filter( 'http_request_timeout', array( &$this, 'filter_timeout_time' ) );
 			add_shortcode( 'redirestaurant', array( $this, 'shortcode' ) );
+
+		}
+
+		function language_files( $mofile, $domain ) {
+
+			if ( $domain === 'redi-restaurant-reservation' ) {
+
+				$full_file    = WP_PLUGIN_DIR . '/redi-restaurant-reservation/lang/' . $domain . '-' . get_locale() . '.mo';
+				$generic_file = WP_PLUGIN_DIR . '/redi-restaurant-reservation/lang/' . $domain . '-' . substr( get_locale(),
+						0, 2 ) . '.mo';
+				if ( file_exists( $full_file ) ) {
+					return $full_file;
+				}
+				if ( file_exists( $generic_file ) ) {
+					return $generic_file;
+				}
+			}
+
+			return $mofile;
 		}
 
 		function ReDiRestaurantReservation() {
@@ -224,7 +243,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					    '<br/>This will cause ReDi Restaurant Reservation plugin to retry fetching an API key for you. ' .
 					    '<br/>If you keep seeing this error it usually means that server where you host your web site can\'t connect to our reservationdiary.eu server. ' .
 					    '<br/>You can try asking your WordPress host to allow your WordPress server to connect to api.reservationdiary.eu' .
-					    '<br/>In case you can not solve this problem yourself, please contact us directly by <a href="mailo:info@reservationdiary.eu">info@reservationdiary.eu</a>', 'redi-restaurant-reservation' )
+					    '<br/>In case you can not solve this problem yourself, please contact us directly by <a href="mailo:info@reservationdiary.eu">info@reservationdiary.eu</a>',
+						'redi-restaurant-reservation' )
 				);
 				$this->display_errors( $errors, true );
 				die;
@@ -280,7 +300,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					if ( isset( $cancel['Error'] ) ) {
 						$errors[] = $cancel['Error'];
 					} else {
-						$cancel_success = __( 'Reservation has been successfully canceled.', 'redi-restaurant-reservation' );
+						$cancel_success = __( 'Reservation has been successfully canceled.',
+							'redi-restaurant-reservation' );
 					}
 
 				} else {
@@ -289,7 +310,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			}
 			$settings_saved = false;
 			if ( isset( $_POST['submit'] ) ) {
-				$form_valid = true;
+				$form_valid               = true;
 				$services                 = (int) self::GetPost( 'services' );
 				$minPersons               = (int) self::GetPost( 'MinPersons' );
 				$maxPersons               = (int) self::GetPost( 'MaxPersons' );
@@ -578,8 +599,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			}
 
 			if ( function_exists( 'load_plugin_textdomain' ) ) {
+				add_filter( 'load_textdomain_mofile', array( $this, 'language_files' ), 10, 2 );
 				load_plugin_textdomain( 'redi-restaurant-reservation', false, 'redi-restaurant-reservation/lang' );
-				load_plugin_textdomain( 'redi-restaurant-reservation-errors', false, 'redi-restaurant-reservation/lang' );
+				load_plugin_textdomain( 'redi-restaurant-reservation-errors', false,
+					'redi-restaurant-reservation/lang' );
 			}
 
 		}
@@ -750,10 +773,12 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider', 'jquery-ui-datepicker' ) );
 			wp_enqueue_script( 'datetimepicker' );
 
-			wp_register_script( 'datetimepicker-lang', REDI_RESTAURANT_PLUGIN_URL . '/lib/datetimepicker/js/jquery.ui.i18n.all.min.js' );
+			wp_register_script( 'datetimepicker-lang',
+				REDI_RESTAURANT_PLUGIN_URL . '/lib/datetimepicker/js/jquery.ui.i18n.all.min.js' );
 			wp_enqueue_script( 'datetimepicker-lang' );
 
-			wp_register_script( 'timepicker-lang', REDI_RESTAURANT_PLUGIN_URL . '/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js' );
+			wp_register_script( 'timepicker-lang',
+				REDI_RESTAURANT_PLUGIN_URL . '/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js' );
 			wp_enqueue_script( 'timepicker-lang' );
 
 			wp_register_script( 'restaurant', REDI_RESTAURANT_PLUGIN_URL . 'js/restaurant.js', array( 'jquery' ) );
@@ -786,7 +811,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$this->redi->setApiKey( $this->ApiKey );
 			}
 			if ( $this->ApiKey == null ) {
-				$this->display_errors( array( 'Error' => '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>' ) );
+				$this->display_errors( array(
+					'Error' => '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
+							'redi-restaurant-reservation' ) . '</p></div>'
+				) );
+
 				return;
 			}
 
@@ -808,16 +837,17 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				die;
 			}
 
-			$categoryID           = $categories[0]->ID;
-			$time_format          = get_option( 'time_format' );
-			$date_format_setting  = $this->options['DateFormat'];
-			$date_format          = $this->getPHPDateFormat( $date_format_setting );
-			$calendar_date_format = $this->getCalendarDateFormat( $date_format_setting );
+			$categoryID               = $categories[0]->ID;
+			$time_format              = get_option( 'time_format' );
+			$date_format_setting      = $this->options['DateFormat'];
+			$date_format              = $this->getPHPDateFormat( $date_format_setting );
+			$calendar_date_format     = $this->getCalendarDateFormat( $date_format_setting );
 			$MinTimeBeforeReservation = (int) ( $this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0 ) + 1;
-			$reservationStartTime = strtotime( '+' . $MinTimeBeforeReservation . ' hour', current_time( 'timestamp' ) );
-			$startDate            = date( $date_format, $reservationStartTime );
-			$startDateISO         = date( 'Y-m-d', $reservationStartTime );
-			$startTime            = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
+			$reservationStartTime     = strtotime( '+' . $MinTimeBeforeReservation . ' hour',
+				current_time( 'timestamp' ) );
+			$startDate                = date( $date_format, $reservationStartTime );
+			$startDateISO             = date( 'Y-m-d', $reservationStartTime );
+			$startTime                = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
 
 			$minPersons         = $this->GetOption( 'MinPersons', 1 );
 			$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
@@ -829,7 +859,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$timepicker        = $this->GetOption( 'timepicker', $this->GetOption( 'TimePicker' ) );
 			$time_format_hours = self::dropdown_time_format();
-			$calendar          = $this->GetOption( 'calendar', $this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
+			$calendar          = $this->GetOption( 'calendar',
+				$this->GetOption( 'Calendar' ) ); // first admin settings then shortcode
 
 			for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
 				$field_name     = 'field_' . $i . '_name';
@@ -861,7 +892,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$hidesteps     = false; // this settings only for 'byshifts' mode
 			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
 			if ( $timeshiftmode === 'byshifts' ) {
-				$hidesteps = $this->GetOption( 'hidesteps', $this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
+				$hidesteps = $this->GetOption( 'hidesteps',
+						$this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
 				//pre call
 				$categories = $this->redi->getPlaceCategories( $placeID );
 				$categoryID = $categories[0]->ID;
@@ -930,12 +962,16 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		private function step1( $categoryID, $post, $placeID = null ) {
 
-			$timeshiftmode = self::GetPost( 'timeshiftmode', $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
+			$timeshiftmode = self::GetPost( 'timeshiftmode',
+				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
-			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime', null, $post ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime', null,
+					$post ) );
 
 			if ( $date['error_count'] > 0 ) {
-				echo json_encode( array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) ) );
+				echo json_encode( array(
+					'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' )
+				) );
 				die;
 			}
 
@@ -1143,7 +1179,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 							if ( isset( $this->options[ $field_type ] ) && $this->options[ $field_type ] === 'checkbox' ) {
 								$comment .= $this->options[ 'field_' . $i . '_name' ] . ': ';
-								$comment .= ( self::GetPost( 'field_' . $i ) === 'on' ) ? __( 'Yes', 'redi-restaurant-reservation' ) : __( 'No', 'redi-restaurant-reservation' );
+								$comment .= ( self::GetPost( 'field_' . $i ) === 'on' ) ? __( 'Yes',
+									'redi-restaurant-reservation' ) : __( 'No', 'redi-restaurant-reservation' );
 								$comment .= '<br/>';
 							} else {
 								if ( ! empty( $_POST[ 'field_' . $i ] ) ) {
