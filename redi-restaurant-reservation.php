@@ -786,11 +786,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$this->redi->setApiKey( $this->ApiKey );
 			}
 			if ( $this->ApiKey == null ) {
-
 				$this->display_errors( array( 'Error' => '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ) . '</p></div>' ) );
-
 				return;
 			}
+
 			//places
 			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
@@ -812,18 +811,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$categoryID           = $categories[0]->ID;
 			$time_format          = get_option( 'time_format' );
 			$date_format_setting  = $this->options['DateFormat'];
-			$time_format          = get_option( 'time_format' );
-			$date_format_setting  = $this->options['DateFormat'];
-			$calendar_date_format = $this->getCalendarDateFormat( $date_format_setting );
 			$date_format          = $this->getPHPDateFormat( $date_format_setting );
-			$time_format          = get_option( 'time_format' );
-			$date_format_setting  = $this->options['DateFormat'];
-
 			$calendar_date_format = $this->getCalendarDateFormat( $date_format_setting );
-			$date_format          = $this->getPHPDateFormat( $date_format_setting );
-
 			$MinTimeBeforeReservation = (int) ( $this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0 ) + 1;
-
 			$reservationStartTime = strtotime( '+' . $MinTimeBeforeReservation . ' hour', current_time( 'timestamp' ) );
 			$startDate            = date( $date_format, $reservationStartTime );
 			$startDateISO         = date( 'Y-m-d', $reservationStartTime );
