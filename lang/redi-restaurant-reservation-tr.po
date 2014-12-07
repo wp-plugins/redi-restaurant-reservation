@@ -4,32 +4,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2014-01-31 09:38+0200\n"
-"PO-Revision-Date: 2014-01-31 09:39+0200\n"
+"POT-Creation-Date: 2014-02-15 23:49+0200\n"
+"PO-Revision-Date: 2014-11-30 21:32+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
-"Language: Danish\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-"
 "reservation\\trunk\n"
 
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:183
+msgid "id and reason are required"
+msgstr ""
+
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:593
 msgid "Name can't be empty"
-msgstr ""
+msgstr "İsim boş kalamaz"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:594
 msgid "Email can't be empty"
-msgstr ""
+msgstr "Email boş kalamaz"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:595
 msgid "Phone can't be empty"
+msgstr "Telefon boş kalamaz"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:687
+msgid "Selected date or time is not valid."
+msgstr "Seçilen tarih ve saat doğru değil"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:765
+msgid "Yes"
+msgstr "Evet"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:765
+msgid "No"
+msgstr "Hayır"
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi.php:234
+msgid ""
+"Online reservation service is not available at this time. Try again later or "
+"contact us directly."
 msgstr ""
+"Rezervasyon servisi şu anda hizmet vermemektedir. Lutfen daha sonra tekrar "
+"deneyin veya bizimle direk irtibatra geçin."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:12
 msgid "Free package settings"
@@ -43,7 +67,7 @@ msgstr ""
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:155
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:166
 msgid "Cancel reservation"
-msgstr ""
+msgstr "Rezervasyonu iptal et"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:21
 msgid "Your settings have been saved!"
@@ -93,13 +117,17 @@ msgstr ""
 msgid "Required error message"
 msgstr ""
 
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:147
+msgid "Save Changes"
+msgstr ""
+
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:159
 msgid "Reservation number"
-msgstr ""
+msgstr "Rezervasyon numarası"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:162
 msgid "Reason"
-msgstr ""
+msgstr "Neden"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:22
 msgid "Restaurant settings"
@@ -108,7 +136,7 @@ msgstr ""
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:27
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:26
 msgid "Place"
-msgstr ""
+msgstr "Mekan"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:41
 msgid "Multiple places are available for Basic package users"
@@ -116,19 +144,19 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:49
 msgid "Restaurant name"
-msgstr ""
+msgstr "Restoran İsimi"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:59
 msgid "Country"
-msgstr ""
+msgstr "Ülke"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:69
 msgid "City"
-msgstr ""
+msgstr "Şehir"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:79
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:89
 msgid "Url"
@@ -137,7 +165,7 @@ msgstr ""
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:100
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:90
 msgid "Email"
-msgstr "E-post"
+msgstr "Email"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:110
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:82
@@ -146,11 +174,11 @@ msgstr "Telefon"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:120
 msgid "Short description"
-msgstr ""
+msgstr "Kısa Bilgi"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:131
 msgid "Long description"
-msgstr ""
+msgstr "Geniş Bilgi"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:141
 msgid "Hours before reservation"
@@ -280,7 +308,7 @@ msgstr ""
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:63
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:71
 msgid "Step"
-msgstr "Trin"
+msgstr "Adım"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:25
 msgid "Select place, date and time"
@@ -288,31 +316,31 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:36
 msgid "Select date and time"
-msgstr "Vælg dato og tidspunkt"
+msgstr "Tarih ve Zaman Seçin"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:39
 msgid "Date and time"
-msgstr "Dato og tidspunkt"
+msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:43
 msgid "Persons"
-msgstr "Personer"
+msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:54
 msgid "Check available time"
-msgstr "Se om der er ledige pladser"
+msgstr "Uygun zamanı kontrol et"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:63
 msgid "Select available time"
-msgstr "Vælg et tidspunkt"
+msgstr "Uygun zamanı seç"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:71
 msgid "Provide reservation details"
-msgstr "Udfyld nedenstående"
+msgstr "Rezervasyon detayları"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:74
 msgid "Name"
-msgstr "Navn"
+msgstr "İsim"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:118
 msgid "Custom field is required"
@@ -320,24 +348,22 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:133
 msgid "Comment"
-msgstr "Kommentar"
+msgstr "Mesajınız"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:140
 msgid "Make a reservation"
-msgstr "Reservér nu!"
+msgstr "Rezervasyonu Gönder"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:149
 msgid "Thank you for your reservation."
-msgstr "Vi takker for din reservation."
+msgstr "Rezervasyonunuz için teşekkürler."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:151
 msgid ""
 "We will create a confirmation and email it to you at the email address you "
 "entered on the reservations form. You should receive your confirmation by "
 "email shortly."
-msgstr ""
-"Du modtager en bekræftelse på din reservation via email hurtigst muligt. "
-"Husk at oplyse reservationsnummeret i denne mail når du ankommer."
+msgstr "Onaylama maili gönderildi. En kısa zamanda sizinle irtibata geçeceğiz."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:158
 msgid "Powered by"

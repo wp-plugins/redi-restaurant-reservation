@@ -279,10 +279,20 @@ jQuery(function () {
                                 </label>
                         </th>
                         <td>
-                                <select name="Lang" style="width:137px;">
-                                <?php foreach ((array)$redi_l10n_sys_locales as $locale): ?>
-                                        <option <?php if ($place['Lang'] == $locale['lang-www']): ?> selected="selected" <?php endif ?> value="<?php echo $locale['lang-www'] ?>">
-                                                <?php echo $locale['lang-native']; ?>
+								<select name="Lang" style="width:137px;">
+                                <?php 
+								
+								$place_lang = $place['Lang'];
+								
+								if ($place_lang != 'pt-BR' && $place_lang != 'pt-PT')
+								{
+									$place_lang = substr($place_lang, 0, 2);
+								}
+                                ?>
+								
+								<?php foreach ((array)$languages as $locale): ?>
+                                        <option <?php if ($place_lang == $locale['locale']): ?> selected="selected" <?php endif ?> value="<?php echo $locale['locale'] ?>">
+                                                <?php echo $locale['name']; ?>
                                         </option>
                                 <?php endforeach ?>
                                 </select>
