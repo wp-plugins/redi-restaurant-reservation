@@ -755,7 +755,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		public function shortcode( $atts ) {
-			global $locale;
 			if ( is_array( $atts ) && is_array( $this->options ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
@@ -909,6 +908,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				);
 				$hide_clock = true;
 			}
+
+			$js_locale         = get_locale();
+			$datepicker_locale = substr( $js_locale, 0, 2 );
 
 			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
