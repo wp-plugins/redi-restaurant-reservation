@@ -755,7 +755,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		public function shortcode( $atts ) {
-			global $locale;
+			//global $locale;
 			if ( is_array( $atts ) && is_array( $this->options ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
@@ -890,7 +890,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$persons       = 1;
 			$all_busy      = false;
 			$hidesteps     = false; // this settings only for 'byshifts' mode
-			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
+			$timeshiftmode = 'byshifts';
 			if ( $timeshiftmode === 'byshifts' ) {
 				$hidesteps = $this->GetOption( 'hidesteps',
 						$this->GetOption( 'Hidesteps' ) ) == 'true'; // first admin settings then shortcode
@@ -909,12 +909,26 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				);
 				$hide_clock = true;
 			}
+			$dates     = array();
+			$date_date = $reservationStartTime;
+			for ( $dates_index = 0; $dates_index != 8; $dates_index ++ ) {
+				$dates[]   =
+					array(
+						'month'    => date( 'M', $date_date ),
+						'day'      => date( 'j', $date_date ),
+						'weekday'  => date( 'D', $date_date ),
+						'selected' => ( $dates_index == 0 ),
+						'hidden'   => date( 'Y-m-d', $date_date )
+					);
+				$date_date = strtotime( "+1 day", $date_date );
+			}
 
+			$js_locale         = get_locale();
+			$datepicker_locale = substr( $js_locale, 0, 2 );
 			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
 
 			ob_end_clean();
-
 			return $out;
 		}
 
@@ -962,11 +976,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		private function step1( $categoryID, $post, $placeID = null ) {
 
-			$timeshiftmode = self::GetPost( 'timeshiftmode',
-				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
+			$timeshiftmode = 'byshifts';
 			// convert date to array
-			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime', null,
-					$post ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' 00:00' );
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array(

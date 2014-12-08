@@ -1,110 +1,1209 @@
-.redi-reservation-select
-{
-    -moz-box-sizing: border-box;
-    background-clip: padding-box;
-    border: 1px solid #B7AEA6;
-    border-radius: 0.236em;
-    box-shadow: 0 0 0.236em 0 #E5E1DE;
-    color: #6C6158;
-    font-family: "Cutive",sans-serif;
-    font-size: 0.857em;
-    line-height: 1.618em;
-    outline: medium none;
-    padding: 0.4em;
-    transition: all 0.2s ease-in-out 0s;
+@charset "utf-8";
+/* CSS Document */
+
+/* элементы страницы, не относящиеся к дизайну формы */
+
+/*body {*/
+    /*color: rgb(142, 142, 142);*/
+    /*font-family: 'PT Sans', verdana;*/
+    /*font-size: 16px;*/
+    /*margin: 0 auto;*/
+    /*line-height: 25px;*/
+    /*background: rgb(246, 246, 246);*/
+/*}*/
+
+.row {
+    margin: 0 auto;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-bottom: 1px;
+    border-top: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-color: #E6E6E6;
+    border-style: solid;
+    height: auto;
+    text-align: center;
 }
 
-.redi-reservation-alert 
-{
-    background-color: #FCF8E3;
-    border: 1px solid #FBEED5;
-    border-radius: 4px 4px 4px 4px;
-    margin-bottom: 20px;
-    padding: 8px 35px 8px 14px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+/* ______________________________ */
+
+/* общие стили для разных объектов формы */
+
+/* ---подчеркивание c точками*/
+
+.underline {
+    border-bottom: 1px dotted #6689b4;
+    padding-left: 5px;
 }
 
-strong 
-{
-    font-weight: bold;
+/* ---стрелки вперед-назад по бокам от полей выбора */
+
+.f_arrow_next_temp {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    right: -32px;
+    top: 21px;
+    z-index: 200;
+    background-image: url(../img/f_arrow_next.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
-.redi-reservation-alert-error 
-{
-    background-color: #F2DEDE;
-    border-color: #EED3D7;
-    color: #B94A48;
+.f_arrow_next_temp:hover {
+    background-image: url(../img/f_arrow_next_hover.png);
 }
 
-.redi-reservation-error h4 
-{
-    color: #B94A48;
+.f_arrow_back_temp {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    left: -33px;
+    top: 21px;
+    z-index: 200;
+    background-image: url(../img/f_arrow_back.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
-.redi-reservation-alert-info 
-{
-    background-color: #D9EDF7;
-    border-color: #BCE8F1;
-    color: #3A87AD;
+.f_arrow_back_temp:hover {
+    background-image: url(../img/f_arrow_back_hover.png);
 }
 
-.redi-reservation-alert-success 
-{
-    background-color: #DFF0D8;
-    border-color: #D6E9C6;
-    color: #468847;
+.f_arrow_next_temp2 {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    right: -32px;
+    top: 75px;
+    z-index: 200;
+    background-image: url(../img/f_arrow_next.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
-.redi_required
-{
-    color: #DD0000;
+.f_arrow_next_temp2:hover {
+    background-image: url(../img/f_arrow_next_hover.png);
 }
 
-.ui-datepicker
-{
-    z-index: 9999 !important;
+.f_arrow_back_temp2 {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    left: -33px;
+    top: 75px;
+    z-index: 200;
+    background-image: url(../img/f_arrow_back.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
-.ui-timepicker-div > dl > dt
-{
-    font-weight: bold;
+.f_arrow_back_temp2:hover {
+    background-image: url(../img/f_arrow_back_hover.png);
 }
 
-.ui-timepicker-div > dl > dd
-{
-    margin: 0 0 20px;
+.f_H2 {
+    text-align: left;
+    font-family: 'PT Sans Narrow', verdana;
+    color: #666666;
+    font-size: 16px;
+    /*padding-bottom: 0.4em;*/
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*vertical-align:middle;*/
+    line-height: 18px;
 }
 
-#persons, #redi-restaurant-startDate, #redi-restaurant-startTime
-{
-    width:175px;
+/* ---иконка закрытия */
+
+.f_close_icon {
+    position: absolute;
+    left: 430px;
+    top: 12px;
+    background: #f3f3f3;
+    background-image: url(../img/f_cancel_form_hover.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 66px;
 }
 
-#redi-restaurant-startHour, #redi-restaurant-startMinute
-{
-    width: 83px;
+.f_close_icon_text {
+    text-align: left;
+    font-family: 'PT Sans Narrow', verdana;
+    color: #666666;
+    padding-bottom: 20px;
 }
 
-.redi-restaurant-button
-{
-    font-weight: normal;
+.f_close_icon:hover {
+    color: #666666;
+    background-image: url(../img/f_cancel_form.png);
 }
 
-.redi-restaurant-button[disabled="disabled"]
-{
-    opacity:0.4;
-    filter:alpha(opacity=40); /* For IE8 and earlier */
+/* ______________________________ */
+
+/* Форма, шаг 1 */
+
+/* ---бокс формы */
+
+#redi_f_box {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    margin: 0 auto;
+    height: auto;
+    width: 500px;
+    box-shadow: 3px 3px 3px 3px rgb(229, 229, 229);
+    line-height: 15px;
+    position: relative;
 }
 
-.redi-restaurant-button[select="select"]
-{
-    font-weight: bold;
+#redi_f_box img {
+    box-shadow: none;
+    border-radius: 0;
 }
 
-#step1button, #redi-restaurant-step3
-{
+#f_tab_box table {
+    /*	width: auto;*/
+    border: 0;
 }
 
-.cancel-reservation {
-    float: right;
+/* ---ряд для шагов формы */
+
+.f_step_box {
+    margin: 0 auto;
+    width: 450px;
+    height: 50px;
+    position: relative;
+}
+
+/* ---иконка следующего шага */
+
+.f_arrow_next_step {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    left: 128px;
+    top: 19px;
+    z-index: 200;
+    background-image: url(../img/f_arrow_next.png);
+}
+
+/* ---заголовок Активный шаг 1 */
+
+.f_active_step1 {
+    background-color: #ffffff;
+    height: 65px;
+    width: 170px;
+    font-family: 'PT Sans Narrow', verdana;
+    font-weight: 700;
+    color: #6689b4;
+    text-align: center;
+    padding-bottom: 10px;
+    left: 0px;
+    top: -1px;
+    border-top: 3px solid #6689b4;
+    position: absolute;
+    z-index: 100;
+}
+
+/* ---заголовок Неактивный шаг 2 */
+
+.f_non_active_step2 {
+    height: 50px;
+    width: 170px;
+    font-family: 'PT Sans Narrow', verdana;
+    color: #666666;
+    text-align: center;
+    padding-bottom: 10px;
+    position: absolute;
+    left: 172px;
+    top: 2px;
+}
+
+/* ---подложка */
+
+#f_tab_box {
+    background-color: #ffffff;
+    margin: 0 auto;
+    height: 870px;
+    width: 450px;
+    box-shadow: 3px 3px 3px 3px rgb(229, 229, 229);
+    line-height: 15px;
+    position: relative;
+    border-top: 3px solid #6689b4;
+    text-align: center;
+}
+
+/* ---бокс кол-во человек, заголовок */
+
+.f_subbox_title {
+    background-color: #f3f3f3;
+    margin: 0 auto;
+    height: 35px;
+    width: 350px;
+    border-radius: 7px 7px 0 0;
+    border-color: #cccccc;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    padding-top: 5px;
+
+}
+
+.f_subbox_title tr td
+{
+    padding-left: 5px;
+    padding-top: 3px;
+}
+/* ---бокс кол-во человек, данные */
+
+.f_subbox_data {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    height: 60px;
+    width: 350px;
+    border-radius: 0 0 7px 7px;
+    border-color: #cccccc;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    position: relative;
+}
+
+/* --- персоны по умолчанию */
+.f_person_data {
+    font-family: 'PT Sans Narrow', verdana;
+    padding: 5px 0px 5px 0px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 35px;
+    border-collapse: separate;
+}
+
+/* --- цвет ячеек персон по умолчанию */
+.f_person_data td {
+    background-color: #f3f3f3;
+    font-family: 'PT Sans Narrow', verdana;
+    padding: 5px 0px 5px 0px;
+    vertical-align: top;
+    text-align: center;
+    border: 0;
+    line-height: 35px;
+    font-size: 16px;
+
+}
+
+.f_subbox_data,.f_subbox_title{
+
+}
+/* ---персоны, активные под курсором */
+.f_person_data td:hover {
+    background-color: #6689b4;
+    color: #FFFFFF;
+}
+
+/* ---выбранное кол-во персон */
+.f_person_data td.select {
+    background-color: #71c18d;
+    color: #FFFFFF;
+}
+
+/* ---недоступное кол-во персон */
+
+.f_person_data td.close {
+    background-color: #FFFFFF;
+    color: #ececec;
+}
+
+/* ---бокс выбора дней, данные */
+
+.f_subbox_data2 {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    height: 85px;
+    width: 350px;
+    border-radius: 0 0 7px 7px;
+    border-color: #cccccc;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    position: relative;
+}
+
+/* ---шрифт легенды календаря */
+
+.legend {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 12px;
+    line-height: 5px;
+    text-align: left;
+}
+
+/* ---шрифт выходного дня на панели выбора */
+.weekend {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 12px;
+    line-height: 5px;
+    text-align: left;
+    color: #fa9090;
+}
+
+.f_calender_data {
+    font-family: 'PT Sans Narrow', verdana;
+    text-align: center;
+    line-height: 20px;
+    border-collapse: separate;
+
+    border-spacing: 6px;
+}
+.f_calender_data tr td{
+
+}
+
+/* --- цвет ячеек дат по умолчанию */
+.f_calender_data td {
+    background-color: #f3f3f3;
+    font-family: 'PT Sans Narrow', verdana;
+    padding: 5px 0px 5px 0px;
+    vertical-align: top;
+    text-align: center;
+    border-spacing: 6px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/* ---даты, активные под курсором */
+.f_calender_data td:hover {
+    background-color: #6689b4;
+    color: #FFFFFF;
+}
+
+/* ---выбранная дата */
+.f_calender_data td.select {
+    background-color: #71c18d;
+    color: #FFFFFF;
+}
+
+/* ---дни, когда закрыто или забронировано*/
+.f_calender_data td.close {
+    background-color: #FFFFFF;
+    color: #a9a9a9;
+}
+
+/* --- время по умолчанию */
+.f_time_data {
+    font-family: 'PT Sans Narrow', verdana;
+    padding: 5px 0px 5px 0px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 28px;
+    border-collapse: separate;
+    border-spacing: 6px;
+
+}
+.f_subbox_data table
+{
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+/* --- цвет ячеек времени по умолчанию */
+.f_time_data td {
+    background-color: #f3f3f3;
+    font-family: 'PT Sans Narrow', verdana;
+    padding: 5px 0px 5px 0px;
+    vertical-align: top;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* ---ячейки выбора времени, активные под курсором */
+.f_time_data td:hover {
+    background-color: #6689b4;
+    color: #FFFFFF;
+}
+
+/* ---выбранное время */
+.f_time_data td.select {
+    background-color: #71c18d;
+    color: #FFFFFF;
+}
+
+/* ---недоступное время */
+
+.f_time_data td.close {
+    background-color: #FFFFFF;
+    color: #ececec;
+}
+
+/* заголовок поля вывода доступного времени */
+
+.f_text_box {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+    width: 350px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* колонки вывода даты и доступного времени */
+
+.f_text_time {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+    width: 350px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ---бокс выбора времени */
+
+.f_subbox_data3 {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    /*height: 150px;*/
+    width: 350px;
+    border-radius: 0 0 7px 7px;
+    border-color: #cccccc;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    position: relative;
+}
+
+/* ---бокс выбора времени */
+
+.f_btn {
+    background-color: #6689b4;
+    margin-left: 242px;
+    width: 160px;
+    height: 30px;
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    color: #FFF;
+    text-align: center;
+    padding-top: 17px;
+    margin-right: 0;
+    font-weight: 700;
+}
+
+.f_btn:hover {
+    color: #a5e3ff;
+}
+
+/* Конец формы, шаг 1 */
+
+/* ______________________________ */
+
+/* стиль раскрывающегося календаря */
+
+/* ---подложка */
+#f_calender_box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 0 auto;
+    height: auto;
+    width: 300px;
+    box-shadow: 3px 3px 3px 3px rgb(229, 229, 229);
+    line-height: 15px;
+    position: relative;
+}
+
+/* ---иконка закрытия */
+
+.f_close_icon2 {
+    position: absolute;
+    width: 50px;
+    left: 257px;
+    top: 6px;
+}
+
+/* ---кнопки календаря вперед / назад */
+
+.f_arrow_back {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    left: 27px;
+    top: 53px;
+    background-image: url(../img/f_arrow_back.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.f_arrow_back:hover {
+    background-image: url(../img/f_arrow_back_hover.png);
+}
+
+.f_arrow_next {
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    left: 263px;
+    top: 53px;
+    background-image: url(../img/f_arrow_next.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.f_arrow_next:hover {
+    background-image: url(../img/f_arrow_next_hover.png);
+}
+
+/* ---заголовок календаря */
+
+.f_H3 {
+    text-align: left;
+    font-family: 'PT Sans Narrow', verdana;
+    color: #666666;
+    padding-bottom: 0.4em;
+    margin-left: 26px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* ---название месяца */
+
+.f_calender caption {
+    font-family: 'PT Sans Narrow', verdana;
+    font-weight: 700;
+    color: #6689b4;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+/* --- названия дней недели */
+.f_calender th {
+    padding: 15px 12px 15px 12px;
+    background-color: #FFFFFF;
+    color: #6689b4;
+    font-family: 'PT Sans Narrow', verdana;
+}
+
+/* ---выходные дня в календаре*/
+.f_calender td.weekendcal {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    line-height: 15px;
+    text-align: center;
+    color: #fa9090;
+}
+
+/* --- дни календаря по умолчанию */
+.f_calender td {
+    background-color: #e5e5e5;
+    font-family: 'PT Sans Narrow', verdana;
+    padding: 5px 0px 5px 0px;
+    vertical-align: top;
+    text-align: center;
+}
+
+/* ---дни прошлого/будущего месяца */
+.f_calender td.previous, .f_calender td.next {
+    background-color: #f3f3f3;
+    color: #C6C6C6;
+}
+
+/* ---дата сегодня */
+.f_calender td.today {
+    background-color: #a9a9a9;
+    color: #FFFFFF;
+}
+
+/* ---дни, активные под курсором */
+.f_calender td:hover {
+    background-color: #6689b4;
+    color: #FFFFFF;
+}
+
+/* ---выбранный день */
+.f_calender td.select {
+    background-color: #71c18d;
+    color: #FFFFFF;
+}
+
+/* ---дни, когда закрыто*/
+.f_calender td.close {
+    background-color: #FFFFFF;
+    background-image: url(../img/f_closed_date.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ---дни, когда забронировано*/
+.f_calender td.full {
+    background-color: #FFFFFF;
+    background-image: url(../img/f_reserve.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* конец стиля раскрывающегося календаря */
+
+/* ______________________________ */
+
+/* стиль раскрывающегося списка / выпадалки*/
+
+/* див выпадалки*/
+
+.f_select {
+    width: 250px;
+    margin: 0 auto;
+    font-family: 'PT Sans Narrow', verdana;
+}
+
+/* бокс выадалки*/
+
+div.selectBox {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    text-align: left;
+    line-height: 30px;
+    clear: both;
+    color: #888;
+}
+
+/* поле формы/выбора */
+
+span.selected {
+    width: 150px;
+    text-indent: 20px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* кнопка раскрытия со стрелкой*/
+
+span.selectArrow {
+    width: 30px;
+    border: 1px solid #6689b4;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    text-align: center;
+    font-size: 20px;
+    background: #6689b4;
+    color: #fff;
+    background-image: url(../img/f_arrow_down_white.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+span.selectArrow:hover {
+    background-image: url(../img/f_arrow_down_hover.png);
+}
+
+span.selectArrow, span.selected {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 1;
+}
+
+/* бокс раскрывающегося списка*/
+
+div.selectOptions {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow: hidden;
+    background: #ffffff;
+    padding-top: 2px;
+    display: none;
+}
+
+/* текст раскрывающегося списка по умолчанию*/
+
+span.selectOption {
+    font-family: 'PT Sans Narrow', verdana;
+    display: block;
+    width: 80%;
+    line-height: 20px;
+    padding: 5px 10%;
+}
+
+/* текст раскрывающегося списка- пункты категорий*/
+
+span.selectOption_category {
+    color: #6689b4;
+    display: block;
+    width: 80%;
+    line-height: 20px;
+    padding: 10px;
+}
+
+/* текст раскрывающегося списка- недоступные пункты*/
+
+span.selectOption_fully {
+    color: #cccccc;
+    display: block;
+    width: 80%;
+    line-height: 20px;
+    padding: 5px 10%;
+}
+
+/* элементы раскрывающегося списка при наведении курсора*/
+
+span.selectOption:hover {
+    color: #ffffff;
+    background: #6689b4;
+}
+
+/* ______________________________ */
+
+/* Форма, шаг 2 */
+
+/* ---заголовок неактивный шаг 1 */
+
+.f_non_active_step1 {
+    height: 50px;
+    width: 170px;
+    font-family: 'PT Sans Narrow', verdana;
+    color: #666666;
+    text-align: center;
+    padding-bottom: 10px;
+    position: absolute;
+    left: 0px;
+    top: 2px;
+}
+
+.f_active_step2 {
+    background-color: #ffffff;
+    height: 65px;
+    width: 170px;
+    font-family: 'PT Sans Narrow', verdana;
+    font-weight: 700;
+    color: #6689b4;
+    text-align: center;
+    padding-bottom: 10px;
+    left: 170px;
+    top: -1px;
+    border-top: 3px solid #6689b4;
+    position: absolute;
+    z-index: 100;
+}
+
+/* поле выбранных параметров, начало шага 2 */
+
+.f_text_selection_step2 {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+    background-color: #f3f3f3;
+    width: 350px;
+    height: 100px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* ______________________________ */
+
+/* Текстовые поля формы шаг 2 */
+/* ______________________________ */
+
+/* поле Имя Заказчика */
+
+/* див */
+
+.f_select2 {
+    width: 400px;
+    margin: 0 auto;
+    font-family: 'PT Sans Narrow', verdana;
+}
+
+/* бокс */
+div.f_input_box {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    text-align: left;
+    line-height: 30px;
+    clear: both;
+    color: #888;
+}
+
+/* поле ввода input*/
+
+#text_field {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    color: rgb(142, 142, 142);
+    position: relative;
+    float: left;
+    height: 28px;
+    z-index: 100;
+    width: 300px;
+    text-indent: 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* подсветка при активном поле ввода*/
+
+#text_field:focus {
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px rgba(82, 168, 236, .8);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px rgba(82, 168, 236, .8);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px rgba(82, 168, 236, .8)
+}
+
+/* иконка поля ввода*/
+
+span.selectArrow2 {
+    width: 50px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+    background: #f3f3f3;
+    background-image: url(../img/f_name.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* смена иконки поля ввода при наведении*/
+
+span.selectArrow2:hover {
+    background-image: url(../img/f_name_hover.png);
+}
+
+span.selectArrow2 {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 100;
+}
+
+/* конец поля Имя Заказчика */
+
+/* иконки поля ввода телефона Заказчика */
+
+span.selectArrow3 {
+    width: 50px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+    background: #f3f3f3;
+    background-image: url(../img/f_phone.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+span.selectArrow3:hover {
+    background-image: url(../img/f_phone_hover.png);
+}
+
+span.selectArrow3 {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 100;
+}
+
+/* ОБЯЗАТЕЛЬНОЕ полe ввода (напр. e-mail) - красный бордер над иконкой */
+
+span.selectArrow4 {
+    width: 50px;
+    border: 1px solid #ccc;
+    border-top: 2px solid #fa9999;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+    background: #f3f3f3;
+    background-image: url(../img/f_mail.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+span.selectArrow4:hover {
+    background-image: url(../img/f_mail_hover.png);
+}
+
+span.selectArrow4 {
+    position: relative;
+    float: left;
+    height: 29px;
+    z-index: 100;
+}
+
+/* поле ввода комментария */
+
+textarea {
+    resize: none;
+}
+
+#textarea_field {
+    width: 300px;
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    color: rgb(142, 142, 142);
+    text-indent: 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    height: 149px;
+    z-index: 100;
+}
+
+#textarea_field:focus {
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px rgba(82, 168, 236, .8);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px rgba(82, 168, 236, .8);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px rgba(82, 168, 236, .8)
+}
+
+span.selectArrow5 {
+    width: 50px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+    background: #f3f3f3;
+    background-image: url(../img/f_comment.png);
+    background-repeat: no-repeat;
+    background-position: center 10px;
+}
+
+span.selectArrow5:hover {
+    background-image: url(../img/f_comment_hover.png);
+}
+
+span.selectArrow5 {
+    position: relative;
+    float: left;
+    height: 150px;
+    z-index: 100;
+}
+
+/* кастомное поле ввода (напр. ваучер) */
+
+span.selectArrow6 {
+    width: 50px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+    background: #f3f3f3;
+    background-image: url(../img/f_custom_field.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+span.selectArrow6:hover {
+    background-image: url(../img/f_custom_field_hover.png);
+}
+
+span.selectArrow6, span.selected2 {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 100;
+}
+
+/* поле чекбокса подписки  */
+
+div.selectBox7 {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    text-align: left;
+    line-height: 30px;
+    clear: both;
+    color: #888;
+}
+
+.selected2 {
+    position: relative;
+    float: left;
+    height: 28px;
+    z-index: 100;
+    width: 300px;
+    text-indent: 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+span.selectArrow7 {
+    width: 50px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+    background: #f3f3f3;
+    background-image: url(../img/f_chek.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+span.selectArrow7:hover {
+    background-image: url(../img/f_chek_hover.png);
+}
+
+span.selectArrow7, span.selected2 {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 100;
+}
+
+/* чек-иконка правильного ввода */
+
+.f_chek_field {
+    margin: 0 auto;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background-image: url(../img/f_check_field.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 409px;
+    top: 5px;
+    z-index: 300;
+}
+
+/* чек-иконка ошибочного ввода */
+
+.f_error_field {
+    margin: 0 auto;
+    height: 28px;
+    width: 20px;
+    position: absolute;
+    background-image: url(../img/f_error.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 409px;
+    top: 0px;
+    z-index: 300;
+}
+
+/* ---окно вывода ошибок */
+
+.f_error_box {
+    text-align: left;
+    margin: 0 auto;
+    background-color: #F3F3F3;
+    height: 50px;
+    width: 410px;
+    border: 1px solid #FA9999;
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+}
+
+/* ---кнопки вперед-назад шага 2 */
+
+.f_btn_step2 {
+    background-color: #6689b4;
+    width: 160px;
+    height: 30px;
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    color: #FFF;
+    text-align: center;
+    padding-top: 17px;
+    margin-right: 0;
+    font-weight: 700;
+}
+
+.f_btn_step2:hover {
+    color: #a5e3ff;
+}
+
+/* ______________________________ */
+/* ______________________________ */
+
+/* Форма, шаг 3 */
+
+/* ---подложка шага 3 */
+
+#f_tab_box_step3 {
+    background-color: #ffffff;
+    margin: 0 auto;
+    height: 300px;
+    width: 450px;
+    box-shadow: 3px 3px 3px 3px rgb(229, 229, 229);
+    line-height: 15px;
+    position: relative;
+    border-top: 3px solid #6689b4;
+}
+
+.f_chek_step1 {
+    margin: 0 auto;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background-image: url(../img/f_check_field.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 124px;
+    top: 15px;
+    z-index: 300;
+}
+
+.f_chek_step2 {
+    margin: 0 auto;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background-image: url(../img/f_check_field.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 295px;
+    top: 15px;
+    z-index: 300;
+}
+
+/* --- синий текст шага 3 (Thank you) */
+
+.f_final_title {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 20px;
+    font-weight: 700;
+    color: #6689b4;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+/* ---текст шага 3 */
+
+.f_final_text {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 25px;
+    color: #666666;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.f_subbox_title table, #f_tab_box .f_person_data {
+    border: 0px;
+}
+
+.f_subbox_title table tr td {
+    border: 0px;
+}
+
+.f_person_data table tr td, .f_text_time table tr td , .f_subbox_data2 div table tr td{
+    border: 0;
 }
