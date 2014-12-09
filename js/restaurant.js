@@ -51,7 +51,10 @@ jQuery(function () {
         timeFormat: time_format,
         onClose: function (dateText, inst) {
             hideSteps();
-        }
+        },
+        altField: "#redi-restaurant-startTime-alt",
+        altFieldTimeOnly: false,
+        altTimeFormat: "HH:mm"
     });
 
     jQuery('#redi-restaurant-startDate').change(function () {
@@ -218,7 +221,7 @@ jQuery(function () {
             action: 'redi_restaurant-submit',
             get: 'step1',
             placeID: jQuery('#placeID').val(),
-            startTime: jQuery('#redi-restaurant-startTime').val(),
+            startTime: jQuery('#redi-restaurant-startTime-alt').val(),
             startDateISO: jQuery('#redi-restaurant-startDateISO').val(),
             persons: jQuery('#persons').val(),
             lang: locale,
