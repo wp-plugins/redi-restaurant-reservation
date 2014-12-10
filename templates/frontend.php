@@ -56,7 +56,7 @@
 			</select>
 			<input id="redi-restaurant-startTime" type="hidden" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
 		<?php else:?>
-				<input id="redi-restaurant-startTime-alt" type="hidden"/>
+				<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n("HH:mm", $startTime);?>"/>
 			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
 		<?php endif ?>
 		<?php endif;?>
