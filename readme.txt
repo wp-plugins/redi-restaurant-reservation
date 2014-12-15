@@ -57,7 +57,7 @@ Please allow 1 business day for us to confirm your payment and upgrade your acco
 * Are you building catalogue with restaurants and you are looking for reservation plugin for that? We can provide it for you.
 * Do you want to write your own module, we have an API. Contact us to get more information.
 
-Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+<img src="http://begemotik.ee/wp-content/themes/cleanPRESS_ru/images/comments.gif"> Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 = Other plugins =
 * If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a>
