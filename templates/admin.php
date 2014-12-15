@@ -33,7 +33,13 @@
 		background-color:#7FFF8E;
 	}
 </style>
-
+<script type="text/javascript">
+	// Include the UserVoice JavaScript SDK (only needed once on a page)
+	UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/gDfKlRGSIwZxjtqDE5rg.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+	UserVoice.push(['set', {locale: '<?php echo get_locale()?>'}]);
+	UserVoice.push(['identify', {email:'<?php echo get_option( 'admin_email' );?>',name:'<?php echo get_option( 'blogname' );?>'}]);
+	UserVoice.push(['addTrigger', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
+</script>
 
 <div class="wrap">
 <a class="nav-tab <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?> nav-tab-active<?php endif;?>"
