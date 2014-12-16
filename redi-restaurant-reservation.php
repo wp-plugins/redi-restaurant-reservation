@@ -207,6 +207,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		function display_errors( $errors, $admin = false, $action = '' ) {
+			global $wp_version;
 			if ( isset( $errors['Error'] ) ) {
 				foreach ( (array) $errors['Error'] as $error ) {
 					echo '<div class="error"><p>' . $error . '</p></div>';
@@ -229,7 +230,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 								'web'           => get_option( 'siteurl' ),
 								'loadTime'      => $errors['request_time'],
 								'APIKEY'        => $this->ApiKey,
-								'php'           => PHP_VERSION
+								'php'           => PHP_VERSION,
+								'theme'         => get_option('current_theme'),
+								'wp_version'    => $wp_version,
+								'lang'          => get_locale()
 							)
 						);
 					}
