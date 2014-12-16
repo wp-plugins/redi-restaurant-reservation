@@ -127,9 +127,8 @@
 			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
 		</div>
 		<div class="f_subbox_data3">
-			<div class="f_arrow_next_temp2"></div>
-
-			<div class="f_arrow_back_temp2"></div>
+<!--			<div class="f_arrow_next_temp2"></div>-->
+<!--			<div class="f_arrow_back_temp2"></div>-->
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/loader1.gif" alt=""/>
 			<table width="350px" border="0" align="center" cellspacing="6" class="f_time_data" id="buttons">
 				<?php if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ): ?>
@@ -141,11 +140,16 @@
 
 							<?php foreach ( $available['Availability'] as $button ): ?>
 								<?php $current ++; ?>
-								<?php if($current ==1):?><tr><?php endif?>
-									<td class="<?php echo $current ?>" <?php if ( ! $button['Available']): ?>disabled="disabled"<?php endif ?> width="25%">
+								<?php if($current == 1):?>
+									<tr>
+								<?php endif?>
+									<td class="redi-restaurant-time-button" <?php if ( ! $button['Available']): ?>disabled="disabled"<?php endif ?> width="25%">
 										<input type="hidden" value="<?php echo $button['StartTimeISO'] ?>"/>
-										<?php echo $button['StartTime'] ?></td>
-								<?php if($current == 4): $current=0;?></tr><?php endif?>
+										<?php echo $button['StartTime'] ?>
+									</td>
+								<?php if($current == 4): $current = 0;?>
+									</tr>
+								<?php endif?>
 
 								<?php if ( $button['Available'] ) {
 									$all_busy = false;

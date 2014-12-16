@@ -1,70 +1,70 @@
-jQuery(function () {
+(function ($) {
 
     /*new*/
-    jQuery('.f_person_data tr td').click(function () {
-        jQuery('.f_person_data tr td').each(function () {
-            jQuery(this).removeClass('select');
+    $('.f_person_data tr td').click(function () {
+        $('.f_person_data tr td').each(function () {
+            $(this).removeClass('select');
         });
-        jQuery(this).addClass('select');
+        $(this).addClass('select');
     });
 
     /*new*/
-    jQuery('.f_calender_data tr td').click(function () {
-        jQuery('.f_calender_data tr td').each(function () {
-            jQuery(this).removeClass('select');
+    $('.f_calender_data tr td').click(function () {
+        $('.f_calender_data tr td').each(function () {
+            $(this).removeClass('select');
         });
-        jQuery(this).addClass('select');
-        step1call(jQuery(this).children('input').val());
+        $(this).addClass('select');
+        step1call($(this).children('input').val());
     });
 
     function hideSteps() {
-        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
-        jQuery('#step3').hide('slow');
+        $('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        $('#step3').hide('slow');
         if (hidesteps) {
-            jQuery('#step1busy').hide();
+            $('#step1busy').hide();
         }
     }
 
     var updateTime = function () {
-        jQuery('#redi-restaurant-startTime').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());
+        $('#redi-restaurant-startTime').val($('#redi-restaurant-startHour').val() + ':' + $('#redi-restaurant-startMinute').val());
         hideSteps();
     };
 
-    jQuery('#redi-restaurant-startHour').change(updateTime);
-    jQuery('#redi-restaurant-startMinute').change(updateTime);
-    jQuery('#persons').change(function () {
-        if (jQuery(this).val() === 'group') {
-            jQuery('#step1button').attr('disabled', true);
-            jQuery('#large_groups_message').show('slow');
+    $('#redi-restaurant-startHour').change(updateTime);
+    $('#redi-restaurant-startMinute').change(updateTime);
+    $('#persons').change(function () {
+        if ($(this).val() === 'group') {
+            $('#step1button').attr('disabled', true);
+            $('#large_groups_message').show('slow');
         }
         else {
-            jQuery('#step1button').attr('disabled', false);
-            jQuery('#large_groups_message').hide('slow');
+            $('#step1button').attr('disabled', false);
+            $('#large_groups_message').hide('slow');
         }
-        var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-        var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-        var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+        var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
+        var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
+        var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
         var fullDate = year1 + '-' + month1 + '-' + day1;
         if (timeshiftmode === 'byshifts') {
             step1call(fullDate);
         }
     });
 
-    if (jQuery.timepicker.regional[datepicker_locale] !== undefined) {
-        jQuery.timepicker.setDefaults(jQuery.timepicker.regional[datepicker_locale]);
+    if ($.timepicker.regional[datepicker_locale] !== undefined) {
+        $.timepicker.setDefaults($.timepicker.regional[datepicker_locale]);
     }
     else {
-        jQuery.timepicker.setDefaults(jQuery.timepicker.regional['']);
+        $.timepicker.setDefaults($.timepicker.regional['']);
     }
 
-    if (jQuery.datepicker.regional[datepicker_locale] !== undefined) {
-        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[datepicker_locale.substring(0, 2)]);
+    if ($.datepicker.regional[datepicker_locale] !== undefined) {
+        $.datepicker.setDefaults($.datepicker.regional[datepicker_locale.substring(0, 2)]);
     }
     else {
-        jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
+        $.datepicker.setDefaults($.datepicker.regional['']);
     }
 
-    jQuery('#redi-restaurant-startTime').timepicker({
+    $('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
         timeFormat: time_format,
         onClose: function (dateText, inst) {
@@ -72,198 +72,199 @@ jQuery(function () {
         }
     });
 
-    jQuery('#redi-restaurant-startDate').change(function () {
-        var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-        var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-        var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+    $('#redi-restaurant-startDate').change(function () {
+        var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
+        var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
+        var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
         var fullDate = year1 + '-' + month1 + '-' + day1;
 
-        jQuery('#redi-restaurant-startDateISO').val(fullDate);
+        $('#redi-restaurant-startDateISO').val(fullDate);
     });
 
-    jQuery('#redi-restaurant-startDate').datepicker({
+    $('#redi-restaurant-startDate').datepicker({
         dateFormat: date_format,
         minDate: new Date(),
         onSelect: function (dateText, inst) {
-            var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-            var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-            var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+            var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
+            var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
+            var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
             var fullDate = year1 + '-' + month1 + '-' + day1;
             if (timeshiftmode === 'byshifts') {
                 step1call(fullDate)
             }
             else {
                 hideSteps();
-                jQuery('#redi-restaurant-startDateISO').val(fullDate);
+                $('#redi-restaurant-startDateISO').val(fullDate);
             }
         }
     });
 
-    jQuery('.redi-restaurant-time-button').live('click', function () {
-        jQuery('.redi-restaurant-time-button').each(function () {
-            jQuery(this).removeAttr('select');
+    $('.redi-restaurant-time-button').live('click', function () {
+        $('.redi-restaurant-time-button').each(function () {
+            //      $(this).removeAttr('select');
+            $(this).removeClass('select');
         });
+        $(this).addClass('select');
+        //$(this).attr('select', 'select');
 
-        jQuery(this).attr('select', 'select');
-
-        jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
+        $('#redi-restaurant-startTimeHidden').val($(this).val());
 
         if (hidesteps) {
-            jQuery('#step2').hide();
-            jQuery('#step3').show();
+            $('#step2').hide();
+            $('#step3').show();
         } else {
-            jQuery('#step3').show('slow');
+            $('#step3').show('slow');
         }
-        jQuery('#UserName').focus();
+        $('#UserName').focus();
         return false;
     });
 
-    jQuery('#redi-restaurant-step3').click(function () {
+    $('#redi-restaurant-step3').click(function () {
         var error = '';
-        if (jQuery('#UserName').val() === '') {
+        if ($('#UserName').val() === '') {
             error += redi_restaurant_reservation.name_missing + '<br/>';
         }
-        if (jQuery('#UserEmail').val() === '') {
+        if ($('#UserEmail').val() === '') {
             error += redi_restaurant_reservation.email_missing + '<br/>';
         }
-        if (jQuery('#UserPhone').val() === '') {
+        if ($('#UserPhone').val() === '') {
             error += redi_restaurant_reservation.phone_missing + '<br/>';
         }
-        jQuery('.field_required').each(function () {
-            if (jQuery(this).attr('type') === 'checkbox' && jQuery(this).attr('checked') !== 'checked' || jQuery(this).attr('type') === 'textbox' && jQuery(this).val() === '') {
-                error += jQuery('#' + this.id + '_message').attr('value') + '<br/>';
+        $('.field_required').each(function () {
+            if ($(this).attr('type') === 'checkbox' && $(this).attr('checked') !== 'checked' || $(this).attr('type') === 'textbox' && $(this).val() === '') {
+                error += $('#' + this.id + '_message').attr('value') + '<br/>';
             }
         });
         if (error) {
-            jQuery('#step3errors').html(error).show('slow');
+            $('#step3errors').html(error).show('slow');
             return false;
         }
         var data = {
             action: 'redi_restaurant-submit',
             get: 'step3',
-            startDate: jQuery('#redi-restaurant-startDate').val(),
-            startTime: jQuery('#redi-restaurant-startTimeHidden').val(),
-            persons: jQuery('.f_person_data').find('.select').html(),
-            UserName: jQuery('#UserName').val(),
-            UserEmail: jQuery('#UserEmail').val(),
-            UserComments: jQuery('#UserComments').val(),
-            UserPhone: jQuery('#UserPhone').val(),
-            placeID: jQuery('#placeID').val(),
+            startDate: $('#redi-restaurant-startDate').val(),
+            startTime: $('#redi-restaurant-startTimeHidden').val(),
+            persons: $('.f_person_data').find('.select').html(),
+            UserName: $('#UserName').val(),
+            UserEmail: $('#UserEmail').val(),
+            UserComments: $('#UserComments').val(),
+            UserPhone: $('#UserPhone').val(),
+            placeID: $('#placeID').val(),
             lang: locale,
             apikeyid: apikeyid
         };
-        if (jQuery('#field_1').attr('type') === 'checkbox' && jQuery('#field_1').attr('checked') === 'checked') {
+        if ($('#field_1').attr('type') === 'checkbox' && $('#field_1').attr('checked') === 'checked') {
             data['field_1'] = 'on';
         } else {
-            data['field_1'] = jQuery('#field_1').val();
+            data['field_1'] = $('#field_1').val();
         }
-        if (jQuery('#field_2').attr('type') === 'checkbox' && jQuery('#field_2').attr('checked') === 'checked') {
+        if ($('#field_2').attr('type') === 'checkbox' && $('#field_2').attr('checked') === 'checked') {
             data['field_2'] = 'on';
         } else {
-            data['field_2'] = jQuery('#field_2').val();
+            data['field_2'] = $('#field_2').val();
         }
-        if (jQuery('#field_3').attr('type') === 'checkbox' && jQuery('#field_3').attr('checked') === 'checked') {
+        if ($('#field_3').attr('type') === 'checkbox' && $('#field_3').attr('checked') === 'checked') {
             data['field_3'] = 'on';
         } else {
-            data['field_3'] = jQuery('#field_3').val();
+            data['field_3'] = $('#field_3').val();
         }
-        if (jQuery('#field_4').attr('type') === 'checkbox' && jQuery('#field_4').attr('checked') === 'checked') {
+        if ($('#field_4').attr('type') === 'checkbox' && $('#field_4').attr('checked') === 'checked') {
             data['field_4'] = 'on';
         } else {
-            data['field_4'] = jQuery('#field_4').val();
+            data['field_4'] = $('#field_4').val();
         }
-        if (jQuery('#field_5').attr('type') === 'checkbox' && jQuery('#field_5').attr('checked') === 'checked') {
+        if ($('#field_5').attr('type') === 'checkbox' && $('#field_5').attr('checked') === 'checked') {
             data['field_5'] = 'on';
         } else {
-            data['field_5'] = jQuery('#field_5').val();
+            data['field_5'] = $('#field_5').val();
         }
 
-        jQuery('#step3load').show();
-        jQuery('#step3errors').hide('slow');
-        jQuery('#redi-restaurant-step3').attr('disabled', true);
-        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
-            jQuery('#redi-restaurant-step3').attr('disabled', false);
-            jQuery('#step3load').hide();
+        $('#step3load').show();
+        $('#step3errors').hide('slow');
+        $('#redi-restaurant-step3').attr('disabled', true);
+        $.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+            $('#redi-restaurant-step3').attr('disabled', false);
+            $('#step3load').hide();
             if (response['Error']) {
-                jQuery('#step3errors').html(response['Error']).show('slow');
+                $('#step3errors').html(response['Error']).show('slow');
             } else {
                 ga_event('Reservation confirmed', '');
-                jQuery('#step1').hide('slow');
-                jQuery('#step2').hide('slow');
-                jQuery('#step3').hide('slow');
-                jQuery('#step4').show('slow'); //success message
-                jQuery('html, body').animate({scrollTop: 0}, 'slow');
+                $('#step1').hide('slow');
+                $('#step2').hide('slow');
+                $('#step3').hide('slow');
+                $('#step4').show('slow'); //success message
+                $('html, body').animate({scrollTop: 0}, 'slow');
             }
         }, 'json');
         return false;
     });
-    jQuery('#step1button').click(function () {
+    $('#step1button').click(function () {
         if (timeshiftmode === 'byshifts') {
             step1call();
         }
         else {
-            jQuery('#step1button').attr('disabled', true);
-            var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-            var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-            var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+            $('#step1button').attr('disabled', true);
+            var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
+            var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
+            var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
             var fullDate = year1 + '-' + month1 + '-' + day1;
             step1call(fullDate);
         }
         return false;
     });
 
-    jQuery('#placeID').change(function () {
+    $('#placeID').change(function () {
         if (hidesteps) {
-            jQuery('#step1buttons').hide('slow');
+            $('#step1buttons').hide('slow');
         }
-        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
-        jQuery('#step3').hide('slow');
-        jQuery('#step1errors').hide('slow');
+        $('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        $('#step3').hide('slow');
+        $('#step1errors').hide('slow');
     });
 
     function step1call(fullDate) {
         hideSteps();
 
-        jQuery('#redi-restaurant-startDateISO').val(fullDate);
-        jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
-        jQuery('#step3').hide('slow');
-        jQuery('#step1load').show();
-        jQuery('#buttons').hide();
-        jQuery('#step1errors').hide('slow');
+        $('#redi-restaurant-startDateISO').val(fullDate);
+        $('#step2').hide('slow'); // if user clicks again first button we hide the other steps
+        $('#step3').hide('slow');
+        $('#step1load').show();
+        $('#buttons').hide();
+        $('#step1errors').hide('slow');
         if (hidesteps) {
-            jQuery('#step1times').hide();
+            $('#step1times').hide();
         }
         var data = {
             action: 'redi_restaurant-submit',
             get: 'step1',
-            placeID: jQuery('#placeID').val(),
-            startTime: jQuery('#redi-restaurant-startTime').val(),
+            placeID: $('#placeID').val(),
+            startTime: $('#redi-restaurant-startTime').val(),
             startDateISO: fullDate,
-            persons: jQuery('.f_person_data').find('.select').html(),
+            persons: $('.f_person_data').find('.select').html(),
             lang: locale,
             timeshiftmode: timeshiftmode,
             apikeyid: apikeyid
         };
 
-        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
-            jQuery('#step1load').hide();
-            jQuery('#step1button').attr('disabled', false);
-            jQuery('#buttons').html('');
+        $.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+            $('#step1load').hide();
+            $('#step1button').attr('disabled', false);
+            $('#buttons').html('');
             if (response['Error']) {
-                jQuery('#step1errors').html(response['Error']).show('slow');
+                $('#step1errors').html(response['Error']).show('slow');
             } else {
                 if (hidesteps) {
-                    jQuery('#step1times').show();
+                    $('#step1times').show();
                 }
                 if (response['alternativeTime'] !== undefined) {
-                    jQuery('#buttons').show();
+                    $('#buttons').show();
                     switch (response['alternativeTime']) {
                         case 1: //AlternativeTimeBlocks see class AlternativeTime::
                         //pass thought
                         case 2: //AlternativeTimeByShiftStartTime
                             var all_busy = true;
                             for (var res in response) {
-                                jQuery('#buttons').append(
+                                $('#buttons').append(
                                     '<button class="redi-restaurant-time-button button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
                                     ' ' + (response[res]['Select'] ? 'select="select"' : '') +
                                     '>' + response[res]['StartTime'] + '</button>'
@@ -276,38 +277,50 @@ jQuery(function () {
                             var all_busy = true;
                             var current = 0;
                             var step1buttons_html = '';
-                            jQuery('#step1buttons_html').html(step1buttons_html).hide();
+                            $('#step1buttons_html').html(step1buttons_html).hide();
                             for (var availability in response) {
                                 if (response[availability]['Name'] !== undefined) {
                                     var html = '';
 
-                                    if (hidesteps) {
-                                        step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
-                                        html += '<span id="opentime_' + (current++) + '" style="display: none">';
-                                        html += jQuery('#time2label').html();
-                                    }
+                                    //if (hidesteps) {
+                                    //    step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
+                                    //    html += '<span id="opentime_' + (current++) + '" style="display: none">';
+                                    //    html += $('#time2label').html();
+                                    //}
+                                    var current = 0;
                                     for (var current_button_index in response[availability]['Availability']) {
 
                                         var b = response[availability]['Availability'][current_button_index];
-
-                                        html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' + ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>';
+                                        current++;
+                                        if (current == 1) {
+                                            html += '<tr>';
+                                        }
+                                        //html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' + ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>';
+                                        html += '<td class="redi-restaurant-time-button ' + (b['Select'] ? 'select' : '') + '" ' + (b['Available'] ? '' : 'disabled="disabled"') + '>';
+                                        html += '<input type="hidden" value="' + b['StartTimeISO'] + '"/>';
+                                        html += b['StartTime'];
+                                        html += '</td>';
+                                        if (current == 4) {
+                                            current = 0;
+                                            html += '</tr>';
+                                        }
                                         if (b['Available']) all_busy = false;
                                     }
                                     if (hidesteps) {
                                         html += '</span>';
                                     }
                                     html += '</br>';
-                                    jQuery('#buttons').append(html);
+                                    $('#buttons').append(html);
                                 }
-                                jQuery('#buttons').append('</br>');
+                                $('#buttons').append('</br>');
                             }
-                            jQuery('#step1buttons').html(step1buttons_html).show();
+                            $('#step1buttons').html(step1buttons_html).show();
                             display_all_busy(all_busy);
                             break;
                     }
                 } else {
                     for (res in response) {
-                        jQuery('#buttons').append(
+                        $('#buttons').append(
                             '<button class="redi-restaurant-button redi-restaurant-time-button" value="' +
                             response[res]['StartTimeISO'] + '" ' +
                             (response[res]['Available'] ? '' : 'disabled="disabled"') +
@@ -318,11 +331,11 @@ jQuery(function () {
                 }
 
                 if (!hidesteps) {
-                    jQuery('#step2').show('slow');
+                    $('#step2').show('slow');
                 }
 
-                jQuery('#UserName').focus();
-                jQuery('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
+                $('#UserName').focus();
+                $('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
             }
         }, 'json');
     }
@@ -330,23 +343,23 @@ jQuery(function () {
     function display_all_busy(display) {
         if (display) {
             if (hidesteps) {
-                jQuery('#step1busy').show();
-                jQuery('.available').each(function () {
-                    jQuery(this).attr('disabled', true);
+                $('#step1busy').show();
+                $('.available').each(function () {
+                    $(this).attr('disabled', true);
                 });
             } else {
-                jQuery('#step2busy').show();
+                $('#step2busy').show();
             }
         } else {
-            jQuery('#step2busy').hide();
+            $('#step2busy').hide();
             if (hidesteps) {
-                jQuery('#step1busy').hide();
+                $('#step1busy').hide();
 
-                jQuery('.available').each(function () {
-                    jQuery(this).attr('disabled', false);
+                $('.available').each(function () {
+                    $(this).attr('disabled', false);
                 });
             } else {
-                jQuery('#step2busy').hide();
+                $('#step2busy').hide();
             }
         }
     }
@@ -358,82 +371,82 @@ jQuery(function () {
     }
 
     //Cancel reservation
-    jQuery('#cancel-reservation').click(function () {
-        jQuery('#redi-reservation').slideUp();
-        jQuery('#cancel-reservation-div').slideDown();
+    $('#cancel-reservation').click(function () {
+        $('#redi-reservation').slideUp();
+        $('#cancel-reservation-div').slideDown();
     });
 
-    jQuery('#back-to-reservation').click(function () {
-        jQuery('#redi-reservation').slideDown();
-        jQuery('#cancel-reservation-div').slideUp();
-        jQuery('#cancel-reservation-form').slideDown();
-        jQuery('#cancel-success').slideUp();
+    $('#back-to-reservation').click(function () {
+        $('#redi-reservation').slideDown();
+        $('#cancel-reservation-div').slideUp();
+        $('#cancel-reservation-form').slideDown();
+        $('#cancel-success').slideUp();
     });
 
-    jQuery('#redi-restaurant-cancel').click(function () {
+    $('#redi-restaurant-cancel').click(function () {
         var error = '';
-        if (jQuery('#redi-restaurant-cancelID').val() === '') {
+        if ($('#redi-restaurant-cancelID').val() === '') {
             error += redi_restaurant_reservation.id_missing + '<br/>';
         }
-        if (jQuery('#redi-restaurant-cancelEmail').val() === '') {
+        if ($('#redi-restaurant-cancelEmail').val() === '') {
             error += redi_restaurant_reservation.email_missing + '<br/>';
         }
-        if (jQuery('#redi-restaurant-cancelReason').val() === '') {
+        if ($('#redi-restaurant-cancelReason').val() === '') {
             error += redi_restaurant_reservation.reason_missing + '<br/>';
         }
         if (error) {
-            jQuery('#cancel-errors').html(error).show('slow');
+            $('#cancel-errors').html(error).show('slow');
             return false;
         }
         //Ajax
         var data = {
             action: 'redi_restaurant-submit',
             get: 'cancel',
-            ID: jQuery('#redi-restaurant-cancelID').val(),
-            Email: jQuery('#redi-restaurant-cancelEmail').val(),
-            Reason: jQuery('#redi-restaurant-cancelReason').val(),
+            ID: $('#redi-restaurant-cancelID').val(),
+            Email: $('#redi-restaurant-cancelEmail').val(),
+            Reason: $('#redi-restaurant-cancelReason').val(),
             lang: locale,
             apikeyid: apikeyid
         };
-        jQuery('#cancel-errors').slideUp();
-        jQuery('#cancel-success').slideUp();
-        jQuery('#cancel-load').show();
-        jQuery('#redi-restaurant-cancel').attr('disabled', true);
-        jQuery.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
-            jQuery('#redi-restaurant-cancel').attr('disabled', false);
-            jQuery('#cancel-load').hide();
+        $('#cancel-errors').slideUp();
+        $('#cancel-success').slideUp();
+        $('#cancel-load').show();
+        $('#redi-restaurant-cancel').attr('disabled', true);
+        $.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+            $('#redi-restaurant-cancel').attr('disabled', false);
+            $('#cancel-load').hide();
             if (response['Error']) {
-                jQuery('#cancel-errors').html(response['Error']).show('slow');
+                $('#cancel-errors').html(response['Error']).show('slow');
             } else {
-                jQuery('#cancel-success').slideDown();
-                jQuery('#cancel-errors').slideUp();
-                jQuery('#cancel-reservation-form').slideUp();
-                jQuery('html, body').animate({scrollTop: 0}, 'slow');
+                $('#cancel-success').slideDown();
+                $('#cancel-errors').slideUp();
+                $('#cancel-reservation-form').slideUp();
+                $('html, body').animate({scrollTop: 0}, 'slow');
                 //clear form
-                jQuery('#redi-restaurant-cancelID').val('');
-                jQuery('#redi-restaurant-cancelEmail').val('');
-                jQuery('#redi-restaurant-cancelReason').val('');
+                $('#redi-restaurant-cancelID').val('');
+                $('#redi-restaurant-cancelEmail').val('');
+                $('#redi-restaurant-cancelReason').val('');
             }
         }, 'json');
         return false;
     });
 
-    jQuery('.available').live('click', function (event) {
+    $('.available').live('click', function (event) {
         event.preventDefault();
-        jQuery('#step1').hide();
-        jQuery('#step2').show();
-        jQuery('#open' + this.id).show();
+        $('#step1').hide();
+        $('#step2').show();
+        $('#open' + this.id).show();
     });
 
-    jQuery('#step2prev').click(function (event) {
+    $('#step2prev').click(function (event) {
         event.preventDefault();
-        jQuery('#step1').show();
-        jQuery('#step2').hide();
+        $('#step1').show();
+        $('#step2').hide();
     });
 
-    jQuery('#step3prev').on('click', function (event) {
+    $('#step3prev').on('click', function (event) {
         event.preventDefault();
-        jQuery('#step3').hide();
-        jQuery('#step2').show();
+        $('#step3').hide();
+        $('#step2').show();
     });
-});
+})(jQuery);
