@@ -210,6 +210,7 @@ class Redi
 
 	private function request( $url, $method = GET, $params_string = null ) {
 		$request = new WP_Http;
+		$curTime = microtime( true );
 		$output  = $request->request(
 			$url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ),
 			array(
@@ -221,6 +222,7 @@ class Redi
 			) );
 		if ( is_wp_error( $output ) ) {
 			return array(
+				'request_time' => round( microtime( true ) - $curTime, 3 ) * 1000,
 				'Error'    => __( 'Online reservation service is not available at this time. Try again later or contact us directly.', 'redi-restaurant-reservation' ),
 				'Wp-Error' => $output->errors
 			);

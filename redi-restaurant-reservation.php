@@ -67,9 +67,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		private $redi;
 		private $weekday = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
-		function filter_timeout_time( $time ) {
-			$time = 30; //new number of seconds
-			return $time;
+		function filter_timeout_time() {
+			return 30; //new number of seconds default 5
 		}
 
 		public function __construct() {
@@ -207,7 +206,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return update_option( $this->optionsName, $this->options );
 		}
 
-		function display_errors( $errors, $admin = false ) {
+		function display_errors( $errors, $admin = false, $action = '' ) {
 			if ( isset( $errors['Error'] ) ) {
 				foreach ( (array) $errors['Error'] as $error ) {
 					echo '<div class="error"><p>' . $error . '</p></div>';
@@ -215,9 +214,24 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			}
 			//WP-errors
 			if ( isset( $errors['Wp-Error'] ) && $admin ) {
+
 				foreach ( (array) $errors['Wp-Error'] as $error_key => $error ) {
 					foreach ( (array) $error as $err ) {
 						echo '<div class="error"><p>' . $error_key . ' : ' . $err . '</p></div>';
+						$this->pixel(
+							array(
+								'type'          => 'Wp-Error',
+								'wp_error_key'  => $error_key,
+								'message'       => $err,
+								'actionName'    => $action,
+								'contact'       => get_option( 'admin_email' ),
+								'pluginVersion' => $this->version,
+								'web'           => get_option( 'siteurl' ),
+								'loadTime'      => $errors['request_time'],
+								'APIKEY'        => $this->ApiKey,
+								'php'           => PHP_VERSION
+							)
+						);
 					}
 				}
 			}
@@ -231,8 +245,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			if ( $this->ApiKey == null ) { /// TODO: move to install
 
-				$return = $this->register();
-				$this->display_errors( $return, true );
+				$this->display_errors( $this->register(), true, 'register' );
 			}
 
 			if ( $this->ApiKey == null ) {
@@ -246,13 +259,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					    '<br/>In case you can not solve this problem yourself, please contact us directly by <a href="mailo:info@reservationdiary.eu">info@reservationdiary.eu</a>',
 						'redi-restaurant-reservation' )
 				);
-				$this->display_errors( $errors, true );
+				$this->display_errors( $errors, true, 'Failed to register' );
 				die;
 			}
 			$places = $this->redi->getPlaces();
 
 			if ( isset( $places['Error'] ) ) {
-				$this->display_errors( $places, true );
+				$this->display_errors( $places, true, 'getPlaces' );
 				die;
 			}
 			$placeID = $places[0]->ID;
@@ -813,7 +826,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$this->display_errors( array(
 					'Error' => '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
 							'redi-restaurant-reservation' ) . '</p></div>'
-				) );
+				), false, 'Frontend No ApiKey' );
 
 				return;
 			}
@@ -821,7 +834,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			//places
 			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
-				$this->display_errors( $places, true );
+				$this->display_errors( $places, false, 'getPlaces' );
 				die;
 			}
 
@@ -832,7 +845,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$categories = $this->redi->getPlaceCategories( $placeID );
 			if ( isset( $categories['Error'] ) ) {
-				$this->display_errors( $categories, true );
+				$this->display_errors( $categories, false, 'getPlaceCategories' );
 				die;
 			}
 
@@ -1327,6 +1340,17 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		private function object_to_array( $object ) {
 			return json_decode( json_encode( $object ), true );
+		}
+
+		private function pixel( $params ) {
+			$encoding_params = null;
+			if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 ) {
+				$params_encoded = base64_encode( json_encode( $params, $encoding_params ) );
+			} else {
+				$params_encoded = base64_encode( json_encode( $params ) );
+
+			}
+			echo '<img src="http://tp.reservationdiary.eu/?parameters=' . $params_encoded . '">';
 		}
 	}
 }
