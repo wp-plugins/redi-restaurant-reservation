@@ -281,12 +281,6 @@
                             for (var availability in response) {
                                 if (response[availability]['Name'] !== undefined) {
                                     var html = '';
-
-                                    //if (hidesteps) {
-                                    //    step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
-                                    //    html += '<span id="opentime_' + (current++) + '" style="display: none">';
-                                    //    html += $('#time2label').html();
-                                    //}
                                     var current = 0;
                                     for (var current_button_index in response[availability]['Availability']) {
 
@@ -306,33 +300,18 @@
                                         }
                                         if (b['Available']) all_busy = false;
                                     }
-                                    if (hidesteps) {
-                                        html += '</span>';
-                                    }
-                                    html += '</br>';
                                     $('#buttons').append(html);
                                 }
-                                $('#buttons').append('</br>');
                             }
                             $('#step1buttons').html(step1buttons_html).show();
                             display_all_busy(all_busy);
                             break;
                     }
-                } else {
-                    for (res in response) {
-                        $('#buttons').append(
-                            '<button class="redi-restaurant-button redi-restaurant-time-button" value="' +
-                            response[res]['StartTimeISO'] + '" ' +
-                            (response[res]['Available'] ? '' : 'disabled="disabled"') +
-                            ' ' + (response[res]['Select'] ? 'select="select"' : '') +
-                            '>' + response[res]['StartTime'] + '</button>'
-                        );
-                    }
                 }
 
-                if (!hidesteps) {
-                    $('#step2').show('slow');
-                }
+                //if (!hidesteps) {
+                //    $('#step2').show('slow');
+                //}
 
                 $('#UserName').focus();
                 $('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
@@ -449,4 +428,16 @@
         $('#step3').hide();
         $('#step2').show();
     });
+
+    $('#next').on('click', function (event) {
+        //check if everything is selected
+        $('#tab1').removeClass('f_active_step1').addClass('f_non_active_step1');
+        $('#tab2').removeClass('f_non_active_step2').addClass('f_active_step2');
+        $('#step1').hide();
+        $('#f_check_step1').show();
+        $('#step2').show();
+        event.preventDefault();
+
+    });
+
 })(jQuery);

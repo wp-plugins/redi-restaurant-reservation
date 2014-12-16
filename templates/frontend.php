@@ -17,20 +17,19 @@
 
 	<div class="f_step_box">
 		<div class="f_arrow_next_step"></div>
-		<div class="f_active_step1"><br>
-			<span class="underline">STEP 1</span></div>
+		<div id="tab1" class="f_active_step1"><br>
+			<span class="underline">STEP 1</span>
+		</div>
 
-		<div class="f_non_active_step2"><br>
-			<span class="underline"> STEP 2</span></div>
-
+		<div id="tab2" class="f_non_active_step2"><br>
+			<span class="underline"> STEP 2</span>
+		</div>
+		<div id="f_check_step1" style="display: none;"></div>
 	</div>
 
-	<div id="f_tab_box">
+	<div id="step1" class="f_tab_box">
 		<p>&nbsp;</p>
-
-
 		<p>
-
 		<div class="f_subbox_title">
 			<table width="335px" border="0" align="center" cellspacing="0">
 				<tbody>
@@ -168,10 +167,140 @@
 		</div>
 
 		<div style="width: 160px; height:40px; margin-top: 30px;">
-			<div class="f_btn">NEXT &nbsp;&gt;</div>
+			<div class="f_btn" id="next">NEXT &nbsp;&gt;</div>
 		</div>
 		</p>
-		<p><br>
+		<br>
+	</div>
+	<div id="step2" style="display: none" class="f_tab_box">
+		<p>&nbsp;</p>
+
+
+		<p>
+		</p><div class="f_text_box"></div>
+		<div class="f_text_selection_step2">
+			<table width="80%" cellspacing="0" cellpadding="0" border="0" align="center">
+				<tbody><tr>
+					<td width="26%" style="color: rgba(102,137,180,1)">Person:</td>
+					<td width="74%">2</td>
+				</tr>
+				<tr>
+					<td style="color: rgba(102,137,180,1)">Date:</td>
+					<td>15.11.2014</td>
+				</tr>
+				<tr>
+					<td style="color: rgba(102,137,180,1)">Time:</td>
+					<td>Dinner 13:30</td>
+				</tr>
+				</tbody></table>
+		</div>
+
+
+		<p></p>
+		<br>
+
+
+		<!--Поле ввода имени заказчика-->
+
+		<p>
+		</p><div style="position:relative;"><div class="f_check_field"></div></div>
+		<div class="f_select2">
+			<div class="f_input_box">
+				<span class="selectArrow2"></span>
+				<input type="text" placeholder="Your name" id="text_field">
+			</div></div>
+
+		<p></p>
+
+
+
+
+		<!--Поле ввода телефона заказчика-->
+
+		<p>
+		</p><div style="position:relative;"><div class="f_error_field"></div></div>
+		<div class="f_select2">
+			<div class="f_input_box">
+				<span class="selectArrow3"></span>
+				<input type="text" placeholder="insert your phone" id="text_field">
+			</div></div>
+		<p></p>
+
+		<!--ОБЯЗАТЕЛЬНОЕ Поле ввода е-мейла заказчика-->
+
+		<p>
+		</p><div class="f_select2">
+			<div class="f_input_box">
+				<span class="selectArrow4"></span>
+				<input type="text" placeholder="insert your e-mail" id="text_field">
+			</div></div>
+		<div style="width: 210px; margin: 0 auto; text-align: left;"><span class="weekend">Please insert correct e-mail address
+</span></div>
+		<p></p>
+
+		<!--Поле ввода комментария-->
+
+		<p>
+		</p><div class="f_select2">
+			<div class="f_input_box">
+				<span class="selectArrow5"></span>
+				<textarea placeholder="Comment:" id="textarea_field"></textarea>
+			</div></div>
+		<p></p>
+
+
+		<!-- кастомное поле ввода -->
+
+		<p>
+		</p><div class="f_select2">
+			<div class="f_input_box">
+				<span class="selectArrow6"></span>
+				<input type="text" placeholder="voucher" id="text_field">
+			</div></div>
+		<p></p>
+
+		<p>
+		</p><div class="f_select2">
+			<div class="selectBox7">
+				<span class="selectArrow7"></span>
+
+<span class="selected2">Send me vine recomendation
+</span>
+			</div></div>
+		<p></p>
+
+
+		<p>
+		</p><div style="height:40px; margin: 0 auto;">
+			<table width="354" cellspacing="0" border="0" align="center">
+				<tbody>
+				<tr>
+					<td><div class="f_btn_step2">&lt; &nbsp; BACK</div></td>
+					<td width="38px">&nbsp;</td>
+					<td><div class="f_btn_step2">MAKE RESERVATION &nbsp; &gt;</div></td>
+				</tr>
+				</tbody>
+			</table>
+
+
+
+		</div>
+		<br>
+		<p></p>
+		<br>
+		<div class="f_error_box"><br>
+			<table width="90%" cellspacing="0" border="0" align="center">
+				<tbody>
+				<tr>
+					<td width="9%"><img width="20" height="22" alt="" src="form_images/f_error.png"></td>
+					<td width="91%">ERROR text here</td>
+				</tr>
+				</tbody>
+			</table>
+			<br>
+			<br>
+		</div>
+		<p><img width="48" height="3" alt="" src="form_images/bord.png"><span class="weekend"> &nbsp; Required fields</span><br>
 		</p>
 	</div>
 
