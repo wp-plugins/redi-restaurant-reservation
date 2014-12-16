@@ -5,32 +5,29 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2014-07-15 22:48+0200\n"
-"PO-Revision-Date: 2014-07-15 22:48+0200\n"
+"PO-Revision-Date: 2014-12-16 14:47+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-"
-"reservation\\trunk\n"
+"X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-reservation\\trunk\n"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:205
 msgid ""
-"ReDi Restaurant Reservation plugin could not get an API key from the "
-"reservationdiary.eu server when it activated.<br/> You can try to fix this "
-"by going to the ReDi Restaurant Reservation \"options\" page. <br/>This will "
-"cause ReDi Restaurant Reservation plugin to retry fetching an API key for "
-"you. <br/>If you keep seeing this error it usually means that server where "
-"you host your web site can't connect to our reservationdiary.eu server. <br/"
-">You can try asking your WordPress host to allow your WordPress server to "
-"connect to api.reservationdiary.eu<br/>In case you can not solve this "
-"problem yourself, please contact us directly by <a href=\"mailo:"
-"info@reservationdiary.eu\">info@reservationdiary.eu</a>"
+"ReDi Restaurant Reservation plugin could not get an API key from the reservationdiary.eu server when "
+"it activated.<br/> You can try to fix this by going to the ReDi Restaurant Reservation \"options\" "
+"page. <br/>This will cause ReDi Restaurant Reservation plugin to retry fetching an API key for you. "
+"<br/>If you keep seeing this error it usually means that server where you host your web site can't "
+"connect to our reservationdiary.eu server. <br/>You can try asking your WordPress host to allow your "
+"WordPress server to connect to api.reservationdiary.eu<br/>In case you can not solve this problem "
+"yourself, please contact us directly by <a href=\"mailo:info@reservationdiary.eu"
+"\">info@reservationdiary.eu</a>"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:259
@@ -74,11 +71,10 @@ msgstr "Поле причина отмены не может быть пусты
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi.php:213
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi.php:219
 msgid ""
-"Online reservation service is not available at this time. Try again later or "
-"contact us directly."
+"Online reservation service is not available at this time. Try again later or contact us directly."
 msgstr ""
-"Онлайн бронирование в данный момент не доступно. Повторите попытку пожже или "
-"свяжитесь с нами напрямую."
+"Онлайн бронирование в данный момент не доступно. Повторите попытку позже или свяжитесь с нами "
+"напрямую."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:920
 msgid "Selected date or time is not valid."
@@ -178,11 +174,11 @@ msgstr "%d мин"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:164
 msgid ""
-"Show to clients available time with time step. For example if you select 15 "
-"min, alternative time will be 10:00, 10:15, 10:30 etc."
+"Show to clients available time with time step. For example if you select 15 min, alternative time "
+"will be 10:00, 10:15, 10:30 etc."
 msgstr ""
-"Показать клиентам доступное время с указанным шагом. Например, если вы "
-"выберите 15 мин, то альтернативное время будет 10:00, 10:15, 10:30 и т.д."
+"Показать клиентам доступное время с указанным шагом. Например, если вы выберите 15 мин, то "
+"альтернативное время будет 10:00, 10:15, 10:30 и т.д."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:171
 msgid "Send confirmation email to client"
@@ -201,11 +197,8 @@ msgid "Disable confirmation email"
 msgstr "Отключить подтверждение по емайл"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:183
-msgid ""
-"Sending from wordpress account setting will work only for Basic package "
-"clients"
-msgstr ""
-"Отправка из WordPress будет работать только для клиентов с базовым пакетом"
+msgid "Sending from wordpress account setting will work only for Basic package clients"
+msgstr "Отправка из WordPress будет работать только для клиентов с базовым пакетом"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:190
 msgid "Max time before reservations"
@@ -221,11 +214,11 @@ msgstr "Дополнительные поля"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:215
 msgid ""
-"NOTE: Name, Email and Phone are required fields of reservation form and does "
-"not need to be defined here."
+"NOTE: Name, Email and Phone are required fields of reservation form and does not need to be defined "
+"here."
 msgstr ""
-"ПРИМЕЧАНИЕ: имя, емайл и телефон обязательны для заполнения формы "
-"бронирования и не должны быть определены здесь."
+"ПРИМЕЧАНИЕ: имя, емайл и телефон обязательны для заполнения формы бронирования и не должны быть "
+"определены здесь."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:223
 msgid "Field name"
@@ -302,12 +295,8 @@ msgid "Email CC"
 msgstr "Копия письма"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:118
-msgid ""
-"Send copy of reservation emails to specific recipients. Separate multiple "
-"recipients with ,"
-msgstr ""
-"Отправить копию бронирования писем конкретным получателям. Разделите "
-"несколько получателей ,"
+msgid "Send copy of reservation emails to specific recipients. Separate multiple recipients with ,"
+msgstr "Отправить копию бронирования писем конкретным получателям. Разделите несколько получателей ,"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:125
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:87
@@ -343,10 +332,8 @@ msgid "Available seats"
 msgstr "Количество мест"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:202
-msgid ""
-"NOTE: Reducing number of available seats will remove existing reservations."
-msgstr ""
-"ПРИМЕЧАНИЕ: Снижение доступных мест удалит существующие резервирования."
+msgid "NOTE: Reducing number of available seats will remove existing reservations."
+msgstr "ПРИМЕЧАНИЕ: Снижение доступных мест удалит существующие резервирования."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:205
 msgid "Working time"
@@ -365,17 +352,14 @@ msgid "Specify time in 24h format (00:00 - 23:59)."
 msgstr "Укажите время в 24 часовом формате (00:00 - 23:59)."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:247
-msgid ""
-"If you close next day at night then set closing time on a same day. For "
-"example 18:00 - 3:00"
+msgid "If you close next day at night then set closing time on a same day. For example 18:00 - 3:00"
 msgstr ""
-"Если ресторан закрывается на следующий день ночью то установите время "
-"закрытия на тот же день. Например 18:00 - 3:00"
+"Если ресторан закрывается на следующий день ночью то установите время закрытия на тот же день. "
+"Например 18:00 - 3:00"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:249
 msgid "Set Open and Close fields to blank if restaurant is closed."
-msgstr ""
-"Оставте время открытия и закрытия пустыми, если ресторан весь день закрыт."
+msgstr "Оставте время открытия и закрытия пустыми, если ресторан весь день закрыт."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:251
 msgid "Multiple open and close times are available in Basic package."
@@ -423,25 +407,20 @@ msgstr "* Просмотр резервирований на мобильном 
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:11
 msgid ""
-"View upcoming reservations from your Mobile/Tablet PC and never miss your "
-"customer. This page should be open on a Tablet PC so waitress can see all "
-"upcoming reservations for today. Page refreshes every 15 min and shows "
-"reservations that in past for 3 hours as well as all upcoming reservations "
-"for next 24 hours. By clicking on reservation item you will see reservation "
-"details."
+"View upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should "
+"be open on a Tablet PC so waitress can see all upcoming reservations for today. Page refreshes every "
+"15 min and shows reservations that in past for 3 hours as well as all upcoming reservations for next "
+"24 hours. By clicking on reservation item you will see reservation details."
 msgstr ""
-"Смотрите список резервирований с вашего мобильного телефона или планшета и "
-"Вы никогда не пропустите вашего клиента. Эта страница должна быть постоянно "
-"открыта на планшетном ПК, так что официантка может видеть все резервирования "
-"на сегодня. Страница обновляется каждые 15 мин и показывает прошедшие "
-"резервирования на 3 часа назад, а также все предстоящие резервирование на "
-"длижайшие 24 часа. Нажав по резервирования вы увидите его детали."
+"Смотрите список резервирований с вашего мобильного телефона или планшета и Вы никогда не пропустите "
+"вашего клиента. Эта страница должна быть постоянно открыта на планшетном ПК, так что официантка может "
+"видеть все резервирования на сегодня. Страница обновляется каждые 15 мин и показывает прошедшие "
+"резервирования на 3 часа назад, а также все предстоящие резервирование на длижайшие 24 часа. Нажав по "
+"резервирования вы увидите его детали."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:13
 msgid "Fully functional demo can be accessed by following link for 30 days:"
-msgstr ""
-"Ознакомится со всем функционалом в течении 30 дней, можно следуя следующей "
-"ссылке:"
+msgstr "Ознакомится со всем функционалом в течении 30 дней, можно следуя следующей ссылке:"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:13
 msgid "Open upcoming reservations"
@@ -453,35 +432,27 @@ msgstr "* Конфигурация доступных места для онла
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:18
 msgid ""
-"* Time shifts. Define multiple open/close time by week day. Define time "
-"before reservation by shift and week day."
-msgstr ""
-"* Смены. Можно определить несколько времён открытия и закрытия по дням "
-"недели."
+"* Time shifts. Define multiple open/close time by week day. Define time before reservation by shift "
+"and week day."
+msgstr "* Смены. Можно определить несколько времён открытия и закрытия по дням недели."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:20
 msgid "* Support for multiple places."
 msgstr "* Поддержка нескольких мест."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:23
-msgid ""
-"Basic package price is 5 EUR per month per place. To subscribe please use "
-"following PayPal link:"
+msgid "Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link:"
 msgstr ""
-"Базовая цена пакета составляет 5 евро в месяц за ресторан. Чтобы "
-"подписаться, пожалуйста, используйте следующую PayPal ссылку:"
+"Базовая цена пакета составляет 5 евро в месяц за ресторан. Чтобы подписаться, пожалуйста, используйте "
+"следующую PayPal ссылку:"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:24
 msgid "Subscribe to basic package"
 msgstr "Подписаться на базовый пакет"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:25
-msgid ""
-"Please allow 1 business day for us to confirm your payment and upgrade your "
-"account."
-msgstr ""
-"Ваш аккаунт будет изменйн в течении 1 рабочего дня с момента поступления "
-"оплаты за подписку"
+msgid "Please allow 1 business day for us to confirm your payment and upgrade your account."
+msgstr "Ваш аккаунт будет изменйн в течении 1 рабочего дня с момента поступления оплаты за подписку"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:3
 msgid "Back to reservation page"
@@ -558,13 +529,11 @@ msgstr "Спасибо за ваше бронирование"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:157
 msgid ""
-"We will create a confirmation and email it to you at the email address you "
-"entered on the reservations form. You should receive your confirmation by "
-"email shortly."
+"We will create a confirmation and email it to you at the email address you entered on the "
+"reservations form. You should receive your confirmation by email shortly."
 msgstr ""
-"Мы отправим подтверждение к вам на почтовый ящик, указанный в форме "
-"бронирования. Вы должны получить подтверждение по электронной почте в "
-"ближайшее время."
+"Мы отправим подтверждение к вам на почтовый ящик, указанный в форме бронирования. Вы должны получить "
+"подтверждение по электронной почте в ближайшее время."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:164
 msgid "Powered by"
@@ -589,9 +558,7 @@ msgstr "Разработано"
 #~ msgstr "Номер и причина обязательны."
 
 #~ msgid "For paid packages please contact us by email:"
-#~ msgstr ""
-#~ "Для получения платного пакета пожалуйста свяжитесь с нами по электронной "
-#~ "почте:"
+#~ msgstr "Для получения платного пакета пожалуйста свяжитесь с нами по электронной почте:"
 
 #~ msgid "Date and time"
 #~ msgstr "Дата и время"

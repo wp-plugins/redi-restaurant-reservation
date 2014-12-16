@@ -207,10 +207,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		function display_errors( $errors, $admin = false, $action = '' ) {
-			global $wp_version;
 			if ( isset( $errors['Error'] ) ) {
 				foreach ( (array) $errors['Error'] as $error ) {
-					echo '<div class="error"><p>' . $error . '</p></div>';
+					echo '<div class="error redi-reservation-alert-error redi-reservation-alert"><p>' . $error . '</p></div>';
 				}
 			}
 			//WP-errors
@@ -221,19 +220,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						echo '<div class="error"><p>' . $error_key . ' : ' . $err . '</p></div>';
 						$this->pixel(
 							array(
-								'type'          => 'Wp-Error',
-								'wp_error_key'  => $error_key,
-								'message'       => $err,
-								'actionName'    => $action,
-								'contact'       => get_option( 'admin_email' ),
-								'pluginVersion' => $this->version,
-								'web'           => get_option( 'siteurl' ),
-								'loadTime'      => $errors['request_time'],
-								'APIKEY'        => $this->ApiKey,
-								'php'           => PHP_VERSION,
-								'theme'         => get_option('current_theme'),
-								'wp_version'    => $wp_version,
-								'lang'          => get_locale()
+								'type'         => 'Wp-Error',
+								'wp_error_key' => $error_key,
+								'message'      => $err,
+								'actionName'   => $action,
+								'loadTime'     => $errors['request_time'],
 							)
 						);
 					}
@@ -828,18 +819,28 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			}
 			if ( $this->ApiKey == null ) {
 				$this->display_errors( array(
-					'Error' => '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
-							'redi-restaurant-reservation' ) . '</p></div>'
+					'Error' => __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
+							'redi-restaurant-reservation' )
 				), false, 'Frontend No ApiKey' );
 
 				return;
 			}
 
+			if ( isset( $_GET['jquery_fail'] ) && $_GET['jquery_fail'] === 'true' ) {
+				$this->display_errors( array(
+					'Error' => __( 'Plugin failed to properly load javascript file, please check that jQuery is loaded and no javascript errors present.',
+							'redi-restaurant-reservation' )
+				), false, 'Frontend No ApiKey' );
+				$this->pixel( array(
+					'type'       => 'js_fail',
+					'actionName' => 'shortcode',
+				) );
+			}
 			//places
 			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
 				$this->display_errors( $places, false, 'getPlaces' );
-				die;
+				return;
 			}
 
 			if ( isset( $this->options['placeid'] ) ) {
@@ -850,7 +851,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$categories = $this->redi->getPlaceCategories( $placeID );
 			if ( isset( $categories['Error'] ) ) {
 				$this->display_errors( $categories, false, 'getPlaceCategories' );
-				die;
+				return;
 			}
 
 			$categoryID               = $categories[0]->ID;
@@ -1347,6 +1348,18 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		private function pixel( $params ) {
+			global $wp_version;
+			$params          = array_merge( $params, array(
+
+				'contact'       => get_option( 'admin_email' ),
+				'pluginVersion' => $this->version,
+				'web'           => get_option( 'siteurl' ),
+				'APIKEY'        => $this->ApiKey,
+				'php'           => PHP_VERSION,
+				'theme'         => get_option( 'current_theme' ),
+				'wp_version'    => $wp_version,
+				'lang'          => get_locale()
+			) );
 			$encoding_params = null;
 			if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 ) {
 				$params_encoded = base64_encode( json_encode( $params, $encoding_params ) );

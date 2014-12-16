@@ -1,7 +1,7 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
 <?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
 <script type="text/javascript">var date_format = '<?php echo $calendar_date_format ?>';<?php $time_format_s = explode(':', $time_format);if(isset($time_format_s[0]) && in_array($time_format_s[0], array('g','h'))):?>var time_format = 'h:mm tt';<?php else: ?>var time_format = 'HH:mm';<?php endif ?>var locale = '<?php echo $js_locale?>';var datepicker_locale = '<?php echo $datepicker_locale?>'; var timeshiftmode = '<?php echo $timeshiftmode; ?>'; var hidesteps = <?php echo $hidesteps ? 1 : 0; ?>; var apikeyid = '<?php echo $apiKeyId; ?>';</script>
-<form id="redi-reservation" name="redi-reservation" method="post">
+<form id="redi-reservation" name="redi-reservation" method="post" action="?jquery_fail=true">
 
 	<div id="step1">
 		
@@ -263,7 +263,7 @@
 			<?php if ($hidesteps):?>
 				<input class="redi-restaurant-button button" type="submit" id="step3prev" value="<?php _e('Previous', 'redi-restaurant-reservation')?>">
 			<?php endif ?>
-			<input class="redi-restaurant-button button" type="submit" id="redi-restaurant-step3" name="Action" value="<?php _e('Make a reservation', 'redi-restaurant-reservation')?>">
+			<input class="redi-restaurant-button button" type="submit" id="redi-restaurant-step3" name="action" value="<?php _e('Make a reservation', 'redi-restaurant-reservation')?>">
 			<img id="step3load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 			<br clear="both"/>
 		</div>
