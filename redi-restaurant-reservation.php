@@ -68,7 +68,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		private $weekday = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 		function filter_timeout_time() {
-			return 30; //new number of seconds default 5
+			return 60; //new number of seconds default 5
 		}
 
 		public function __construct() {
