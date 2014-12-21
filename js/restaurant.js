@@ -246,11 +246,13 @@ jQuery(function () {
                         case 2: //AlternativeTimeByShiftStartTime
                             var all_busy = true;
                             for (var res in response) {
-                    jQuery('#buttons').append(
-                                    '<button class="redi-restaurant-time-button button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
-                                ' ' + (response[res]['Select'] ? 'select="select"' : '') +
-                                '>' + response[res]['StartTime'] + '</button>'
-                        );
+								if(response[res] !== undefined) {
+										jQuery('#buttons').append(
+											'<button class="redi-restaurant-time-button button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
+										' ' + (response[res]['Select'] ? 'select="select"' : '') +
+										'>' + response[res]['StartTime'] + '</button>'
+										);
+									}
                                 if (response[res]['Available']) all_busy = false;
                             }
                             display_all_busy(all_busy);
