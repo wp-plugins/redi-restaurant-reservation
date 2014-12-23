@@ -1,11 +1,11 @@
 (function ($) {
 
-    /*new*/
+    /*new persons select*/
     $('.f_person_data tr td').click(function () {
         $('.f_person_data tr td').each(function () {
             $(this).removeClass('select');
         });
-        $(this).addClass('select');
+        $('#persons_view').html($(this).addClass('select').html());// update viewbox
     });
 
     /*new*/
@@ -224,7 +224,8 @@
 
     function step1call(fullDate) {
         hideSteps();
-
+        var persons = $('.f_person_data').find('.select').html();
+        $('#persons_view').html(persons);
         $('#redi-restaurant-startDateISO').val(fullDate);
         $('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         $('#step3').hide('slow');
@@ -240,7 +241,7 @@
             placeID: $('#placeID').val(),
             startTime: $('#redi-restaurant-startTime').val(),
             startDateISO: fullDate,
-            persons: $('.f_person_data').find('.select').html(),
+            persons: persons,
             lang: locale,
             timeshiftmode: timeshiftmode,
             apikeyid: apikeyid

@@ -182,7 +182,7 @@
 			<table width="80%" cellspacing="0" cellpadding="0" border="0" align="center">
 				<tbody><tr>
 					<td width="26%" style="color: rgba(102,137,180,1)">Person:</td>
-					<td width="74%">2</td>
+					<td width="74%" id="persons_view">2</td>
 				</tr>
 				<tr>
 					<td style="color: rgba(102,137,180,1)">Date:</td>
