@@ -1,20 +1,34 @@
 (function ($) {
 
-    /*new persons select*/
+    /* new persons select */
     $('.f_person_data tr td').click(function () {
         $('.f_person_data tr td').each(function () {
             $(this).removeClass('select');
         });
         $('#persons_view').html($(this).addClass('select').html());// update viewbox
+
+        step1call(jQuery('.f_calender_data tr td + .select > input[type="hidden"]').val());
     });
 
-    /*new*/
+    /* new calendar select */
     $('.f_calender_data tr td').click(function () {
         $('.f_calender_data tr td').each(function () {
             $(this).removeClass('select');
         });
         $(this).addClass('select');
         step1call($(this).children('input').val());
+    });
+
+    /* step1 > step2 */
+    $('#next').on('click', function (event) {
+        //check if everything is selected
+        $('#tab1').removeClass('f_active_step1').addClass('f_non_active_step1');
+        $('#tab2').removeClass('f_non_active_step2').addClass('f_active_step2');
+        $('#step1').hide();
+        $('#f_check_step1').show();
+        $('#step2').show();
+        $('.f_arrow_next_step').hide();
+        event.preventDefault();
     });
 
     function hideSteps() {
@@ -119,7 +133,7 @@
         return false;
     });
 
-    $('#redi-restaurant-step3').click(function () {
+    $('#redi-restaurant-reservation').click(function () {
         var error = '';
         if ($('#UserName').val() === '') {
             error += redi_restaurant_reservation.name_missing + '<br/>';
@@ -198,6 +212,7 @@
         }, 'json');
         return false;
     });
+
     $('#step1button').click(function () {
         if (timeshiftmode === 'byshifts') {
             step1call();
@@ -423,16 +438,6 @@
         event.preventDefault();
         $('#step3').hide();
         $('#step2').show();
-    });
-
-    $('#next').on('click', function (event) {
-        //check if everything is selected
-        $('#tab1').removeClass('f_active_step1').addClass('f_non_active_step1');
-        $('#tab2').removeClass('f_non_active_step2').addClass('f_active_step2');
-        $('#step1').hide();
-        $('#f_check_step1').show();
-        $('#step2').show();
-        event.preventDefault();
     });
 
 })(jQuery);
