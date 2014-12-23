@@ -4,12 +4,12 @@
 /* элементы страницы, не относящиеся к дизайну формы */
 
 /*body {*/
-    /*color: rgb(142, 142, 142);*/
-    /*font-family: 'PT Sans', verdana;*/
-    /*font-size: 16px;*/
-    /*margin: 0 auto;*/
-    /*line-height: 25px;*/
-    /*background: rgb(246, 246, 246);*/
+/*color: rgb(142, 142, 142);*/
+/*font-family: 'PT Sans', verdana;*/
+/*font-size: 16px;*/
+/*margin: 0 auto;*/
+/*line-height: 25px;*/
+/*background: rgb(246, 246, 246);*/
 /*}*/
 
 .row {
@@ -160,6 +160,12 @@
 #redi_f_box img {
     box-shadow: none;
     border-radius: 0;
+    margin-left: 6px;
+}
+
+#redi_f_box td {
+    border: none;
+    padding: 0;
 }
 
 #f_tab_box table {
@@ -250,11 +256,11 @@
 
 }
 
-.f_subbox_title tr td
-{
+.f_subbox_title tr td {
     padding-left: 5px;
     padding-top: 3px;
 }
+
 /* ---бокс кол-во человек, данные */
 
 .f_subbox_data {
@@ -292,9 +298,10 @@
 
 }
 
-.f_subbox_data,.f_subbox_title{
+.f_subbox_data, .f_subbox_title {
 
 }
+
 /* ---персоны, активные под курсором */
 .f_person_data td:hover {
     background-color: #6689b4;
@@ -328,6 +335,10 @@
     position: relative;
 }
 
+.f_subbox_data2 table {
+    border: none;
+}
+
 /* ---шрифт легенды календаря */
 
 .legend {
@@ -354,7 +365,8 @@
 
     border-spacing: 6px;
 }
-.f_calender_data tr td{
+
+.f_calender_data tr td {
 
 }
 
@@ -399,11 +411,12 @@
     border-spacing: 6px;
 
 }
-.f_subbox_data table
-{
+
+.f_subbox_data table {
     border-collapse: separate;
     border-spacing: 6px;
 }
+
 /* --- цвет ячеек времени по умолчанию */
 .f_time_data td {
     background-color: #f3f3f3;
@@ -469,6 +482,11 @@
     border-width: 0 1px 1px 1px;
     border-style: solid;
     position: relative;
+    /*border: 0;*/
+}
+
+.f_subbox_data3 table {
+    border: none;
 }
 
 /* ---бокс выбора времени */
@@ -791,20 +809,6 @@ span.selectOption:hover {
     z-index: 100;
 }
 
-/* поле выбранных параметров, начало шага 2 */
-
-.f_text_selection_step2 {
-    font-family: 'PT Sans Narrow', verdana;
-    font-size: 16px;
-    line-height: 25px;
-    text-align: left;
-    background-color: #f3f3f3;
-    width: 350px;
-    height: 100px;
-    margin: 0 auto;
-    padding-top: 20px;
-}
-
 /* ______________________________ */
 
 /* Текстовые поля формы шаг 2 */
@@ -839,7 +843,7 @@ div.f_input_box {
     color: rgb(142, 142, 142);
     position: relative;
     float: left;
-    height: 28px;
+    height: 18px;
     z-index: 100;
     width: 300px;
     text-indent: 20px;
@@ -959,7 +963,7 @@ textarea {
     overflow: hidden;
     position: relative;
     float: left;
-    height: 149px;
+    height: 137px;
     z-index: 100;
 }
 
@@ -1123,6 +1127,7 @@ span.selectArrow7, span.selected2 {
     padding-top: 17px;
     margin-right: 0;
     font-weight: 700;
+    line-height: 13px;
 }
 
 .f_btn_step2:hover {
@@ -1197,13 +1202,50 @@ span.selectArrow7, span.selected2 {
 }
 
 .f_subbox_title table, .f_tab_box .f_person_data {
-    border: 0px;
+    border: none;
 }
 
 .f_subbox_title table tr td {
-    border: 0px;
+    border: none;
 }
 
-.f_person_data table tr td, .f_text_time table tr td , .f_subbox_data2 div table tr td{
-    border: 0;
+.f_person_data table tr td, .f_text_time table tr td, .f_subbox_data2 div table tr td {
+    border: none;
+}
+
+/* поле выбранных параметров, начало шага 2 */
+
+.f_text_selection_step2 {
+    font-family: 'PT Sans Narrow', verdana;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+    background-color: #f3f3f3;
+    width: 350px;
+    height: 100px;
+    margin-left: 35px;
+    padding-top: 20px;
+}
+
+.f_text_selection_step2 table {
+    font-family: "PT Sans Narrow", verdana;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+
+    margin-left: 35px;
+}
+
+#redi_f_box table {
+    /*font-family: "PT Sans Narrow",verdana;*/
+    /*font-size: 16px;*/
+    /*line-height: 25px;*/
+    /*text-align: left;*/
+    border: none;
+    /*margin-left: 35px;*/
+}
+
+#redi_f_box td {
+    border: none;
+    padding: 0;
 }

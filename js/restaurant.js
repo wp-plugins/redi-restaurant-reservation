@@ -279,7 +279,7 @@
                             var step1buttons_html = '';
                             $('#step1buttons_html').html(step1buttons_html).hide();
                             for (var availability in response) {
-                                if (response[availability]['Name'] !== undefined) {
+                                if (response[availability] !== undefined || response[availability]['Name'] !== undefined) {
                                     var html = '';
                                     var current = 0;
                                     for (var current_button_index in response[availability]['Availability']) {
@@ -289,7 +289,7 @@
                                         if (current == 1) {
                                             html += '<tr>';
                                         }
-                                        //html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' + ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>';
+
                                         html += '<td class="redi-restaurant-time-button ' + (b['Select'] ? 'select' : '') + '" ' + (b['Available'] ? '' : 'disabled="disabled"') + '>';
                                         html += '<input type="hidden" value="' + b['StartTimeISO'] + '"/>';
                                         html += b['StartTime'];
@@ -308,11 +308,6 @@
                             break;
                     }
                 }
-
-                //if (!hidesteps) {
-                //    $('#step2').show('slow');
-                //}
-
                 $('#UserName').focus();
                 $('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
             }
@@ -437,7 +432,6 @@
         $('#f_check_step1').show();
         $('#step2').show();
         event.preventDefault();
-
     });
 
 })(jQuery);
