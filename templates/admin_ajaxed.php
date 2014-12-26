@@ -58,7 +58,7 @@ jQuery(function () {
 			</td>
 			<td style="width:80%;">
 				<p class="description">
-					<?php _e('This <b>ID</b> associated with your place. The <b>ID</b> can be used as a short code for specifying the place of reservation. Example of shortcode', 'redi-restaurant-reservation'); ?>
+					<?php _e('This <b>ID</b> associated with your place. The <b>ID</b> can be used as a short code for specifying the place of reservation. <br/>Example of shortcode:<br/><code style="font-style: normal; padding:0">[redirestaurant placeid="0000"]</code>', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
         </tr>

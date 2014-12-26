@@ -239,7 +239,7 @@
 				</td>
 				<td style="width:75%">
 					<p class="description">
-						<?php _e('Mode how available working hours presented to user so that they can choose time slots most convenient to them', 'redi-restaurant-reservation'); ?><br/>
+						<?php _e('Mode how available working hours presented to user so that they can choose time slots most convenient to them.', 'redi-restaurant-reservation'); ?><br/>
 						<b><?php _e('Normal', 'redi-restaurant-reservation'); ?></b> – <?php _e('In this mode, the user selects the desired time and the system verifies its availability to present five different alternative times to the customer.', 'redi-restaurant-reservation'); ?><br/>
 						<b><?php _e('By shifts', 'redi-restaurant-reservation'); ?></b> – <?php _e('In this mode, the system automatically displays all the available times for the date selected without any manual time input.', 'redi-restaurant-reservation'); ?><br/>
 						<b><?php _e('Hide steps', 'redi-restaurant-reservation'); ?></b> - <?php _e('This option is meant only for the by shifts mode. It is meant for hiding the previous steps. The system would display all the available times for the specified date but upon selecting the available time, the previous steps are hidden and the next step is presented. It is a good mode for widgets specially.', 'redi-restaurant-reservation'); ?><br/>
