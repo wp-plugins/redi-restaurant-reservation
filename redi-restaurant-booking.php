@@ -1,12 +1,12 @@
 <?php
 /*
-  Plugin Name: ReDi Restaurant Reservation
-  Plugin URI: http://reservationdiary.eu/eng/reservation-wordpress-plugin/
+  Plugin Name: ReDi Restaurant Booking
+  Plugin URI: http://reservationdiary.eu/eng/booking-wordpress-plugin/
   Description: ReDi Reservation plugin for Restaurants
   Version: 14.0904
   Author: reservationdiary.eu
   Author URI: http://reservationdiary.eu/
-  Text Domain: redi-restaurant-reservation
+  Text Domain: redi-restaurant-booking
   Domain Path: /lang
 
  */
@@ -25,7 +25,7 @@ if ( ! defined( 'ID' ) ) {
 require_once( 'redi.php' );
 
 
-if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
+if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 	if ( ! class_exists( 'Report' ) ) {
 		class Report {
 			const Full = 'Full';
@@ -54,7 +54,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 	}
 
-	class ReDiRestaurantReservation {
+	class ReDiRestaurantbooking {
 		public $version = '14.0904';
 		/**
 		 * @var string The options string name for this plugin
@@ -84,14 +84,14 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			add_action( 'init', array( &$this, 'init_sessions' ) );
 			add_action( 'admin_menu', array( &$this, 'redi_restaurant_admin_menu_link' ) );
 
-			$this->page_title = 'Reservation';
+			$this->page_title = 'booking';
 			$this->content    = '[redirestaurant]';
 			$this->page_name  = $this->_name;
 			$this->page_id    = '0';
 
 			register_activation_hook( __FILE__, array( $this, 'activate' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
-			register_uninstall_hook( __FILE__, array( 'ReDiRestaurantReservation', 'uninstall' ) );
+			register_uninstall_hook( __FILE__, array( 'ReDiRestaurantbooking', 'uninstall' ) );
 
 			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
 			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
@@ -102,10 +102,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 		function language_files( $mofile, $domain ) {
 
-			if ( $domain === 'redi-restaurant-reservation' ) {
+			if ( $domain === 'redi-restaurant-booking' ) {
 
-				$full_file    = WP_PLUGIN_DIR . '/redi-restaurant-reservation/lang/' . $domain . '-' . get_locale() . '.mo';
-				$generic_file = WP_PLUGIN_DIR . '/redi-restaurant-reservation/lang/' . $domain . '-' . substr( get_locale(),
+				$full_file    = WP_PLUGIN_DIR . '/redi-restaurant-booking/lang/' . $domain . '-' . get_locale() . '.mo';
+				$generic_file = WP_PLUGIN_DIR . '/redi-restaurant-booking/lang/' . $domain . '-' . substr( get_locale(),
 						0, 2 ) . '.mo';
 				if ( file_exists( $full_file ) ) {
 					return $full_file;
@@ -118,7 +118,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return $mofile;
 		}
 
-		function ReDiRestaurantReservation() {
+		function ReDiRestaurantbooking() {
 			$this->__construct();
 		}
 
@@ -238,13 +238,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $this->ApiKey == null ) {
 
 				$errors['Error'] = array(
-					__( 'ReDi Restaurant Reservation plugin could not get an API key from the reservationdiary.eu server when it activated.' .
-					    '<br/> You can try to fix this by going to the ReDi Restaurant Reservation "options" page. ' .
-					    '<br/>This will cause ReDi Restaurant Reservation plugin to retry fetching an API key for you. ' .
+					__( 'ReDi Restaurant booking plugin could not get an API key from the reservationdiary.eu server when it activated.' .
+					    '<br/> You can try to fix this by going to the ReDi Restaurant booking "options" page. ' .
+					    '<br/>This will cause ReDi Restaurant booking plugin to retry fetching an API key for you. ' .
 					    '<br/>If you keep seeing this error it usually means that server where you host your web site can\'t connect to our reservationdiary.eu server. ' .
 					    '<br/>You can try asking your WordPress host to allow your WordPress server to connect to api.reservationdiary.eu' .
 					    '<br/>In case you can not solve this problem yourself, please contact us directly by <a href="mailo:info@reservationdiary.eu">info@reservationdiary.eu</a>',
-						'redi-restaurant-reservation' )
+						'redi-restaurant-booking' )
 				);
 				$this->display_errors( $errors, true );
 				die;
@@ -301,11 +301,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						$errors[] = $cancel['Error'];
 					} else {
 						$cancel_success = __( 'Reservation has been successfully canceled.',
-							'redi-restaurant-reservation' );
+							'redi-restaurant-booking' );
 					}
 
 				} else {
-					$errors[] = __( 'Reservation number is required', 'redi-restaurant-reservation' );
+					$errors[] = __( 'Reservation number is required', 'redi-restaurant-booking' );
 				}
 			}
 			$settings_saved = false;
@@ -329,13 +329,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				//validation
 				if ( $minPersons >= $maxPersons ) {
-					$errors[]   = __( 'Min Persons should be lower than Max Persons', 'redi-restaurant-reservation' );
+					$errors[]   = __( 'Min Persons should be lower than Max Persons', 'redi-restaurant-booking' );
 					$form_valid = false;
 				}
 
 				$reservationTime = (int) self::GetPost( 'ReservationTime' );
 				if ( $reservationTime <= 0 ) {
-					$errors[]   = __( 'Reservation time should be greater than 0', 'redi-restaurant-reservation' );
+					$errors[]   = __( 'Reservation time should be greater than 0', 'redi-restaurant-booking' );
 					$form_valid = false;
 				}
 				$place = array(
@@ -360,7 +360,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				);
 
 				if ( empty( $place['place']['Country'] ) ) {
-					$errors[]   = __( 'Country is required', 'redi-restaurant-reservation' );
+					$errors[]   = __( 'Country is required', 'redi-restaurant-booking' );
 					$form_valid = false;
 				}
 
@@ -600,9 +600,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			if ( function_exists( 'load_plugin_textdomain' ) ) {
 				add_filter( 'load_textdomain_mofile', array( $this, 'language_files' ), 10, 2 );
-				load_plugin_textdomain( 'redi-restaurant-reservation', false, 'redi-restaurant-reservation/lang' );
-				load_plugin_textdomain( 'redi-restaurant-reservation-errors', false,
-					'redi-restaurant-reservation/lang' );
+				load_plugin_textdomain( 'redi-restaurant-booking', false, 'redi-restaurant-booking/lang' );
+				load_plugin_textdomain( 'redi-restaurant-booking-errors', false,
+					'redi-restaurant-booking/lang' );
 			}
 
 		}
@@ -611,10 +611,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		 * @desc Adds the options subpanel
 		 */
 		function redi_restaurant_admin_menu_link() {
-			add_options_page( 'Redi Restaurant Reservation',
-				'Redi Restaurant Reservation',
+			add_options_page( 'Redi Restaurant booking',
+				'Redi Restaurant booking',
 				'manage_options',
-				'redi-restaurant-reservation',
+				'redi-restaurant-booking',
 				array( &$this, 'redi_restaurant_admin_options_page' ) );
 		}
 
@@ -784,14 +784,14 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			wp_register_script( 'restaurant', REDI_RESTAURANT_PLUGIN_URL . 'js/restaurant.js', array( 'jquery' ) );
 
 			wp_localize_script( 'restaurant',
-				'redi_restaurant_reservation',
+				'redi_restaurant_booking',
 				array( // URL to wp-admin/admin-ajax.php to process the request
 					'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-					'id_missing'     => __( 'Reservation number can\'t be empty', 'redi-restaurant-reservation' ),
-					'name_missing'   => __( 'Name can\'t be empty', 'redi-restaurant-reservation' ),
-					'email_missing'  => __( 'Email can\'t be empty', 'redi-restaurant-reservation' ),
-					'phone_missing'  => __( 'Phone can\'t be empty', 'redi-restaurant-reservation' ),
-					'reason_missing' => __( 'Reason can\'t be empty', 'redi-restaurant-reservation' ),
+					'id_missing'     => __( 'Reservation number can\'t be empty', 'redi-restaurant-booking' ),
+					'name_missing'   => __( 'Name can\'t be empty', 'redi-restaurant-booking' ),
+					'email_missing'  => __( 'Email can\'t be empty', 'redi-restaurant-booking' ),
+					'phone_missing'  => __( 'Phone can\'t be empty', 'redi-restaurant-booking' ),
+					'reason_missing' => __( 'Reason can\'t be empty', 'redi-restaurant-booking' ),
 				) );
 			wp_enqueue_script( 'restaurant' );
 
@@ -813,7 +813,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $this->ApiKey == null ) {
 				$this->display_errors( array(
 					'Error' => '<div class="error"><p>' . __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
-							'redi-restaurant-reservation' ) . '</p></div>'
+							'redi-restaurant-booking' ) . '</p></div>'
 				) );
 
 				return;
@@ -982,7 +982,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array(
-					'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' )
+					'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-booking' )
 				) );
 				die;
 			}
@@ -1033,7 +1033,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			} else {
 				$categories = $this->redi->getPlaceCategories( $placeID );
 				if ( isset( $categories['Error'] ) ) {
-					$categories['Error'] = __( $categories['Error'], 'redi-restaurant-reservation-errors' );
+					$categories['Error'] = __( $categories['Error'], 'redi-restaurant-booking-errors' );
 					echo json_encode( $categories );
 					die;
 				}
@@ -1192,7 +1192,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							if ( isset( $this->options[ $field_type ] ) && $this->options[ $field_type ] === 'checkbox' ) {
 								$comment .= $this->options[ 'field_' . $i . '_name' ] . ': ';
 								$comment .= ( self::GetPost( 'field_' . $i ) === 'on' ) ? __( 'Yes',
-									'redi-restaurant-reservation' ) : __( 'No', 'redi-restaurant-reservation' );
+									'redi-restaurant-booking' ) : __( 'No', 'redi-restaurant-booking' );
 								$comment .= '<br/>';
 							} else {
 								if ( ! empty( $_POST[ 'field_' . $i ] ) ) {
@@ -1340,6 +1340,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 	}
 }
-new ReDiRestaurantReservation();
+new ReDiRestaurantbooking();
 
-register_activation_hook( __FILE__, array( 'ReDiRestaurantReservation', 'install' ) );
+register_activation_hook( __FILE__, array( 'ReDiRestaurantbooking', 'install' ) );

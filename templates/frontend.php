@@ -213,8 +213,8 @@
 		<!--		<p></p><div style="position:relative;"><div class="f_check_field"></div></div>-->
 		<div class="f_select2">
 			<div class="f_input_box">
-				<span class="selectArrow2"></span>
-				<input type="text" placeholder="Your name" id="UserName">
+				<span class="selectArrow2 required"></span>
+				<input class="text_field" type="text" placeholder="Your name" id="UserName">
 			</div>
 		</div>
 		<p></p>
@@ -223,8 +223,8 @@
 		<!--		<p></p><div style="position:relative;"><div class="f_error_field"></div></div>-->
 		<div class="f_select2">
 			<div class="f_input_box">
-				<span class="selectArrow3"></span>
-				<input type="text" placeholder="insert your phone" id="UserPhone">
+				<span class="selectArrow3 required"></span>
+				<input class="text_field" type="text" placeholder="insert your phone" id="UserPhone">
 			</div>
 		</div>
 		<p></p>
@@ -234,8 +234,8 @@
 
 		<div class="f_select2">
 			<div class="f_input_box">
-				<span class="selectArrow4"></span>
-				<input type="text" placeholder="insert your e-mail" id="UserEmail">
+				<span class="selectArrow4 required"></span>
+				<input class="text_field" type="text" placeholder="insert your e-mail" id="UserEmail">
 			</div>
 		</div>
 <!--		<div style="width: 210px; margin: 0 auto; text-align: left;">-->
@@ -250,7 +250,7 @@
 		<div class="f_select2">
 			<div class="f_input_box">
 				<span class="selectArrow5"></span>
-				<textarea placeholder="Comment:" id="UserComments"></textarea>
+				<textarea class="textarea_field" placeholder="Comment:" id="UserComments"></textarea>
 			</div>
 		</div>
 		<p></p>
