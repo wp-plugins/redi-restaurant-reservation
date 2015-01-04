@@ -19,7 +19,7 @@
 			<br clear="both"/>
 			<textarea maxlength="250" rows="2" name="cancelEmail" id="redi-restaurant-cancelReason" cols="20"></textarea>
 			<br clear="both"/><br clear="both"/>
-			<input class="redi-restaurant-button" type="submit" id="redi-restaurant-cancel" name="action" value="<?php _e('Cancel a reservation', 'redi-restaurant-reservation')?>">
+			<input class="redi-restaurant-button" type="submit" id="redi-restaurant-cancel" name="action" value="<?php _e('Cancel reservation', 'redi-restaurant-reservation')?>">
 			<img id="cancel-load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</form>
 	</div>

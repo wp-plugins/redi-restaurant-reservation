@@ -4,11 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
-"POT-Creation-Date: 2015-01-04 13:31+0200\n"
-"PO-Revision-Date: 2015-01-04 13:32+0200\n"
+"POT-Creation-Date: 2015-01-04 16:06+0200\n"
+"PO-Revision-Date: 2015-01-04 16:07+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
-"Language: ru\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: C:\\ProjectsCloudSync\\Wordpress\\redi-restaurant-"
 "reservation\\trunk\n"
 
@@ -112,6 +113,7 @@ msgstr ""
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:400
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:411
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:3
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:22
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:12
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:30
 msgid "Cancel reservation"
@@ -202,11 +204,13 @@ msgid "Send confirmation email to client"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:173
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:182
 msgid "From ReservationDiary.eu"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:174
-msgid "From wordpress email account"
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:181
+msgid "From WordPress email account"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:175
@@ -222,18 +226,10 @@ msgid ""
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:181
-msgid "From WordPress email account"
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:181
 msgid ""
 "the confirmation email will be sent out from your email set in WordPress. "
 "Sending from WordPress account setting will work only for Basic package "
 "clients."
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:182
-msgid "From reservationdiary.eu"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:182
@@ -243,7 +239,7 @@ msgid ""
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:183
-msgid "With this option, confirmation email is not sent to the client."
+msgid "with this option, confirmation email is not sent to the client."
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:190
@@ -266,7 +262,7 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:224
 msgid ""
-" If this field is filled, the drop down menu of persons would show \"Large "
+"If this field is filled, the drop down menu of persons would show \"Large "
 "Groups\" and upon selection, the specified message would appear."
 msgstr ""
 
@@ -301,6 +297,7 @@ msgid ""
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:245
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:253
 msgid "Hide steps"
 msgstr ""
 
@@ -311,10 +308,6 @@ msgid ""
 "specified date but upon selecting the available time, the previous steps are "
 "hidden and the next step is presented. It is a good mode for widgets "
 "specially."
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:253
-msgid "Hidesteps"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin.php:264
@@ -538,7 +531,7 @@ msgid "Short description"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:201
-msgid "a short description about your restaurant."
+msgid "Short description about your restaurant."
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:208
@@ -547,7 +540,7 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:216
 msgid ""
-"detailed description about your restaurant. This can include anything you "
+"Detailed description about your restaurant. This can include anything you "
 "would want the customers to know about your restaurant features and "
 "offerings."
 msgstr ""
@@ -561,7 +554,7 @@ msgid ""
 "This is the number of minimum hours before which a reservation can be "
 "accepted from a client. For example, the current time is 10:00 and the "
 "setting for Hours before reservation is set to 3 hours then the next time, "
-"then the reservation will be accepted is 13:00."
+"when the reservation will be accepted is 13:00."
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:239
@@ -571,7 +564,7 @@ msgstr ""
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:247
 msgid ""
 "This check box if checked, the restaurant details are published to the "
-"catalog of <a target=\"_blank\" href=\"reservationdiary.eu"
+"catalog of <a target=\"_blank\" href=\"http://reservationdiary.eu"
 "\">reservationdiary.eu</a>. If you do not want it to be published, keep the "
 "box unchecked. Clients can find your restaurant from one more location."
 msgstr ""
@@ -686,12 +679,8 @@ msgid "Basic package functionality (paid version)"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:12
-msgid "◾ View upcoming reservations on Mobile/Tablet PC"
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:13
 msgid ""
-"◾ View your upcoming reservations from your Mobile/Tablet PC and never miss "
+"View your upcoming reservations from your Mobile/Tablet PC and never miss "
 "your customer. This page should be open on a Tablet PC and so hostess can "
 "see all upcoming reservations for today. Page refreshes every 15 min and "
 "shows reservations that in past for 3 hours as well as upcoming reservations "
@@ -699,69 +688,129 @@ msgid ""
 "details. Demo version can be accessed for 30 days using this link: "
 msgstr ""
 
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:13
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:12
 msgid "Open upcoming reservations"
 msgstr ""
 
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:13
+msgid "Setup maximum available seats for online reservation by week day"
+msgstr ""
+
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:14
-msgid "◾ Setup maximum available seats for online reservation by week day"
+msgid ""
+"Open times. This option will enable you to choose between various working "
+"hours whichever is most convenient to you."
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:15
 msgid ""
-"◾ Time shifts. The time shift option will enable you to choose between "
-"various working hours whichever is most convenient to you."
+"Support for multiple places. Number of places depends on number of "
+"subscriptions."
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:16
 msgid ""
-"◾ Support for multiple places. Number of places depends on number of "
-"subscriptions."
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:17
-msgid ""
-"◾ Blocked Time. Define time range when online reservation should not be "
+"Blocked Time. Define time range when online reservation should not be "
 "accepted. Specify a reason why reservations are not accepted at this time to "
 "keep your clients happy."
 msgstr ""
 
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:17
+msgid "Send client reservation confirmation emails from WordPress account."
+msgstr ""
+
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:18
-msgid "◾ Send client reservation confirmation emails from WordPress account"
+msgid "Email template customization for all supported languages."
 msgstr ""
 
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:19
-msgid "◾ Email template customization for all supported languages"
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:21
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:20
 msgid ""
 "Basic package price is 5 EUR per month per place. To subscribe please use "
 "following PayPal link:"
 msgstr ""
 
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:22
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:21
 msgid "Subscribe to basic package"
 msgstr ""
 
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:23
-msgid ""
-"Please provide API key into comment field. You can find API key from setting "
-"page."
-msgstr ""
-
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:24
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:22
 msgid ""
 "Please allow 1 business day for us to confirm your payment and upgrade your "
 "account."
 msgstr ""
 
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:3
-msgid "Back to reservation page"
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:26
+msgid ""
+"Use your Facebook account for your business. Make clients from your Facebook "
+"fans."
 msgstr ""
 
-#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:22
-msgid "Cancel a reservation"
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:26
+msgid "View presentation."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:27
+msgid ""
+"We can offer you white labeled restaurant reservation application for "
+"Facebook Application, iPhone/iPad Application, Windows Phone Application or "
+"Android Application."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:28
+msgid ""
+"Enhance your business experience by using our Facebook integration service "
+"where we try to provide you with profile pictures of your customers if "
+"found. You can amaze your customer by knowing him by face when he visits "
+"you, especially at the time of first visit."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:29
+msgid ""
+"Do you want to know what your client thinks about his last visit? We will "
+"collect it for you."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:30
+msgid "Remind your customer about upcoming reservation via Email or by SMS"
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:31
+msgid "Collect pre-payment for reservations."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:32
+msgid ""
+"If you are building a catalogue of restaurants and looking for the perfect "
+"reservation plugin for it, we can provide it to you."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:33
+msgid ""
+"Do you want to write your own module? We have an API. Contact us to get more "
+"information."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:35
+msgid ""
+"If you would like to add some new functionality or have any other queries, "
+"please contact us by email: "
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:39
+msgid ""
+"If you need to manage more complex reservations, please check our ReDi "
+"Reservation plugin too."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:40
+msgid ""
+"Open Improve your restaurant’s turnaround time by allowing the clients to "
+"call a waiter using their smart phones. Create a mobile web page with our QR "
+"Code Waiter Calling System plugin."
+msgstr ""
+
+#: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:3
+msgid "Back to reservation page"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:10

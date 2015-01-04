@@ -34,12 +34,12 @@ Supported languages:
 If you need more languages, please contact us!
 
 = Basic package functionality =
-* View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
+* View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed using this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 * Setup maximum available seats for online reservation by week day
-* Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
+* Open times. This option will enable you to choose between various working hours whichever is most convenient to you.
 * Support for multiple places. Number of places depends on number of subscriptions.
-* Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted to explain it to clients.
-* Send client reservation confirmation emails from wordpress account
+* Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted at this time to keep your clients happy.
+* Send client reservation confirmation emails from WordPress account
 * Email template customization for all supported languages
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
@@ -48,24 +48,22 @@ Please provide API key into comment field. You can find API key from setting pag
 Please allow 1 business day for us to confirm your payment and upgrade your account.
 
 = Additional services (by request) =
-* Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
-* We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
-* Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
+* Use your Facebook account for your business. Make clients from your Facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
+* We can offer you white labeled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+* Enhance your business experience by using our Facebook integration service where we try to provide you with profile pictures of your customers if found. You can amaze your customer by knowing him by face when he visits you, especially at the time of first visit.
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
 * Remind your customer about upcoming reservation via Email or by SMS
 * Collect pre-payment for reservations
-* Are you building catalogue with restaurants and you are looking for reservation plugin for that? We can provide it for you.
-* Do you want to write your own module, we have an API. Contact us to get more information.
+* If you are building a catalogue of restaurants and looking for the perfect reservation plugin for it, we can provide it to you.
+* Do you want to write your own module? We have an API. Contact us to get more information.
 
-Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+If you would like to add some new functionality or have any other queries, please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 = Other plugins =
-* If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a>
+* If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a> too.
  plugin too.
-* Improve restaurant turnaround time by allowing clients to call a waiter with help of their smart phones via mobile web page. <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">Open QR Code Waiter Calling System plugin</a>
+* Improve your restaurant’s turnaround time by allowing the clients to call a waiter using their smart phones via a mobile web page with our <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">Open QR Code Waiter Calling System plugin</a>.
 
-![alt text](http://pixelsite.info/track/t23721.gif)
- 
 == Installation ==
 
 1. Click on "Install now" to install plugin
@@ -116,6 +114,10 @@ In case you have any problems with plugin installation or you need some customiz
 * (+) Changed country from free form field to dropdown
 * (+) New variation is added to plugin, that displays all possible times for selected date
 * (+) Updated list of languages and translation
+* (+) Added diagnostics for installation troubleshooting
+* (+) Added support for translation to Upcoming Reservations TabletPC version
+* (+) Added description to each setting
+* (+) Added widget to collect new feature requests
 
 = 14.0630 =
 * Limit maximum time before reservation

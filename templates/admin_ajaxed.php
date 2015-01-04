@@ -198,7 +198,7 @@ jQuery(function () {
 			</td>
 			<td style="vertical-align: top;">
 				<p class="description">
-					<?php _e('a short description about your restaurant.', 'redi-restaurant-reservation'); ?>
+					<?php _e('Short description about your restaurant.', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
 		</tr>
@@ -213,7 +213,7 @@ jQuery(function () {
 			</td>
 			<td style="vertical-align: top;">
 				<p class="description">
-					<?php _e('detailed description about your restaurant. This can include anything you would want the customers to know about your restaurant features and offerings.', 'redi-restaurant-reservation'); ?>
+					<?php _e('Detailed description about your restaurant. This can include anything you would want the customers to know about your restaurant features and offerings.', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
 		</tr>
@@ -228,7 +228,7 @@ jQuery(function () {
 			</td>
 			<td style="width:80%">
 				<p class="description">
-					<?php _e('This is the number of minimum hours before which a reservation can be accepted from a client. For example, the current time is 10:00 and the setting for Hours before reservation is set to 3 hours then the next time, then the reservation will be accepted is 13:00.', 'redi-restaurant-reservation'); ?>
+					<?php _e('This is the number of minimum hours before which a reservation can be accepted from a client. For example, the current time is 10:00 and the setting for Hours before reservation is set to 3 hours then the next time, when the reservation will be accepted is 13:00.', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
 		</tr>
@@ -244,7 +244,7 @@ jQuery(function () {
 			</td>
 			<td style="width:80%">
 				<p class="description">
-					<?php _e('This check box if checked, the restaurant details are published to the catalog of <a target="_blank" href="reservationdiary.eu">reservationdiary.eu</a>. If you do not want it to be published, keep the box unchecked. Clients can find your restaurant from one more location.', 'redi-restaurant-reservation'); ?>
+					<?php _e('This check box if checked, the restaurant details are published to the catalog of <a target="_blank" href="http://reservationdiary.eu">reservationdiary.eu</a>. If you do not want it to be published, keep the box unchecked. Clients can find your restaurant from one more location.', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
 		</tr>

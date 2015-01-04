@@ -171,7 +171,7 @@
                 <td style="vertical-align: top;">
                     <select name="EmailFrom">
                         <option value="ReDi" <?php if ($emailFrom == EmailFrom::ReDi):?>selected="selected" <?php endif;?>><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation'); ?></option>
-                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('From wordpress email account', 'redi-restaurant-reservation'); ?></option>
+                        <option value="WordPress" <?php if ($emailFrom == EmailFrom::WordPress):?>selected="selected" <?php endif;?>><?php _e('From WordPress email account', 'redi-restaurant-reservation'); ?></option>
                         <option value="Disabled" <?php if ($emailFrom == EmailFrom::Disabled):?>selected="selected" <?php endif;?>><?php _e('Disable confirmation email', 'redi-restaurant-reservation'); ?></option>
                     </select>
                 </td>
@@ -179,8 +179,8 @@
                     <p class="description">
                         <?php _e('The way you want confirmation email to be delivered to the client. It can be "From WordPress email account", "From reservationdiary.eu" or "Disable confirmation email".', 'redi-restaurant-reservation') ?><br/>
                         <b><?php _e('From WordPress email account', 'redi-restaurant-reservation') ?></b> - <?php _e('the confirmation email will be sent out from your email set in WordPress. Sending from WordPress account setting will work only for Basic package clients.', 'redi-restaurant-reservation') ?><br/>
-	                    <b><?php _e('From reservationdiary.eu', 'redi-restaurant-reservation') ?></b> - <?php _e('the confirmation email will be sent out from info@reservationdiary.eu. When the client replies to confirmation email, you will receive it.', 'redi-restaurant-reservation') ?><br/>
-		                <b><?php _e('Disable confirmation email', 'redi-restaurant-reservation') ?></b> - <?php _e('With this option, confirmation email is not sent to the client.', 'redi-restaurant-reservation') ?>
+	                    <b><?php _e('From ReservationDiary.eu', 'redi-restaurant-reservation') ?></b> - <?php _e('the confirmation email will be sent out from info@reservationdiary.eu. When the client replies to confirmation email, you will receive it.', 'redi-restaurant-reservation') ?><br/>
+		                <b><?php _e('Disable confirmation email', 'redi-restaurant-reservation') ?></b> - <?php _e('with this option, confirmation email is not sent to the client.', 'redi-restaurant-reservation') ?>
                     </p>
                 </td>
             </tr>
@@ -221,7 +221,7 @@
 				</td>
 				<td style="width:75%; vertical-align: top;">
 					<p class="description">
-						<?php _e(' If this field is filled, the drop down menu of persons would show "Large Groups" and upon selection, the specified message would appear.', 'redi-restaurant-reservation'); ?>
+						<?php _e('If this field is filled, the drop down menu of persons would show "Large Groups" and upon selection, the specified message would appear.', 'redi-restaurant-reservation'); ?>
 					</p>
 				</td>
 			</tr>
@@ -250,7 +250,7 @@
 			<tr style="width: 250px">
 				<th scope="row">
 					<label for="Hidesteps">
-						<?php _e('Hidesteps', 'redi-restaurant-reservation'); ?>
+						<?php _e('Hide steps', 'redi-restaurant-reservation'); ?>
 					</label>
 				</th>
 				<td style="vertical-align: top;">
