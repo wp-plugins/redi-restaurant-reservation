@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ReDi Restaurant Reservation\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/redi-restaurant-reservation\n"
 "POT-Creation-Date: 2015-01-04 16:04+0200\n"
-"PO-Revision-Date: 2015-01-04 16:05+0200\n"
+"PO-Revision-Date: 2015-01-05 20:18+0200\n"
 "Last-Translator: Sergei Prokopov <info@reservationdiary.eu>\n"
 "Language-Team: ReDi team <info@reservationdiary.eu>\n"
 "Language: fr\n"
@@ -29,18 +29,18 @@ msgid ""
 "you host your web site can't connect to our reservationdiary.eu server. <br/"
 ">You can try asking your WordPress host to allow your WordPress server to "
 "connect to api.reservationdiary.eu<br/>In case you can not solve this "
-"problem yourself, please contact us directly by <a href=\"mailo:"
+"problem yourself, please contact us directly by <a href=\"mailto:"
 "info@reservationdiary.eu\">info@reservationdiary.eu</a>"
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:311
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:31
 msgid "Reservation has been successfully canceled."
-msgstr ""
+msgstr "Votre réservation a bien été annulée. Au plaisir de vous revoir."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:316
 msgid "Reservation number is required"
-msgstr ""
+msgstr "Merci d'entrer votre numéro de réservation"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:340
 msgid "Min Persons should be lower than Max Persons"
@@ -49,15 +49,15 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:346
 msgid "Reservation time should be greater than 0"
-msgstr ""
+msgstr "La durée de votre réservation doit être supérieure à 0"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:371
 msgid "Country is required"
-msgstr ""
+msgstr "Merci d'indiquer le pays"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:797
 msgid "Reservation number can't be empty"
-msgstr ""
+msgstr "Merci d'indiquer le nombre de personnes"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:798
 msgid "Name can't be empty"
@@ -73,7 +73,7 @@ msgstr "Indiquez votre téléphone"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:801
 msgid "Reason can't be empty"
-msgstr ""
+msgstr "Merci d'indiquer le motif"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi-restaurant-reservation.php:822
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/redi.php:226
@@ -473,7 +473,7 @@ msgstr "Pays"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:88
 msgid "Select Country"
-msgstr ""
+msgstr "Sélectionnez le pays"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:96
 msgid "The country of restaurant can be mentioned here."
@@ -573,7 +573,7 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:253
 msgid "Maximum number of guests"
-msgstr ""
+msgstr "Nombre maximum de personnes"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/admin_ajaxed.php:266
 msgid ""
@@ -679,7 +679,6 @@ msgid ""
 msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/basicpackage.php:9
-#, fuzzy
 msgid "Basic package functionality (paid version)"
 msgstr "Service Premium"
 
@@ -816,7 +815,7 @@ msgstr ""
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/cancel.php:3
 msgid "Back to reservation page"
-msgstr ""
+msgstr "Retour à la page de réservation"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:10
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:27
@@ -831,7 +830,7 @@ msgstr "Sélectionnez le lieu, la date et l'heure "
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:27
 msgid "Select date and time"
-msgstr ""
+msgstr "Sélectionner la date et l'heure"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:34
 msgid "Date"
@@ -851,7 +850,7 @@ msgstr "Personnes"
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:80
 #, php-format
 msgid "More than %s people"
-msgstr ""
+msgstr "Plus de %s personnes"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:122
 msgid "Check available time"
@@ -872,7 +871,7 @@ msgstr "Choisir une disponibilité"
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:195
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:264
 msgid "Previous"
-msgstr ""
+msgstr "Précédent"
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:203
 msgid "Provide reservation details"
@@ -901,6 +900,9 @@ msgid ""
 "been received and is confirmed. If you wish you may contact us by phone to "
 "confirm."
 msgstr ""
+"Merci pour votre réservation, un mail de confirmation vous a été envoyé. Si "
+"vous ne le recevez pas soyez assuré que votre réservation a bien été "
+"enregistrée."
 
 #: C:\ProjectsCloudSync\Wordpress\redi-restaurant-reservation\trunk/templates/frontend.php:285
 msgid "Powered by"
