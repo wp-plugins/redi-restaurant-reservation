@@ -213,11 +213,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				}
 			}
 			//WP-errors
-			if ( isset( $errors['Wp-Error'] ) && $admin ) {
+			if ( isset( $errors['Wp-Error'] ) ) {
 
 				foreach ( (array) $errors['Wp-Error'] as $error_key => $error ) {
 					foreach ( (array) $error as $err ) {
-						echo '<div class="error"><p>' . $error_key . ' : ' . $err . '</p></div>';
+						if ( $admin ) {
+							echo '<div class="error"><p>' . $error_key . ' : ' . $err . '</p></div>';
+						}
 						$this->pixel(
 							array(
 								'type'         => 'Wp-Error',
@@ -820,7 +822,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $this->ApiKey == null ) {
 				$this->display_errors( array(
 					'Error' => __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
-							'redi-restaurant-reservation' )
+						'redi-restaurant-reservation' )
 				), false, 'Frontend No ApiKey' );
 
 				return;
@@ -829,7 +831,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( isset( $_GET['jquery_fail'] ) && $_GET['jquery_fail'] === 'true' ) {
 				$this->display_errors( array(
 					'Error' => __( 'Plugin failed to properly load javascript file, please check that jQuery is loaded and no javascript errors present.',
-							'redi-restaurant-reservation' )
+						'redi-restaurant-reservation' )
 				), false, 'Frontend No ApiKey' );
 				$this->pixel( array(
 					'type'       => 'js_fail',
@@ -840,6 +842,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
 				$this->display_errors( $places, false, 'getPlaces' );
+
 				return;
 			}
 
@@ -851,6 +854,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$categories = $this->redi->getPlaceCategories( $placeID );
 			if ( isset( $categories['Error'] ) ) {
 				$this->display_errors( $categories, false, 'getPlaceCategories' );
+
 				return;
 			}
 
