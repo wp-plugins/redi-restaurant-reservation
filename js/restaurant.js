@@ -1,4 +1,6 @@
 jQuery(function () {
+
+
     function hideSteps() {
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
@@ -11,6 +13,7 @@ jQuery(function () {
         jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());
         hideSteps();
     };
+    updateTime();// update time in hidden field
 
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
