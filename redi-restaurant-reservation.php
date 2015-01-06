@@ -989,8 +989,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$timeshiftmode = self::GetPost( 'timeshiftmode',
 				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
-			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime', null,
-					$post ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime', date( 'H:i', current_time( 'timestamp' ) ), $post ) );
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array(
