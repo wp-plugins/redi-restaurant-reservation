@@ -1013,9 +1013,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$currentTimeISO = date( 'Y-m-d H:i', current_time( 'timestamp' ) );
 
 			if ( $timeshiftmode === 'byshifts' ) {
+				$StartTime = gmdate( 'Y-m-d 00:00', strtotime( $post['startDateISO'] ) ); //CalendarDate + 00:00
+				$EndTime   = gmdate( 'Y-m-d 00:00', strtotime( "+1 day", strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
 				$params = array(
-					'StartTime'           => urlencode( $startTimeISO ),
-					'EndTime'             => urlencode( $endTimeISO ),
+					'StartTime'           => urlencode( $StartTime ),
+					'EndTime'             => urlencode( $EndTime ),
 					'Quantity'            => $persons,
 					'Lang'                => str_replace( '_', '-', $post['lang'] ),
 					'CurrentTime'         => urlencode( $currentTimeISO ),
