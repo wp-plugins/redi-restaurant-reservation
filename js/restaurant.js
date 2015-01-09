@@ -1,5 +1,7 @@
 (function ($) {
 
+
+
     /* new persons select */
     $('.f_person_data tr td').click(function () {
         $('.f_person_data tr td').each(function () {
@@ -10,16 +12,25 @@
         step1call(jQuery('.f_calender_data tr td + .select > input[type="hidden"]').val());
     });
 
+   // $('#more-date-select').unbind();
+    $('#more-date-select').click(function () {
+      //  $("#datepicker").show();
+       // $('#datepicker').setDefaults($.datepicker.regional['ru']);
+        $('#datepicker').datepicker('dialog');
+
+        return false;
+    });
+
     /* new calendar select */
-    $('.f_calender_data tr td').click(function () {
-        $('.f_calender_data tr td').each(function () {
+    $('.date').click(function () {
+        $('.date').each(function () {
             $(this).removeClass('select');
         });
         $(this).addClass('select');
         step1call($(this).children('input').val());
     });
 
-    /* step1 > step2 */
+    /* st\ep1 > step2 */
     $('#next').on('click', function (event) {
         //check if everything is selected
         $('#tab1').removeClass('f_active_step1').addClass('f_non_active_step1');
@@ -63,20 +74,6 @@
             step1call(fullDate);
         }
     });
-
-    if ($.timepicker.regional[datepicker_locale] !== undefined) {
-        $.timepicker.setDefaults($.timepicker.regional[datepicker_locale]);
-    }
-    else {
-        $.timepicker.setDefaults($.timepicker.regional['']);
-    }
-
-    if ($.datepicker.regional[datepicker_locale] !== undefined) {
-        $.datepicker.setDefaults($.datepicker.regional[datepicker_locale.substring(0, 2)]);
-    }
-    else {
-        $.datepicker.setDefaults($.datepicker.regional['']);
-    }
 
     $('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
@@ -136,13 +133,13 @@
     $('#redi-restaurant-reservation').click(function () {
         var error = '';
         if ($('#UserName').val() === '') {
-            error += redi_restaurant_reservation.name_missing + '<br/>';
+            error += redi_restaurant_booking.name_missing + '<br/>';
         }
         if ($('#UserEmail').val() === '') {
-            error += redi_restaurant_reservation.email_missing + '<br/>';
+            error += redi_restaurant_booking.email_missing + '<br/>';
         }
         if ($('#UserPhone').val() === '') {
-            error += redi_restaurant_reservation.phone_missing + '<br/>';
+            error += redi_restaurant_booking.phone_missing + '<br/>';
         }
         $('.field_required').each(function () {
             if ($(this).attr('type') === 'checkbox' && $(this).attr('checked') !== 'checked' || $(this).attr('type') === 'textbox' && $(this).val() === '') {
@@ -196,7 +193,7 @@
         $('#step3load').show();
         $('#step3errors').hide('slow');
         $('#redi-restaurant-step3').attr('disabled', true);
-        $.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+        $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
             $('#redi-restaurant-step3').attr('disabled', false);
             $('#step3load').hide();
             if (response['Error']) {
@@ -262,7 +259,7 @@
             apikeyid: apikeyid
         };
 
-        $.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+        $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
             $('#step1load').hide();
             $('#step1button').attr('disabled', false);
             $('#buttons').html('');
@@ -376,13 +373,13 @@
     $('#redi-restaurant-cancel').click(function () {
         var error = '';
         if ($('#redi-restaurant-cancelID').val() === '') {
-            error += redi_restaurant_reservation.id_missing + '<br/>';
+            error += redi_restaurant_booking.id_missing + '<br/>';
         }
         if ($('#redi-restaurant-cancelEmail').val() === '') {
-            error += redi_restaurant_reservation.email_missing + '<br/>';
+            error += redi_restaurant_booking.email_missing + '<br/>';
         }
         if ($('#redi-restaurant-cancelReason').val() === '') {
-            error += redi_restaurant_reservation.reason_missing + '<br/>';
+            error += redi_restaurant_booking.reason_missing + '<br/>';
         }
         if (error) {
             $('#cancel-errors').html(error).show('slow');
@@ -402,7 +399,7 @@
         $('#cancel-success').slideUp();
         $('#cancel-load').show();
         $('#redi-restaurant-cancel').attr('disabled', true);
-        $.post(redi_restaurant_reservation.ajaxurl, data, function (response) {
+        $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
             $('#redi-restaurant-cancel').attr('disabled', false);
             $('#cancel-load').hide();
             if (response['Error']) {
@@ -439,5 +436,20 @@
         $('#step3').hide();
         $('#step2').show();
     });
+
+    //alert(datepicker_locale);
+    if ($.timepicker.regional[datepicker_locale] !== undefined) {
+        $.timepicker.setDefaults($.timepicker.regional[datepicker_locale]);
+    }
+    else {
+        $.timepicker.setDefaults($.timepicker.regional['']);
+    }
+
+    if ($.datepicker.regional[datepicker_locale] !== undefined) {
+        $.datepicker.setDefaults($.datepicker.regional[datepicker_locale.substring(0, 2)]);
+    }
+    else {
+        $.datepicker.setDefaults($.datepicker.regional['']);
+    }
 
 })(jQuery);
