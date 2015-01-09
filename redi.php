@@ -227,7 +227,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 				return array(
 					'request_time' => round( microtime( true ) - $curTime, 3 ) * 1000,
 					'Error'        => __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
-						'redi-restaurant-reservation' ),
+						'redi-restaurant-booking' ),
 					'Wp-Error'     => $output->errors
 				);
 			}
@@ -235,7 +235,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 			if ( $output['response']['code'] != 200 && $output['response']['code'] != 400 ) {
 				return array(
 					'Error' => __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
-						'redi-restaurant-reservation' )
+						'redi-restaurant-booking' )
 				);
 			}
 			$output = $output['body'];

@@ -48,7 +48,7 @@
 			<div class="postbox">
 				<h3><?php _e('Plugin Info', 'redi-restaurant-reservation') ?></h3>
 				<div class="inside">
-					<p><?php _e('Name', 'redi-restaurant-reservation') ?>: Redi Restaurant Reservation</p>
+					<p><?php _e('Name', 'redi-restaurant-reservation') ?>: Redi Restaurant Booking</p>
 					<p><?php _e('Version', 'redi-restaurant-reservation') ?>: <?php echo $this->version ?></p>
 					<p><?php _e('Authors', 'redi-restaurant-reservation') ?>: <a href="https://profiles.wordpress.org/thecatkin/" target="_blank">Catkin</a> & <a href="https://profiles.wordpress.org/robbyroboter/" target="_blank">Robby Roboter</a></p>
 					<p><?php _e('Email', 'redi-restaurant-reservation') ?>: <a target="_blank" href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a></p>
@@ -376,7 +376,7 @@
 		<input class="button-primary" id="submit" type="submit" value="<?php _e( 'Save Changes', 'redi-restaurant-reservation') ?>" name="submit">
 	</form>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='basic')):?>
-            <iframe src="http://wp.reservationdiary.eu/en-uk/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1700px;"></iframe>
+            <iframe src="http://wp.reservationdiary.eu/<?php echo str_replace( '_', '-', get_locale() )?>/<?php echo $this->ApiKey; ?>/Home" width="100%;" style="min-height: 1700px;"></iframe>
         <?php elseif((isset($_GET['sm']) && $_GET['sm']=='cancel')):?>
         <div id="icon-admin" class="icon32">
             <br>

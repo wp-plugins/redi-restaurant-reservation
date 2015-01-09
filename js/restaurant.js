@@ -1,7 +1,13 @@
+jQuery(function () {
+    if (jQuery.datepicker.regional[datepicker_locale] !== undefined) {
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[datepicker_locale.substring(0, 2)]);
+    }
+    else {
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
+    }
+});
+
 (function ($) {
-
-
-
     /* new persons select */
     $('.f_person_data tr td').click(function () {
         $('.f_person_data tr td').each(function () {
@@ -12,17 +18,67 @@
         step1call(jQuery('.f_calender_data tr td + .select > input[type="hidden"]').val());
     });
 
-   // $('#more-date-select').unbind();
-    $('#more-date-select').click(function () {
-      //  $("#datepicker").show();
-       // $('#datepicker').setDefaults($.datepicker.regional['ru']);
-        $('#datepicker').datepicker('dialog');
 
+    $('#more-date-select').click(function () {
+
+
+        $('#datepicker').datepicker("dialog", null,
+            //on Select Date
+            function () {
+
+                var selectedDate = moment($(this).datepicker("getDate")).set('hour', 0).set('minute', 0).set('second', 0);
+                var now = moment().set('hour', 0).set('minute', 0).set('second', 0);
+                var isToday = now.startOf('day').isSame(selectedDate.startOf('day'));
+                var start = 0;
+                if (!isToday) {
+                    var dayDiff = selectedDate.diff(now, 'days');
+                    start = dayDiff > 3 ? 3 : dayDiff;
+                }
+                var startDate = selectedDate.add(-start, 'days');
+                // var currentDate = $(this).datepicker("getDate");
+                //alert(Date(currentDate));
+                //  alert(daydiff(Date(), currentDate));
+                //remove all .date columns except datepicker
+                $('.date').each(function () {
+                    $(this).remove();
+                });
+                startDate = startDate.add(7, 'days');
+                //add new dates
+                for (var i = 0; i != 7; i++) {
+                    startDate = startDate.add(-1, 'days');
+                    $('#dates_row').prepend(
+                        $(document.createElement('td'))
+                            .addClass('date')
+                            .append('<input type="hidden"/>' +
+                            '<span class="legend">' + startDate.format('MMM') + ' </span>' +
+                            '<br/>' + startDate.format('D') + '<br/>' +
+                            '<span class="legend">' + startDate.format('ddd') + '</span>'
+                        )
+                    );
+                }
+            });
         return false;
     });
+    function translate_day(day) {
+        return day + 1;
+    }
+
+    function daydiff(first, second) {
+        return (second - first) / (1000 * 60 * 60 * 24);
+    }
+
+    function translate_month(month) {
+        return month + 1;
+    }
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(date.getDate() + days);
+        return result;
+    }
 
     /* new calendar select */
-    $('.date').click(function () {
+    $('.date').on('click', function () {
         $('.date').each(function () {
             $(this).removeClass('select');
         });
@@ -437,19 +493,5 @@
         $('#step2').show();
     });
 
-    //alert(datepicker_locale);
-    if ($.timepicker.regional[datepicker_locale] !== undefined) {
-        $.timepicker.setDefaults($.timepicker.regional[datepicker_locale]);
-    }
-    else {
-        $.timepicker.setDefaults($.timepicker.regional['']);
-    }
-
-    if ($.datepicker.regional[datepicker_locale] !== undefined) {
-        $.datepicker.setDefaults($.datepicker.regional[datepicker_locale.substring(0, 2)]);
-    }
-    else {
-        $.datepicker.setDefaults($.datepicker.regional['']);
-    }
 
 })(jQuery);

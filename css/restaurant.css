@@ -1260,3 +1260,7 @@ span.selectArrow7, span.selected2 {
 .required {
     border-top: 2px solid #fa9999 !important;
 }
+
+.date {
+    width: 33px;
+}

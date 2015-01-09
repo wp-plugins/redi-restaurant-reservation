@@ -24,6 +24,7 @@ if ( ! defined( 'ID' ) ) {
 }
 require_once( 'redi.php' );
 
+define( 'TOTALDATES', 7 );
 
 if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 	if ( ! class_exists( 'Report' ) ) {
@@ -773,6 +774,10 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 				array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider', 'jquery-ui-datepicker' ) );
 			wp_enqueue_script( 'datetimepicker' );
 
+			//DateTime parsing library
+			wp_register_script( 'moment', REDI_RESTAURANT_PLUGIN_URL . '/lib/moment/moment.js' );
+			wp_enqueue_script( 'moment' );
+
 			wp_register_script( 'datetimepicker-lang',
 				REDI_RESTAURANT_PLUGIN_URL . '/lib/datetimepicker/js/jquery.ui.i18n.all.min.js' );
 			wp_enqueue_script( 'datetimepicker-lang' );
@@ -911,7 +916,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			}
 			$dates     = array();
 			$date_date = $reservationStartTime;
-			for ( $dates_index = 0; $dates_index != 8; $dates_index ++ ) {
+			for ( $dates_index = 0; $dates_index != TOTALDATES; $dates_index ++ ) {
 				$dates[]   =
 					array(
 						'month'    => date( 'M', $date_date ),
@@ -929,6 +934,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			$out = ob_get_contents();
 
 			ob_end_clean();
+
 			return $out;
 		}
 

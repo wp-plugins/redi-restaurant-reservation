@@ -81,27 +81,30 @@
 				</tbody>
 			</table>
 		</div>
+		<div id="datepicker"></div>
 
 		<div class="f_subbox_data2">
-			<!--			<div class="f_arrow_back_temp"></div>-->
-			<!--			<div class="f_arrow_next_temp"></div>-->
 			<table width="350px" border="0" align="center" cellspacing="6" class="f_calender_data">
-				<tbody>
-				<tr>
+				<tr id="dates_row">
 					<?php foreach ( $dates as $date ): ?>
-						<td width="33px" <?php if ($date['selected']): ?>class="select"<?php endif ?>>
+						<td class="<?php if ($date['selected']): ?>select <?php endif ?> date"
 							<input type="hidden" value="<?php echo $date['hidden'] ?>">
 							<span class="legend"><?php echo $date['month'] ?> </span>
-							<br><?php echo $date['day'] ?><br>
+							<br/><?php echo $date['day'] ?><br/>
 							<span class="legend"><?php echo $date['weekday'] ?></span>
 						</td>
 					<?php endforeach ?>
+					<td width="33px" id="more-date-select">
+						<input type="hidden" id="122datepicker" value=""/>
+						<br/>...<br/>
+					</td>
 				</tr>
-				</tbody>
 			</table>
 
 		</div>
 		<br>
+
+
 
 		<div id="step1errors" <?php if ( ! isset( $step1['Error'] )): ?>style="display: none;"<?php endif; ?>
 		     class="redi-reservation-alert-error redi-reservation-alert">
