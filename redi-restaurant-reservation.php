@@ -934,6 +934,46 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$js_locale         = get_locale();
 			$datepicker_locale = substr( $js_locale, 0, 2 );
 
+			$disabled_dates_array = array(
+
+				"'2015-01-02'",
+				"'2015-01-05'",
+				"'2015-01-06'",
+				"'2015-01-07'",
+				"'2015-01-08'",
+				"'2015-01-09'",
+
+
+				"'2015-01-12'",
+				"'2015-01-13'",
+				"'2015-01-14'",
+				"'2015-01-15'",
+				"'2015-01-16'",
+				"'2015-01-19'",
+				"'2015-01-20'",
+				"'2015-01-21'",
+				"'2015-01-22'",
+				"'2015-01-23'",
+
+
+				"'2015-01-26'",
+				"'2015-01-27'",
+				"'2015-01-28'",
+				"'2015-01-29'",
+				"'2015-01-30'",
+				// 31
+				// 1
+				"'2015-02-02'",
+				"'2015-02-03'",
+				"'2015-02-04'",
+				"'2015-02-05'",
+				"'2015-02-06'",
+				"'2015-02-19'",
+
+
+			);
+			$disabled_dates      = implode( ',', $disabled_dates_array );
+
 			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
 
@@ -989,7 +1029,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$timeshiftmode = self::GetPost( 'timeshiftmode',
 				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
-			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime', date( 'H:i', current_time( 'timestamp' ) ), $post ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime',
+					date( 'H:i', current_time( 'timestamp' ) ), $post ) );
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode( array(
@@ -1014,8 +1055,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			if ( $timeshiftmode === 'byshifts' ) {
 				$StartTime = gmdate( 'Y-m-d 00:00', strtotime( $post['startDateISO'] ) ); //CalendarDate + 00:00
-				$EndTime   = gmdate( 'Y-m-d 00:00', strtotime( "+1 day", strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
-				$params = array(
+				$EndTime   = gmdate( 'Y-m-d 00:00',
+					strtotime( "+1 day", strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
+				$params    = array(
 					'StartTime'           => urlencode( $StartTime ),
 					'EndTime'             => urlencode( $EndTime ),
 					'Quantity'            => $persons,
