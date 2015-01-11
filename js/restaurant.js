@@ -337,6 +337,7 @@ jQuery(function () {
                     jQuery(this).attr('disabled', true);
                 });
             } else {
+                jQuery('#buttons').hide();
                 jQuery('#step2busy').show();
             }
         } else {
@@ -348,6 +349,7 @@ jQuery(function () {
                     jQuery(this).attr('disabled', false);
                 });
             } else {
+                jQuery('#buttons').show();
                 jQuery('#step2busy').hide();
             }
         }
