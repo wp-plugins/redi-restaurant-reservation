@@ -13,7 +13,7 @@ jQuery(function () {
         jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());
         hideSteps();
     };
-    updateTime();// update time in hidden field
+    jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
 
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
