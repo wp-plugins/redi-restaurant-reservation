@@ -67,12 +67,24 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		private $redi;
 		private $weekday = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
+        public function error_handler($errno, $errstr, $errfile, $errline ) {
+            $this->display_errors(array('Error' => array($errstr)), false);
+        }
+
+        public function exception_handler($exception) {
+            $this->display_errors(array(
+                'Error' => array(substr ($exception, 0 , strpos($exception, 'Stack trace')))
+            ), false);
+        }
+
 		function filter_timeout_time() {
 			return 60; //new number of seconds default 5
 		}
 
 		public function __construct() {
 			$this->_name = self::$name;
+            set_exception_handler(array($this, 'exception_handler'));
+            set_error_handler(array($this, 'error_handler'));
 			//Initialize the options
 			$this->get_options();
 
@@ -210,6 +222,15 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( isset( $errors['Error'] ) ) {
 				foreach ( (array) $errors['Error'] as $error ) {
 					echo '<div class="error redi-reservation-alert-error redi-reservation-alert"><p>' . $error . '</p></div>';
+                    $this->pixel(
+                        array(
+                            'type'         => 'error',
+                          //  'wp_error_key' => $error_key,
+                            'message'      => $error,
+                            'actionName'   => $action,
+                        //    'loadTime'     => $errors['request_time']
+                        )
+                    );
 				}
 			}
 			//WP-errors
@@ -226,7 +247,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 								'wp_error_key' => $error_key,
 								'message'      => $err,
 								'actionName'   => $action,
-								'loadTime'     => $errors['request_time'],
+								'loadTime'     => $errors['request_time']
 							)
 						);
 					}
