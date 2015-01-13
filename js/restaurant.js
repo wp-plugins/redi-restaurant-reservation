@@ -10,10 +10,14 @@ jQuery(function () {
     }
 
     var updateTime = function () {
-        jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());
+        if(timepicker == 'dropdown') {
+            jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
+        }
         hideSteps();
     };
-    jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
+    if(timepicker == 'dropdown') {
+        jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
+    }
 
     jQuery('#redi-restaurant-startHour').change(updateTime);
     jQuery('#redi-restaurant-startMinute').change(updateTime);
@@ -55,9 +59,9 @@ jQuery(function () {
         onClose: function (dateText, inst) {
             hideSteps();
         },
-        altField: "#redi-restaurant-startTime-alt",
+        altField: '#redi-restaurant-startTime-alt',
         altFieldTimeOnly: false,
-        altTimeFormat: "HH:mm"
+        altTimeFormat: 'HH:mm'
     });
 
     jQuery('#redi-restaurant-startDate').change(function () {

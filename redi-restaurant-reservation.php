@@ -920,12 +920,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' )) {
 
             $categoryID               = $categories[0]->ID;
             $time_format              = get_option( 'time_format' );
-            $date_format_setting      = $this->options['DateFormat'];
+            $date_format_setting      = $this->GetOption('DateFormat');
             $date_format              = $this->getPHPDateFormat( $date_format_setting );
             $calendar_date_format     = $this->getCalendarDateFormat( $date_format_setting );
-            $MinTimeBeforeReservation = (int) ( $this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0 ) + 1;
-            $reservationStartTime     = strtotime( '+' . $MinTimeBeforeReservation . ' hour',
-                current_time( 'timestamp' ) );
+            $MinTimeBeforeReservation = (int) ( $this->GetOption('MinTimeBeforeReservation') > 0 ? $this->GetOption('MinTimeBeforeReservation') : 0 ) + 1;
+            $reservationStartTime     = strtotime( '+' . $MinTimeBeforeReservation . ' hour', current_time( 'timestamp' ) );
             $startDate                = date( $date_format, $reservationStartTime );
             $startDateISO             = date( 'Y-m-d', $reservationStartTime );
             $startTime                = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
