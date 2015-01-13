@@ -54,9 +54,9 @@
 					<option value="<?php echo $minute;?>"><?php printf('%02d', $minute);?></option>
 				<?php endforeach;?>
 			</select>
-			<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:m', $startTime);?>" name="startTime"/><br clear="both"/>
+			<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:i', $startTime);?>" name="startTime"/><br clear="both"/>
 		<?php else:?>
-				<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:m', $startTime);?>"/>
+				<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:i', $startTime);?>"/>
 			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
 		<?php endif ?>
 		<?php endif;?>
