@@ -74,7 +74,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' )) {
 
         public function error_handler( $errno, $errstr, $errfile, $errline )
         {
-            $this->display_errors( array( 'Error' => array( $errstr ) ), false );
+	        if (in_array( 'redi-restaurant-reservation', explode( DIRECTORY_SEPARATOR, $errfile ) )) {
+		        $this->display_errors( array( 'Error' => array( $errline . ':' . $errstr ) ), false );
+	        }
         }
 
         public function exception_handler( $exception )
