@@ -200,7 +200,7 @@
 	<div id="step3" style="display: none;">
 
 		<h2 style="float:left;">
-			<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> <?php echo ( $hidesteps ) ? 3 : 2 ?>: <?php _e( 'Provide reservation details', 'redi-restaurant-reservation' ) ?>
+			<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> <?php echo ( $timeshiftmode !=='byshifts' ||$hidesteps ) ? 3 : 2 ?>: <?php _e( 'Provide reservation details', 'redi-restaurant-reservation' ) ?>
 		</h2>
 
 		<div>
