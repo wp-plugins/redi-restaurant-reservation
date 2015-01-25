@@ -25,18 +25,26 @@ jQuery(function () {
         if (jQuery(this).val() === 'group') {
             jQuery('#step1button').attr('disabled', true);
             jQuery('#large_groups_message').show('slow');
+            if (!hidesteps) {
+                jQuery('#step2').hide();
+            }
         }
         else {
             jQuery('#step1button').attr('disabled', false);
             jQuery('#large_groups_message').hide('slow');
+            var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
+            var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
+            var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+            var fullDate = year1 + '-' + month1 + '-' + day1
+            if (timeshiftmode === 'byshifts') {
+                step1call(fullDate)
+            }
+            else {
+                hideSteps();
+                jQuery('#redi-restaurant-startDateISO').val(fullDate);
+            }
         }
-        var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-        var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-        var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
-        var fullDate = year1 + '-' + month1 + '-' + day1;
-        if (timeshiftmode === 'byshifts') {
-            step1call(fullDate);
-        }
+
     });
 
     if (jQuery.timepicker.regional[datepicker_locale] !== undefined) {
@@ -86,8 +94,8 @@ jQuery(function () {
             }
             else {
                 hideSteps();
-            jQuery('#redi-restaurant-startDateISO').val(fullDate);
-        }
+                jQuery('#redi-restaurant-startDateISO').val(fullDate);
+            }
         }
     });
 
