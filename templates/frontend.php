@@ -86,7 +86,11 @@
 
 			<span id="step1times">
 				<br clear="all">
-				<br clear="all">
+				<?php if ( !$hidesteps ): ?>
+			        
+			        <label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label>
+
+				<?php endif ?>
 		        <span id="step1buttons">
 			        <?php
 			        if ( $hidesteps ):
@@ -125,7 +129,7 @@
 		        <?php endif?>
 		    </div>
 		<?php endif /* normal */ ?>
-		<br clear="both"/><br clear="both"/>
+		<br clear="both"/>
 
 		<div id="step1busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
 			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
