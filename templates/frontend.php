@@ -81,21 +81,22 @@
                 </option>
             <?php endif ?>
 		</select>
-		<?php if ( $timeshiftmode === 'byshifts' ): ?>
+		<?php if ( $timeshiftmode === 'byshifts' || $hidesteps): ?>
 			<br clear="both"/>
 
 			<span id="step1times">
-				<?php if ( $hidesteps ): ?>
-			        <br clear="all">
-			        <label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label>
-					<br clear="all">
-				<?php endif ?>
+				<br clear="all">
+				<br clear="all">
 		        <span id="step1buttons">
-			        <?php if ( $hidesteps ):
+			        <?php
+			        if ( $hidesteps ):
 				        $current = 0;
+
 				        if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ):
 					        $all_busy = true;
+
 					        foreach ( $step1 as $available ): ?>
+
 						        <?php $current_busy = true;
 						        if ( isset( $available['Availability'] ) && is_array( $available['Availability'] ) ) {
 							        foreach ( $available['Availability'] as $button ) {
@@ -104,9 +105,10 @@
 								        }
 							        }
 						        }
-						        if ( isset( $available['Name'] ) ): ?>
+
+						        if ( is_array( $available) ): ?>
 							        <input class="redi-restaurant-button button available" type="submit"
-							               id="time_<?php echo $current ++; ?>" value="<?php echo( $available['Name'] ); ?>"
+							               id="time_<?php echo $current ++; ?>" value="<?php echo( isset( $available['Name'] ) ? $available['Name'] : __('Next', 'redi-restaurant-reservation')); ?>"
 							               <?php if ($current_busy): ?>disabled="disabled"<?php endif ?>/>
 						        <?php endif ?>
 					        <?php endforeach ?>
@@ -144,7 +146,7 @@
 
 	<div id="step2" <?php if ($timeshiftmode !=='byshifts' || $hidesteps): ?>style="display: none" <?php endif ?>>
 
-		<?php if ( $timeshiftmode !=='byshifts' ||$hidesteps ): ?>
+		<?php if ( $timeshiftmode !=='byshifts' || $hidesteps ): ?>
 			<h2 style="float:left;">
 				<?php _e('Step', 'redi-restaurant-reservation')?> 2: <?php _e('Select available time', 'redi-restaurant-reservation')?>
 			</h2>
@@ -152,14 +154,11 @@
 		<?php endif ?>
 		<span id="time2label" style="display: none"><?php _e('Time', 'redi-restaurant-reservation')?>:</label><br clear="both"/></span>
 		<div id="buttons">
-
-			<?php if ( isset( $step1 ) && is_array($step1)&& !isset($step1['Error'] )): ?>
+			<?php if ( isset( $step1 ) && is_array($step1) && !isset($step1['Error'] )): ?>
 				<?php $current = 0;?>
 				<?php foreach ( $step1 as $available ): ?>
 					<?php if ( isset( $available['Name'] ) ): ?>
-
 						<?php if ( !$hidesteps ): ?>
-
 							<?php echo( $available['Name'] ); ?>:</br>
 						<?php endif ?>
 					<?php endif ?>
@@ -200,7 +199,7 @@
 	<div id="step3" style="display: none;">
 
 		<h2 style="float:left;">
-			<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> <?php echo ( $timeshiftmode !=='byshifts' ||$hidesteps ) ? 3 : 2 ?>: <?php _e( 'Provide reservation details', 'redi-restaurant-reservation' ) ?>
+			<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> <?php echo ( $timeshiftmode !=='byshifts' || $hidesteps ) ? 3 : 2 ?>: <?php _e( 'Provide reservation details', 'redi-restaurant-reservation' ) ?>
 		</h2>
 
 		<div>

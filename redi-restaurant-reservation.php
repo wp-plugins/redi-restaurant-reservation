@@ -863,6 +863,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' )) {
                     'email_missing'  => __( 'Email can\'t be empty', 'redi-restaurant-reservation' ),
                     'phone_missing'  => __( 'Phone can\'t be empty', 'redi-restaurant-reservation' ),
                     'reason_missing' => __( 'Reason can\'t be empty', 'redi-restaurant-reservation' ),
+	                'next'           => __( 'Next', 'redi-restaurant-reservation' ),
                 ) );
             wp_enqueue_script( 'restaurant' );
 

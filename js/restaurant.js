@@ -278,16 +278,19 @@ jQuery(function () {
                             var step1buttons_html = '';
                             jQuery('#step1buttons_html').html(step1buttons_html).hide();
                             for (var availability in response) {
-                                if (response[availability]['Name'] !== undefined) {
+                                if (response[availability]['Name'] !== undefined ) {
                                     var html = '';
 
                                     if (!hidesteps) {
                                         if (response[availability]['Name']) {
                                             html += response[availability]['Name'] + ':</br>';
                                         }
-                }
+                                    }
 
                                     if (hidesteps) {
+                                        if(response[availability]['Name'] === null) {
+                                            response[availability]['Name'] = redi_restaurant_reservation.next;
+                                        }
                                         step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
                                         html += '<span id="opentime_' + (current++) + '" style="display: none">';
                                         html += jQuery('#time2label').html();

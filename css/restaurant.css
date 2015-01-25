@@ -90,10 +90,11 @@ strong
     font-weight: normal;
 }
 
+.redi-restaurant-time-button[disabled="disabled"],
 .redi-restaurant-button[disabled="disabled"]
 {
-    opacity:0.4;
-    filter:alpha(opacity=40); /* For IE8 and earlier */
+    opacity:0.4 !important;
+    filter:alpha(opacity=40) !important; /* For IE8 and earlier */
 }
 
 .redi-restaurant-time-button[select="select"], .redi-restaurant-button[select="select"]
