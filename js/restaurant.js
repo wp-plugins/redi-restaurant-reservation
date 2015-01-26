@@ -326,6 +326,7 @@ jQuery(function () {
                     }
                 }
 
+                jQuery('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
                 if (!hidesteps) {
                     jQuery('#step2').show('slow');
                     // if selected time is available make it bold and show fields
@@ -337,7 +338,7 @@ jQuery(function () {
                 }
 
                 jQuery('#UserName').focus();
-                jQuery('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
+
             }
         }, 'json');
     }
