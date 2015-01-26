@@ -10,12 +10,12 @@ jQuery(function () {
     }
 
     var updateTime = function () {
-        if(timepicker == 'dropdown') {
+        if (timepicker == 'dropdown') {
             jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
         }
         hideSteps();
     };
-    if(timepicker == 'dropdown') {
+    if (timepicker == 'dropdown') {
         jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
     }
 
@@ -55,7 +55,7 @@ jQuery(function () {
     }
 
     if (jQuery.datepicker.regional[datepicker_locale] !== undefined) {
-        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[datepicker_locale.substring(0,2)]);
+        jQuery.datepicker.setDefaults(jQuery.datepicker.regional[datepicker_locale.substring(0, 2)]);
     }
     else {
         jQuery.datepicker.setDefaults(jQuery.datepicker.regional['']);
@@ -187,12 +187,12 @@ jQuery(function () {
             if (response['Error']) {
                 jQuery('#step3errors').html(response['Error']).show('slow');
             } else {
-                ga_event('Reservation confirmed','');
+                ga_event('Reservation confirmed', '');
                 jQuery('#step1').hide('slow');
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
                 jQuery('#step4').show('slow'); //success message
-                jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+                jQuery('html, body').animate({scrollTop: 0}, 'slow');
             }
         }, 'json');
         return false;
@@ -202,7 +202,7 @@ jQuery(function () {
             step1call();
         }
         else {
-        jQuery('#step1button').attr('disabled', true);
+            jQuery('#step1button').attr('disabled', true);
             var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
             var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
             var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
@@ -261,13 +261,13 @@ jQuery(function () {
                         case 2: //AlternativeTimeByShiftStartTime
                             var all_busy = true;
                             for (var res in response) {
-								if(response[res] !== undefined) {
-										jQuery('#buttons').append(
-											'<button class="redi-restaurant-time-button button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
-										' ' + (response[res]['Select'] ? 'select="select"' : '') +
-										'>' + response[res]['StartTime'] + '</button>'
-										);
-									}
+                                if (response[res] !== undefined) {
+                                    jQuery('#buttons').append(
+                                        '<button class="redi-restaurant-time-button button" value="' + response[res]['StartTimeISO'] + '" ' + (response[res]['Available'] ? '' : 'disabled="disabled"') +
+                                        ' ' + (response[res]['Select'] ? 'select="select"' : '') +
+                                        '>' + response[res]['StartTime'] + '</button>'
+                                    );
+                                }
                                 if (response[res]['Available']) all_busy = false;
                             }
                             display_all_busy(all_busy);
@@ -278,7 +278,7 @@ jQuery(function () {
                             var step1buttons_html = '';
                             jQuery('#step1buttons_html').html(step1buttons_html).hide();
                             for (var availability in response) {
-                                if (response[availability]['Name'] !== undefined ) {
+                                if (response[availability]['Name'] !== undefined) {
                                     var html = '';
 
                                     if (!hidesteps) {
@@ -288,7 +288,7 @@ jQuery(function () {
                                     }
 
                                     if (hidesteps) {
-                                        if(response[availability]['Name'] === null) {
+                                        if (response[availability]['Name'] === null) {
                                             response[availability]['Name'] = redi_restaurant_reservation.next;
                                         }
                                         step1buttons_html += '<input class="redi-restaurant-button button available" type="submit" id="time_' + (current) + '" value="' + response[availability]['Name'] + '" >';
@@ -328,13 +328,19 @@ jQuery(function () {
 
                 if (!hidesteps) {
                     jQuery('#step2').show('slow');
+                    // if selected time is available make it bold and show fields
+                    jQuery('.redi-restaurant-time-button').each(function () {
+                        if (jQuery(this).attr('select')) {
+                            jQuery(this).click();
+                        }
+                    });
                 }
 
-                    jQuery('#UserName').focus();
+                jQuery('#UserName').focus();
                 jQuery('#redi-restaurant-startTimeHidden').val(response['StartTimeISO']);
-                    }
-        }, 'json');
             }
+        }, 'json');
+    }
 
     function display_all_busy(display) {
         if (display) {
@@ -419,7 +425,7 @@ jQuery(function () {
                 jQuery('#cancel-success').slideDown();
                 jQuery('#cancel-errors').slideUp();
                 jQuery('#cancel-reservation-form').slideUp();
-                jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+                jQuery('html, body').animate({scrollTop: 0}, 'slow');
                 //clear form
                 jQuery('#redi-restaurant-cancelID').val('');
                 jQuery('#redi-restaurant-cancelEmail').val('');
