@@ -86,7 +86,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			add_action( 'admin_menu', array( &$this, 'redi_restaurant_admin_menu_link' ) );
 
 			$this->page_title = 'booking';
-			$this->content    = '[redirestaurant]';
+			$this->content    = '[redibooking]';
 			$this->page_name  = $this->_name;
 			$this->page_id    = '0';
 
@@ -97,7 +97,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
 			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
 			add_filter( 'http_request_timeout', array( &$this, 'filter_timeout_time' ) );
-			add_shortcode( 'redirestaurant', array( $this, 'shortcode' ) );
+			add_shortcode( 'redibooking', array( $this, 'shortcode' ) );
 
 		}
 
