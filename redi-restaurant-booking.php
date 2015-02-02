@@ -920,7 +920,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 				$dates[]   =
 					array(
 						'month'    => date( 'M', $date_date ),
-						'day'      => date( 'j', $date_date ),
+						'day'      => date( 'd', $date_date ),
 						'weekday'  => date( 'D', $date_date ),
 						'selected' => ( $dates_index == 0 ),
 						'hidden'   => date( 'Y-m-d', $date_date )

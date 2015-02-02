@@ -87,7 +87,7 @@
 			<table width="350px" border="0" align="center" cellspacing="6" class="f_calender_data">
 				<tr id="dates_row">
 					<?php foreach ( $dates as $date ): ?>
-						<td class="<?php if ($date['selected']): ?>select <?php endif ?> date"
+						<td class="<?php if ($date['selected']): ?>select <?php endif ?> date">
 							<input type="hidden" value="<?php echo $date['hidden'] ?>">
 							<span class="legend"><?php echo $date['month'] ?> </span>
 							<br/><?php echo $date['day'] ?><br/>
@@ -104,8 +104,6 @@
 		</div>
 		<br>
 
-
-
 		<div id="step1errors" <?php if ( ! isset( $step1['Error'] )): ?>style="display: none;"<?php endif; ?>
 		     class="redi-reservation-alert-error redi-reservation-alert">
 			<?php if ( isset( $step1['Error'] ) ): ?>
@@ -113,10 +111,11 @@
 			<?php endif; ?>
 		</div>
 		<br>
-
-
-		<p>
-
+		<div id="step2busy" <?php if ( ! $all_busy): ?>style="display: none;"<?php endif; ?>
+		     class="redi-reservation-alert-error redi-reservation-alert">
+			<?php _e( 'Reservation is not available on selected day. Please select another day.',
+				'redi-restaurant-reservation' ); ?>
+		</div>
 		<div class="f_subbox_title">
 			<table width="335" border="0" align="center" cellspacing="0">
 				<tbody>
@@ -128,11 +127,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="step2busy" <?php if ( ! $all_busy): ?>style="display: none;"<?php endif; ?>
-		     class="redi-reservation-alert-error redi-reservation-alert">
-			<?php _e( 'Reservation is not available on selected day. Please select another day.',
-				'redi-restaurant-reservation' ); ?>
-		</div>
+
 		<div class="f_subbox_data3">
 			<!--			<div class="f_arrow_next_temp2"></div>-->
 			<!--			<div class="f_arrow_back_temp2"></div>-->
@@ -163,8 +158,6 @@
 								<?php if ( $button['Available'] ) {
 									$all_busy = false;
 								} ?>
-
-
 							<?php endforeach; ?>
 						<?php endif; ?>
 
@@ -179,7 +172,6 @@
 		<div style="width: 160px; height:40px; margin-top: 30px;">
 			<div class="f_btn" id="next">NEXT &nbsp;&gt;</div>
 		</div>
-		</p>
 		<br>
 	</div>
 	<div id="step2" style="display: none" class="f_tab_box">

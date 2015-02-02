@@ -503,6 +503,7 @@
     padding-top: 17px;
     margin-right: 0;
     font-weight: 700;
+    box-sizing: initial;
 }
 
 .f_btn:hover {
@@ -938,7 +939,7 @@ textarea {
     height: 149px;
     z-index: 100;
     padding: 0;
-    border-radius:0;
+    border-radius: 0;
 }
 
 .textarea_field:focus {
@@ -1102,6 +1103,7 @@ span.selectArrow7, span.selected2 {
     margin-right: 0;
     font-weight: 700;
     line-height: 13px;
+    box-sizing: initial;
 }
 
 .f_btn_step2:hover {
@@ -1244,7 +1246,7 @@ span.selectArrow7, span.selected2 {
     overflow: hidden;
     position: relative;
     text-indent: 20px;
-    width: 300px;
+    width: 300px !important;
     z-index: 100;
     padding: 0;
 }
@@ -1263,4 +1265,14 @@ span.selectArrow7, span.selected2 {
 
 .date {
     width: 33px;
+}
+
+.redi-restaurant-time-button[disabled="disabled"],
+.redi-restaurant-button[disabled="disabled"] {
+    opacity: 0.4 !important;
+    filter: alpha(opacity=40) !important; /* For IE8 and earlier */
+}
+
+#step2busy {
+    line-height: 100%;
 }

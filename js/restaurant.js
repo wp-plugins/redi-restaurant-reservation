@@ -8,6 +8,17 @@ jQuery(function () {
 });
 
 (function ($) {
+
+    var calselect = function () {
+        $('.date').each(function () {
+            $(this).removeClass('select');
+        });
+        $(this).addClass('select');
+        step1call($(this).children('input').val());
+    };
+    /* new calendar select */
+    $('td.date').on('click', calselect);
+
     /* new persons select */
     $('.f_person_data tr td').click(function () {
         $('.f_person_data tr td').each(function () {
@@ -20,13 +31,12 @@ jQuery(function () {
 
 
     $('#more-date-select').click(function () {
-
-
         $('#datepicker').datepicker("dialog", null,
             //on Select Date
             function () {
 
                 var selectedDate = moment($(this).datepicker("getDate")).set('hour', 0).set('minute', 0).set('second', 0);
+                var current = moment(selectedDate);
                 var now = moment().set('hour', 0).set('minute', 0).set('second', 0);
                 var isToday = now.startOf('day').isSame(selectedDate.startOf('day'));
                 var start = 0;
@@ -34,10 +44,8 @@ jQuery(function () {
                     var dayDiff = selectedDate.diff(now, 'days');
                     start = dayDiff > 3 ? 3 : dayDiff;
                 }
-                var startDate = selectedDate.add(-start, 'days');
-                // var currentDate = $(this).datepicker("getDate");
-                //alert(Date(currentDate));
-                //  alert(daydiff(Date(), currentDate));
+                var startDate = moment(selectedDate.add(-start, 'days'));
+
                 //remove all .date columns except datepicker
                 $('.date').each(function () {
                     $(this).remove();
@@ -46,16 +54,23 @@ jQuery(function () {
                 //add new dates
                 for (var i = 0; i != 7; i++) {
                     startDate = startDate.add(-1, 'days');
-                    $('#dates_row').prepend(
-                        $(document.createElement('td'))
-                            .addClass('date')
-                            .append('<input type="hidden"/>' +
-                            '<span class="legend">' + startDate.format('MMM') + ' </span>' +
-                            '<br/>' + startDate.format('D') + '<br/>' +
-                            '<span class="legend">' + startDate.format('ddd') + '</span>'
-                        )
+                    var new_element = $('<td>')
+                        .addClass('date')
+                        .append('<input type="hidden" value="' + startDate.format('YYYY-MM-DD') + '"/>' +
+                        '<span class="legend">' + startDate.format('MMM') + ' </span>' +
+                        '<br/>' + startDate.format('DD') + '<br/>' +
+                        '<span class="legend">' + startDate.format('ddd') + '</span>'
                     );
+                    $('#dates_row').prepend(new_element);
+
+                    new_element.on('click', calselect);// should work without it
+                    //select new added date
+                    if (current.isSame(startDate)) {
+                        new_element.click();
+                    }
                 }
+
+
             });
         return false;
     });
@@ -77,16 +92,8 @@ jQuery(function () {
         return result;
     }
 
-    /* new calendar select */
-    $('.date').on('click', function () {
-        $('.date').each(function () {
-            $(this).removeClass('select');
-        });
-        $(this).addClass('select');
-        step1call($(this).children('input').val());
-    });
 
-    /* st\ep1 > step2 */
+    /* step1 > step2 */
     $('#next').on('click', function (event) {
         //check if everything is selected
         $('#tab1').removeClass('f_active_step1').addClass('f_non_active_step1');
@@ -167,6 +174,12 @@ jQuery(function () {
     });
 
     $('.redi-restaurant-time-button').live('click', function () {
+        if ($(this).attr('disabled')) {
+            e.prefentDefault();
+            e.stopPropagation();
+            return;
+        }
+        // do your stuff here
         $('.redi-restaurant-time-button').each(function () {
             //      $(this).removeAttr('select');
             $(this).removeClass('select');
@@ -317,6 +330,7 @@ jQuery(function () {
 
         $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
             $('#step1load').hide();
+            $('#step2busy').hide();
             $('#step1button').attr('disabled', false);
             $('#buttons').html('');
             if (response['Error']) {
