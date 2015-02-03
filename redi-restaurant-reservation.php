@@ -226,8 +226,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' )) {
                     $times[$value] = array( 'OpenTime' => '12:00', 'CloseTime' => '00:00' );
                 }
                 $this->redi->setServiceTime( $categoryID, $times );
-
-                $this->options['serviceID'] = $serviceID = (int) $service[0]->ID;
+	            
                 $this->saveAdminOptions();
             }
 
@@ -314,8 +313,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' )) {
             $placeID = $places[0]->ID;
 
             $categories = $this->redi->getPlaceCategories( $placeID );
-
-            $serviceID = $this->options['serviceID'];
 
             $categoryID = $categories[0]->ID;
 
