@@ -61,6 +61,10 @@ if ( ! class_exists( 'ReDi' ) ) {
 		$this->ApiKey = $ApiKey;
 	}
 
+	public function getReservationUrl($lang) {
+        return  'http://wp.reservationdiary.eu/'.$lang.'/'.$this->ApiKey.'/Reservation/Index';
+	}
+
     public function getEmailContent($reservationID, $type, $params){
 			return $this->request( REDI_RESTAURANT_API . EMAILCONTENT . $this->ApiKey . '/' . $reservationID . '/ClientReservation' . $type,
 				GET, $this->strParams( $params ) );
@@ -163,7 +167,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 		public function getPlace( $placeID ) {
 		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
 	}
-    
+
 		public function getPlaceCategories( $placeID ) {
 		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
 	}
@@ -171,7 +175,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 		public function getPlaces() {
 		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey, GET);
 	}
-    
+
 		public function setApiKey( $ApiKey ) {
 		$this->ApiKey = $ApiKey;
 	}

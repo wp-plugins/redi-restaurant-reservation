@@ -37,14 +37,14 @@
 	UserVoice.push(['identify', {email:'<?php echo get_option( 'admin_email' );?>',name:'<?php echo get_option( 'blogname' );?>'}]);
 	UserVoice.push(['addTrigger', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
 </script>
-
+<?php $admin_slug = 'redi-restaurant-reservation-settings' ?>
 <div class="wrap">
 <a class="nav-tab <?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?> nav-tab-active<?php endif;?>"
-   href="options-general.php?page=redi-restaurant-reservation&sm=free"><?php _e('Free package settings', 'redi-restaurant-reservation') ?></a>
+   href="admin.php?page=<?php echo $admin_slug?>&amp;sm=free"><?php _e('Free package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab nav-tab-basic <?php if((isset($_GET['sm']) && $_GET['sm']=='basic')): ?> nav-tab-active<?php endif;?>"
-   href="options-general.php?page=redi-restaurant-reservation&sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
+   href="admin.php?page=<?php echo $admin_slug?>&amp;sm=basic"><?php _e('Basic package settings', 'redi-restaurant-reservation') ?></a>
 <a class="nav-tab <?php if((isset($_GET['sm']) && $_GET['sm']=='cancel')): ?> nav-tab-active<?php endif;?>"
-   href="options-general.php?page=redi-restaurant-reservation&sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
+   href="admin.php?page=<?php echo $admin_slug?>&amp;sm=cancel"><?php _e('Cancel reservation', 'redi-restaurant-reservation') ?></a>
 	<?php if(!isset($_GET['sm']) || (isset($_GET['sm']) && $_GET['sm']=='free')): ?>
 		<div class="redi-admin-right" >
 
