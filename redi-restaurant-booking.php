@@ -362,13 +362,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 					$form_valid = false;
 				}
 
-
 				for ( $i = 1; $i != CUSTOM_FIELDS; $i ++ ) {
-					$field_name     = 'field_' . $i . '_name';
-					$field_type     = 'field_' . $i . '_type';
-					$field_required = 'field_' . $i . '_required';
-					$field_message  = 'field_' . $i . '_message';
-
 					$field_name     = 'field_' . $i . '_name';
 					$field_type     = 'field_' . $i . '_type';
 					$field_required = 'field_' . $i . '_required';
@@ -602,7 +596,6 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 				load_plugin_textdomain( 'redi-restaurant-booking-errors', false,
 					'redi-restaurant-booking/lang' );
 			}
-
 		}
 
 		/**
@@ -656,8 +649,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			delete_option( $this->_name . '_page_id' );
 			add_option( $this->_name . '_page_id', $this->page_id );
 
-			if ( $this->ApiKey == null ) // TODO: move to install
-			{
+			if ( $this->ApiKey == null ){ // TODO: move to install
 				$this->register();
 			}
 
