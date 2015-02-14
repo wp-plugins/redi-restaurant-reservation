@@ -61,9 +61,9 @@ if ( ! class_exists( 'ReDi' ) ) {
 		$this->ApiKey = $ApiKey;
 	}
 
-	public function getReservationUrl($lang) {
-        return  'http://wp.reservationdiary.eu/'.$lang.'/'.$this->ApiKey.'/Reservation/Index';
-	}
+    public function getReservationUrl($lang){
+        return 'http://wp.reservationdiary.eu/' . $lang . '/' . $this->ApiKey . '/Reservation/Index';
+    }
 
     public function getEmailContent($reservationID, $type, $params){
 			return $this->request( REDI_RESTAURANT_API . EMAILCONTENT . $this->ApiKey . '/' . $reservationID . '/ClientReservation' . $type,
