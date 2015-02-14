@@ -187,7 +187,7 @@
 			<tr>
 				<th scope="row">
 					<label for="MaxTime">
-						<?php _e('Max time before reservations', 'redi-restaurant-reservation'); ?>
+						<?php _e('Early Bookings', 'redi-restaurant-reservation'); ?>
 					</label>
 				</th>
 				<td style="vertical-align: top;">
@@ -201,7 +201,7 @@
 				</td>
                 <td style="width:75%">
                     <p class="description">
-                        <?php _e('Maximum time before the reservation is accepted. It can be anything from 1 month to 1 year.', 'redi-restaurant-reservation') ?>
+                        <?php _e('Maximum time before the reservation can be accepted. It can be anything from 1 month to 1 year.', 'redi-restaurant-reservation') ?>
                     </p>
                 </td>
 			</tr>
