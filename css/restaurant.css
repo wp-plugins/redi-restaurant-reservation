@@ -88,6 +88,11 @@ strong
 .redi-restaurant-button
 {
     font-weight: normal;
+
+}
+.redi-restaurant-time-button
+{
+    float:left;
 }
 
 .redi-restaurant-time-button[disabled="disabled"],
