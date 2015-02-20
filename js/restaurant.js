@@ -63,7 +63,7 @@ jQuery(function () {
 
     jQuery('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
-        timeFormat: time_format,
+        timeFormat: timepicker_time_format,
         onClose: function (dateText, inst) {
             hideSteps();
         },
@@ -299,7 +299,13 @@ jQuery(function () {
 
                                         var b = response[availability]['Availability'][current_button_index];
 
-                                        html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' + ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>';
+                                        var date = Date.createFromString(b['StartTimeISO']);
+
+                                        var UTCdate = new Date(date.getTime() + date.getTimezoneOffset()*60*1000);
+
+                                        html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' +
+                                        ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>'
+                                        + UTCdate.format(buttons_time_format) + '</button>';
                                         if (b['Available']) all_busy = false;
                                     }
                                     if (hidesteps) {
@@ -455,3 +461,36 @@ jQuery(function () {
         jQuery('#step2').show();
     });
 });
+
+Date.createFromString = function (string) {
+    'use strict';
+    var pattern = /^(\d\d\d\d)-(\d\d)-(\d\d)[ T](\d\d):(\d\d)$/;
+    var matches = pattern.exec(string);
+    if (!matches) {
+        throw new Error("Invalid string: " + string);
+    }
+    var year = matches[1];
+    var month = matches[2] - 1;   // month counts from zero
+    var day = matches[3];
+    var hour = matches[4];
+    var minute = matches[5];
+    //var second = matches[6];
+    //var zoneType = matches[7];
+    //var zoneHour = matches[8] || 0;
+    //var zoneMinute = matches[9] || 0;
+
+    // Date.UTC() returns milliseconds since the unix epoch.
+    var absoluteMs = Date.UTC(year, month, day, hour, minute, 0);
+    //var ms;
+    //if (zoneType === 'Z') {
+    //    // UTC time requested. No adjustment necessary.
+    //    ms = absoluteMs;
+    //} else if (zoneType === '+') {
+    //    // Adjust UTC time by timezone offset
+    //    ms = absoluteMs - (zoneHour * 60 * 60 * 1000) - (zoneMinute * 60 * 1000);
+    //} else if (zoneType === '-') {
+    //    // Adjust UTC time by timezone offset
+    //    ms = absoluteMs + (zoneHour * 60 * 60 * 1000) + (zoneMinute * 60 * 1000);
+    //}
+    return new Date(absoluteMs);
+};
