@@ -208,15 +208,16 @@ if ( ! class_exists( 'ReDi' ) ) {
 	private function request( $url, $method = GET, $params_string = null ) {
 		$request = new WP_Http;
 		$curTime = microtime( true );
+        $req = array(
+            'method'  => $method,
+            'body'    => $params_string,
+            'headers' => array(
+                'Content-Type' => 'application/json; charset=utf-8',
+                'Content-Length' => $method == GET ? 0 : strlen($params_string)
+            )
+        );
 		$output  = $request->request(
-			$url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ),
-			array(
-				'method'  => $method,
-				'body'    => $params_string,
-				'headers' => array(
-					'Content-Type' => 'application/json; charset=utf-8'
-				)
-			) );
+			$url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ),$req);
 		if ( is_wp_error( $output ) ) {
 			return array(
 				'request_time' => round( microtime( true ) - $curTime, 3 ) * 1000,
@@ -228,6 +229,9 @@ if ( ! class_exists( 'ReDi' ) ) {
 
 		if ( $output['response']['code'] != 200 && $output['response']['code'] != 400 ) {
 				return array(
+//                    'get' => $url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ),
+//                    'debug' => var_export($req, true),
+                    'response_code' => $output['response']['code'],
 					'Error' => __( 'Online reservation service is not available at this time. Try again later or contact us directly.',
 						'redi-restaurant-reservation' )
 				);

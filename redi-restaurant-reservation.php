@@ -1062,12 +1062,14 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$timeshiftmode = self::GetPost( 'timeshiftmode',
 				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
-			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime',
-					date( 'H:i', current_time( 'timestamp' ) ), $post ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' .
+                self::GetPost( 'startTime', date( 'H:i', current_time( 'timestamp' ) ), $post ) );
 
 			if ( $date['error_count'] > 0 ) {
-				echo json_encode( array(
-					'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' )
+
+				echo json_encode(
+                    array_merge($date['errors'],
+                    array('Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ))
 				) );
 				die;
 			}
@@ -1121,7 +1123,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			} else {
 				$categories = $this->redi->getPlaceCategories( $placeID );
 				if ( isset( $categories['Error'] ) ) {
-					$categories['Error'] = __( $categories['Error'], 'redi-restaurant-reservation-errors' );
+					$categories['Error'] = __('categories:'.$categories['Error'], 'redi-restaurant-reservation-errors' );
+
 					echo json_encode( $categories );
 					die;
 				}
