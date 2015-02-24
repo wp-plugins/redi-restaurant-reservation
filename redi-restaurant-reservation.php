@@ -1052,7 +1052,7 @@ if (!class_exists('ReDiRestaurantReservation')) {
 
             $timepicker_time_format = (isset($time_format_s[0]) && in_array($time_format_s[0], array('g', 'h'))) ? 'h:mm tt' : 'HH:mm';
             $buttons_time_format = (isset($time_format_s[0]) && in_array($time_format_s[0], array('g', 'h'))) ? 'h:MM TT' : 'HH:MM';
-            if (function_exists('qtrans_convertTimeFormat')) {// time format from qTranslate
+            if (function_exists('qtrans_convertTimeFormat') || function_exists('ppqtrans_convertTimeFormat')) {// time format from qTranslate and qTranslate Plus
                 global $q_config;
                 $format = $q_config['time_format'][$q_config['language']];
                 $buttons_time_format = self::convert_to_js_format($format);
