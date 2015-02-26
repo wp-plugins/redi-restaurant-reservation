@@ -1,6 +1,6 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
 <?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
-<script type="text/javascript">var timepicker = '<?php echo $timepicker;?>';var date_format = '<?php echo $calendar_date_format ?>';var timepicker_time_format ='<?php echo $timepicker_time_format;?>';var buttons_time_format ='<?php echo $buttons_time_format;?>';var locale = '<?php echo $js_locale?>';var datepicker_locale = '<?php echo $datepicker_locale?>'; var timeshiftmode = '<?php echo $timeshiftmode; ?>'; var hidesteps = <?php echo $hidesteps ? 1 : 0; ?>; var apikeyid = '<?php echo $apiKeyId; ?>';</script>
+<script type="text/javascript">var timepicker = '<?php echo $timepicker;?>';var date_format = '<?php echo $calendar_date_format ?>';var timepicker_time_format ='<?php echo $timepicker_time_format;?>';var locale = '<?php echo $js_locale?>';var datepicker_locale = '<?php echo $datepicker_locale?>'; var timeshiftmode = '<?php echo $timeshiftmode; ?>'; var hidesteps = <?php echo $hidesteps ? 1 : 0; ?>; var apikeyid = '<?php echo $apiKeyId; ?>';</script>
 <form id="redi-reservation" name="redi-reservation" method="post" action="?jquery_fail=true">
 
 	<div id="step1">
@@ -87,9 +87,7 @@
 			<span id="step1times">
 				<br clear="all">
 				<?php if ( !$hidesteps ): ?>
-			        
-			        <label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label>
-
+					<label><?php _e( 'Time', 'redi-restaurant-reservation' ) ?>:</label>
 				<?php endif ?>
 		        <span id="step1buttons">
 			        <?php
@@ -98,9 +96,7 @@
 
 				        if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ):
 					        $all_busy = true;
-
 					        foreach ( $step1 as $available ): ?>
-
 						        <?php $current_busy = true;
 						        if ( isset( $available['Availability'] ) && is_array( $available['Availability'] ) ) {
 							        foreach ( $available['Availability'] as $button ) {

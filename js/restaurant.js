@@ -299,13 +299,9 @@ jQuery(function () {
 
                                         var b = response[availability]['Availability'][current_button_index];
 
-                                        var date = Date.createFromString(b['StartTimeISO']);
-
-                                        var UTCdate = new Date(date.getTime() + date.getTimezoneOffset()*60*1000);
-
                                         html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' +
                                         ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>'
-                                        + UTCdate.format(buttons_time_format) + '</button>';
+                                        + b['StartTime'] + '</button>';
                                         if (b['Available']) all_busy = false;
                                     }
                                     if (hidesteps) {
