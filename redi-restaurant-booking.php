@@ -94,8 +94,8 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 			register_uninstall_hook( __FILE__, array( 'ReDiRestaurantbooking', 'uninstall' ) );
 
-			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
-			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
+			add_action( 'wp_ajax_nopriv_redi_booking-submit', array( &$this, 'redi_booking_ajax' ) );
+			add_action( 'wp_ajax_redi_booking-submit', array( &$this, 'redi_booking_ajax' ) );
 			add_filter( 'http_request_timeout', array( &$this, 'filter_timeout_time' ) );
 			add_shortcode( 'redibooking', array( $this, 'shortcode' ) );
 
@@ -1092,7 +1092,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			return $query;
 		}
 
-		function redi_restaurant_ajax() {
+		function redi_booking_ajax() {
 
 			$apiKeyId = $this->GetPost( 'apikeyid' );
 			if ( $apiKeyId ) {

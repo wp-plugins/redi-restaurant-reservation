@@ -220,7 +220,7 @@ jQuery(function () {
             return false;
         }
         var data = {
-            action: 'redi_restaurant-submit',
+            action: 'redi_booking-submit',
             get: 'step3',
             startDate: $('#redi-restaurant-startDate').val(),
             startTime: $('#redi-restaurant-startTimeHidden').val(),
@@ -317,7 +317,7 @@ jQuery(function () {
             $('#step1times').hide();
         }
         var data = {
-            action: 'redi_restaurant-submit',
+            action: 'redi_booking-submit',
             get: 'step1',
             placeID: $('#placeID').val(),
             startTime: $('#redi-restaurant-startTime').val(),
@@ -457,7 +457,7 @@ jQuery(function () {
         }
         //Ajax
         var data = {
-            action: 'redi_restaurant-submit',
+            action: 'redi_booking-submit',
             get: 'cancel',
             ID: $('#redi-restaurant-cancelID').val(),
             Email: $('#redi-restaurant-cancelEmail').val(),
