@@ -1,7 +1,7 @@
 <?php
 
-if (!defined('REDI_RESTAURANT_DEBUG')) {
-	define( 'REDI_RESTAURANT_DEBUG', false );
+if (!defined('REDI_BOOKING_DEBUG')) {
+	define( 'REDI_BOOKING_DEBUG', false );
 }
 if (!defined('USER')) {
 	define('USER', 'User.svc/');
@@ -39,8 +39,8 @@ if (!defined('DELETE')) {
 if (!defined('REDI_SUCCESS')) {
 	define('REDI_SUCCESS', 'SUCCESS');
 }
-if ( ! defined( 'REDI_RESTAURANT_API' ) ) {
-	define('REDI_RESTAURANT_API', 'http://api.reservationdiary.eu/service/');
+if ( ! defined( 'REDI_BOOKING_API' ) ) {
+	define('REDI_BOOKING_API', 'http://api.reservationdiary.eu/service/');
 }
 
 if ( ! defined( 'CUSTOM_FIELDS' ) ) {
@@ -60,22 +60,22 @@ if ( ! class_exists( 'ReDi' ) ) {
     }
 
     public function getEmailContent($reservationID, $type, $params){
-			return $this->request( REDI_RESTAURANT_API . EMAILCONTENT . $this->ApiKey . '/' . $reservationID . '/ClientReservation' . $type,
+			return $this->request( REDI_BOOKING_API . EMAILCONTENT . $this->ApiKey . '/' . $reservationID . '/ClientReservation' . $type,
 				GET, $this->strParams( $params ) );
     }
 
 	public function cancelReservationByClient( $params ) {
-			return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByClient', DELETE,
+			return $this->request( REDI_BOOKING_API . RESERVATION . $this->ApiKey . '/cancelByClient', DELETE,
 				$this->strParams( $params ) );
 	}
 
 	public function cancelReservation( $params ) {
-			return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/cancelByProvider', DELETE,
+			return $this->request( REDI_BOOKING_API . RESERVATION . $this->ApiKey . '/cancelByProvider', DELETE,
 				$this->strParams( $params ) );
 	}
 
 		public function createReservation( $categoryID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/' . $categoryID, POST,
+			return $this->request( REDI_BOOKING_API . RESERVATION . $this->ApiKey . '/' . $categoryID, POST,
 				json_encode( self::unescape_array( $params ) ) );
 	}
 
@@ -92,82 +92,82 @@ if ( ! class_exists( 'ReDi' ) ) {
 	 * @return array
 	 */
 		public function query( $categoryID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/' . $categoryID . '/Person',
+			return $this->request( REDI_BOOKING_API . RESERVATION . $this->ApiKey . '/' . $categoryID . '/Person',
 				GET, $this->strParams( $params ) );
 	}
 
 		public function createCategory( $placeID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . CATEGORY . $this->ApiKey . '/' . $placeID, POST,
+			return $this->request( REDI_BOOKING_API . CATEGORY . $this->ApiKey . '/' . $placeID, POST,
 				json_encode( self::unescape_array( $params ) ) );
 	}
 
 		public function getServices( $categoryID ) {
-		return $this->request(REDI_RESTAURANT_API.SERVICE.$this->ApiKey.'/'.$categoryID.'/Person', GET);
+		return $this->request(REDI_BOOKING_API.SERVICE.$this->ApiKey.'/'.$categoryID.'/Person', GET);
 	}
 
 		public function deleteServices( $ids ) {
-			return $this->request( REDI_RESTAURANT_API . SERVICE . $this->ApiKey . '?serviceID=' . join( ',', $ids ),
+			return $this->request( REDI_BOOKING_API . SERVICE . $this->ApiKey . '?serviceID=' . join( ',', $ids ),
 				DELETE );
 	}
 
 		public function setServiceTime( $categoryID, $timeSet ) {
-		return $this->request(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time',
+		return $this->request(REDI_BOOKING_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time',
 			PUT,
 			json_encode(self::unescape_array(array ('timeSet' => $timeSet))));
 	}
 
 		public function getServiceTime( $categoryID ) {
-		return $this->request(REDI_RESTAURANT_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time', GET);
+		return $this->request(REDI_BOOKING_API.CATEGORY.$this->ApiKey.'/'.$categoryID.'/time', GET);
 	}
 
 		public function createService( $categoryID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . SERVICE . $this->ApiKey . '/' . $categoryID, POST,
+			return $this->request( REDI_BOOKING_API . SERVICE . $this->ApiKey . '/' . $categoryID, POST,
 				json_encode( self::unescape_array( $params ) ) );
 	}
 
 		public function userGetError() {
-		return $this->request(REDI_RESTAURANT_API.USERGET);
+		return $this->request(REDI_BOOKING_API.USERGET);
 	}
 
 		public function createUser( $params ) {
-		return $this->request(REDI_RESTAURANT_API.USER, POST, json_encode(self::unescape_array($params)));
+		return $this->request(REDI_BOOKING_API.USER, POST, json_encode(self::unescape_array($params)));
 	}
 
 		public function setPlace( $placeID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . PLACE . $this->ApiKey . '/' . $placeID, PUT,
+			return $this->request( REDI_BOOKING_API . PLACE . $this->ApiKey . '/' . $placeID, PUT,
 				json_encode( self::unescape_array( $params ) ) );
 	}
 
 		public function createPlace( $params ) {
-			return $this->request( REDI_RESTAURANT_API . PLACE . $this->ApiKey, POST,
+			return $this->request( REDI_BOOKING_API . PLACE . $this->ApiKey, POST,
 				json_encode( self::unescape_array( $params ) ) );
 	}
 
 		public function shiftsStartTime( $categoryID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . CATEGORY . $this->ApiKey . '/' . $categoryID . '/shiftsStartTime',
+			return $this->request( REDI_BOOKING_API . CATEGORY . $this->ApiKey . '/' . $categoryID . '/shiftsStartTime',
 				GET, $this->strParams( $params ) );
 	}
 
 		public function availabilityByDay( $categoryID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/' . $categoryID . '/availabilityByDay/Person',
+			return $this->request( REDI_BOOKING_API . RESERVATION . $this->ApiKey . '/' . $categoryID . '/availabilityByDay/Person',
 				GET, $this->strParams( $params ) );
 	}
 
 		public function availabilityByShifts( $categoryID, $params ) {
-			return $this->request( REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/' . $categoryID . '/availabilityByShifts/Person',
+			return $this->request( REDI_BOOKING_API . RESERVATION . $this->ApiKey . '/' . $categoryID . '/availabilityByShifts/Person',
 				GET, $this->strParams( $params ) );
 	}
 
 		public function getPlace( $placeID ) {
-		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
+		return $this->request(REDI_BOOKING_API.PLACE.$this->ApiKey.'/'.$placeID, GET);
 	}
 
 		public function getPlaceCategories( $placeID ) {
-		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
+		return $this->request(REDI_BOOKING_API.PLACE.$this->ApiKey.'/'.$placeID.'/categories', GET);
 	}
 
 		public function getPlaces() {
-		return $this->request(REDI_RESTAURANT_API.PLACE.$this->ApiKey, GET);
+		return $this->request(REDI_BOOKING_API.PLACE.$this->ApiKey, GET);
 	}
 
 		public function setApiKey( $ApiKey ) {
@@ -230,7 +230,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 
 		// convert response
 		$output = (array) json_decode( $output );
-		if ( REDI_RESTAURANT_DEBUG ){
+		if ( REDI_BOOKING_DEBUG ){
 			$output['debug'] = array
 			(
 				'method' => $method,
@@ -244,7 +244,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 	}
 
 	public static function d( $object, $color = true ) {
-		if ( REDI_RESTAURANT_DEBUG ) {
+		if ( REDI_BOOKING_DEBUG ) {
 			if ( ! $color ) {
 				echo '<pre>';
 				var_dump($object);
@@ -260,7 +260,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 	}
 
 	public static function p( $object ) {
-		if ( REDI_RESTAURANT_DEBUG ) {
+		if ( REDI_BOOKING_DEBUG ) {
 			return var_export( $object, true );
 	}
 }

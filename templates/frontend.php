@@ -38,7 +38,7 @@
 				<tbody>
 				<tr>
 					<td width="36px" style="text-align: center;"><img
-							src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/f_name.png" width="22px" height="22px"
+							src="<?php echo REDI_BOOKING_PLUGIN_URL ?>img/f_name.png" width="22px" height="22px"
 							alt=""/>
 					</td>
 					<td width="295"><span class="f_H2">Person</span></td>
@@ -74,7 +74,7 @@
 			<table width="335px" border="0" align="center" cellspacing="0">
 				<tbody>
 				<tr>
-					<td width="36px"><img src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/f_calender.png" width="23px"
+					<td width="36px"><img src="<?php echo REDI_BOOKING_PLUGIN_URL ?>img/f_calender.png" width="23px"
 					                      height="23px" alt=""/></td>
 					<td width="293px"><span class="f_H2">Select date</span></td>
 				</tr>
@@ -120,7 +120,7 @@
 			<table width="335" border="0" align="center" cellspacing="0">
 				<tbody>
 				<tr>
-					<td width="36px"><img src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/f_time.png" width="24px"
+					<td width="36px"><img src="<?php echo REDI_BOOKING_PLUGIN_URL ?>img/f_time.png" width="24px"
 					                      height="25px" alt=""/></td>
 					<td width="295px"><span class="f_H2">Time</span></td>
 				</tr>
@@ -131,7 +131,7 @@
 		<div class="f_subbox_data3">
 			<!--			<div class="f_arrow_next_temp2"></div>-->
 			<!--			<div class="f_arrow_back_temp2"></div>-->
-			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/loader1.gif"
+			<img id="step1load" style="display: none;" src="<?php echo REDI_BOOKING_PLUGIN_URL ?>img/loader1.gif"
 			     alt=""/>
 			<table width="350px" border="0" align="center" cellspacing="6" class="f_time_data" id="buttons">
 				<?php if ( isset( $step1 ) && is_array( $step1 ) && ! isset( $step1['Error'] ) ): ?>

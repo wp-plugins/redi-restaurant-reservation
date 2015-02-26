@@ -10,14 +10,14 @@
   Domain Path: /lang
 
  */
-if ( ! defined( 'REDI_RESTAURANT_PLUGIN_URL' ) ) {
-	define( 'REDI_RESTAURANT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'REDI_BOOKING_PLUGIN_URL' ) ) {
+	define( 'REDI_BOOKING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
-if ( ! defined( 'REDI_RESTAURANT_TEMPLATE' ) ) {
-	define( 'REDI_RESTAURANT_TEMPLATE', plugin_dir_path( __FILE__ ) . 'templates' . DIRECTORY_SEPARATOR );
+if ( ! defined( 'REDI_BOOKING_TEMPLATE' ) ) {
+	define( 'REDI_BOOKING_TEMPLATE', plugin_dir_path( __FILE__ ) . 'templates' . DIRECTORY_SEPARATOR );
 }
-if ( ! defined( 'REDI_RESTAURANT_DEBUG' ) ) {
-	define( 'REDI_RESTAURANT_DEBUG', false );
+if ( ! defined( 'REDI_BOOKING_DEBUG' ) ) {
+	define( 'REDI_BOOKING_DEBUG', false );
 }
 if ( ! defined( 'ID' ) ) {
 	define( 'ID', 'ID' );
@@ -60,9 +60,9 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 		/**
 		 * @var string The options string name for this plugin
 		 */
-		private $optionsName = 'wp_redi_restaurant_options';
-		private $apiKeyOptionName = 'wp_redi_restaurant_options_ApiKey';
-		private static $name = 'REDI_RESTAURANT';
+		private $optionsName = 'wp_redi_booking_options';
+		private $apiKeyOptionName = 'wp_redi_booking_options_ApiKey';
+		private static $name = 'REDI_BOOKING';
 		private $options = array();
 		private $ApiKey;
 		private $redi;
@@ -83,7 +83,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			$this->redi = new Redi( $this->ApiKey );
 			//Actions
 			add_action( 'init', array( &$this, 'init_sessions' ) );
-			add_action( 'admin_menu', array( &$this, 'redi_restaurant_admin_menu_link' ) );
+			add_action( 'admin_menu', array( &$this, 'redi_booking_admin_menu_link' ) );
 
 			$this->page_title = 'booking';
 			$this->content    = '[redibooking]';
@@ -226,7 +226,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 		/**
 		 * Adds settings/options page
 		 */
-		function redi_restaurant_admin_options_page() {
+		function redi_booking_admin_options_page() {
 			$errors = array();
 
 			if ( $this->ApiKey == null ) { /// TODO: move to install
@@ -519,8 +519,8 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 				$alternativeTimeStep = self::GetPost( 'AlternativeTimeStep' );
 			}
 
-			require_once( REDI_RESTAURANT_TEMPLATE . 'admin.php' );
-			require_once( REDI_RESTAURANT_TEMPLATE . 'basicpackage.php' );
+			require_once( REDI_BOOKING_TEMPLATE . 'admin.php' );
+			require_once( REDI_BOOKING_TEMPLATE . 'basicpackage.php' );
 		}
 
 		private function GetOption( $name, $default = null ) {
@@ -582,7 +582,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 				$serviceTimes = self::GetServiceTimes();
 			}
 			require_once( 'countrylist.php' );
-			require_once( REDI_RESTAURANT_TEMPLATE . 'admin_ajaxed.php' );
+			require_once( REDI_BOOKING_TEMPLATE . 'admin_ajaxed.php' );
 		}
 
 		function init_sessions() {
@@ -601,12 +601,12 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 		/**
 		 * @desc Adds the options subpanel
 		 */
-		function redi_restaurant_admin_menu_link() {
+		function redi_booking_admin_menu_link() {
 			add_options_page( 'Redi Restaurant booking',
 				'Redi Restaurant booking',
 				'manage_options',
 				'redi-restaurant-booking',
-				array( &$this, 'redi_restaurant_admin_options_page' ) );
+				array( &$this, 'redi_booking_admin_options_page' ) );
 		}
 
 		static function install() {
@@ -755,30 +755,30 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 			wp_enqueue_style( 'jquery_ui' );
 
 			wp_register_style( 'jquery-ui-custom-style',
-				REDI_RESTAURANT_PLUGIN_URL . '/css/custom-theme/jquery-ui-1.8.18.custom.css' );
+				REDI_BOOKING_PLUGIN_URL . '/css/custom-theme/jquery-ui-1.8.18.custom.css' );
 			wp_enqueue_style( 'jquery-ui-custom-style' );
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_register_script( 'datetimepicker',
-				REDI_RESTAURANT_PLUGIN_URL . '/lib/datetimepicker/js/jquery-ui-timepicker-addon.js',
+				REDI_BOOKING_PLUGIN_URL . '/lib/datetimepicker/js/jquery-ui-timepicker-addon.js',
 				array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider', 'jquery-ui-datepicker' ) );
 			wp_enqueue_script( 'datetimepicker' );
 
 			//DateTime parsing library
-			wp_register_script( 'moment', REDI_RESTAURANT_PLUGIN_URL . '/lib/moment/moment.js' );
+			wp_register_script( 'moment', REDI_BOOKING_PLUGIN_URL . '/lib/moment/moment.js' );
 			wp_enqueue_script( 'moment' );
 
 			wp_register_script( 'datetimepicker-lang',
-				REDI_RESTAURANT_PLUGIN_URL . '/lib/datetimepicker/js/jquery.ui.i18n.all.min.js' );
+				REDI_BOOKING_PLUGIN_URL . '/lib/datetimepicker/js/jquery.ui.i18n.all.min.js' );
 			wp_enqueue_script( 'datetimepicker-lang' );
 
 			wp_register_script( 'timepicker-lang',
-				REDI_RESTAURANT_PLUGIN_URL . '/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js' );
+				REDI_BOOKING_PLUGIN_URL . '/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js' );
 			wp_enqueue_script( 'timepicker-lang' );
 
-			wp_register_script( 'restaurant', REDI_RESTAURANT_PLUGIN_URL . 'js/restaurant.js', array( 'jquery' ) );
+			wp_register_script( 'restaurant', REDI_BOOKING_PLUGIN_URL . 'js/restaurant.js', array( 'jquery' ) );
 
 			wp_localize_script( 'restaurant',
-				'redi_restaurant_booking',
+				'redi_booking',
 				array( // URL to wp-admin/admin-ajax.php to process the request
 					'ajaxurl'        => admin_url( 'admin-ajax.php' ),
 					'id_missing'     => __( 'Reservation number can\'t be empty', 'redi-restaurant-booking' ),
@@ -789,7 +789,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 				) );
 			wp_enqueue_script( 'restaurant' );
 
-			wp_register_style( 'redi-restaurant', REDI_RESTAURANT_PLUGIN_URL . '/css/restaurant.css' );
+			wp_register_style( 'redi-restaurant', REDI_BOOKING_PLUGIN_URL . '/css/restaurant.css' );
 			wp_enqueue_style( 'redi-restaurant' );
 
 			$apiKeyId = (int) $this->GetOption( 'apikeyid' );
@@ -919,7 +919,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 
 			$js_locale         = get_locale();
 			$datepicker_locale = substr( $js_locale, 0, 2 );
-			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
+			require_once( REDI_BOOKING_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
 
 			ob_end_clean();

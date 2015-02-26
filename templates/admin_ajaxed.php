@@ -10,7 +10,7 @@ jQuery(function () {
 		jQuery('#Place option:selected').each(function () {
 			jQuery("#selected_place_id").html(this.value);
 				var data = {
-					action: 'redi_restaurant-submit',
+					action: 'redi_booking-submit',
 					get: 'get_place',
 					placeID: this.value
 				};
@@ -41,7 +41,7 @@ jQuery(function () {
                                             </option>
                                     <?php endforeach; ?>
                             </select>
-                            <img id="ajaxload" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
+                            <img id="ajaxload" style="display: none;" src="<?php echo REDI_BOOKING_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
                         </td>
 				        <td style="width:80%">
 					        <p class="description">

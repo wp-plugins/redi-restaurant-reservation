@@ -202,13 +202,13 @@ jQuery(function () {
     $('#redi-restaurant-reservation').click(function () {
         var error = '';
         if ($('#UserName').val() === '') {
-            error += redi_restaurant_booking.name_missing + '<br/>';
+            error += redi_booking.name_missing + '<br/>';
         }
         if ($('#UserEmail').val() === '') {
-            error += redi_restaurant_booking.email_missing + '<br/>';
+            error += redi_booking.email_missing + '<br/>';
         }
         if ($('#UserPhone').val() === '') {
-            error += redi_restaurant_booking.phone_missing + '<br/>';
+            error += redi_booking.phone_missing + '<br/>';
         }
         $('.field_required').each(function () {
             if ($(this).attr('type') === 'checkbox' && $(this).attr('checked') !== 'checked' || $(this).attr('type') === 'textbox' && $(this).val() === '') {
@@ -262,7 +262,7 @@ jQuery(function () {
         $('#step3load').show();
         $('#step3errors').hide('slow');
         $('#redi-restaurant-step3').attr('disabled', true);
-        $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
+        $.post(redi_booking.ajaxurl, data, function (response) {
             $('#redi-restaurant-step3').attr('disabled', false);
             $('#step3load').hide();
             if (response['Error']) {
@@ -328,7 +328,7 @@ jQuery(function () {
             apikeyid: apikeyid
         };
 
-        $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
+        $.post(redi_booking.ajaxurl, data, function (response) {
             $('#step1load').hide();
             $('#step2busy').hide();
             $('#step1button').attr('disabled', false);
@@ -443,13 +443,13 @@ jQuery(function () {
     $('#redi-restaurant-cancel').click(function () {
         var error = '';
         if ($('#redi-restaurant-cancelID').val() === '') {
-            error += redi_restaurant_booking.id_missing + '<br/>';
+            error += redi_booking.id_missing + '<br/>';
         }
         if ($('#redi-restaurant-cancelEmail').val() === '') {
-            error += redi_restaurant_booking.email_missing + '<br/>';
+            error += redi_booking.email_missing + '<br/>';
         }
         if ($('#redi-restaurant-cancelReason').val() === '') {
-            error += redi_restaurant_booking.reason_missing + '<br/>';
+            error += redi_booking.reason_missing + '<br/>';
         }
         if (error) {
             $('#cancel-errors').html(error).show('slow');
@@ -469,7 +469,7 @@ jQuery(function () {
         $('#cancel-success').slideUp();
         $('#cancel-load').show();
         $('#redi-restaurant-cancel').attr('disabled', true);
-        $.post(redi_restaurant_booking.ajaxurl, data, function (response) {
+        $.post(redi_booking.ajaxurl, data, function (response) {
             $('#redi-restaurant-cancel').attr('disabled', false);
             $('#cancel-load').hide();
             if (response['Error']) {
