@@ -1122,8 +1122,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return 'H'; //if no time format found use 24 h with lead zero
 		}
 
-		private static function format_time( $start_time, $language ) {
-			$format = get_option( 'time_format' );
+		private static function format_time( $start_time, $language, $format ) {
+
 			global $q_config;
 			if ( function_exists( 'qtrans_convertTimeFormat' ) ) {// time format from qTranslate
 				$format = $q_config['time_format'][ $language ];
@@ -1138,13 +1138,26 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return date( $format, strtotime( $start_time ) );
 		}
 
+		private static function load_time_format( $lang, $default_time_format ) {
+			$filename = plugin_dir_path( __FILE__ ) . 'time_format.json';
+
+			if ( file_exists( $filename ) ) {
+				$json = json_decode( file_get_contents( $filename ), true );
+				if(array_key_exists($lang, $json)) {
+					return $json[$lang];
+				}
+			}
+			return $default_time_format;
+		}
+
 		private function step1( $categoryID, $post, $placeID = null ) {
 			global $q_config;
 			$loc = get_locale();
 			if ( isset( $post['lang'] ) ) {
 				$loc = $post['lang'];
 			}
-			$time_lang = null;
+			$time_lang   = null;
+			$time_format = get_option( 'time_format' );
 			if ( isset( $q_config['language'] ) ) { //if q_translate
 				$time_lang = $q_config['language'];
 				foreach ( $q_config['locale'] as $key => $val ) {
@@ -1152,7 +1165,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						$time_lang = $key;
 					}
 				}
+			} else { // load time format from file
+				$time_format = self::load_time_format( $loc, $time_format );
 			}
+
 			$timeshiftmode = self::GetPost( 'timeshiftmode',
 				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
@@ -1235,8 +1251,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$query = $this->redi->query( $category->ID, $params );
 			}
 
-			$time_format = get_option( 'time_format' );
-
 			if ( isset( $query['Error'] ) ) {
 				return $query;
 			}
@@ -1250,7 +1264,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						foreach ( $query as $q ) {
 							$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
 							$q->StartTimeISO = $q->StartTime;
-							$q->StartTime    = self::format_time( $q->StartTime, $time_lang );
+							$q->StartTime    = self::format_time( $q->StartTime, $time_lang, $time_format );
 							$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
 						}
 						break;
@@ -1260,7 +1274,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 								foreach ( $q2->Availability as $q ) {
 									$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
 									$q->StartTimeISO = $q->StartTime;
-									$q->StartTime    = self::format_time( $q->StartTime, $time_lang );
+									$q->StartTime    = self::format_time( $q->StartTime, $time_lang, $time_format );
 									$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
 								}
 							}
@@ -1271,7 +1285,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				foreach ( $query as $q ) {
 					$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
 					$q->StartTimeISO = $q->StartTime;
-					$q->StartTime    = self::format_time( $q->StartTime, $time_lang );
+					$q->StartTime    = self::format_time( $q->StartTime, $time_lang, $time_format );
 					$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
 				}
 			}
