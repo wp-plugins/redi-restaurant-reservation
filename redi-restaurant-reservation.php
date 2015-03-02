@@ -651,13 +651,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$icon = 'dashicons-groups';
 
             if($this->ApiKey) {
-                add_menu_page(
+	            add_object_page(
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     'edit_posts',
                     'redi-restaurant-reservation-reservations',
                     array(&$this, 'redi_restaurant_admin_reservations'),
-                    $icon, 26); // where in menu it will be located, 26 is after comments
+                    $icon); // where in menu it will be located, 26 is after comments
                 add_submenu_page(
                     'redi-restaurant-reservation-reservations',
                     __('Settings', 'redi-restaurant-reservation'),
