@@ -1,6 +1,5 @@
 jQuery(function () {
 
-
     function hideSteps() {
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
@@ -15,6 +14,7 @@ jQuery(function () {
         }
         hideSteps();
     };
+
     if (timepicker == 'dropdown') {
         jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
     }
@@ -82,6 +82,14 @@ jQuery(function () {
     });
 
     jQuery('#redi-restaurant-startDate').datepicker({
+        beforeShowDay: function (date) {
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            if (jQuery.inArray(string, enabled_dates) != -1) {
+                return [true, '', 'Available'];
+            } else {
+                return [false, '', 'unAvailable'];
+            }
+        },
         dateFormat: date_format,
         minDate: new Date(),
         onSelect: function (dateText, inst) {
@@ -470,23 +478,9 @@ Date.createFromString = function (string) {
     var day = matches[3];
     var hour = matches[4];
     var minute = matches[5];
-    //var second = matches[6];
-    //var zoneType = matches[7];
-    //var zoneHour = matches[8] || 0;
-    //var zoneMinute = matches[9] || 0;
 
     // Date.UTC() returns milliseconds since the unix epoch.
     var absoluteMs = Date.UTC(year, month, day, hour, minute, 0);
-    //var ms;
-    //if (zoneType === 'Z') {
-    //    // UTC time requested. No adjustment necessary.
-    //    ms = absoluteMs;
-    //} else if (zoneType === '+') {
-    //    // Adjust UTC time by timezone offset
-    //    ms = absoluteMs - (zoneHour * 60 * 60 * 1000) - (zoneMinute * 60 * 1000);
-    //} else if (zoneType === '-') {
-    //    // Adjust UTC time by timezone offset
-    //    ms = absoluteMs + (zoneHour * 60 * 60 * 1000) + (zoneMinute * 60 * 1000);
-    //}
+
     return new Date(absoluteMs);
 };
