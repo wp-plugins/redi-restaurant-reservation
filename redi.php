@@ -30,6 +30,9 @@ if ( ! defined( 'RESERVATION' ) ) {
 if ( ! defined( 'EMAILCONTENT' ) ) {
 	define( 'EMAILCONTENT', 'emailcontent.svc/' );
 }
+if ( ! defined( 'DATES' ) ) {
+	define( 'DATES', 'Date.svc/' );
+}
 if ( ! defined( 'POST' ) ) {
 	define( 'POST', 'POST' );
 }
@@ -60,6 +63,12 @@ if ( ! class_exists( 'ReDi' ) ) {
 		public function Redi( $ApiKey ) {
 			$this->ApiKey = $ApiKey;
 		}
+
+		public function getBlockingDates( $lang, $categoryID, $params ) {
+			//Date.svc/en/[APIKEY]/[CategoryID]?StartTime=2015-03-01&EndTime=2015-03-31
+			return $this->request( REDI_RESTAURANT_API . DATES . '/' . $lang . '/' . $categoryID . '?' . GET, $this->strParams( $params ) );
+		}
+
 
 		public function getReservationUrl( $lang ) {
 			return 'http://wp.reservationdiary.eu/' . $lang . '/' . $this->ApiKey . '/Reservation/Index';

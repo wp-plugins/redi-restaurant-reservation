@@ -1058,6 +1058,12 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			);
 			$enabled_dates = implode( ',', $enabled_dates_array );
 
+			$blocked_dates = $this->redi->getBlockingDates( get_locale(), $categoryID, array(
+				'StartTime' => date( 'Y-m-d' ),
+				'EndTime'   => date( 'Y-m-d' )
+			) );
+
+
 			$time_format_s = explode( ':', $time_format );
 
 			$timepicker_time_format = ( isset( $time_format_s[0] ) && in_array( $time_format_s[0],
