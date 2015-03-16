@@ -66,7 +66,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 
 		public function getBlockingDates( $lang, $categoryID, $params ) {
 			//Date.svc/en/[APIKEY]/[CategoryID]?StartTime=2015-03-01&EndTime=2015-03-31
-			return $this->request( REDI_RESTAURANT_API . DATES . '/' . $lang . '/' . $categoryID . '?' . GET, $this->strParams( $params ) );
+			return $this->request( REDI_RESTAURANT_API . DATES  . $lang . '/'.$this->ApiKey.'/'. $categoryID, GET,  $this->strParams( $params ) );
 		}
 
 

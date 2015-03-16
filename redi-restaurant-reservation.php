@@ -334,7 +334,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							(int) $cancel['ID'],
 							EmailContentType::Canceled,
 							array(
-								"Lang" => str_replace( '_', '-', self::GetPost( 'lang' ) )
+								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 							)
 						);
 
@@ -950,7 +950,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				current_time( 'timestamp' ) );
 			$startDate                = date( $date_format, $reservationStartTime );
 			$startDateISO             = date( 'Y-m-d', $reservationStartTime );
-			$startTime                = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
+			$startTime                = mktime( date( 'G', $reservationStartTime ), 0, 0, 0, 0, 0 );
 
 			$minPersons         = $this->GetOption( 'MinPersons', 1 );
 			$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
@@ -1055,14 +1055,26 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				"'2015-02-05'",
 				"'2015-02-06'",
 				"'2015-02-19'",
+				"'2015-06-08'",
 			);
-			$enabled_dates = implode( ',', $enabled_dates_array );
 
-			$blocked_dates = $this->redi->getBlockingDates( get_locale(), $categoryID, array(
+			$dates = $this->redi->getBlockingDates( str_replace( '_', '-', get_locale() ), $categoryID, array(
 				'StartTime' => date( 'Y-m-d' ),
-				'EndTime'   => date( 'Y-m-d' )
+				'EndTime'   => date( 'Y-m-d', strtotime('+3 month') ) // + 3 months
 			) );
 
+			$blocked_dates = array();
+			foreach($dates as $date) {
+				if($date->Blocked) {
+					$blocked_dates[] = "'".$date->Date."'";
+				}else {
+					$enabled_dates[] = "'".$date->Date."'";
+				}
+			}
+
+			$enabled_dates = array_unique(array_merge($enabled_dates, $enabled_dates_array));
+
+			$enabled_dates = implode( ',', $enabled_dates );
 
 			$time_format_s = explode( ':', $time_format );
 
@@ -1249,7 +1261,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $timeshiftmode === 'byshifts' ) {
 				$StartTime = gmdate( 'Y-m-d 00:00', strtotime( $post['startDateISO'] ) ); //CalendarDate + 00:00
 				$EndTime   = gmdate( 'Y-m-d 00:00',
-					strtotime( "+1 day", strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
+					strtotime( '+1 day', strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
 				$params    = array(
 					'StartTime'           => urlencode( $StartTime ),
 					'EndTime'             => urlencode( $EndTime ),
@@ -1480,7 +1492,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							(int) $reservation['ID'],
 							EmailContentType::Confirmed,
 							array(
-								"Lang" => str_replace( '_', '-', self::GetPost( 'lang' ) )
+								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 							)
 						);
 
@@ -1504,7 +1516,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						'ID'          => urlencode( self::GetPost( 'ID' ) ),
 						'Email'       => urlencode( self::GetPost( 'Email' ) ),
 						'Reason'      => urlencode( mb_substr( self::GetPost( 'Reason' ), 0, 250 ) ),
-						"Lang"        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
+						'Lang'        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
 						'Version'     => urlencode( self::plugin_get_version() )
 					);
@@ -1522,7 +1534,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							(int) $cancel['ID'],
 							EmailContentType::Canceled,
 							array(
-								"Lang" => str_replace( '_', '-', self::GetPost( 'lang' ) )
+								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 							)
 						);
 
