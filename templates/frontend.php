@@ -1,6 +1,6 @@
 <!-- ReDi restaurant reservation plugin version <?php echo $this->version?> -->
 <?php require_once(REDI_RESTAURANT_TEMPLATE.'cancel.php');?>
-<script type="text/javascript">var enabled_dates = [<?php echo $enabled_dates;?>];var timepicker = '<?php echo $timepicker;?>';var date_format = '<?php echo $calendar_date_format ?>';var timepicker_time_format ='<?php echo $timepicker_time_format;?>';var locale = '<?php echo $js_locale?>';var datepicker_locale = '<?php echo $datepicker_locale?>'; var timeshiftmode = '<?php echo $timeshiftmode; ?>'; var hidesteps = <?php echo $hidesteps ? 1 : 0; ?>; var apikeyid = '<?php echo $apiKeyId; ?>';</script>
+<script type="text/javascript">var disabled_dates = [<?php echo $disabled_dates;?>];var enabled_dates = [<?php echo $enabled_dates;?>];var timepicker = '<?php echo $timepicker;?>';var date_format = '<?php echo $calendar_date_format ?>';var timepicker_time_format ='<?php echo $timepicker_time_format;?>';var locale = '<?php echo $js_locale?>';var datepicker_locale = '<?php echo $datepicker_locale?>'; var timeshiftmode = '<?php echo $timeshiftmode; ?>'; var hidesteps = <?php echo $hidesteps ? 1 : 0; ?>; var apikeyid = '<?php echo $apiKeyId; ?>';</script>
 <form id="redi-reservation" name="redi-reservation" method="post" action="?jquery_fail=true">
 
 	<div id="step1">

@@ -84,7 +84,7 @@ jQuery(function () {
     jQuery('#redi-restaurant-startDate').datepicker({
         beforeShowDay: function (date) {
             var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-            if (jQuery.inArray(string, enabled_dates) != -1) {
+            if (jQuery.inArray(string, disabled_dates) == -1) {
                 return [true, '', 'Available'];
             } else {
                 return [false, '', 'unAvailable'];

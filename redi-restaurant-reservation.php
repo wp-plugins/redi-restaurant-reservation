@@ -1063,10 +1063,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				'EndTime'   => date( 'Y-m-d', strtotime('+3 month') ) // + 3 months
 			) );
 
-			$blocked_dates = array();
+			$disabled_dates = array();
+
 			foreach($dates as $date) {
 				if($date->Blocked) {
-					$blocked_dates[] = "'".$date->Date."'";
+					$disabled_dates[] = "'".$date->Date."'";
 				}else {
 					$enabled_dates[] = "'".$date->Date."'";
 				}
@@ -1075,6 +1076,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$enabled_dates = array_unique(array_merge($enabled_dates, $enabled_dates_array));
 
 			$enabled_dates = implode( ',', $enabled_dates );
+			$disabled_dates = implode( ',', $disabled_dates );
 
 			$time_format_s = explode( ':', $time_format );
 
