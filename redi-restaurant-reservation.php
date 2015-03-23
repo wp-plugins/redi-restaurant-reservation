@@ -55,6 +55,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 	}
 
 	class ReDiRestaurantReservation {
+
 		public $version = '14.0904';
 		/**
 		 * @var string The options string name for this plugin
@@ -213,6 +214,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				$this->saveAdminOptions();
 			}
+
 			return $new_account;
 		}
 
@@ -272,6 +274,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
             $iframe_url = $this->redi->getReservationUrl(str_replace( '_', '-', get_locale() ));
             require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
         }
+
 		/**
 		 * Adds settings/options page
 		 */
@@ -331,7 +334,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							(int) $cancel['ID'],
 							EmailContentType::Canceled,
 							array(
-								"Lang" => str_replace( '_', '-', self::GetPost( 'lang' ) )
+								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 							)
 						);
 
@@ -647,6 +650,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			}
 
 		}
+
 		function redi_restaurant_admin_menu_link_new() {
 			$icon = 'dashicons-groups';
 
@@ -687,8 +691,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
                     'edit_posts',
                     'redi_restaurant_admin_upcoming',
                     array( &$this, 'redi_restaurant_admin_upcoming' ));
-            }
-            else{
+			} else {
                 add_menu_page(
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
@@ -862,7 +865,12 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				REDI_RESTAURANT_PLUGIN_URL . '/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js' );
 			wp_enqueue_script( 'timepicker-lang' );
 
-			wp_register_script( 'restaurant', REDI_RESTAURANT_PLUGIN_URL . 'js/restaurant.js', array( 'jquery' ) );
+			//	wp_register_script( 'date.format', REDI_RESTAURANT_PLUGIN_URL . 'js/date.format.js' );
+
+			wp_register_script( 'restaurant', REDI_RESTAURANT_PLUGIN_URL . 'js/restaurant.js', array(
+				//		'date.format',
+				'jquery'
+			) );
 
 			wp_localize_script( 'restaurant',
 				'redi_restaurant_reservation',
@@ -933,6 +941,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$categoryID               = $categories[0]->ID;
 			$time_format              = get_option( 'time_format' );
+
 			$date_format_setting      = $this->GetOption( 'DateFormat' );
 			$date_format              = $this->getPHPDateFormat( $date_format_setting );
 			$calendar_date_format     = $this->getCalendarDateFormat( $date_format_setting );
@@ -941,7 +950,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				current_time( 'timestamp' ) );
 			$startDate                = date( $date_format, $reservationStartTime );
 			$startDateISO             = date( 'Y-m-d', $reservationStartTime );
-			$startTime                = mktime( date( "G", $reservationStartTime ), 0, 0, 0, 0, 0 );
+			$startTime                = mktime( date( 'G', $reservationStartTime ), 0, 0, 0, 0, 0 );
 
 			$minPersons         = $this->GetOption( 'MinPersons', 1 );
 			$maxPersons         = $this->GetOption( 'MaxPersons', 10 );
@@ -1007,12 +1016,90 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$js_locale         = get_locale();
 			$datepicker_locale = substr( $js_locale, 0, 2 );
 
+
+			$dates = $this->redi->getBlockingDates( str_replace( '_', '-', get_locale() ), $categoryID, array(
+				'StartTime' => date( 'Y-m-d' ),
+				'EndTime'   => date( 'Y-m-d', strtotime('+3 month') ) // + 3 months
+			) );
+
+
+			$disabled_dates = array();
+			$enabled_dates = array();
+
+			foreach($dates as $date) {
+				if($date->Blocked) {
+					$disabled_dates[] = "'".$date->Date."'";
+				}else {
+					$enabled_dates[] = "'".$date->Date."'";
+				}
+			}
+
+			$enabled_dates = implode( ',', $enabled_dates );
+			$disabled_dates = implode( ',', $disabled_dates );
+
+			$time_format_s = explode( ':', $time_format );
+
+			$timepicker_time_format = ( isset( $time_format_s[0] ) && in_array( $time_format_s[0],
+					array( 'g', 'h' ) ) ) ? 'h:mm tt' : 'HH:mm';
+			$buttons_time_format    = ( isset( $time_format_s[0] ) && in_array( $time_format_s[0],
+					array( 'g', 'h' ) ) ) ? 'h:MM TT' : 'HH:MM';
+			if ( function_exists( 'qtrans_convertTimeFormat' ) || function_exists( 'ppqtrans_convertTimeFormat' ) ) {// time format from qTranslate and qTranslate Plus
+				global $q_config;
+				$format              = $q_config['time_format'][ $q_config['language'] ];
+				$buttons_time_format = self::convert_to_js_format( $format );
+			}
+
 			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
 
 			ob_end_clean();
 
 			return $out;
+		}
+
+		function convert_to_js_format( $format ) {
+			$convert = array(
+//Day 	    --- 	---
+//Week 	    --- 	---
+//Month 	--- 	---
+//Year 	    --- 	---
+//Time 	    --- 	---
+
+//%I 	Two digit representation of the hour in 12-hour format 	01 through 12
+//hh 	Hours; leading zero for single-digit hours (12-hour clock).
+				'I' => 'hh',
+//%l (lower-case 'L') 	Hour in 12-hour format, with a space preceding single digits 	1 through 12
+//h 	Hours; no leading zero for single-digit hours (12-hour clock).
+				'l' => 'h',
+//%k 	Two digit representation of the hour in 24-hour format, with a space preceding single digits 	0 through 23
+//H 	Hours; no leading zero for single-digit hours (24-hour clock).
+				'k' => 'H',
+//%H 	Two digit representation of the hour in 24-hour format 	00 through 23
+//HH 	Hours; leading zero for single-digit hours (24-hour clock).
+				'H' => 'HH',
+//%M 	Two digit representation of the minute 	00 through 59
+//MM 	Minutes; leading zero for single-digit minutes.
+				'M' => 'MM',
+//%P 	lower-case 'am' or 'pm' based on the given time 	Example: am for 00:31, pm for 22:23
+//tt 	Lowercase, two-character time marker string: am or pm.
+				'P' => 'tt',
+//%p 	UPPER-CASE 'AM' or 'PM' based on the given time 	Example: AM for 00:31, PM for 22:23
+//TT 	Uppercase, two-character time marker string: AM or PM.
+				'p' => 'TT',
+			);
+
+			$result = '';
+			foreach ( str_split( $format ) as $char ) {
+				if ( $char == '%' ) {
+					$result .= '';
+				} elseif ( array_key_exists( $char, $convert ) ) {
+					$result .= $convert[ $char ];
+				} else {
+					$result .= $char;
+				}
+			}
+
+			return $result;
 		}
 
 		function dropdown_time_format() {
@@ -1057,16 +1144,60 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return 'H'; //if no time format found use 24 h with lead zero
 		}
 
+		private static function format_time( $start_time, $language, $format ) {
+
+			global $q_config;
+			if ( function_exists( 'qtrans_convertTimeFormat' ) ) {// time format from qTranslate
+				$format = $q_config['time_format'][ $language ];
+
+				return qtrans_strftime( $format, strtotime( $start_time ) );
+			} elseif ( function_exists( 'ppqtrans_convertTimeFormat' ) ) { //and qTranslate Plus
+				$format = $q_config['time_format'][ $language ];
+
+				return ppqtrans_strftime( $format, strtotime( $start_time ) );
+			}
+
+			return date( $format, strtotime( $start_time ) );
+		}
+
+		private static function load_time_format( $lang, $default_time_format ) {
+			$filename = plugin_dir_path( __FILE__ ) . 'time_format.json';
+
+			if ( file_exists( $filename ) ) {
+				$json = json_decode( file_get_contents( $filename ), true );
+				if(array_key_exists($lang, $json)) {
+					return $json[$lang];
+				}
+			}
+			return $default_time_format;
+		}
+
 		private function step1( $categoryID, $post, $placeID = null ) {
+			global $q_config;
+			$loc = get_locale();
+			if ( isset( $post['lang'] ) ) {
+				$loc = $post['lang'];
+			}
+			$time_lang   = null;
+			$time_format = get_option( 'time_format' );
+			if ( isset( $q_config['language'] ) ) { //if q_translate
+				$time_lang = $q_config['language'];
+				foreach ( $q_config['locale'] as $key => $val ) {
+					if ( $loc == $val ) {
+						$time_lang = $key;
+					}
+				}
+			} else { // load time format from file
+				$time_format = self::load_time_format( $loc, $time_format );
+			}
 
 			$timeshiftmode = self::GetPost( 'timeshiftmode',
 				$this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) ) );
 			// convert date to array
-			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' .
-                self::GetPost( 'startTime', date( 'H:i', current_time( 'timestamp' ) ), $post ) );
+			$date = date_parse( self::GetPost( 'startDateISO', null, $post ) . ' ' . self::GetPost( 'startTime',
+					date( 'H:i', current_time( 'timestamp' ) ), $post ) );
 
 			if ( $date['error_count'] > 0 ) {
-
 				echo json_encode(
                     array_merge($date['errors'],
                     array('Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ))
@@ -1091,7 +1222,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( $timeshiftmode === 'byshifts' ) {
 				$StartTime = gmdate( 'Y-m-d 00:00', strtotime( $post['startDateISO'] ) ); //CalendarDate + 00:00
 				$EndTime   = gmdate( 'Y-m-d 00:00',
-					strtotime( "+1 day", strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
+					strtotime( '+1 day', strtotime( $post['startDateISO'] ) ) ); //CalendarDate + 1day + 00:00
 				$params    = array(
 					'StartTime'           => urlencode( $StartTime ),
 					'EndTime'             => urlencode( $EndTime ),
@@ -1123,8 +1254,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			} else {
 				$categories = $this->redi->getPlaceCategories( $placeID );
 				if ( isset( $categories['Error'] ) ) {
-					$categories['Error'] = __('categories:'.$categories['Error'], 'redi-restaurant-reservation-errors' );
-
+					$categories['Error'] = __( $categories['Error'], 'redi-restaurant-reservation-errors' );
 					echo json_encode( $categories );
 					die;
 				}
@@ -1143,9 +1273,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$query = $this->redi->query( $category->ID, $params );
 			}
 
-
-			$time_format = get_option( 'time_format' );
-
 			if ( isset( $query['Error'] ) ) {
 				return $query;
 			}
@@ -1159,7 +1286,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						foreach ( $query as $q ) {
 							$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
 							$q->StartTimeISO = $q->StartTime;
-							$q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+							$q->StartTime    = self::format_time( $q->StartTime, $time_lang, $time_format );
 							$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
 						}
 						break;
@@ -1169,7 +1296,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 								foreach ( $q2->Availability as $q ) {
 									$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
 									$q->StartTimeISO = $q->StartTime;
-									$q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+									$q->StartTime    = self::format_time( $q->StartTime, $time_lang, $time_format );
 									$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
 								}
 							}
@@ -1180,7 +1307,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				foreach ( $query as $q ) {
 					$q->Select       = ( $startTimeISO == $q->StartTime && $q->Available );
 					$q->StartTimeISO = $q->StartTime;
-					$q->StartTime    = date( $time_format, strtotime( $q->StartTime ) );
+					$q->StartTime    = self::format_time( $q->StartTime, $time_lang, $time_format );
 					$q->EndTime      = date( $time_format, strtotime( $q->EndTime ) );
 				}
 			}
@@ -1326,7 +1453,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							(int) $reservation['ID'],
 							EmailContentType::Confirmed,
 							array(
-								"Lang" => str_replace( '_', '-', self::GetPost( 'lang' ) )
+								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 							)
 						);
 
@@ -1350,7 +1477,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						'ID'          => urlencode( self::GetPost( 'ID' ) ),
 						'Email'       => urlencode( self::GetPost( 'Email' ) ),
 						'Reason'      => urlencode( mb_substr( self::GetPost( 'Reason' ), 0, 250 ) ),
-						"Lang"        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
+						'Lang'        => str_replace( '_', '-', self::GetPost( 'lang' ) ),
 						'CurrentTime' => urlencode( date( 'Y-m-d H:i', current_time( 'timestamp' ) ) ),
 						'Version'     => urlencode( self::plugin_get_version() )
 					);
@@ -1368,7 +1495,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 							(int) $cancel['ID'],
 							EmailContentType::Canceled,
 							array(
-								"Lang" => str_replace( '_', '-', self::GetPost( 'lang' ) )
+								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 							)
 						);
 
@@ -1453,6 +1580,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			echo '<img src="http://tp.reservationdiary.eu/?parameters=' . $params_encoded . '">';
 		}
 	}
+
 }
 new ReDiRestaurantReservation();
 

@@ -1,6 +1,5 @@
 jQuery(function () {
 
-
     function hideSteps() {
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
         jQuery('#step3').hide('slow');
@@ -15,6 +14,7 @@ jQuery(function () {
         }
         hideSteps();
     };
+
     if (timepicker == 'dropdown') {
         jQuery('#redi-restaurant-startTime-alt').val(jQuery('#redi-restaurant-startHour').val() + ':' + jQuery('#redi-restaurant-startMinute').val());// update time in hidden field
     }
@@ -63,7 +63,7 @@ jQuery(function () {
 
     jQuery('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
-        timeFormat: time_format,
+        timeFormat: timepicker_time_format,
         onClose: function (dateText, inst) {
             hideSteps();
         },
@@ -82,6 +82,14 @@ jQuery(function () {
     });
 
     jQuery('#redi-restaurant-startDate').datepicker({
+        beforeShowDay: function (date) {
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            if (jQuery.inArray(string, disabled_dates) == -1) {
+                return [true, '', 'Available'];
+            } else {
+                return [false, '', 'unAvailable'];
+            }
+        },
         dateFormat: date_format,
         minDate: new Date(),
         onSelect: function (dateText, inst) {
@@ -299,7 +307,9 @@ jQuery(function () {
 
                                         var b = response[availability]['Availability'][current_button_index];
 
-                                        html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' + ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>' + b['StartTime'] + '</button>';
+                                        html += '<button class="redi-restaurant-time-button button" value="' + b['StartTimeISO'] + '" ' +
+                                        ' ' + (b['Available'] ? '' : 'disabled="disabled"') + (b['Select'] ? 'select="select"' : '') + '>'
+                                        + b['StartTime'] + '</button>';
                                         if (b['Available']) all_busy = false;
                                     }
                                     if (hidesteps) {
@@ -455,3 +465,22 @@ jQuery(function () {
         jQuery('#step2').show();
     });
 });
+
+Date.createFromString = function (string) {
+    'use strict';
+    var pattern = /^(\d\d\d\d)-(\d\d)-(\d\d)[ T](\d\d):(\d\d)$/;
+    var matches = pattern.exec(string);
+    if (!matches) {
+        throw new Error("Invalid string: " + string);
+    }
+    var year = matches[1];
+    var month = matches[2] - 1;   // month counts from zero
+    var day = matches[3];
+    var hour = matches[4];
+    var minute = matches[5];
+
+    // Date.UTC() returns milliseconds since the unix epoch.
+    var absoluteMs = Date.UTC(year, month, day, hour, minute, 0);
+
+    return new Date(absoluteMs);
+};
