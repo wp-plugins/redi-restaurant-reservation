@@ -1016,54 +1016,15 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$js_locale         = get_locale();
 			$datepicker_locale = substr( $js_locale, 0, 2 );
 
-			$enabled_dates_array = array(
-//              "'2015-01-01'",
-//				"'2015-01-02'",
-//              "'2015-01-03'",
-//              "'2015-01-04'",
-//				"'2015-01-05'",
-				"'2015-03-06'",
-//				"'2015-01-07'",
-				"'2015-03-08'",
-				"'2015-03-09'",
-                "'2015-03-10'",
-                "'2015-03-11'",
-//				"'2015-01-12'",
-				"'2015-03-13'",
-				"'2015-03-14'",
-				"'2015-03-15'",
-				"'2015-03-16'",
-                "'2015-03-17'",
-                "'2015-03-18'",
-//				"'2015-01-19'",
-				"'2015-01-20'",
-				"'2015-01-21'",
-				"'2015-01-22'",
-				"'2015-01-23'",
-                "'2015-01-24'",
-                "'2015-01-25'",
-//				"'2015-01-26'",
-				"'2015-01-27'",
-				"'2015-01-28'",
-				"'2015-01-29'",
-				"'2015-01-30'",
-                "'2015-01-31'",
-                "'2015-02-01'",
-//				"'2015-02-02'",
-				"'2015-02-03'",
-				"'2015-02-04'",
-				"'2015-02-05'",
-				"'2015-02-06'",
-				"'2015-02-19'",
-				"'2015-06-08'",
-			);
 
 			$dates = $this->redi->getBlockingDates( str_replace( '_', '-', get_locale() ), $categoryID, array(
 				'StartTime' => date( 'Y-m-d' ),
 				'EndTime'   => date( 'Y-m-d', strtotime('+3 month') ) // + 3 months
 			) );
 
+
 			$disabled_dates = array();
+			$enabled_dates = array();
 
 			foreach($dates as $date) {
 				if($date->Blocked) {
@@ -1072,8 +1033,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$enabled_dates[] = "'".$date->Date."'";
 				}
 			}
-
-			$enabled_dates = array_unique(array_merge($enabled_dates, $enabled_dates_array));
 
 			$enabled_dates = implode( ',', $enabled_dates );
 			$disabled_dates = implode( ',', $disabled_dates );
