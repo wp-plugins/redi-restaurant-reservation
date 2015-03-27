@@ -1,8 +1,8 @@
 ﻿=== ReDi Restaurant Reservation ===
 Contributors: thecatkin, robby.roboter
-Tags: reservation diary, reservations, reservation, table reservation, restaurant reservation, reservation plugin, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin, restaurant, online reservation, Booking Calendar, online booking services, restaurant reservation, restaurant reservation system, restaurant booking system, online reservation system, restaurant booking plugin, table booking system, table booking online, restaurant reservation module, restaurant reservation software, reservation table restaurant, online restaurant reservation system, free restaurant reservation system, restaurant booking online, restaurant booking software, free restaurant booking software, online restaurant booking system, restaurant booking systems, restaurant table booking, top table booking, restaurant table reservation system, bookings, reservation confirm, reservation decline, reservation notifications, schedule reservations, schedules, table bookings, table reservations, booking system, restaurant booking wordpress, restaurant booking system wordpress, restaurant plugin wordpress, table booking wordpress, wordpress restaurant booking plugin, table reservation wordpress, ResDiary, Restaurant Manager, WP Restaurant Manager, ResRes, Guestful widget, easyReservations, restaurant reservations, Open Table Widget
+Tags: reservation diary, reservation, table reservation, restaurant reservation, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking
 Requires at least: 3.0.0
-Tested up to: 4.0.1
+Tested up to: 3.9.1
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
@@ -15,55 +15,46 @@ Initially you need to setup number of persons that can book at one time, working
 Supported languages:
 
 * Danish
-* Deutsch
+* Dutch
 * English
-* Español
-* Eesti
-* Français, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
-* Italiano
-* Nederlands
-* Polski
-* Português
-* Türkçe
-* Svenska
-* Suomi
-* Русский
-* עברית
-* 日本語
+* Estonian
+* Finnish
+* French, <a href="http://www.youtube.com/watch?v=MWJKx7onpBs">check out video review</a>
+* German
+* Italian
+* Polish
+* Russian
+* Portuguese (Brazil) 
+* Portuguese (Portugal)
+* Spanish
+* Swedish
 
 If you need more languages, please contact us!
 
 = Basic package functionality =
-* View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed using this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
+* View your upcoming reservations from your Mobile/Tablet PC and never miss your customer. This page should be open on a Tablet PC and so hostess can see all upcoming reservations for today. Page refreshes every 15 min and shows reservations that in past for 3 hours as well as upcoming reservations for next 24 hours. By clicking on reservation you will see reservation details. Demo version can be accessed by this link: <a href="http://goo.gl/DFSBXQ" target="_blank">Open demo version</a>
 * Setup maximum available seats for online reservation by week day
-* Open times. This option will enable you to choose between various working hours whichever is most convenient to you.
+* Time shifts. Define multiple open/close time by week day. Define time before reservation by shift and week day.
 * Support for multiple places. Number of places depends on number of subscriptions.
-* Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted at this time to keep your clients happy.
-* Send client reservation confirmation emails from WordPress account
-* Email template customization for all supported languages
+* Blocked Time. Define time range when online reservation should not be accepted. Specify a reason why reservations are not accepted to explain it to clients.
+* Send client reservation confirmation emails from wordpress account
 
 Basic package price is 5 EUR per month per place. To subscribe please use following PayPal link: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R2KJQFCXB7EMN">Subscribe to basic package</a>
-Please provide API key into comment field. You can find API key from setting page.
 
-Please allow 1 business day for us to confirm your payment and upgrade your account.
-
-= Additional services (by request) =
-* Use your Facebook account for your business. Make clients from your Facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
-* We can offer you white labeled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
-* Enhance your business experience by using our Facebook integration service where we try to provide you with profile pictures of your customers if found. You can amaze your customer by knowing him by face when he visits you, especially at the time of first visit.
+= Additional services =
+* Make clients from your facebook fans. <a href="http://www.slideshare.net/sergeiprokopov/make-clients-from-your-facebook-fans">View presentation.</a>
+* We can offer you white labelled restaurant reservation application for Facebook Application, iPhone/iPad Application, Windows Phone Application or Android Application. Please send request by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+* Amaze your customer by knowing him in face when he visits you, especially when he visits you for first time. We can offer you Facebook integration where we will try to provide you customer profile picture if exists.
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
 * Remind your customer about upcoming reservation via Email or by SMS
 * Collect pre-payment for reservations
-* If you are building a catalogue of restaurants and looking for the perfect reservation plugin for it, we can provide it to you.
-* Do you want to write your own module? We have an API. Contact us to get more information.
+* Are you building catalogue with restaurants and you are looking for reservation plugin for that? We can provide it for you.
 
-If you would like to add some new functionality or have any other queries, please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
+Do you want to have some new functionality or if you have any other questions please contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 = Other plugins =
-* If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a> too.
+* If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a>
  plugin too.
-* Improve your restaurant’s turnaround time by allowing the clients to call a waiter using their smart phones via a mobile web page with our <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">Open QR Code Waiter Calling System plugin</a>.
-
 == Installation ==
 
 1. Click on "Install now" to install plugin
@@ -97,35 +88,10 @@ In case you have any problems with plugin installation or you need some customiz
 20. Step 1: Setup Goal with Google Analytics Tracking Code (google analytics/Conversions/Goals/Overview/Set up goals/New goal). 
 21. Step 2: Setup Goal details (Category: ReDi Restaurant Reservation, Action: Reservation confirmed)
 22. Cancel reservation page for clients.
-23. Step 1: Display all available time grouped by Opening Times (Available only for Basic package users)
-24. List of all emails available for customization
-25. Example of Email customization page
 
 == Upgrade Notice ==
 
 == Changelog ==
-
-= 14.0904 =
-* Extended view for basic package settings
-* Removed warnings
-* Improved error handling during first registration
-* Added support for Email CC for reservation notifications
-* (+) Fixed cancel reservation with space in number
-* (+) Changed country from free form field to dropdown
-* (+) New variation is added to plugin, that displays all possible times for selected date
-* (+) Updated list of languages and translation
-* (+) Added diagnostics for installation troubleshooting
-* (+) Added support for translation to Upcoming Reservations TabletPC version
-* (+) Added description to each setting
-* (+) Added widget to collect new feature requests
-
-= 14.0630 =
-* Limit maximum time before reservation
-* Fixed warnings
-* Fixed upcoming reservation list
-* New style for upcoming reservation email
-* Increased time out for API call
-* Added check for comments size
 
 = 14.0511 =
 * Added settings to select Min and Max party size
@@ -142,6 +108,9 @@ In case you have any problems with plugin installation or you need some customiz
 * Added ability to cancel reservation by client
 * Added possibility to override errors returned by API
 * New client reservation confirmation email template
+* (+) Limit maximum time before reservation
+* (+) Fixed warnings
+
 
 = 14.0221 =
 * Added alternative time picker for better reservation time selection on mobile devices
@@ -215,8 +184,8 @@ In case you have any problems with plugin installation or you need some customiz
 
 = 13.0128 =
 * Added settings saved message box to admin page
-* Added check box that asks for permission to publish restaurant details into reservationdiary.eu catalogue
-* Fixed pre populating of URL field in admin page
+* Added checkbox that asks for permission to publish restaurant details into reservationdiary.eu catalog
+* Fixed prepopulating of URL field in admin page
 
 = 13.0119 =
 * Updated reservation confirmation text

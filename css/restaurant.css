@@ -88,24 +88,17 @@ strong
 .redi-restaurant-button
 {
     font-weight: normal;
-
-}
-.redi-restaurant-time-button
-{
-    float:left;
 }
 
-.redi-restaurant-time-button[disabled="disabled"],
 .redi-restaurant-button[disabled="disabled"]
 {
-    opacity:0.4 !important;
-    filter:alpha(opacity=40) !important; /* For IE8 and earlier */
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
-.redi-restaurant-time-button[select="select"], .redi-restaurant-button[select="select"]
+.redi-restaurant-button[select="select"]
 {
-    font-weight: bold !important;
-    background-color: #DFF0D8 !important;
+    font-weight: bold;
 }
 
 #step1button, #redi-restaurant-step3
