@@ -847,8 +847,16 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					$startTimeInt = strtotime( $startTimeStr, 0 );
 					$dayname      = date( 'l', strtotime( $_POST['startDateISO'] ) );
 					// calculate end time
-					//    echo "endTimeInt".$endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
-					if ( $dayname != "Sunday" ) {
+					// echo "endTimeInt".$endTimeInt = strtotime('+'.$this->getReservationTime($persons).'minutes', $startTimeInt);
+					$endTimeInt = strtotime( '+' . $this->getReservationTime( $persons ) . 'minutes', $startTimeInt );
+
+					if( $_POST['session'] == "lunch")
+						$alternatives =8;
+					elseif( $dayname == "Sunday")
+						$alternatives =1;
+					else
+						$alternatives =12;
+					/*if ( $dayname != "Sunday" ) {
 						if ( $_POST['session'] == "breakfast" ) {
 							$endTimeStr   = $date['year'] . '-' . $date['month'] . '-' . $date['day'] . ' ' . '12:0';
 							$alternatives = 12;
@@ -863,9 +871,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					} else {
 						$endTimeStr   = $date['year'] . '-' . $date['month'] . '-' . $date['day'] . ' ' . '15:0';
 						$alternatives = 12;
-					}
+					}*/
 					// echo $alternatives;
-					$endTimeInt = strtotime( $endTimeStr, 0 );
+					//$endTimeInt = strtotime( $endTimeStr, 0 );
 
 
 					// format to ISO
@@ -880,7 +888,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						'Alternatives'        => $alternatives,
 						'Lang'                => str_replace( '_', '-', $_POST['lang'] ),
 						'CurrentTime'         => urlencode( $currentTimeISO ),
-						'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons )
+						'AlternativeTimeStep' => self::getAlternativeTimeStep( $persons , $dayname)
 					);
 
 					//get first category on selected place
@@ -1030,7 +1038,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			die;
 		}
 
-		private function getAlternativeTimeStep( $persons = 0 ) {
+		private function getAlternativeTimeStep( $persons = 0 , $dayname='') {
+			if($dayname == 'Sunday') {
+				return 60;
+			}
 			$filename = plugin_dir_path( __FILE__ ) . 'alternativetimestep.json';
 
 			if ( file_exists( $filename ) && $persons ) {

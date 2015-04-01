@@ -79,7 +79,7 @@ width:100%;
 <form id="redi-reservation" name="redi-reservation" method="post">
 
 	<div id="step1" style="margin-top: -15px;">
-		
+
         <?php if(count((array)$places) > 1 ): ?>
             <h2 style="float:left;"> <?php _e('Step', 'redi-restaurant-reservation')?> 1: <?php _e('Select place, date and time', 'redi-restaurant-reservation')?></h2><a href="#cancel" id="cancel-reservation" class="cancel-reservation" style="border-radius: 31px;float: left;font-size: 13px;font-weight: bold;padding: 13px;width: 38%;margin-top:0;"><?php _e('Cancel Booking', 'redi-restaurant-reservation')?></a>
             <br clear="both"/><label for="placeID"><?php _e('Place', 'redi-restaurant-reservation')?>:</label><br clear="both"/>

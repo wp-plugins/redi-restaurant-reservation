@@ -57,14 +57,7 @@ jQuery('#datepicker').change(function () {
         jQuery('#redi-restaurant-startDateISO').val(fullDate);
 		jQuery('#redi-restaurant-startDate').val(hiddendate);
     });
-  /*  jQuery('#redi-restaurant-startDate').change(function () {
-        var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-        var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-        var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
-        var fullDate = year1 + '-' + month1 + '-' + day1;
 
-        jQuery('#redi-restaurant-startDateISO').val(fullDate);
-    });*/
 jQuery( "#datepicker" ).datepicker(); 
 
  jQuery('#datepicker').datepicker({
@@ -93,18 +86,12 @@ jQuery( "#datepicker" ).datepicker();
             unloadPopupBox();
         });
 
-/* jQuery('#step1button1').click( function() {
-	 alert("hiii");
-            loadPopupBox();
-        });*/
         function unloadPopupBox() {    // TO Unload the Popupbox
            jQuery('#popup_box').fadeOut("slow");
+            jQuery("#fade").fadeOut("slow");
             jQuery("#container").css({ // this is just for style        
                 "opacity": "1"  
             }); 
-			
-			
-			window.setTimeout(function(){location.reload()},1000);
         }    
         
         function loadPopupBox() {    // To Load the Popupbox
@@ -119,20 +106,6 @@ jQuery( "#datepicker" ).datepicker();
                 "opacity": "0.3"  
             });      
         }   
-/* jQuery('#redi-restaurant-startDate').datepicker({
-        dateFormat: date_format,
-        minDate: new Date(),
-        onSelect: function (dateText, inst) {
-            hideSteps();
-
-            var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-            var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-            var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
-            var fullDate = year1 + '-' + month1 + '-' + day1;
-
-            jQuery('#redi-restaurant-startDateISO').val(fullDate);
-        }
-    });*/
 
     jQuery('#redi-restaurant-step3').click(function () {
         var error = '';
@@ -208,16 +181,13 @@ jQuery( "#datepicker" ).datepicker();
 				var bookingdatee=bookingdatesplit[0];
 				var datearray=bookingdatee.split('-');
 				var reservationdate=datearray[2]+"-"+datearray[1]+"-"+datearray[0];
-				//alert(reservationdate);
 				var bookingtime=bookingdatesplit[1];
-				//alert(bookingtime);
                 ga_event('Reservation confirmed','');
                 jQuery('#step1').hide('slow');
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
 				jQuery('#success_msg').html('You should receive your confirmation by email shortly.Details of your Booking are as follows: </br> No of Person : '+jQuery('#persons').val()+' </br>Date of Reservation : '+reservationdate+" "+bookingtime );
                 jQuery('#step4').show('slow'); //success message
-				//jQuery('#popup_box').css('display','none !important'); 
                 jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
 				window.setTimeout(function(){location.reload()},10000);
             }
@@ -234,37 +204,24 @@ var dArray = givenDate.split("-");
 myDate=new Date(dArray[0],dArray[1]-1,dArray[2]);
   
 var dayCode = myDate.getDay(); // dayCode 0-6  
-//alert(dayCode);
 var dayIs=weekDays[dayCode]; //It will contain the required day, in this example it will be friday  
-//alert(dayIs);
 return dayIs; 
 }  
     jQuery('#step1button1').click(function () {
-	//	alert("hi");
 		loadPopupBox();
 		
-	//	alert("hello");
-	//	alert(jQuery('#session').val());
 	    var bookingdate=jQuery('#redi-restaurant-startDateISO').val();
-		//alert(bookingdate);
         var dd=getDayOfDate(bookingdate); //Give call to the function  
-	//	alert(dd);
 		var session=jQuery('#session').val();
 	    if(session=="lunch")
 		{
 			jQuery('#redi-restaurant-startTime').val('12:00 pm');
 		}else  if(session=="dinner"){
-		   if((dd=="Monday")||(dd=="Tuesday")||(dd=="Wednesday")||(dd=="Thursday")||(dd=="Friday")||(dd=="Saturday"))
-		   {  
-		   //alert("hello");
 			jQuery('#redi-restaurant-startTime').val('06:00 pm');
 		   }
-		}
-		//alert(jQuery('#redi-restaurant-startTime').val());
         jQuery('#step1button').attr('disabled', true);
 		
         jQuery('#step2').hide('slow'); // if user clicks again first button we hide the other steps
-     //   jQuery('#step3').hide('slow');
 	
         jQuery('#step1load').show();
         jQuery('#step1errors').hide('slow');
@@ -278,15 +235,11 @@ return dayIs;
             persons: jQuery('#persons').val(),
             lang: locale
         };
-       // alert(data);
         jQuery.post(redi_restaraurant_reservation.ajaxurl, data, function (response) {
-			//alert(response);
-		
             jQuery('#step1load').hide();
             jQuery('#step1button').attr('disabled', false);
             jQuery('#buttons').html('');
             if (response['Error']) {
-				//alert(response['Error']);
 			jQuery("#step2").css({ // this is just for style        
                 "display": "block !important"  
             });
@@ -294,16 +247,16 @@ return dayIs;
 			jQuery("#fade").css({ // this is just for style        
                 "display": "block !important"  
             });
-                jQuery('#step1errors').html(response['Error']).show('slow');
-				
+
+            jQuery('#step1errors').html(response['Error']).show('slow');
+            jQuery('#step2').show();
+            jQuery('#step3').hide();
             } else {
-				var session = $( "#session option:selected" ).text();
+				var session = jQuery( "#session option:selected" ).text();
 			
                 for (res in response) {	
                      				
-				//alert(response[res]['StartTimeISO']);
-				//alert(response[res]['StartTime']);
-					  if(response[res]['StartTimeISO']!=null){
+                    if(response[res]['StartTimeISO']!=null && response[res]['Available'] ){
 						
                     jQuery('#buttons').append(
                             '<button id="'+ response[res]['StartTime'] +'" class="redi-restaurant-button redi-restaurant-time-button" value="' + response[res]['StartTimeISO'] + '" '  +
@@ -312,57 +265,14 @@ return dayIs;
                         );
 						
 						
-						
-						if(session=="Dinner")
-						{
-						   if(dd!="Sunday")
-						   {
-						      if((response[res]['StartTime']<"5:45pm"))
-						      {
-							     jQuery(".redi-restaurant-time-button").css("display","none");
-							  }
-							  if(response[res]['StartTime']=="9:00 pm")
-							  {
-								  $("[id='"+response[res]['StartTime']+"']").css("display","none");
-							  }
-							  
-						   }else{
-						   jQuery('#step1errors').html("Dinner facility is not provided on Sunday.");
-						   jQuery('#step1errors').show('slow');
-						   jQuery('#buttons').hide('slow');
-						   jQuery('#msg').hide('slow');
-						   }
-						}else if(session=="Lunch")
-						{
-						
-						 if(dd!="Sunday")
-						   {
-						      if(response[res]['StartTime']<"11:45pm")
-						      {
-							     jQuery(".redi-restaurant-time-button").css("display","none");
-							  }
-						   }else{
-						      if(response[res]['StartTime']<"11:45pm")
-						      {
-							     jQuery(".redi-restaurant-time-button").css("display","none");
-							  }
-						   }
-						
-						}
-						
-						
 						jQuery( "#msg" ).css("display","block");
 					}
                 }
 			
-                //jQuery('#step2').show('slow');
                    jQuery('#step2').show();
 				   jQuery('#step3').hide();
-				  //  alert(jQuery('#step2').css('display'));
-		          //   alert(jQuery('#step3').css('display')); 
                     jQuery('.redi-restaurant-time-button').click(function () {
                     jQuery('#step3').show();
-					//jquery('#redi-restaurant-step3').show();
                     jQuery('.redi-restaurant-time-button').each(function () {
                         jQuery(this).removeAttr('select');
                     });
@@ -370,7 +280,6 @@ return dayIs;
                     jQuery(this).attr('select', 'select');
 
                     jQuery('#redi-restaurant-startTimeHidden').val(jQuery(this).val());
-                   // jQuery('#step3').show('slow');
                     jQuery('#UserName').focus();
 
                     return false;
