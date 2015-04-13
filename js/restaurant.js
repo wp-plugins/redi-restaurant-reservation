@@ -9,7 +9,7 @@ jQuery(function () {
 
 (function ($) {
 
-    var calselect = function () {
+    var calendar_select = function () {
         $('.date').each(function () {
             $(this).removeClass('select');
         });
@@ -17,7 +17,7 @@ jQuery(function () {
         step1call($(this).children('input').val());
     };
     /* new calendar select */
-    $('td.date').on('click', calselect);
+    $('td.date').on('click', calendar_select);
 
     /* new persons select */
     $('.f_person_data tr td').click(function () {
@@ -26,7 +26,7 @@ jQuery(function () {
         });
         $('#persons_view').html($(this).addClass('select').html());// update viewbox
 
-        step1call(jQuery('.f_calender_data tr td + .select > input[type="hidden"]').val());
+        step1call($('.date.select > input[type="hidden"]').val());
     });
 
 
@@ -63,7 +63,7 @@ jQuery(function () {
                     );
                     $('#dates_row').prepend(new_element);
 
-                    new_element.on('click', calselect);// should work without it
+                    new_element.on('click', calendar_select);// should work without it
                     //select new added date
                     if (current.isSame(startDate)) {
                         new_element.click();
@@ -74,23 +74,23 @@ jQuery(function () {
             });
         return false;
     });
-    function translate_day(day) {
-        return day + 1;
-    }
+    //function translate_day(day) {
+    //    return day + 1;
+    //}
 
-    function daydiff(first, second) {
-        return (second - first) / (1000 * 60 * 60 * 24);
-    }
+    //function daydiff(first, second) {
+    //    return (second - first) / (1000 * 60 * 60 * 24);
+    //}
 
-    function translate_month(month) {
-        return month + 1;
-    }
+    //function translate_month(month) {
+    //    return month + 1;
+    //}
 
-    function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(date.getDate() + days);
-        return result;
-    }
+    //function addDays(date, days) {
+    //    var result = new Date(date);
+    //    result.setDate(date.getDate() + days);
+    //    return result;
+    //}
 
 
     /* step1 > step2 */
@@ -129,9 +129,10 @@ jQuery(function () {
             $('#step1button').attr('disabled', false);
             $('#large_groups_message').hide('slow');
         }
-        var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
-        var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-        var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+        var start_date = $('#redi-restaurant-startDate').datepicker('getDate');
+        var day1 = start_date.getDate();
+        var month1 = start_date.getMonth() + 1;
+        var year1 = start_date.getFullYear();
         var fullDate = year1 + '-' + month1 + '-' + day1;
         if (timeshiftmode === 'byshifts') {
             step1call(fullDate);
@@ -141,15 +142,16 @@ jQuery(function () {
     $('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
         timeFormat: time_format,
-        onClose: function (dateText, inst) {
+        onClose: function () {
             hideSteps();
         }
     });
 
     $('#redi-restaurant-startDate').change(function () {
-        var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
-        var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-        var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+        var start_date = $('#redi-restaurant-startDate').datepicker('getDate');
+        var day1 = start_date.getDate();
+        var month1 = start_date.getMonth() + 1;
+        var year1 = start_date.getFullYear();
         var fullDate = year1 + '-' + month1 + '-' + day1;
 
         $('#redi-restaurant-startDateISO').val(fullDate);
@@ -158,10 +160,11 @@ jQuery(function () {
     $('#redi-restaurant-startDate').datepicker({
         dateFormat: date_format,
         minDate: new Date(),
-        onSelect: function (dateText, inst) {
-            var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
-            var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-            var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+        onSelect: function () {
+            var start_date = $('#redi-restaurant-startDate').datepicker('getDate');
+            var day1 = start_date.getDate();
+            var month1 = start_date.getMonth() + 1;
+            var year1 = start_date.getFullYear();
             var fullDate = year1 + '-' + month1 + '-' + day1;
             if (timeshiftmode === 'byshifts') {
                 step1call(fullDate)
@@ -173,19 +176,17 @@ jQuery(function () {
         }
     });
 
-    $('.redi-restaurant-time-button').live('click', function () {
+    $('.redi-restaurant-time-button').on('click', function () {
         if ($(this).attr('disabled')) {
-            e.prefentDefault();
+            e.preventDefault();
             e.stopPropagation();
             return;
         }
         // do your stuff here
         $('.redi-restaurant-time-button').each(function () {
-            //      $(this).removeAttr('select');
             $(this).removeClass('select');
         });
         $(this).addClass('select');
-        //$(this).attr('select', 'select');
 
         $('#redi-restaurant-startTimeHidden').val($(this).val());
 
@@ -285,9 +286,10 @@ jQuery(function () {
         }
         else {
             $('#step1button').attr('disabled', true);
-            var day1 = $('#redi-restaurant-startDate').datepicker('getDate').getDate();
-            var month1 = $('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-            var year1 = $('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+            var start_date = $('#redi-restaurant-startDate').datepicker('getDate');
+            var day1 = start_date.getDate();
+            var month1 = start_date.getMonth() + 1;
+            var year1 = start_date.getFullYear();
             var fullDate = year1 + '-' + month1 + '-' + day1;
             step1call(fullDate);
         }
@@ -358,7 +360,7 @@ jQuery(function () {
                             break;
                         case 3: //AlternativeTimeByDay
                             var all_busy = true;
-                            var current = 0;
+                            //var current = 0;
                             var step1buttons_html = '';
                             $('#step1buttons_html').html(step1buttons_html).hide();
                             for (var availability in response) {
@@ -488,7 +490,7 @@ jQuery(function () {
         return false;
     });
 
-    $('.available').live('click', function (event) {
+    $('.available').on('click', function (event) {
         event.preventDefault();
         $('#step1').hide();
         $('#step2').show();

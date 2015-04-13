@@ -80,7 +80,7 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 
 			$this->ApiKey = isset( $this->options[ ID ] ) ? $this->options[ ID ] : null;
 
-			$this->redi = new Redi( $this->ApiKey );
+			$this->redi = new ReDiBooking( $this->ApiKey );
 			//Actions
 			add_action( 'init', array( &$this, 'init_sessions' ) );
 			add_action( 'admin_menu', array( &$this, 'redi_booking_admin_menu_link' ) );
@@ -833,10 +833,10 @@ if ( ! class_exists( 'ReDiRestaurantbooking' ) ) {
 
 			$categoryID               = $categories[0]->ID;
 			$time_format              = get_option( 'time_format' );
-			$date_format_setting      = $this->options['DateFormat'];
+			$date_format_setting      = isset($this->options['DateFormat']) ? $this->options['DateFormat'] : null;
 			$date_format              = $this->getPHPDateFormat( $date_format_setting );
 			$calendar_date_format     = $this->getCalendarDateFormat( $date_format_setting );
-			$MinTimeBeforeReservation = (int) ( $this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0 ) + 1;
+			$MinTimeBeforeReservation = (int) (isset($this->options['MinTimeBeforeReservation']) && $this->options['MinTimeBeforeReservation'] > 0 ? $this->options['MinTimeBeforeReservation'] : 0 ) + 1;
 			$reservationStartTime     = strtotime( '+' . $MinTimeBeforeReservation . ' hour',
 				current_time( 'timestamp' ) );
 			$startDate                = date( $date_format, $reservationStartTime );

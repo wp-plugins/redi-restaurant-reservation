@@ -47,11 +47,11 @@ if ( ! defined( 'CUSTOM_FIELDS' ) ) {
 define('CUSTOM_FIELDS', 6);
 }
 
-if ( ! class_exists( 'ReDi' ) ) {
-	class Redi {
+if ( ! class_exists( 'ReDiBooking' ) ) {
+	class ReDiBooking {
 	private $ApiKey;
 
-		public function Redi( $ApiKey ) {
+		public function ReDiBooking( $ApiKey ) {
 		$this->ApiKey = $ApiKey;
 	}
 
