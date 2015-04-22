@@ -2,7 +2,7 @@
 Contributors: thecatkin, robby.roboter
 Tags: reservation diary, reservations, reservation, table reservation, restaurant reservation, reservation plugin, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin, restaurant, online reservation, Booking Calendar, online booking services, restaurant reservation, restaurant reservation system, restaurant booking system, online reservation system, restaurant booking plugin, table booking system, table booking online, restaurant reservation module, restaurant reservation software, reservation table restaurant, online restaurant reservation system, free restaurant reservation system, restaurant booking online, restaurant booking software, free restaurant booking software, online restaurant booking system, restaurant booking systems, restaurant table booking, top table booking, restaurant table reservation system, bookings, reservation confirm, reservation decline, reservation notifications, schedule reservations, schedules, table bookings, table reservations, booking system, restaurant booking wordpress, restaurant booking system wordpress, restaurant plugin wordpress, table booking wordpress, wordpress restaurant booking plugin, table reservation wordpress, ResDiary, Restaurant Manager, WP Restaurant Manager, ResRes, Guestful widget, easyReservations, restaurant reservations, Open Table Widget
 Requires at least: 3.0.0
-Tested up to: 4.0.1
+Tested up to: 4.1.2
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
@@ -28,8 +28,8 @@ Supported languages:
 * Svenska
 * Suomi
 * Русский
-* עברית
-* 日本語
+* עברית (Hebrew)
+* 日本語 (Japanese)
 
 If you need more languages, please contact us!
 
@@ -105,19 +105,23 @@ In case you have any problems with plugin installation or you need some customiz
 
 == Changelog ==
 
+= 15.0422 =
+* Fixed cancel reservation with space in number
+* Changed country from free form field to dropdown
+* New variation is added to plugin, that displays all possible times for selected date
+* Updated list of languages and translation
+* Added diagnostics for installation troubleshooting
+* Added support for translation to Upcoming Reservations TabletPC version
+* Added description to each setting
+* Added widget to collect new feature requests
+* Disable blocked dates in calendar
+* Added list of reservations
+
 = 14.0904 =
 * Extended view for basic package settings
 * Removed warnings
 * Improved error handling during first registration
 * Added support for Email CC for reservation notifications
-* (+) Fixed cancel reservation with space in number
-* (+) Changed country from free form field to dropdown
-* (+) New variation is added to plugin, that displays all possible times for selected date
-* (+) Updated list of languages and translation
-* (+) Added diagnostics for installation troubleshooting
-* (+) Added support for translation to Upcoming Reservations TabletPC version
-* (+) Added description to each setting
-* (+) Added widget to collect new feature requests
 
 = 14.0630 =
 * Limit maximum time before reservation

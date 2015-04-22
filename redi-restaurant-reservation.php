@@ -56,7 +56,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 	class ReDiRestaurantReservation {
 
-		public $version = '14.0904';
+		public $version = '15.0422';
 		/**
 		 * @var string The options string name for this plugin
 		 */

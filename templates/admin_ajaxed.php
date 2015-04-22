@@ -230,7 +230,7 @@ jQuery(function () {
 				<p class="description">
 					<?php _e('Specify how late customers can make their booking in hours. For example, the current time is 10:00 and this setting is set to 3 hours then the first time, when the reservation will be accepted is 13:00.', 'redi-restaurant-reservation'); ?>
 					<br/>
-					<?php _e('NOTE: If you define Open Time in basic package, then this setting will be ignored. Use open times settings to define Late Bookings', 'redi-restaurant-reservation'); ?>
+					<?php _e('NOTE: If you define Open Time in basic package, then this setting will be ignored. Use open times settings to define Late Bookings.', 'redi-restaurant-reservation'); ?>
 				</p>
 			</td>
 		</tr>
