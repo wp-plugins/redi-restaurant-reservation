@@ -3,7 +3,7 @@
   Plugin Name: ReDi Restaurant Reservation
   Plugin URI: http://reservationdiary.eu/eng/reservation-wordpress-plugin/
   Description: ReDi Reservation plugin for Restaurants
-  Version: 14.0904
+  Version: 15.0422
   Author: reservationdiary.eu
   Author URI: http://reservationdiary.eu/
   Text Domain: redi-restaurant-reservation
