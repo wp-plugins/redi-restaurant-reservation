@@ -655,7 +655,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$icon = 'dashicons-groups';
 
             if($this->ApiKey) {
-	            add_object_page(
+	            add_menu_page(
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     'edit_posts',
