@@ -260,20 +260,20 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			}
 		}
 
-        function redi_restaurant_admin_upcoming(){
-            $iframe_url ='http://upcoming.reservationdiary.eu/Entry/'.$this->ApiKey;
-            require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
-        }
+		function redi_restaurant_admin_upcoming() {
+			$iframe_url = 'http://upcoming.reservationdiary.eu/Entry/' . $this->ApiKey;
+			require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
+		}
 
-        function redi_restaurant_admin_test(){
-            $iframe_url = get_option( 'siteurl' ).'/reservation';
-            require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
-        }
+		function redi_restaurant_admin_test() {
+			$iframe_url = get_option( 'siteurl' ) . '/reservation';
+			require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
+		}
 
-        function redi_restaurant_admin_reservations(){
-            $iframe_url = $this->redi->getReservationUrl(str_replace( '_', '-', get_locale() ));
-            require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
-        }
+		function redi_restaurant_admin_reservations() {
+			$iframe_url = $this->redi->getReservationUrl( str_replace( '_', '-', get_locale() ) );
+			require_once( REDI_RESTAURANT_TEMPLATE . 'iframe.php' );
+		}
 
 		/**
 		 * Adds settings/options page
@@ -654,53 +654,53 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		function redi_restaurant_admin_menu_link_new() {
 			$icon = 'dashicons-groups';
 
-            if($this->ApiKey) {
-	            add_menu_page(
-                    __('ReDi Reservations', 'redi-restaurant-reservation'),
-                    __('ReDi Reservations', 'redi-restaurant-reservation'),
-                    'edit_posts',
-                    'redi-restaurant-reservation-reservations',
-                    array(&$this, 'redi_restaurant_admin_reservations'),
-                    $icon); // where in menu it will be located, 26 is after comments
-                add_submenu_page(
-                    'redi-restaurant-reservation-reservations',
-                    __('Settings', 'redi-restaurant-reservation'),
-                    __('Settings', 'redi-restaurant-reservation'),
-                    'edit_posts',
-                    'redi-restaurant-reservation-settings',
-                    array(&$this, 'redi_restaurant_admin_options_page'));
+			if ( $this->ApiKey ) {
+				add_menu_page(
+					__( 'ReDi Reservations', 'redi-restaurant-reservation' ),
+					__( 'ReDi Reservations', 'redi-restaurant-reservation' ),
+					'edit_posts',
+					'redi-restaurant-reservation-reservations',
+					array( &$this, 'redi_restaurant_admin_reservations' ),
+					$icon ); // where in menu it will be located, 26 is after comments
+				add_submenu_page(
+					'redi-restaurant-reservation-reservations',
+					__( 'Settings', 'redi-restaurant-reservation' ),
+					__( 'Settings', 'redi-restaurant-reservation' ),
+					'edit_posts',
+					'redi-restaurant-reservation-settings',
+					array( &$this, 'redi_restaurant_admin_options_page' ) );
 
-                add_submenu_page(
-                    'redi-restaurant-reservation-reservations',
-                    __('Settings $','redi-restaurant-reservation'),
-                    __('Settings $','redi-restaurant-reservation'),
-                    'edit_posts',
-                    'redi-restaurant-reservation-settings&sm=basic',
-                    array( &$this, 'redi_restaurant_admin_options_page' ));
-                add_submenu_page(
-                    'redi-restaurant-reservation-reservations',
-                    __('Test reservation','redi-restaurant-reservation'),
-                    __('Test reservation','redi-restaurant-reservation'),
-                    'edit_posts',
-                    'redi-restaurant-reservation-test',
-                    array( &$this, 'redi_restaurant_admin_test' ));
-                add_submenu_page(
-                    'redi-restaurant-reservation-reservations',
-                    __('Upcoming (Tablet PC)','redi-restaurant-reservation'),
-                    __('Upcoming (Tablet PC)','redi-restaurant-reservation'),
-                    'edit_posts',
-                    'redi_restaurant_admin_upcoming',
-                    array( &$this, 'redi_restaurant_admin_upcoming' ));
+				add_submenu_page(
+					'redi-restaurant-reservation-reservations',
+					__( 'Settings $', 'redi-restaurant-reservation' ),
+					__( 'Settings $', 'redi-restaurant-reservation' ),
+					'edit_posts',
+					'redi-restaurant-reservation-settings&sm=basic',
+					array( &$this, 'redi_restaurant_admin_options_page' ) );
+				add_submenu_page(
+					'redi-restaurant-reservation-reservations',
+					__( 'Test reservation', 'redi-restaurant-reservation' ),
+					__( 'Test reservation', 'redi-restaurant-reservation' ),
+					'edit_posts',
+					'redi-restaurant-reservation-test',
+					array( &$this, 'redi_restaurant_admin_test' ) );
+				add_submenu_page(
+					'redi-restaurant-reservation-reservations',
+					__( 'Upcoming (Tablet PC)', 'redi-restaurant-reservation' ),
+					__( 'Upcoming (Tablet PC)', 'redi-restaurant-reservation' ),
+					'edit_posts',
+					'redi_restaurant_admin_upcoming',
+					array( &$this, 'redi_restaurant_admin_upcoming' ) );
 			} else {
-                add_menu_page(
-                    __('ReDi Reservations', 'redi-restaurant-reservation'),
-                    __('ReDi Reservations', 'redi-restaurant-reservation'),
-                    'edit_posts'
-                    ,
-                    'redi-restaurant-reservation-manage-options',
-                    array(&$this, 'redi_restaurant_admin_options_page'),
-                    $icon, 26); // where in menu it will be located, 26 is after comments
-            }
+				add_menu_page(
+					__( 'ReDi Reservations', 'redi-restaurant-reservation' ),
+					__( 'ReDi Reservations', 'redi-restaurant-reservation' ),
+					'edit_posts'
+					,
+					'redi-restaurant-reservation-manage-options',
+					array( &$this, 'redi_restaurant_admin_options_page' ),
+					$icon, 26 ); // where in menu it will be located, 26 is after comments
+			}
 		}
 
 		static function install() {
@@ -843,6 +843,13 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			if ( is_array( $atts ) && is_array( $this->options ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
+
+			if ( array_key_exists( 'action', $_GET ) && array_key_exists( 'quantity', $_GET ) && $_GET['action'] === 'thank-you' ) {
+				$data = array( 'redirect' => '/reservation-thank-you', 'quantity' => (int) $_GET['quantity'] );
+				$data = apply_filters( 'redi-reservation-thank-you', $data );
+			//	wp_redirect($data['redirect']);
+			}
+
 			ob_start();
 			wp_enqueue_script( 'jquery' );
 			wp_register_style( 'jquery_ui', null, array( 'jquery' ) );
@@ -939,8 +946,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				return;
 			}
 
-			$categoryID               = $categories[0]->ID;
-			$time_format              = get_option( 'time_format' );
+			$categoryID  = $categories[0]->ID;
+			$time_format = get_option( 'time_format' );
 
 			$date_format_setting      = $this->GetOption( 'DateFormat' );
 			$date_format              = $this->getPHPDateFormat( $date_format_setting );
@@ -1019,22 +1026,22 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$dates = $this->redi->getBlockingDates( str_replace( '_', '-', get_locale() ), $categoryID, array(
 				'StartTime' => date( 'Y-m-d' ),
-				'EndTime'   => date( 'Y-m-d', strtotime('+3 month') ) // + 3 months
+				'EndTime'   => date( 'Y-m-d', strtotime( '+3 month' ) ) // + 3 months
 			) );
 
 
 			$disabled_dates = array();
-			$enabled_dates = array();
+			$enabled_dates  = array();
 
-			foreach($dates as $date) {
-				if($date->Blocked) {
-					$disabled_dates[] = "'".$date->Date."'";
-				}else {
-					$enabled_dates[] = "'".$date->Date."'";
+			foreach ( $dates as $date ) {
+				if ( $date->Blocked ) {
+					$disabled_dates[] = "'" . $date->Date . "'";
+				} else {
+					$enabled_dates[] = "'" . $date->Date . "'";
 				}
 			}
 
-			$enabled_dates = implode( ',', $enabled_dates );
+			$enabled_dates  = implode( ',', $enabled_dates );
 			$disabled_dates = implode( ',', $disabled_dates );
 
 			$time_format_s = explode( ':', $time_format );
@@ -1165,10 +1172,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			if ( file_exists( $filename ) ) {
 				$json = json_decode( file_get_contents( $filename ), true );
-				if(array_key_exists($lang, $json)) {
-					return $json[$lang];
+				if ( array_key_exists( $lang, $json ) ) {
+					return $json[ $lang ];
 				}
 			}
+
 			return $default_time_format;
 		}
 
@@ -1199,9 +1207,9 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			if ( $date['error_count'] > 0 ) {
 				echo json_encode(
-                    array_merge($date['errors'],
-                    array('Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ))
-				) );
+					array_merge( $date['errors'],
+						array( 'Error' => __( 'Selected date or time is not valid.', 'redi-restaurant-reservation' ) )
+					) );
 				die;
 			}
 
@@ -1234,7 +1242,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				if ( isset( $post['alternatives'] ) ) {
 					$params['Alternatives'] = $post['alternatives'];
 				}
-				$params = apply_filters( 'redi-reservation-pre-query', $params );
+				$params          = apply_filters( 'redi-reservation-pre-query', $params );
 				$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
 				switch ( $alternativeTime ) {

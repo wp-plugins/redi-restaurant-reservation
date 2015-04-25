@@ -203,7 +203,9 @@ jQuery(function () {
                 jQuery('#step1').hide('slow');
                 jQuery('#step2').hide('slow');
                 jQuery('#step3').hide('slow');
-                jQuery('#step4').show('slow'); //success message
+                //jQuery('#step4').show('slow'); //success message
+
+                jQuery(location).attr('href','/?action=thankyou&quantity='.jQuery('#persons').val());
                 jQuery('html, body').animate({scrollTop: 0}, 'slow');
             }
         }, 'json');
