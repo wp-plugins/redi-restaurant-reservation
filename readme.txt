@@ -2,7 +2,7 @@
 Contributors: thecatkin, robby.roboter
 Tags: reservation diary, reservations, reservation, table reservation, restaurant reservation, reservation plugin, time reservation, open table, free table, easy reservation, easy booking, table booking, restaurant booking, restaurant plugin, restaurant, online reservation, Booking Calendar, online booking services, restaurant reservation, restaurant reservation system, restaurant booking system, online reservation system, restaurant booking plugin, table booking system, table booking online, restaurant reservation module, restaurant reservation software, reservation table restaurant, online restaurant reservation system, free restaurant reservation system, restaurant booking online, restaurant booking software, free restaurant booking software, online restaurant booking system, restaurant booking systems, restaurant table booking, top table booking, restaurant table reservation system, bookings, reservation confirm, reservation decline, reservation notifications, schedule reservations, schedules, table bookings, table reservations, booking system, restaurant booking wordpress, restaurant booking system wordpress, restaurant plugin wordpress, table booking wordpress, wordpress restaurant booking plugin, table reservation wordpress, ResDiary, Restaurant Manager, WP Restaurant Manager, ResRes, Guestful widget, easyReservations, restaurant reservations, Open Table Widget
 Requires at least: 3.0.0
-Tested up to: 4.1.2
+Tested up to: 4.2
 Stable tag: trunk
 
 ReDi Restaurant Reservation plugin allows you to easily manage reservations for your restaurant business.
