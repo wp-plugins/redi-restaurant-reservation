@@ -1234,7 +1234,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				if ( isset( $post['alternatives'] ) ) {
 					$params['Alternatives'] = $post['alternatives'];
 				}
-
+				$params = apply_filters( 'redi-reservation-pre-query', $params );
 				$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
 				switch ( $alternativeTime ) {
