@@ -655,7 +655,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$icon = 'dashicons-groups';
 
             if($this->ApiKey) {
-	            add_object_page(
+	            add_menu_page(
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     'edit_posts',
@@ -1234,7 +1234,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				if ( isset( $post['alternatives'] ) ) {
 					$params['Alternatives'] = $post['alternatives'];
 				}
-
+				$params = apply_filters( 'redi-reservation-pre-query', $params );
 				$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
 				switch ( $alternativeTime ) {
