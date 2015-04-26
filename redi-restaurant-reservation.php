@@ -844,10 +844,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
 
-			if ( array_key_exists( 'action', $_GET ) && array_key_exists( 'quantity', $_GET ) && $_GET['action'] === 'thank-you' ) {
+			if ( array_key_exists( 'action', $_GET ) && array_key_exists( 'quantity', $_GET ) && $_GET['action'] === 'thankyou' ) {
 				$data = array( 'redirect' => '/reservation-thank-you', 'quantity' => (int) $_GET['quantity'] );
-				$data = apply_filters( 'redi-reservation-thank-you', $data );
-			//	wp_redirect($data['redirect']);
+				$data = apply_filters( 'redi-reservation-thank-you', $data);
+				wp_redirect($data['redirect']);
 			}
 
 			ob_start();

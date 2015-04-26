@@ -205,7 +205,7 @@ jQuery(function () {
                 jQuery('#step3').hide('slow');
                 //jQuery('#step4').show('slow'); //success message
 
-                jQuery(location).attr('href','/?action=thankyou&quantity='.jQuery('#persons').val());
+                jQuery(location).attr('href', '/reservation/?action=thankyou&quantity=' + jQuery('#persons').val());
                 jQuery('html, body').animate({scrollTop: 0}, 'slow');
             }
         }, 'json');
@@ -393,19 +393,19 @@ jQuery(function () {
     }
 
     //Cancel reservation
-    jQuery(document).on('click','#cancel-reservation', function () {
+    jQuery(document).on('click', '#cancel-reservation', function () {
         jQuery('#redi-reservation').slideUp();
         jQuery('#cancel-reservation-div').slideDown();
     });
 
-    jQuery(document).on('click','#back-to-reservation',function () {
+    jQuery(document).on('click', '#back-to-reservation', function () {
         jQuery('#redi-reservation').slideDown();
         jQuery('#cancel-reservation-div').slideUp();
         jQuery('#cancel-reservation-form').slideDown();
         jQuery('#cancel-success').slideUp();
     });
 
-    jQuery(document).on('click','#redi-restaurant-cancel', function () {
+    jQuery(document).on('click', '#redi-restaurant-cancel', function () {
         var error = '';
         if (jQuery('#redi-restaurant-cancelID').val() === '') {
             error += redi_restaurant_reservation.id_missing + '<br/>';
