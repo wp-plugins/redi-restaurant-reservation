@@ -839,15 +839,41 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			return 'Y-m-d';
 		}
 
+		private static function redirect( $url ) {
+			$baseUri = get_home_url();
+
+			if ( headers_sent() ) {
+				$string = '<script type="text/javascript">';
+				$string .= 'window.location = "' . $url . '"';
+				$string .= '</script>';
+
+				echo $string;
+			} else {
+				if ( isset( $_SERVER['HTTP_REFERER'] ) AND ( $url == $_SERVER['HTTP_REFERER'] ) ) {
+					header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+				} else {
+					header( 'Location: ' . $url );
+				}
+
+			}
+			exit;
+		}
+
 		public function shortcode( $atts ) {
 			if ( is_array( $atts ) && is_array( $this->options ) ) {
 				$this->options = array_merge( $this->options, $atts );
 			}
+			if ( array_key_exists( 'id', $_GET ) && array_key_exists( 'action', $_GET ) && array_key_exists( 'quantity', $_GET ) && $_GET['action'] === 'thankyou' ) {
 
-			if ( array_key_exists( 'action', $_GET ) && array_key_exists( 'quantity', $_GET ) && $_GET['action'] === 'thankyou' ) {
-				$data = array( 'redirect' => '/reservation-thank-you', 'quantity' => (int) $_GET['quantity'] );
-				$data = apply_filters( 'redi-reservation-thank-you', $data);
-				wp_redirect($data['redirect']);
+				$redirect = get_home_url() . 'reservation-thank-you';
+				$data     = array(
+					'redirect' => $redirect,
+					'quantity' => (int) $_GET['quantity'],
+					'id'       => (int) $_GET['id']
+				);
+				$data     = apply_filters( 'redi-reservation-thank-you', $data );
+
+				self::redirect( $data['redirect'] );
 			}
 
 			ob_start();
