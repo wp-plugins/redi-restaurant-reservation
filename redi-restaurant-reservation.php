@@ -990,7 +990,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				}
 			}
 			$hide_clock    = false;
-			$persons       = 1;
+			$persons       = (int) $this->GetOption( 'MinPersons' );
 			$all_busy      = false;
 			$hidesteps     = false; // this settings only for 'byshifts' mode
 			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
@@ -1005,7 +1005,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						array(
 							'startDateISO' => $startDateISO,
 							'startTime'    => '0:00',
-							'persons'      => 1,
+							'persons'      => $persons,
 							'lang'         => get_locale()
 						)
 					)
@@ -1048,7 +1048,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$format              = $q_config['time_format'][ $q_config['language'] ];
 				$buttons_time_format = self::convert_to_js_format( $format );
 			}
-
 			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
 
