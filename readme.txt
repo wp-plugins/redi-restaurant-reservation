@@ -116,6 +116,7 @@ In case you have any problems with plugin installation or you need some customiz
 * Added widget to collect new feature requests
 * Disable blocked dates in calendar
 * Added list of reservations
+* (+) Fixed check of available time when minimum number of guests is more that one
 
 = 14.0904 =
 * Extended view for basic package settings
