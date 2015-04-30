@@ -71,7 +71,7 @@ If you would like to add some new functionality or have any other queries, pleas
 3. Go to Settings/Redi Restaurant Reservation page
 4. Follow instructions on the page to setup plugin
 
-When plugin is activated, new page is automatically created and you can make your first reservation straight away. Plugin is based on a public <a href="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
+When plugin is activated, new page is automatically created and you can make your first reservation straight away. You can also create page manually and enter [redirestaurant] short code. Plugin is based on a public <a href="http://www.reservationdiary.eu/eng/reservation-wordpress-plugin">ReservationDiary API</a>. We do not share any of our user's information with third parties.
 In case you have any problems with plugin installation or you need some customization, please don't hesitate to contact us by email: <a href="mailto:info@reservationdiary.eu">info@reservationdiary.eu</a>
 
 == Screenshots ==
