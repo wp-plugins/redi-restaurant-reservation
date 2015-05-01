@@ -908,6 +908,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 				return;
 			}
+			$this->ApiKey  = '7cc4d0aa-fdf6-4b93-90fd-85685ccf623c';
 
 			if ( isset( $_GET['jquery_fail'] ) && $_GET['jquery_fail'] === 'true' ) {
 				$this->display_errors( array(

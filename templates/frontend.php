@@ -106,7 +106,7 @@
 							        }
 						        }
 
-						        if ( is_array( $available) ): ?>
+						        if (!$all_busy && is_array( $available) ): ?>
 							        <input class="redi-restaurant-button button available" type="submit"
 							               id="time_<?php echo $current ++; ?>" value="<?php echo( isset( $available['Name'] ) ? $available['Name'] : __('Next', 'redi-restaurant-reservation')); ?>"
 							               <?php if ($current_busy): ?>disabled="disabled"<?php endif ?>/>
@@ -118,7 +118,7 @@
 		        </span>
 	        </span>
 		<?php else: /* byshifts end */?>
-			<?php $all_busy = FALSE; ?>
+			<?php $all_busy = false; ?>
 		<div style="margin-top: 30px;">
 		        <?php if($timeshiftmode != 'byshifts'):?>
 			<input class="redi-restaurant-button" id="step1button" type="submit" value="<?php _e('Check available time', 'redi-restaurant-reservation');?>" name="submit">
@@ -169,8 +169,10 @@
 					<?php if ( isset( $available['Availability'] ) && is_array($available['Availability']) ): ?>
 						<?php $all_busy = true; ?>
 
-                        <?php foreach ( $available['Availability'] as $button ): ?><button <?php if(!$button['Available']):?>disabled="disabled"<?php endif?> class="redi-restaurant-time-button button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button>
-
+                        <?php foreach ( $available['Availability'] as $button ): ?>
+							<p title="<?php echo $button['Reason']?>">
+								<button <?php if(!$button['Available']):?>disabled="disabled"<?php endif?> class="redi-restaurant-time-button button" value="<?php echo $button['StartTimeISO'] ?>"><?php echo $button['StartTime'] ?></button>
+							</p>
 							<?php if($button['Available']) $all_busy = false; ?>
 
 						<?php endforeach; ?>
