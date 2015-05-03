@@ -10,7 +10,7 @@
 				<?php _e( 'Step', 'redi-restaurant-reservation' ) ?> 1: <?php _e( 'Select place, date and time', 'redi-restaurant-reservation' ) ?>
 			</h2>
 			<a href="#cancel" id="cancel-reservation" class="cancel-reservation"><?php _e('Cancel reservation', 'redi-restaurant-reservation')?></a>
-			<br clear="both"/>
+			<br clear="both"/><br clear="both"/>
 			<label for="placeID">
 				<?php _e( 'Place', 'redi-restaurant-reservation' ) ?>:</label>
 			<br clear="both"/>
@@ -39,11 +39,8 @@
 		<?php endif ?>
 
 		<input id="redi-restaurant-startDateISO" type="hidden" value="<?php echo $startDateISO ?>" name="startDateISO"/>
-
-
 		<?php if(!$hide_clock):?>
-        <br clear="both"/>
-        <br clear="both"/><label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
+        <label for="redi-restaurant-startHour"><?php _e('Time', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label>
 		<?php if (isset($timepicker) && $timepicker === 'dropdown'):?>
 			<select id="redi-restaurant-startHour" class="redi-reservation-select">
 				<?php foreach(range(0, 23) as $hour):?>
@@ -54,22 +51,18 @@
 					<option value="<?php echo $minute;?>"><?php printf('%02d', $minute);?></option>
 				<?php endforeach;?>
 			</select>
-			<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:i', $startTime);?>" name="startTime"/><br clear="both"/>
+			<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:i', $startTime);?>" name="startTime"/>
 		<?php else:?>
 				<input id="redi-restaurant-startTime-alt" type="hidden" value="<?php echo date_i18n('H:i', $startTime);?>"/>
-			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/><br clear="both"/>
+			<input id="redi-restaurant-startTime" type="text" value="<?php echo date_i18n($time_format, $startTime);?>" name="startTime"/>
 		<?php endif ?>
 		<?php endif;?>
 		
 		<?php if(isset($start_time_array)):?>
 			<input id="redi-restaurant-startTimeArray" type="hidden" name="StartTimeArray" value="<?php echo $start_time_array; ?>" />
 		<?php endif;?>
-		<br clear="both"/>
-
         <label for="persons">
-		<?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/>
-
-		<select name="persons" id="persons" class="redi-reservation-select">
+		<?php _e('Persons', 'redi-restaurant-reservation')?>:<span class="redi_required">*</span></label><br clear="both"/><select name="persons" id="persons" class="redi-reservation-select">
 			<?php for ($i = $minPersons; $i != $maxPersons+1; $i++): ?>
 				<option value="<?php echo $i?>" <?php if ($persons == $i) echo 'selected="selected"';?> >
                     <?php echo $i ?>
@@ -206,25 +199,19 @@
 			<br clear="both"/>
 			<label for="UserName"><?php _e('Name', 'redi-restaurant-reservation');?>:
 				<span class="redi_required">*</span>
-			</label>
-			<br clear="both"/>
-			<input type="text" value="" name="UserName" id="UserName">
+			</label><input type="text" value="" name="UserName" id="UserName">
 		</div>
 		<div>
 			<br clear="both"/>
 			<label for="UserPhone"><?php _e('Phone', 'redi-restaurant-reservation');?>:
 				<span class="redi_required">*</span>
-			</label>
-			<br clear="both"/>
-			<input type="text" value="" name="UserPhone" id="UserPhone">
+			</label><input type="text" value="" name="UserPhone" id="UserPhone">
 		</div>
 		<div>
 			<br clear="both"/>
 			<label for="UserEmail"><?php _e('Email', 'redi-restaurant-reservation');?>:
 				<span class="redi_required">*</span>
-			</label>
-			<br clear="both"/>
-			<input type="text" value="" name="UserEmail" id="UserEmail">
+			</label><input type="text" value="" name="UserEmail" id="UserEmail">
 		</div>
 		<!-- custom fields -->
 		<?php for($i=1; $i!=6; $i++):?>
@@ -241,24 +228,18 @@
 							<span class="redi_required">*</span>
 							<input type="hidden" id="<?php echo 'field_'.$i.'_message'; ?>" value="<?php echo !empty($$field_message) ? $$field_message : _e('Custom field is required', 'redi-restaurant-reservation');?>">
 						<?php endif;?>
-					</label>
-					<br clear="both"/>
-
-					<input type="<?php echo($$field_type);?>" value="" name="field_<?php echo $i; ?>" id="field_<?php echo $i; ?>" <?php if(isset($$field_required) && $$field_required):?>class="field_required"<?php endif; ?>>
+					</label><input type="<?php echo($$field_type);?>" value="" name="field_<?php echo $i; ?>" id="field_<?php echo $i; ?>" <?php if(isset($$field_required) && $$field_required):?>class="field_required"<?php endif; ?>>
 				</div>
 			<?php endif;?>
 		<?php endfor;?>
 		<!-- /custom fields -->
+
+		<label for="UserComments">
+			<?php _e('Comment', 'redi-restaurant-reservation');?>:
+		</label><textarea maxlength="250" rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
+
 		<div>
 			<br clear="both"/>
-			<label for="UserComments">
-				<?php _e('Comment', 'redi-restaurant-reservation');?>:
-			</label>
-			<br clear="both"/>
-			<textarea maxlength="250" rows="2" name="UserComments" id="UserComments" cols="20"></textarea>
-		</div>
-		<div>
-			<br clear="both"/><br clear="both"/>
 			<?php if ($hidesteps):?>
 				<input class="redi-restaurant-button button" type="submit" id="step3prev" value="<?php _e('Previous', 'redi-restaurant-reservation')?>">
 			<?php endif ?>
@@ -266,7 +247,6 @@
 			<img id="step3load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 			<br clear="both"/>
 		</div>
-		<br clear="both"/>
         <br clear="both"/>
 		<div id="step3errors" style="display: none;" class="redi-reservation-alert-error redi-reservation-alert"></div>
 	</div>

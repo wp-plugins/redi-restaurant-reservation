@@ -180,8 +180,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						'WebAddress'               => get_option( 'siteurl' ),
 						'Lang'                     => str_replace( '_', '-', get_locale() ),
 						'MinTimeBeforeReservation' => 24, // hour
-						'DescriptionShort'         => get_option( 'blogdescription' ),
-						'DescriptionFull'          => '',
+						'DescriptionShort'         => null,
+						'DescriptionFull'          => get_option( 'blogdescription' ),
 						'Catalog'                  => true
 					)
 				) );
@@ -868,8 +868,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$redirect = get_home_url() . 'reservation-thank-you';
 				$data     = array(
 					'redirect' => $redirect,
-					'quantity' => (int) $_GET['quantity'],
-					'id'       => (int) $_GET['id']
+					'quantity' => $_GET['quantity'],
+					'id'       => $_GET['id']
 				);
 				$data     = apply_filters( 'redi-reservation-thank-you', $data );
 

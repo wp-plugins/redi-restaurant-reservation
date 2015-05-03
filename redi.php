@@ -25,7 +25,7 @@ if ( ! defined( 'CATEGORY' ) ) {
 	define( 'CATEGORY', 'Category.svc/' );
 }
 if ( ! defined( 'RESERVATION' ) ) {
-	define ( 'RESERVATION', 'Reservation.svc/' );
+	define( 'RESERVATION', 'Reservation.svc/' );
 }
 if ( ! defined( 'EMAILCONTENT' ) ) {
 	define( 'EMAILCONTENT', 'emailcontent.svc/' );
@@ -33,6 +33,7 @@ if ( ! defined( 'EMAILCONTENT' ) ) {
 if ( ! defined( 'DATES' ) ) {
 	define( 'DATES', 'Date.svc/' );
 }
+
 if ( ! defined( 'POST' ) ) {
 	define( 'POST', 'POST' );
 }
@@ -64,9 +65,14 @@ if ( ! class_exists( 'ReDi' ) ) {
 			$this->ApiKey = $ApiKey;
 		}
 
+		public function confirmReservation( $reservationID, $params = array() ) {
+			$url = REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/Approve/' . ((int)$reservationID).$this->strParams( $params );
+			return $this->request( $url, PUT );
+		}
+
 		public function getBlockingDates( $lang, $categoryID, $params ) {
 			//Date.svc/en/[APIKEY]/[CategoryID]?StartTime=2015-03-01&EndTime=2015-03-31
-			return $this->request( REDI_RESTAURANT_API . DATES  . $lang . '/'.$this->ApiKey.'/'. $categoryID, GET,  $this->strParams( $params ) );
+			return $this->request( REDI_RESTAURANT_API . DATES . $lang . '/' . $this->ApiKey . '/' . $categoryID, GET, $this->strParams( $params ) );
 		}
 
 
@@ -226,6 +232,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 					'Content-Length' => $method == GET ? 0 : strlen( $params_string )
 				)
 			);
+
 			$output  = $request->request(
 				$url . ( ( $method === GET || $method === DELETE ) ? $params_string : '' ), $req );
 			if ( is_wp_error( $output ) ) {
@@ -250,7 +257,7 @@ if ( ! class_exists( 'ReDi' ) ) {
 
 			// convert response
 			$output = (array) json_decode( $output );
-			if ( REDI_RESTAURANT_DEBUG ) {
+			if ( REDI_RESTAURANT_DEBUG ){
 				$output['debug'] = array
 				(
 					'method' => $method,
