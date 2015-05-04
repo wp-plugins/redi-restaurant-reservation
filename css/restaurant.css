@@ -88,18 +88,25 @@ strong
 .redi-restaurant-button
 {
     font-weight: normal;
+    width: 110px;
 
 }
-.redi-restaurant-time-button
-{
+.redi-restaurant-time-button {
     float:left;
+}
+.redi-restaurant-time-button,.redi-restaurant-button {
+    border: 1px;
+    margin:1px;
+    cursor: pointer;
 }
 
 .redi-restaurant-time-button[disabled="disabled"],
-.redi-restaurant-button[disabled="disabled"]
+.redi-restaurant-button[disabled="disabled"],
+input.disabled, button.disabled
 {
     opacity:0.4 !important;
     filter:alpha(opacity=40) !important; /* For IE8 and earlier */
+
 }
 
 .redi-restaurant-time-button[select="select"], .redi-restaurant-button[select="select"]
