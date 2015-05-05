@@ -95,10 +95,13 @@ strong
     float:left;
 }
 .redi-restaurant-time-button,.redi-restaurant-button {
-    border: 1px;
     margin:1px;
     cursor: pointer;
+	  border: 1px solid #d3d3d3;
+  background-color: #e6e6e6;
 }
+.redi-restaurant-time-button:hover,.redi-restaurant-button:hover {
+ border: 1px solid #999999; background: #dadada; color: #212121; }
 
 .redi-restaurant-time-button[disabled="disabled"],
 .redi-restaurant-button[disabled="disabled"],
@@ -121,4 +124,11 @@ input.disabled, button.disabled
 
 .cancel-reservation {
     float: right;
+}
+
+
+.ui-tooltip {
+	padding: 10px 20px;
+    border-radius: 5px; 
+    width: 250px;
 }
