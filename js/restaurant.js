@@ -1,5 +1,5 @@
 jQuery(function () {
-    jQuery('.disabled').on('click', function(e){
+    jQuery('.disabled').on('click', function (e) {
         e.preventDefault();
     });
 
@@ -28,6 +28,7 @@ jQuery(function () {
         if (jQuery(this).val() === 'group') {
             jQuery('#step1button').attr('disabled', true);
             jQuery('#large_groups_message').show('slow');
+            jQuery('#step1buttons').hide('slow');
             if (!hidesteps) {
                 jQuery('#step2').hide();
             }
@@ -279,8 +280,8 @@ jQuery(function () {
                             for (var res in response) {
                                 if (response[res] !== undefined) {
                                     jQuery('#buttons').append(
-                                       // (response[res]['Available'] ? '' : '<p title="This time is fully booked">') +
-                                        '<button '+ (response[res]['Available'] ? '' : 'title="This time is fully booked"')+' class="redi-restaurant-time-button button '+(response[res]['Available'] ? '' : 'disabled')+'" value="' + response[res]['StartTimeISO'] + '" ' + //(response[res]['Available'] ? '' : 'disabled="disabled"') +
+                                        // (response[res]['Available'] ? '' : '<p title="This time is fully booked">') +
+                                        '<button ' + (response[res]['Available'] ? '' : 'title="This time is fully booked"') + ' class="redi-restaurant-time-button button ' + (response[res]['Available'] ? '' : 'disabled') + '" value="' + response[res]['StartTimeISO'] + '" ' + //(response[res]['Available'] ? '' : 'disabled="disabled"') +
                                         ' ' + (response[res]['Select'] ? 'select="select"' : '') +
                                         '>' + response[res]['StartTime'] + '</button>' //+
                                         //(response[res]['Available'] ? '' : '</p>')
@@ -321,7 +322,7 @@ jQuery(function () {
                                         var b = response[availability]['Availability'][current_button_index];
 
                                         html +=
-                                            '<button '+(b['Available'] ? '' : ' title="This time is fully booked"')+' class="redi-restaurant-time-button button '+ (b['Available'] ? '' : 'disabled') +'" value="' + b['StartTimeISO'] + '" ' +
+                                            '<button ' + (b['Available'] ? '' : ' title="This time is fully booked"') + ' class="redi-restaurant-time-button button ' + (b['Available'] ? '' : 'disabled') + '" value="' + b['StartTimeISO'] + '" ' +
                                             ' ' + (b['Select'] ? 'select="select"' : '') + '>'
                                             + b['StartTime'] + '</button>';
                                         if (b['Available']) {
@@ -349,8 +350,17 @@ jQuery(function () {
                                 current++;
                             }
                             jQuery('#buttons').append('</br>');
-                            jQuery('#step1buttons').html(step1buttons_html).show();
-                            display_all_busy(all_busy);
+                            if (jQuery('#persons').val() === 'group') {
+                                jQuery('#step1button').attr('disabled', true);
+                                jQuery('#large_groups_message').show('slow');
+                                jQuery('#step1buttons').hide('slow');
+                                if (!hidesteps) {
+                                    jQuery('#step2').hide();
+                                }
+                            } else {
+                                jQuery('#step1buttons').html(step1buttons_html).show();
+                                display_all_busy(all_busy);
+                            }
                             break;
                     }
                 } else {
@@ -389,9 +399,9 @@ jQuery(function () {
             jQuery('#step1buttons').hide();
             if (hidesteps) {
                 jQuery('#step1busy').show();
-             //   jQuery('.available').each(function () {
-              //      jQuery(this).attr('disabled', true).wrap('<span title="This time is fully booked"></span>');
-             //   });
+                //   jQuery('.available').each(function () {
+                //      jQuery(this).attr('disabled', true).wrap('<span title="This time is fully booked"></span>');
+                //   });
             } else {
                 jQuery('#buttons').hide();
                 jQuery('#step2busy').show();
