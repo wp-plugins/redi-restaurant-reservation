@@ -865,15 +865,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				REDI_RESTAURANT_PLUGIN_URL . '/lib/timepicker/i18n/jquery-ui-timepicker.all.lang.js' );
 			wp_enqueue_script( 'timepicker-lang' );
 
-//			wp_register_script( 'tooltipster', REDI_RESTAURANT_PLUGIN_URL . 'lib/tooltipster-master/js/jquery.tooltipster.js', 'jquery' );
-//			wp_enqueue_script( 'tooltipster' );
-//			wp_register_style( 'tooltipster',
-//				REDI_RESTAURANT_PLUGIN_URL . 'lib/tooltipster-master/css/tooltipster.css' );
-//			wp_enqueue_style( 'tooltipster' );
-//			wp_register_style( 'tooltipster-light',
-//				REDI_RESTAURANT_PLUGIN_URL . 'lib/tooltipster-master/css/themes/tooltipster-light.css' );
-//			wp_enqueue_style( 'tooltipster-light' );
-
 			wp_register_script( 'restaurant', REDI_RESTAURANT_PLUGIN_URL . 'js/restaurant.js', array(
 				//		'date.format',
 				'jquery',
@@ -890,6 +881,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 					'phone_missing'  => __( 'Phone can\'t be empty', 'redi-restaurant-reservation' ),
 					'reason_missing' => __( 'Reason can\'t be empty', 'redi-restaurant-reservation' ),
 					'next'           => __( 'Next', 'redi-restaurant-reservation' ),
+					'tooltip'        => __( 'This time is fully booked', 'redi-restaurant-reservation' )
 				) );
 			wp_enqueue_script( 'restaurant' );
 

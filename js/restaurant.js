@@ -68,7 +68,7 @@ jQuery(function () {
     jQuery('#redi-restaurant-startTime').timepicker({
         stepMinute: 15,
         timeFormat: timepicker_time_format,
-        onClose: function (dateText, inst) {
+        onClose: function () {
             hideSteps();
         },
         altField: '#redi-restaurant-startTime-alt',
@@ -96,10 +96,11 @@ jQuery(function () {
         },
         dateFormat: date_format,
         minDate: new Date(),
-        onSelect: function (dateText, inst) {
-            var day1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getDate();
-            var month1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getMonth() + 1;
-            var year1 = jQuery('#redi-restaurant-startDate').datepicker('getDate').getFullYear();
+        onSelect: function () {
+            var startDate = jQuery('#redi-restaurant-startDate');
+            var day1 = startDate.datepicker('getDate').getDate();
+            var month1 = startDate.datepicker('getDate').getMonth() + 1;
+            var year1 = startDate.datepicker('getDate').getFullYear();
             var fullDate = year1 + '-' + month1 + '-' + day1;
             if (timeshiftmode === 'byshifts') {
                 step1call(fullDate)
@@ -219,10 +220,10 @@ jQuery(function () {
         }
         else {
             jQuery('#step1button').attr('disabled', true);
-            var start_date = jQuery('#redi-restaurant-startDate');
-            var day1 = start_date.datepicker('getDate').getDate();
-            var month1 = start_date.datepicker('getDate').getMonth() + 1;
-            var year1 = start_date.datepicker('getDate').getFullYear();
+            var start_date = jQuery('#redi-restaurant-startDate').datepicker('getDate');
+            var day1 = start_date.getDate();
+            var month1 = start_date.getMonth() + 1;
+            var year1 = start_date.getFullYear();
             var fullDate = year1 + '-' + month1 + '-' + day1;
             step1call(fullDate);
         }
@@ -280,11 +281,9 @@ jQuery(function () {
                             for (var res in response) {
                                 if (response[res] !== undefined) {
                                     jQuery('#buttons').append(
-                                        // (response[res]['Available'] ? '' : '<p title="This time is fully booked">') +
                                         '<button ' + (response[res]['Available'] ? '' : 'title="This time is fully booked"') + ' class="redi-restaurant-time-button button ' + (response[res]['Available'] ? '' : 'disabled') + '" value="' + response[res]['StartTimeISO'] + '" ' + //(response[res]['Available'] ? '' : 'disabled="disabled"') +
                                         ' ' + (response[res]['Select'] ? 'select="select"' : '') +
-                                        '>' + response[res]['StartTime'] + '</button>' //+
-                                        //(response[res]['Available'] ? '' : '</p>')
+                                        '>' + response[res]['StartTime'] + '</button>'
                                     );
                                 }
                                 if (response[res]['Available']) all_busy = false;
@@ -295,8 +294,6 @@ jQuery(function () {
                             var all_busy = true;
                             var current = 0;
                             var step1buttons_html = '';
-                            var step1buttons_html_before = '';
-                            var step1buttons_html_after = '';
                             jQuery('#step1buttons_html').html(step1buttons_html).hide();
                             for (var availability in response) {
                                 if (response[availability]['Name'] !== undefined) {
@@ -322,7 +319,7 @@ jQuery(function () {
                                         var b = response[availability]['Availability'][current_button_index];
 
                                         html +=
-                                            '<button ' + (b['Available'] ? '' : ' title="This time is fully booked"') + ' class="redi-restaurant-time-button button ' + (b['Available'] ? '' : 'disabled') + '" value="' + b['StartTimeISO'] + '" ' +
+                                            '<button ' + (b['Available'] ? '' : ' title="'+redi_restaurant_reservation.tooltip+'"') + ' class="redi-restaurant-time-button button ' + (b['Available'] ? '' : 'disabled') + '" value="' + b['StartTimeISO'] + '" ' +
                                             ' ' + (b['Select'] ? 'select="select"' : '') + '>'
                                             + b['StartTime'] + '</button>';
                                         if (b['Available']) {
@@ -338,9 +335,8 @@ jQuery(function () {
 
                                     jQuery('#buttons').append(html);
                                     if (current_button_busy) {
-                                        //step1buttons_html += 'disabled="disabled"
                                         step1buttons_html += 'disabled"'; //add class
-                                        step1buttons_html += ' title="This time is fully booked"';
+                                        step1buttons_html += ' title="'+redi_restaurant_reservation.tooltip+'"';
                                     }
                                     else {
                                         step1buttons_html += 'available"'; //close class bracket
@@ -399,9 +395,6 @@ jQuery(function () {
             jQuery('#step1buttons').hide();
             if (hidesteps) {
                 jQuery('#step1busy').show();
-                //   jQuery('.available').each(function () {
-                //      jQuery(this).attr('disabled', true).wrap('<span title="This time is fully booked"></span>');
-                //   });
             } else {
                 jQuery('#buttons').hide();
                 jQuery('#step2busy').show();
@@ -411,10 +404,6 @@ jQuery(function () {
             jQuery('#step1buttons').show();
             if (hidesteps) {
                 jQuery('#step1busy').hide();
-
-                //jQuery('.available').each(function () {
-                //    jQuery(this).attr('disabled', false);
-                //});
             } else {
                 jQuery('#buttons').show();
                 jQuery('#step2busy').hide();
