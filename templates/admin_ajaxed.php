@@ -256,7 +256,7 @@ jQuery(function () {
 			</td>
 			<td style="vertical-align: top;">
 				<select name="services" id="services">
-					<?php foreach(range(1, 200) as $current):?>
+					<?php foreach(range(1, 500) as $current):?>
 						<option value="<?php echo $current?>" <?php if($current == (int)count($getServices)): ?>selected="selected"<?php endif;?>>
 							<?php echo $current ?>
 						</option>
