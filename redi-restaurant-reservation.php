@@ -102,8 +102,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$this->redi = new Redi( $this->ApiKey );
 			//Actions
-			add_action( 'init', array( &$this, 'init_sessions' ) );
-			add_action( 'admin_menu', array( &$this, 'redi_restaurant_admin_menu_link_new' ) );
+			add_action( 'init', array( $this, 'init_sessions' ) );
+			add_action( 'admin_menu', array( $this, 'redi_restaurant_admin_menu_link_new' ) );
 
 			$this->page_title = 'Reservation';
 			$this->content    = '[redirestaurant]';
@@ -112,12 +112,26 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			register_activation_hook( __FILE__, array( $this, 'activate' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
-			register_uninstall_hook( __FILE__, array( 'ReDiRestaurantReservation', 'uninstall' ) );
+			register_uninstall_hook( __FILE__, array( $this, 'uninstall' ) );
 
-			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
-			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
-			add_filter( 'http_request_timeout', array( &$this, 'filter_timeout_time' ) );
+			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( $this, 'redi_restaurant_ajax' ) );
+			add_action( 'wp_ajax_redi_restaurant-submit', array( $this, 'redi_restaurant_ajax' ) );
+			add_filter( 'http_request_timeout', array( $this, 'filter_timeout_time' ) );
+			add_action( 'http_api_curl', array($this, 'my_http_api_curl'), 100, 1 );
+			add_filter( 'http_request_args', array($this, 'my_http_request_args'), 100, 1 );
 			add_shortcode( 'redirestaurant', array( $this, 'shortcode' ) );
+		}
+
+		function my_http_request_args ( $r )
+		{
+			$r['timeout'] = 60; # new timeout
+			return $r;
+		}
+
+		function my_http_api_curl ( $handle )
+		{
+			curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 60 ); # new timeout
+			curl_setopt( $handle, CURLOPT_TIMEOUT, 60 ); # new timeout
 		}
 
 		function language_files( $mofile, $domain ) {
@@ -655,7 +669,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$icon = 'dashicons-groups';
 
             if($this->ApiKey) {
-	            add_menu_page(
+	            add_object_page(
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     'edit_posts',
@@ -990,7 +1004,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				}
 			}
 			$hide_clock    = false;
-			$persons       = (int) $this->GetOption( 'MinPersons' );
+			$persons       = 1;
 			$all_busy      = false;
 			$hidesteps     = false; // this settings only for 'byshifts' mode
 			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
@@ -1005,7 +1019,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						array(
 							'startDateISO' => $startDateISO,
 							'startTime'    => '0:00',
-							'persons'      => $persons,
+							'persons'      => 1,
 							'lang'         => get_locale()
 						)
 					)
@@ -1048,6 +1062,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$format              = $q_config['time_format'][ $q_config['language'] ];
 				$buttons_time_format = self::convert_to_js_format( $format );
 			}
+
 			require_once( REDI_RESTAURANT_TEMPLATE . 'frontend.php' );
 			$out = ob_get_contents();
 
@@ -1233,7 +1248,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				if ( isset( $post['alternatives'] ) ) {
 					$params['Alternatives'] = $post['alternatives'];
 				}
-				$params = apply_filters( 'redi-reservation-pre-query', $params );
+
 				$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
 				switch ( $alternativeTime ) {
