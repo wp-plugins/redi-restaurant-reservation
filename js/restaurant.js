@@ -205,7 +205,7 @@ jQuery(function () {
                 jQuery('#step3').hide('slow');
                 //jQuery('#step4').show('slow'); //success message
 
-                jQuery(location).attr('href', document.URL + '?action=thankyou&quantity=' + jQuery('#persons').val()+'&id='+response['ID']);
+                jQuery(location).attr('href', document.URL + '?action=thankyou&quantity=' + jQuery('#persons').val()+'&id='+response['ID']+'&lang='+locale);
                 jQuery('html, body').animate({scrollTop: 0}, 'slow');
             }
         }, 'json');

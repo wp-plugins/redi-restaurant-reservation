@@ -66,6 +66,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		private $options = array();
 		private $ApiKey;
 		private $redi;
+		private $emailContent;
 		private $weekday = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 		public function error_handler( $errno, $errstr, $errfile, $errline ) {
@@ -102,8 +103,8 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 			$this->redi = new Redi( $this->ApiKey );
 			//Actions
-			add_action( 'init', array( &$this, 'init_sessions' ) );
-			add_action( 'admin_menu', array( &$this, 'redi_restaurant_admin_menu_link_new' ) );
+			add_action( 'init', array( $this, 'init_sessions' ) );
+			add_action( 'admin_menu', array( $this, 'redi_restaurant_admin_menu_link_new' ) );
 
 			$this->page_title = 'Reservation';
 			$this->content    = '[redirestaurant]';
@@ -114,10 +115,35 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 			register_uninstall_hook( __FILE__, array( 'ReDiRestaurantReservation', 'uninstall' ) );
 
-			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
-			add_action( 'wp_ajax_redi_restaurant-submit', array( &$this, 'redi_restaurant_ajax' ) );
-			add_filter( 'http_request_timeout', array( &$this, 'filter_timeout_time' ) );
+			add_action( 'wp_ajax_nopriv_redi_restaurant-submit', array( $this, 'redi_restaurant_ajax' ) );
+			add_action( 'wp_ajax_redi_restaurant-submit', array( $this, 'redi_restaurant_ajax' ) );
+			add_filter( 'http_request_timeout', array( $this, 'filter_timeout_time' ) );
 			add_shortcode( 'redirestaurant', array( $this, 'shortcode' ) );
+
+			add_action( 'redi-reservation-send-confirmation-email', array( $this, 'send_confirmation_email' ) );
+			add_action( 'redi-reservation-email-content', array( $this, 'redi_reservation_email_content' ) );
+			add_action('redi-reservation-send-confirmation-email-other', array( $this, 'send_confirmation_email' ) );
+			do_action( 'redi-reservation-after-init' );
+		}
+
+		function redi_reservation_email_content( $args ) {
+			$this->emailContent = $this->redi->getEmailContent(
+				$args['id'],
+				EmailContentType::Confirmed,
+				array(
+					'Lang' => $args['lang']
+				)
+			);
+		}
+
+		function send_confirmation_email() {
+			if ( ! isset( $this->emailContent['Error'] ) ) {
+				wp_mail( $this->emailContent['To'], $this->emailContent['Subject'], $this->emailContent['Body'],
+					array(
+						'Content-Type: text/html; charset=UTF-8',
+						'From: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n"
+					) );
+			}
 		}
 
 		function language_files( $mofile, $domain ) {
@@ -840,23 +866,11 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 		}
 
 		private static function redirect( $url ) {
-			$baseUri = get_home_url();
+			$string = '<script type="text/javascript">';
+			$string .= 'window.location = "' . $url . '"';
+			$string .= '</script>';
 
-			if ( headers_sent() ) {
-				$string = '<script type="text/javascript">';
-				$string .= 'window.location = "' . $url . '"';
-				$string .= '</script>';
-
-				echo $string;
-			} else {
-				if ( isset( $_SERVER['HTTP_REFERER'] ) AND ( $url == $_SERVER['HTTP_REFERER'] ) ) {
-					header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
-				} else {
-					header( 'Location: ' . $url );
-				}
-
-			}
-			exit;
+			echo $string;
 		}
 
 		public function shortcode( $atts ) {
@@ -869,10 +883,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$data     = array(
 					'redirect' => $redirect,
 					'quantity' => $_GET['quantity'],
-					'id'       => $_GET['id']
+					'id'       => $_GET['id'],
+					'lang'     => $_GET['lang']
 				);
 				$data     = apply_filters( 'redi-reservation-thank-you', $data );
-
 				self::redirect( $data['redirect'] );
 			}
 
@@ -956,7 +970,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$places = $this->redi->getPlaces();
 			if ( isset( $places['Error'] ) ) {
 				$this->display_errors( $places, false, 'getPlaces' );
-
 				return;
 			}
 
@@ -968,7 +981,6 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$categories = $this->redi->getPlaceCategories( $placeID );
 			if ( isset( $categories['Error'] ) ) {
 				$this->display_errors( $categories, false, 'getPlaceCategories' );
-
 				return;
 			}
 
@@ -1049,12 +1061,10 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$js_locale         = get_locale();
 			$datepicker_locale = substr( $js_locale, 0, 2 );
 
-
 			$dates = $this->redi->getBlockingDates( str_replace( '_', '-', get_locale() ), $categoryID, array(
 				'StartTime' => date( 'Y-m-d' ),
 				'EndTime'   => date( 'Y-m-d', strtotime( '+3 month' ) ) // + 3 months
 			) );
-
 
 			$disabled_dates = array();
 			$enabled_dates  = array();
@@ -1483,21 +1493,14 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 					if ( isset( $this->options['EmailFrom'] ) && $this->options['EmailFrom'] == EmailFrom::WordPress && ! isset( $reservation['Error'] ) ) {
 						//call api for content
-						$emailContent = $this->redi->getEmailContent(
-							(int) $reservation['ID'],
-							EmailContentType::Confirmed,
-							array(
-								'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
-							)
-						);
 
+						do_action( 'redi-reservation-email-content', array(
+							'id'   => (int) $reservation['ID'],
+							'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
+						) );
+
+						do_action( 'redi-reservation-send-confirmation-email', $this->emailContent );
 						//send
-						if ( ! isset( $emailContent['Error'] ) ) {
-							wp_mail( $emailContent['To'], $emailContent['Subject'], $emailContent['Body'], array(
-								'Content-Type: text/html; charset=UTF-8',
-								'From: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n"
-							) );
-						}
 					}
 					echo json_encode( $reservation );
 					break;
