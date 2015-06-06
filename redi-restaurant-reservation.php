@@ -669,7 +669,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 			$icon = 'dashicons-groups';
 
             if($this->ApiKey) {
-	            add_object_page(
+	            add_menu_page(
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     __('ReDi Reservations', 'redi-restaurant-reservation'),
                     'edit_posts',
@@ -1004,7 +1004,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				}
 			}
 			$hide_clock    = false;
-			$persons       = 1;
+			$persons       = (int) $this->GetOption( 'MinPersons' );
 			$all_busy      = false;
 			$hidesteps     = false; // this settings only for 'byshifts' mode
 			$timeshiftmode = $this->GetOption( 'timeshiftmode', $this->GetOption( 'TimeShiftMode' ) );
@@ -1019,7 +1019,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 						array(
 							'startDateISO' => $startDateISO,
 							'startTime'    => '0:00',
-							'persons'      => 1,
+							'persons'      => $persons,
 							'lang'         => get_locale()
 						)
 					)
@@ -1248,7 +1248,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				if ( isset( $post['alternatives'] ) ) {
 					$params['Alternatives'] = $post['alternatives'];
 				}
-
+				$params = apply_filters( 'redi-reservation-pre-query', $params );
 				$alternativeTime = AlternativeTime::AlternativeTimeByDay;
 
 				switch ( $alternativeTime ) {
