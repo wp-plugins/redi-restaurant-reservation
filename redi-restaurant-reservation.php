@@ -1496,7 +1496,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 
 						do_action( 'redi-reservation-email-content', array(
 							'id'   => (int) $reservation['ID'],
-							'Lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
+							'lang' => str_replace( '_', '-', self::GetPost( 'lang' ) )
 						) );
 
 						do_action( 'redi-reservation-send-confirmation-email', $this->emailContent );
