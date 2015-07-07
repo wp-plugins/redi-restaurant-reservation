@@ -126,7 +126,7 @@
 		    </div>
 		<?php endif /* normal */ ?>
         <div id="large_groups_message" style="display: none;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
-		
+
 
 		<div id="step1busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
 			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>

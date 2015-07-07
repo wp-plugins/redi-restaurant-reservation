@@ -240,6 +240,7 @@ jQuery(function () {
     });
 
     function step1call(fullDate) {
+        if(jQuery('#persons').val() === 'group') return;
         hideSteps();
 
         jQuery('#redi-restaurant-startDateISO').val(fullDate);
