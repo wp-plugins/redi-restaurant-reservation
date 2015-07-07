@@ -125,13 +125,13 @@
 		        <?php endif?>
 		    </div>
 		<?php endif /* normal */ ?>
-		<br clear="both"/>
+        <div id="large_groups_message" style="display: none;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
+		
 
 		<div id="step1busy" <?php if(!$all_busy):?>style="display: none;"<?php endif; ?> class="redi-reservation-alert-error redi-reservation-alert">
 			<?php _e('Reservation is not available on selected day. Please select another day.', 'redi-restaurant-reservation');?>
 		</div>
 
-		<div id="large_groups_message" style="display: none;margin-top: 30px;" class="redi-reservation-alert-info redi-reservation-alert"><?php echo $largeGroupsMessage?></div>
 		<div>
 			<img id="step1load" style="display: none;" src="<?php echo REDI_RESTAURANT_PLUGIN_URL ?>img/ajax-loader.gif" alt=""/>
 		</div>
