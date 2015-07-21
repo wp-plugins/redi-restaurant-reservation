@@ -65,16 +65,19 @@ if ( ! class_exists( 'ReDi' ) ) {
 			$this->ApiKey = $ApiKey;
 		}
 
-		public function confirmReservation( $reservationID, $params = array() ) {
+		public function rejectReservation ($reservationID, $params){
+			$url = 	REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/Reject/' . ((int)$reservationID).$this->strParams( $params );
+			return $this->request( $url, PUT );
+		}
+
+		public function confirmReservation( $reservationID, $params) {
 			$url = REDI_RESTAURANT_API . RESERVATION . $this->ApiKey . '/Approve/' . ((int)$reservationID).$this->strParams( $params );
 			return $this->request( $url, PUT );
 		}
 
 		public function getBlockingDates( $lang, $categoryID, $params ) {
-			//Date.svc/en/[APIKEY]/[CategoryID]?StartTime=2015-03-01&EndTime=2015-03-31
 			return $this->request( REDI_RESTAURANT_API . DATES . $lang . '/' . $this->ApiKey . '/' . $categoryID, GET, $this->strParams( $params ) );
 		}
-
 
 		public function getReservationUrl( $lang ) {
 			return 'http://wp.reservationdiary.eu/' . $lang . '/' . $this->ApiKey . '/Reservation/Index';
