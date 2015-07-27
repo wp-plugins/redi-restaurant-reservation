@@ -1,5 +1,9 @@
 <?php
 $languages = array(
+	'cs' => array (
+		'name' => 'Čeština‎',
+		'locale' => 'cs',
+	),
 	'da' => array (
 		'name' => 'Dansk',
 		'locale' => 'da',
