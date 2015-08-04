@@ -14,6 +14,7 @@ Initially you need to setup number of persons that can book at one time, working
 
 Supported languages:
 
+* Czeck
 * Danish
 * Deutsch
 * English
