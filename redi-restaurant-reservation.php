@@ -391,7 +391,7 @@ if ( ! class_exists( 'ReDiRestaurantReservation' ) ) {
 				$timeshiftmode            = self::GetPost( 'TimeShiftMode' );
 
 				//validation
-				if ( $minPersons >= $maxPersons ) {
+				if ( $minPersons > $maxPersons ) {
 					$errors[]   = __( 'Min Persons should be lower than Max Persons', 'redi-restaurant-reservation' );
 					$form_valid = false;
 				}
