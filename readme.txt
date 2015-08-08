@@ -55,6 +55,7 @@ Please allow 1 business day for us to confirm your payment and upgrade your acco
 * Do you want to know what your client thinks about his last visit? We will collect it for you.
 * Remind your customer about upcoming reservation via Email or by SMS
 * Collect pre-payment for reservations
+* Send birthday promotions or reminders to visit your restaurant again with MailChimp integration.
 * If you are building a catalogue of restaurants and looking for the perfect reservation plugin for it, we can provide it to you.
 * Do you want to write your own module? We have an API. Contact us to get more information.
 
@@ -63,7 +64,7 @@ If you would like to add some new functionality or have any other queries, pleas
 = Other plugins =
 * If you need to manage more complex reservations, please check our <a href="http://wordpress.org/plugins/redi-reservation/" target="_blank">ReDi Reservation</a> too.
  plugin too.
-* Improve your restaurant’s turnaround time by allowing the clients to call a waiter using their smart phones via a mobile web page with our <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">Open QR Code Waiter Calling System plugin</a>.
+* Improve your restaurant’s turnaround time by allowing the clients to call a waiter using their smart phones via a mobile web page with our <a href="http://wordpress.org/plugins/qr-code-waiter-calling-system/" target="_blank">QR Code Waiter Calling System plugin</a>.
 
 == Installation ==
 
